@@ -27,6 +27,7 @@ public class Event {
 	
 	@Id
 	private Integer id;
+	
 	private String title;
 	private String description;
 	private String location;

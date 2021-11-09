@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import model.event.Event;
@@ -49,8 +50,8 @@ public class EventController {
 	  }
 	}
 	
-	@GetMapping("events/dataAAAA={datetime}")
-	public ResponseEntity<Event> getEventsByYear(@PathVariable("datetime") Integer datetime){
+	@GetMapping("/events")
+	public ResponseEntity<Event> getEventsByYear(@RequestParam(required = false, name = "year") Integer datetime){
 		try {
 			List<Event> events = new ArrayList<>();
 			eventRepository.findByYear(datetime).forEach(events::add);

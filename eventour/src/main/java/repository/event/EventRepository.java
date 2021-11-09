@@ -1,4 +1,4 @@
-package repository;
+package repository.event;
 
 import java.util.List;
 

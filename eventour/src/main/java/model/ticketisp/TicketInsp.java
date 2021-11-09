@@ -14,7 +14,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  */
 @Document(collection = "ticketInspectors")
-public class TicketIsp extends Account{
+public class TicketInsp extends Account{
 	private String fullName;
 	private Event event;
 	/**
@@ -25,7 +25,7 @@ public class TicketIsp extends Account{
 	 * @param event
 	 * @throws Exception 
 	 */
-	public TicketIsp(Integer id, String code, String password, String fullName, Event event) throws Exception {
+	public TicketInsp(Integer id, String code, String password, String fullName, Event event) throws Exception {
 		super(id, password);
 		setCode(code);
 		setFullName(fullName);

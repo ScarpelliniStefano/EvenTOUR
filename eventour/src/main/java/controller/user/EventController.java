@@ -1,4 +1,4 @@
-package controller.event;
+package controller.user;
 
 import java.util.ArrayList;
 import java.util.List;

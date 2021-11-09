@@ -17,8 +17,7 @@ import functions.BootstrapSingleton;
 import functions.Functionalities;
 import functions.Sex;
 import functions.TypesE;
-
-import com.scarcolo.eventour.Account;
+import model.Account;
 
 /**
  * @author stefa

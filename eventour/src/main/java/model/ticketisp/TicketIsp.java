@@ -4,11 +4,10 @@
 package model.ticketisp;
 
 import functions.Functionalities;
+import model.Account;
 import model.event.Event;
 
 import org.springframework.data.mongodb.core.mapping.Document;
-
-import com.scarcolo.eventour.Account;
 
 /**
  * @author stefa

@@ -1,4 +1,4 @@
-package com.scarcolo.eventour;
+package model;
 
 import org.springframework.data.annotation.Id;
 

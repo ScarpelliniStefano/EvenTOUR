@@ -12,10 +12,9 @@ import javax.mail.internet.AddressException;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.scarcolo.eventour.Account;
-
 import functions.Functionalities;
 import functions.PartitaIVAFunctions;
+import model.Account;
 
 
 /**

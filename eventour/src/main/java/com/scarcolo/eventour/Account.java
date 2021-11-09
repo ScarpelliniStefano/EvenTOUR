@@ -1,15 +1,30 @@
 package com.scarcolo.eventour;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Hashtable;
+import org.springframework.data.annotation.Id;
 
-import functions.TypesE;
 
 public abstract class Account{
+	@Id
 	private Integer id;
 	private String username;
 	private String password;
+
+	/**
+	 * @param id
+	 * @param username
+	 * @param password
+	 */
+	public Account(Integer id, String username, String password) {
+		super();
+		setId(id);
+		setUsername(username);
+		setPassword(password);
+	}
+
+	public Account(Integer id, String password) {
+		setId(id);
+		setPassword(password);
+	}
 
 	/**
 	 * @return the id

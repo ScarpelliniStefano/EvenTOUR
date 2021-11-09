@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import model.Event;
+import model.event.Event;
 
 //Cambiare il titolo con solo Service
 @Service

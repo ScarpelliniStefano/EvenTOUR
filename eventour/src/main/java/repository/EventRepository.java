@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import functions.TypesE;
-import model.Event;
+import model.event.Event;
 
 public interface EventRepository extends MongoRepository<Event, String> {
 	List<Event> findByYear(Integer Year);

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import model.booking.Booking;
 import model.event.Event;
 import model.manager.Manager;
+import model.sponsorship.Sponsorship;
 import repository.booking.BookingRepository;
 import repository.event.EventRepository;
 import repository.manager.ManagerRepository;
@@ -30,14 +31,14 @@ public class SponsorshipController {
 	SponsorshipRepository sponsorshipRepository;
 	
 	@GetMapping("/sponsor")
-	public ResponseEntity<List<Manager>> getAllEvents(){
+	public ResponseEntity<List<Sponsorship>> getAllSponsor(){
 		try {
-			List<Manager> managers = new ArrayList<>();
-			managerRepository.findAll().forEach(managers::add);
-			if(managers.isEmpty()) {
+			List<Sponsorship> sponsors = new ArrayList<>();
+			sponsorshipRepository.findAll().forEach(sponsors::add);
+			if(sponsors.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-			return new ResponseEntity<>(managers, HttpStatus.OK);
+			return new ResponseEntity<>(sponsors, HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

@@ -27,7 +27,7 @@ public class BookingController {
 	BookingRepository bookingRepository;
 	
 	@GetMapping("/bookings")
-	public ResponseEntity<List<Booking>> getAllEvents(){
+	public ResponseEntity<List<Booking>> getAllBookings(){
 		try {
 			List<Booking> bookings = new ArrayList<>();
 			bookingRepository.findAll().forEach(bookings::add);

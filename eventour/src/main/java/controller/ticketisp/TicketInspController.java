@@ -1,4 +1,4 @@
-package controller.manager;
+package controller.ticketisp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,30 +13,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import model.booking.Booking;
 import model.event.Event;
-import model.manager.Manager;
-import repository.booking.BookingRepository;
+import model.ticketisp.TicketInsp;
 import repository.event.EventRepository;
-import repository.manager.ManagerRepository;
+import repository.ticketisp.TicketInspRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
-public class ManagerController {
+public class TicketInspController {
 	
 	@Autowired
-	ManagerRepository managerRepository;
+	TicketInspRepository ticketinspRepository;
 	
-	@GetMapping("/managers")
-	public ResponseEntity<List<Manager>> getAllManagers(){
+	@GetMapping("/ticketinsps")
+	public ResponseEntity<List<TicketInsp>> getAllTicketInsp(){
 		try {
-			List<Manager> managers = new ArrayList<>();
-			managerRepository.findAll().forEach(managers::add);
-			if(managers.isEmpty()) {
+			List<TicketInsp> ticketinsps = new ArrayList<>();
+			ticketinspRepository.findAll().forEach(ticketinsps::add);
+			if(ticketinsps.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-			return new ResponseEntity<>(managers, HttpStatus.OK);
+			return new ResponseEntity<>(ticketinsps, HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

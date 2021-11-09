@@ -13,11 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import model.booking.Booking;
-import model.event.Event;
 import model.manager.Manager;
-import repository.booking.BookingRepository;
-import repository.event.EventRepository;
 import repository.manager.ManagerRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -42,14 +38,14 @@ public class ManagerController {
 		}
 	}
 	
-	/*@GetMapping("/bookings/{id}")
-	public ResponseEntity<Booking> getEventById(@PathVariable("id") String id) {
-	  Optional<Booking> bookingData = BookingRepository.findById(id);
+	@GetMapping("/managers/{id}")
+	public ResponseEntity<Manager> getManagerById(@PathVariable("id") String id) {
+	  Optional<Manager> managerData = managerRepository.findById(id);
 
-	  if (bookingData.isPresent()) {
-	    return new ResponseEntity<>(bookingData.get(), HttpStatus.OK);
+	  if (managerData.isPresent()) {
+	    return new ResponseEntity<>(managerData.get(), HttpStatus.OK);
 	  } else {
 	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	  }
-	}*/
+	}
 }

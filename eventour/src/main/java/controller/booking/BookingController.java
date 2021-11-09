@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import model.booking.Booking;
-import model.event.Event;
 import repository.booking.BookingRepository;
-import repository.event.EventRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
@@ -40,16 +38,16 @@ public class BookingController {
 		}
 	}
 	
-	/*@GetMapping("/bookings/{id}")
+	@GetMapping("/bookings/{id}")
 	public ResponseEntity<Booking> getEventById(@PathVariable("id") String id) {
-	  Optional<Booking> bookingData = BookingRepository.findById(id);
+	  Optional<Booking> bookingData = bookingRepository.findById(id);
 
 	  if (bookingData.isPresent()) {
 	    return new ResponseEntity<>(bookingData.get(), HttpStatus.OK);
 	  } else {
 	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	  }
-	}*/
+	}
 	
 	
 }

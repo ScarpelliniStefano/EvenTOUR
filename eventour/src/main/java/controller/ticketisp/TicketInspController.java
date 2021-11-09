@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import model.event.Event;
 import model.ticketisp.TicketInsp;
-import repository.event.EventRepository;
 import repository.ticketisp.TicketInspRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -40,14 +38,14 @@ public class TicketInspController {
 		}
 	}
 	
-	/*@GetMapping("/bookings/{id}")
-	public ResponseEntity<Booking> getEventById(@PathVariable("id") String id) {
-	  Optional<Booking> bookingData = BookingRepository.findById(id);
+	@GetMapping("/ticketinsps/{id}")
+	public ResponseEntity<TicketInsp> getTicketInspById(@PathVariable("id") String id) {
+	  Optional<TicketInsp> ticketData = ticketinspRepository.findById(id);
 
-	  if (bookingData.isPresent()) {
-	    return new ResponseEntity<>(bookingData.get(), HttpStatus.OK);
+	  if (ticketData.isPresent()) {
+	    return new ResponseEntity<>(ticketData.get(), HttpStatus.OK);
 	  } else {
 	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	  }
-	}*/
+	}
 }

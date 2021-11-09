@@ -13,13 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import model.booking.Booking;
-import model.event.Event;
-import model.manager.Manager;
 import model.sponsorship.Sponsorship;
-import repository.booking.BookingRepository;
-import repository.event.EventRepository;
-import repository.manager.ManagerRepository;
 import repository.sponsorship.SponsorshipRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -30,7 +24,7 @@ public class SponsorshipController {
 	@Autowired
 	SponsorshipRepository sponsorshipRepository;
 	
-	@GetMapping("/sponsor")
+	@GetMapping("/sponsors")
 	public ResponseEntity<List<Sponsorship>> getAllSponsor(){
 		try {
 			List<Sponsorship> sponsors = new ArrayList<>();
@@ -44,14 +38,14 @@ public class SponsorshipController {
 		}
 	}
 	
-	/*@GetMapping("/bookings/{id}")
-	public ResponseEntity<Booking> getEventById(@PathVariable("id") String id) {
-	  Optional<Booking> bookingData = BookingRepository.findById(id);
+	@GetMapping("/sponsors/{id}")
+	public ResponseEntity<Sponsorship> getSponsorById(@PathVariable("id") String id) {
+	  Optional<Sponsorship> sponsorData = sponsorshipRepository.findById(id);
 
-	  if (bookingData.isPresent()) {
-	    return new ResponseEntity<>(bookingData.get(), HttpStatus.OK);
+	  if (sponsorData.isPresent()) {
+	    return new ResponseEntity<>(sponsorData.get(), HttpStatus.OK);
 	  } else {
 	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	  }
-	}*/
+	}
 }

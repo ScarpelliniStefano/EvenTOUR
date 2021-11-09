@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import model.event.Event;
 import model.user.User;
-import repository.event.EventRepository;
 import repository.user.UserRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -40,16 +38,16 @@ public class UserController {
 		}
 	}
 	
-	/*@GetMapping("/events/{id}")
-	public ResponseEntity<Event> getEventById(@PathVariable("id") String id) {
-	  Optional<Event> eventData = eventRepository.findById(id);
+	@GetMapping("/users/{id}")
+	public ResponseEntity<User> getUserById(@PathVariable("id") String id) {
+	  Optional<User> userData = userRepository.findById(id);
 
-	  if (eventData.isPresent()) {
-	    return new ResponseEntity<>(eventData.get(), HttpStatus.OK);
+	  if (userData.isPresent()) {
+	    return new ResponseEntity<>(userData.get(), HttpStatus.OK);
 	  } else {
 	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	  }
 	}
-	*/
+	
 	
 }

@@ -28,3 +28,37 @@
 1636459178899	Rename type 'ManagerController'
 1636465110360	Rename type 'EventController'
 1636465298483	Rename type 'EventController'
+1636478604601	Copy compilation unit
+1636536871617	Delete element
+1636536878587	Delete element
+1636536881945	Delete element
+1636537925140	Delete element
+1636537933466	Delete element
+1636538924882	Rename type 'AddUserRequest'
+1636538941063	Rename type 'EditUserRequest'
+1636538954600	Rename type 'UserResponse'
+1636654823161	Move compilation unit
+1636654898055	Rename package 'servicemanager'
+1636655191253	Delete element
+1636656088971	Delete element
+1636656092344	Delete element
+1636656095117	Delete element
+1636656097942	Delete element
+1636656101021	Delete element
+1636656107238	Delete element
+1636656110771	Delete element
+1636656113692	Delete element
+1636656116577	Delete element
+1636656119464	Delete element
+1636656122727	Delete element
+1636656126019	Delete element
+1636656128662	Delete element
+1636656131656	Delete element
+1636656134250	Delete element
+1636656380815	Rename package 'configuration'
+1636656399415	Rename package 'controller'
+1636656415538	Rename package 'functions'
+1636656423526	Rename package 'model'
+1636656432608	Rename package 'fcom.scarcolo.eventour.functions'
+1636656440071	Rename package 'repository'
+1636656448034	Rename package 'service'

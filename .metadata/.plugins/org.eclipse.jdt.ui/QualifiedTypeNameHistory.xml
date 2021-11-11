@@ -1,2 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="repository.booking.BookingRepository"/>
+    <fullyQualifiedTypeName name="model.booking.Booking"/>
+    <fullyQualifiedTypeName name="repository.manager.ManagerRepository"/>
+    <fullyQualifiedTypeName name="model.manager.Manager"/>
+    <fullyQualifiedTypeName name="repository.sponsorship.SponsorshipRepository"/>
+    <fullyQualifiedTypeName name="model.sponsorship.Sponsorship"/>
+    <fullyQualifiedTypeName name="repository.ticketisp.TicketInspRepository"/>
+    <fullyQualifiedTypeName name="model.ticketisp.TicketInsp"/>
+    <fullyQualifiedTypeName name="repository.user.UserRepository"/>
+    <fullyQualifiedTypeName name="model.user.User"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.repository.config.EnableMongoRepositories"/>
+    <fullyQualifiedTypeName name="org.springframework.boot.CommandLineRunner"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.core.mapping.Document"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.CrossOrigin"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="repository.TesterRepository"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="model.Tester"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.DeleteMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+    <fullyQualifiedTypeName name="repository.event.EventRepository"/>
+    <fullyQualifiedTypeName name="model.event.EventResponse"/>
+    <fullyQualifiedTypeName name="model.event.Event"/>
+    <fullyQualifiedTypeName name="service.event.EventService"/>
+    <fullyQualifiedTypeName name="model.event.AddEventRequest"/>
+    <fullyQualifiedTypeName name="model.event.EditEventRequest"/>
+</qualifiedTypeNameHistroy>

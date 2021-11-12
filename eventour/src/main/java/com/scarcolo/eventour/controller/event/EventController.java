@@ -56,7 +56,7 @@ public class EventController {
 
 	   
 	    @DeleteMapping("/events/{id}")
-	    public boolean deleteById(@RequestParam String id){
+	    public boolean deleteEventById(@RequestParam String id){
 	        return eventService.delete(id);
 	    }
 

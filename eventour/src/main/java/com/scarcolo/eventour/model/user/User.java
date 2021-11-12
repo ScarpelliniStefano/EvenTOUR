@@ -6,14 +6,16 @@ package com.scarcolo.eventour.model.user;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.mail.internet.AddressException;
 
 import com.scarcolo.eventour.functions.BootstrapSingleton;
 import com.scarcolo.eventour.functions.Functionalities;
-import com.scarcolo.eventour.functions.Sex;
+import com.scarcolo.eventour.functions.TypesE;
 import com.scarcolo.eventour.model.Account;
 
 
@@ -25,34 +27,24 @@ import com.scarcolo.eventour.model.Account;
 public class User extends Account{
 	private String name;
 	private String surname;
-	private String dateOfBirth;
-	private Sex sex;
+	private LocalDateTime dateOfBirth;
+	private String sex;
 	private String residence;
-	private ArrayList<TypesE> types;
-	/**
-	 * @param id
-	 * @param username
-	 * @param password
-	 * @param name
-	 * @param surname
-	 * @param dateOfBirth
-	 * @param sex
-	 * @param residence
-	 * @param types
-	 * @throws ParseException 
-	 * @throws AddressException 
-	 */
-	public User(Integer id, String mail, String password, String name, String surname, String dateOfBirth, Sex sex,
-			String residence, ArrayList<TypesE> types) throws ParseException, AddressException {
-		super(id, password);
-		setEmail(mail);
-		setName(name);
-		setSurname(surname);
-		setDateOfBirth(dateOfBirth);
-		setSex(sex);
-		setResidence(residence);
-		setTypes(types);
+	private String[] types;
+	
+	public User(AddUserRequest request) throws Exception {
+        super(request.password);
+        setEmail(request.mail);
+        this.name=request.name;
+        this.surname=request.surname;
+        setDateOfBirth(request.dateOfBirth);
+        setSex(request.sex);
+    }
+	
+	public User() {
+		super();
 	}
+	
 	/**
 	 * @return the name
 	 */
@@ -80,66 +72,68 @@ public class User extends Account{
 	/**
 	 * @return the dateOfBirth
 	 */
-	protected String getDateOfBirth() {
+	protected LocalDateTime getDateOfBirth() {
 		return dateOfBirth;
 	}
 	
-	/**
-	 * @return the dateOfBirth
-	 * @throws ParseException 
-	 */
-	protected Date getDateOfBirthDate() throws ParseException {
-		DateFormat df=new SimpleDateFormat("dd/MM/aaaa");
-		return df.parse(dateOfBirth);
-	}
-	/**
-	 * @param dateOfBirth the dateOfBirth to set
-	 * @throws ParseException 
-	 */
-	protected void setDateOfBirth(String dateOfBirth) throws ParseException {
-		DateFormat df=new SimpleDateFormat("gg/MM/aaaa");
-		Date dataProv=df.parse(dateOfBirth);
-		if(dataProv.before(new Date())) {
+	
+	private void setDateOfBirthCheck(LocalDateTime dateOfBirth) throws Exception {
+		if(dateOfBirth.isBefore(LocalDateTime.now())) {
 			this.dateOfBirth = dateOfBirth;
+		}else {
+			throw new Exception("Errore data futura");
 		}
 		
 	}
 	
-	/**
-	 * @param dateOfBirth the dateOfBirth to set
-	 * @throws ParseException 
-	 */
-	protected void setDateOfBirth(Date dateOfBirth) throws ParseException { 
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/aaaa");  
-		setDateOfBirth(dateFormat.format(dateOfBirth));
+	public void setDateOfBirth(LocalDateTime dateOfBirth) throws Exception {
+		setDateOfBirthCheck(dateOfBirth);
 	}
-	
-	/**
-	 * @return the sex
-	 */
-	public String getSexString() {
-		return sex == Sex.MAN ? "M" : "F";
-	}
-	
-	/**
-	 * @return the sex
-	 */
-	public Sex getSex() {
+
+	public String getSex() {
 		return sex;
 	}
-	/**
-	 * @param sex the sex to set
-	 */
+
 	public void setSex(String sex) {
-		this.sex = sex.matches("M") ? Sex.MAN : Sex.WOMAN;
+		this.sex = sex=="M" ? "M" : "F";
+	}
+
+	public String[] getTypes() {
+		return types;
 	}
 	
-	/**
-	 * @param sex the sex to set
-	 */
-	public void setSex(Sex sex) {
-		this.sex = sex;
+	public String[] getTypesName() {
+		ArrayList<String> provString=new ArrayList<String>();
+		TypesE tipoTrovato;
+		for(String type : types) {
+			tipoTrovato=BootstrapSingleton.lookup.get(type);
+			provString.add(tipoTrovato.name());
+		}
+		return (String[]) provString.toArray();
 	}
+	
+	public String[] getTypesDesc() {
+		ArrayList<String> provString=new ArrayList<String>();
+		TypesE tipoTrovato;
+		for(String type : types) {
+			tipoTrovato=BootstrapSingleton.lookup.get(type);
+			provString.add(tipoTrovato.description());
+		}
+		return (String[]) provString.toArray();
+	}
+
+	public void setTypes(String[] types) {
+		this.types = types;
+	}
+	
+	public void addType(String type) {
+		String[] newArr=Arrays.copyOf(this.types, this.types.length+1);
+		newArr[this.types.length+1]=type;
+		this.types=newArr;
+		
+	}
+
+	
 	/**
 	 * @return the residence
 	 */
@@ -152,67 +146,6 @@ public class User extends Account{
 	protected void setResidence(String residence) {
 		this.residence = residence;
 	}
-	/**
-	 * @return the types
-	 */
-	public ArrayList<TypesE> getTypes() {
-		return types;
-	}
-	
-	/**
-	 * @return the types
-	 */
-	public ArrayList<String> getTypesCode() {
-		ArrayList<String> returnlist=new ArrayList<String>();
-		for (TypesE i : types) {
-			returnlist.add(i.code());
-		}
-		return returnlist;
-	}
-	
-	/**
-	 * @return the types
-	 */
-	public ArrayList<String> getTypesName() {
-		ArrayList<String> returnlist=new ArrayList<String>();
-		for (TypesE i : types) {
-			returnlist.add(i.name().toLowerCase().replace(i.name().toLowerCase().substring(0, 1),i.name().substring(0, 1)));
-		}
-		return returnlist;
-	}
-	
-	/**
-	 * @return the types
-	 */
-	public ArrayList<String> getTypesNameComplete() {
-		ArrayList<String> returnlist=new ArrayList<String>();
-		for (TypesE i : types) {
-			returnlist.add(i.description());
-		}
-		return returnlist;
-	}
-	/**
-	 * @param types the types to set
-	 */
-	public void setTypes(ArrayList<TypesE> types) {
-		this.types = types;
-	}
-	
-	/**
-	 * @param types the types to set
-	 */
-	public void addTypes(TypesE types) {
-		this.types.add(types);
-	}
-	
-	/**
-	 * @param types the types to set
-	 */
-	public void addTypes(String c) {
-		TypesE tipoTrovato=BootstrapSingleton.lookup.get(c);
-		this.types.add(tipoTrovato);
-	}
-	
 	
 	/**
 	 * @return the username

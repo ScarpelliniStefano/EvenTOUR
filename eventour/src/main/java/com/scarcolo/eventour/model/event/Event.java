@@ -5,9 +5,16 @@ package com.scarcolo.eventour.model.event;
 
 
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.scarcolo.eventour.functions.TypesE;
+import com.scarcolo.eventour.functions.BootstrapSingleton;
 
 
 
@@ -25,11 +32,8 @@ public class Event {
 	private String title;
 	private String description;
 	private String location;
-	private Object[] types;
-	private String dataAAAA;
-	private String dataMM;
-	private String dataGG;
-	private String time;
+	private String[] types;
+	private LocalDateTime dataOra;
 	private String managerId;
 	private String urlImage;
 	private Integer freeSeat;
@@ -40,10 +44,7 @@ public class Event {
         this.description=request.description;
         this.location=request.location;
         this.types=request.types;
-        this.dataAAAA=request.dataAAAA;
-        this.dataMM=request.dataMM;
-        this.dataGG=request.dataGG;
-        this.time=request.time;
+        this.setDataOra(request.dataOra);
         this.managerId=request.managerId;
         this.urlImage=request.urlImage;
         this.totSeat=request.totSeat;
@@ -102,44 +103,47 @@ public class Event {
 		this.location = location;
 	}
 	
-	public Object[] getTypes() {
+	public String[] getTypes() {
 		return types;
 	}
+	
+	public String[] getTypesName() {
+		ArrayList<String> provString=new ArrayList<String>();
+		TypesE tipoTrovato;
+		for(String type : types) {
+			tipoTrovato=BootstrapSingleton.lookup.get(type);
+			provString.add(tipoTrovato.name());
+		}
+		return (String[]) provString.toArray();
+	}
+	
+	public String[] getTypesDesc() {
+		ArrayList<String> provString=new ArrayList<String>();
+		TypesE tipoTrovato;
+		for(String type : types) {
+			tipoTrovato=BootstrapSingleton.lookup.get(type);
+			provString.add(tipoTrovato.description());
+		}
+		return (String[]) provString.toArray();
+	}
 
-	public void setTypes(Object[] types) {
+	public void setTypes(String[] types) {
 		this.types = types;
 	}
-
-	public String getDataAAAA() {
-		return dataAAAA;
+	
+	public void addType(String type) {
+		String[] newArr=Arrays.copyOf(this.types, this.types.length+1);
+		newArr[this.types.length+1]=type;
+		this.types=newArr;
+		
 	}
 
-	public void setDataAAAA(String dataAAAA) {
-		this.dataAAAA = dataAAAA;
+	public LocalDateTime getDataOra() {
+		return dataOra;
 	}
 
-	public String getDataMM() {
-		return dataMM;
-	}
-
-	public void setDataMM(String dataMM) {
-		this.dataMM = dataMM;
-	}
-
-	public String getDataGG() {
-		return dataGG;
-	}
-
-	public void setDataGG(String dataGG) {
-		this.dataGG = dataGG;
-	}
-
-	public String getTime() {
-		return time;
-	}
-
-	public void setTime(String time) {
-		this.time = time;
+	public void setDataOra(LocalDateTime dataOra) {
+		this.dataOra = dataOra;
 	}
 
 	public String getManagerId() {
@@ -173,181 +177,5 @@ public class Event {
 	public void setTotSeat(Integer totSeat) {
 		this.totSeat = totSeat;
 	}
-	/*public ArrayList<TypesE> getTypes() {
-		return types;
-	}
 	
-	public ArrayList<String> getTypesCode() {
-		ArrayList<String> returnlist=new ArrayList<String>();
-		for (TypesE i : types) {
-			returnlist.add(i.code());
-		}
-		return returnlist;
-	}
-	
-
-	public ArrayList<String> getTypesName() {
-		ArrayList<String> returnlist=new ArrayList<String>();
-		for (TypesE i : types) {
-			returnlist.add(i.name().toLowerCase().replace(i.name().toLowerCase().substring(0, 1),i.name().substring(0, 1)));
-		}
-		return returnlist;
-	}
-	
-
-	public ArrayList<String> getTypesNameComplete() {
-		ArrayList<String> returnlist=new ArrayList<String>();
-		for (TypesE i : types) {
-			returnlist.add(i.description());
-		}
-		return returnlist;
-	}
-
-	public void setTypes(ArrayList<TypesE> types) {
-		this.types = types;
-	}
-	
-
-	public void addTypes(TypesE types) {
-		this.types.add(types);
-	}
-	
-
-	public void addTypes(String c) {
-		TypesE tipoTrovato=BootstrapSingleton.lookup.get(c);
-		this.types.add(tipoTrovato);
-	}
-
-	public String[] getDateTimeEvent() {
-		return dateTimeEvent;
-	}
-
-	public String getYear() {
-		return dateTimeEvent[0];
-	}
-	
-
-	public String getMonth() {
-		return dateTimeEvent[1];
-	}
-	
-
-	public String getDay() {
-		return dateTimeEvent[2];
-	}
-	
-
-	public String getTime() {
-		return dateTimeEvent[3];
-	}
-	
-
-	public Date getDateEvent() throws ParseException {
-		DateFormat df=new SimpleDateFormat("aaaa/MM/gg - hh:mm");
-		return df.parse(dateTimeEvent[0]+
-							"/" + dateTimeEvent[1]+
-							"/" + dateTimeEvent[2]+
-							" - " + dateTimeEvent[3]);
-	}
-
-	public void setDateTimeEvent(String[] dateTimeEvent) throws ParseException {
-		DateFormat df=new SimpleDateFormat("aaaa/MM/gg hh:mm");
-		df.setLenient(false);
-		Date dataProv=df.parse(dateTimeEvent[0]+"/"+dateTimeEvent[1]+"/"+dateTimeEvent[2]+" "+dateTimeEvent[3]);
-		if(dataProv.after(new Date())) {
-			this.dateTimeEvent = dateTimeEvent;
-		}
-		
-	}
-
-	protected String getDateTime() {
-		return dateTimeEvent[0]+
-				"/" + dateTimeEvent[1]+
-				"/" + dateTimeEvent[2]+
-				" - " + dateTimeEvent[3];
-	}
-	
-
-	protected void setDateTimeEvent(String date) throws ParseException {
-		String[] provDate=new String[4];
-		provDate[2]=date.substring(0,2);
-		provDate[1] = date.substring(3,2);
-		provDate[0] = date.substring(6,4);
-		provDate[3] = "00:00";
-		setDateTimeEvent(provDate);
-	}
-	
-
-	protected void setDateTimeEvent(String date,String time) throws ParseException {
-		String[] provDate=new String[4];
-		provDate[2] = date.substring(0,2);
-		provDate[1] = date.substring(3,2);
-		provDate[0] = date.substring(6,4);
-		provDate[3] = time;
-		setDateTimeEvent(provDate);
-	}
-	
-
-	protected Date getData() throws ParseException {
-		DateFormat df=new SimpleDateFormat("aaaa/MM/gg hh:mm");
-		df.setLenient(false);
-		return df.parse(dateTimeEvent[0]+"/"+dateTimeEvent[1]+"/"+dateTimeEvent[2]+" "+dateTimeEvent[3]);
-	}
-
-	protected void setData(Date data) throws ParseException {
-		DateFormat df=new SimpleDateFormat("aaaa/MM/gg hh:mm");
-		df.setLenient(false);
-		String dataProv=df.format(dateTimeEvent[0]+"/"+dateTimeEvent[1]+"/"+dateTimeEvent[2]+" "+dateTimeEvent[3]);
-		String[] provDate=new String[4];
-		provDate[2] = dataProv.substring(0,2);
-		provDate[1] = dataProv.substring(3,2);
-		provDate[0] = dataProv.substring(6,4);
-		provDate[3] = dataProv.substring(11, 5);
-		setDateTimeEvent(provDate);
-	}
-
-	protected Manager getManager() {
-		return manager;
-	}
-
-	protected void setManager(Manager manager) {
-		this.manager = manager;
-	}
-
-	protected String getUrlimg() {
-		return urlimg;
-	}
-
-	protected void setUrlimg(String urlimg) {
-        this.urlimg = urlimg;
-	}
-
-	protected String[] getSeat() {
-		return this.seat;
-	}
-
-	protected void setSeat(String[] seat) {
-		this.seat = seat;
-	}
-	
-
-	protected void setSeatTot(Integer totseat) {
-		seat[0] = totseat.toString();
-	}
-	
-
-	protected void setSeatFree(Integer freeseat) {
-		seat[1] = freeseat.toString();
-	}
-	
-
-	protected void setSeat(Integer totseat,Integer freeseat) {
-		seat[0] = totseat.toString();
-		seat[1] = freeseat.toString();
-	}
-	
-
-	protected void setSeatFree(String freeseat) {
-		seat[1] = freeseat;
-	}*/
 }

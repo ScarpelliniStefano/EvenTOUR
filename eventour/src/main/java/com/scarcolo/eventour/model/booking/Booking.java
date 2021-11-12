@@ -3,75 +3,62 @@
  */
 package com.scarcolo.eventour.model.booking;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.scarcolo.eventour.model.event.AddEventRequest;
+
 /**
  * @author stefa
  *
  */
+@Document(collection="bookings")
 public class Booking {
-	private Integer id;
-	private User user;
-	private Event event;
+	@Id
+	private String id;
+	private String userId;
+	private String eventId;
 	private Integer prenotedSeat;	
 	
-	/**
-	 * @param id
-	 * @param user
-	 * @param event
-	 * @param prenotedSeat
-	 */
-	public Booking(Integer id, User user, Event event, Integer prenotedSeat) {
-		super();
-		setId(id);
-		setUser(user);
-		setEvent(event);
-		setPrenotedSeat(prenotedSeat);
+	public Booking(AddBookingRequest request) {
+        this.userId=request.userId;
+        this.eventId=request.eventId;
+        this.prenotedSeat=request.prenotedSeat;
+    }
+	
+	public Booking() {
+		
 	}
-	/**
-	 * @return the id
-	 */
-	protected Integer getId() {
+	
+	public String getId() {
 		return id;
 	}
-	/**
-	 * @param id the id to set
-	 */
-	protected void setId(Integer id) {
+
+	public void setId(String id) {
 		this.id = id;
 	}
-	/**
-	 * @return the user
-	 */
-	protected User getUser() {
-		return user;
+
+	public String getUserId() {
+		return userId;
 	}
-	/**
-	 * @param user the user to set
-	 */
-	protected void setUser(User user) {
-		this.user = user;
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	/**
-	 * @return the event
-	 */
-	protected Event getEvent() {
-		return event;
+
+	public String getEventId() {
+		return eventId;
 	}
-	/**
-	 * @param event the event to set
-	 */
-	protected void setEvent(Event event) {
-		this.event = event;
+
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
 	}
-	/**
-	 * @return the prenotedSeat
-	 */
-	protected Integer getPrenotedSeat() {
+
+	public Integer getPrenotedSeat() {
 		return prenotedSeat;
 	}
-	/**
-	 * @param prenotedSeat the prenotedSeat to set
-	 */
-	protected void setPrenotedSeat(Integer prenotedSeat) {
+
+	public void setPrenotedSeat(Integer prenotedSeat) {
 		this.prenotedSeat = prenotedSeat;
 	}
 }

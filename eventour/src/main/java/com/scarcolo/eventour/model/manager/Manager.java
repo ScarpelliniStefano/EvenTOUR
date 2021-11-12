@@ -10,8 +10,8 @@ import java.util.Date;
 
 import javax.mail.internet.AddressException;
 
-import functions.Functionalities;
-import functions.PartitaIVAFunctions;
+import com.scarcolo.eventour.model.Account;
+
 
 
 /**

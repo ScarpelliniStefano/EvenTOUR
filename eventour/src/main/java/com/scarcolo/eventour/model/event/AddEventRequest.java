@@ -1,5 +1,7 @@
 package com.scarcolo.eventour.model.event;
 
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
@@ -12,15 +14,9 @@ public class AddEventRequest {
 	@JsonProperty("location")
 	public String location;
 	@JsonProperty("types")
-	public Object[] types;
-	@JsonProperty("dataAAAA")
-	public String dataAAAA;
-	@JsonProperty("dataMM")
-	public String dataMM;
-	@JsonProperty("dataGG")
-	public String dataGG;
-	@JsonProperty("time")
-	public String time;
+	public String[] types;
+	@JsonProperty("dataOra")
+	public LocalDateTime dataOra;
 	@JsonProperty("managerId")
 	public String managerId;
 	@JsonProperty("urlImage")

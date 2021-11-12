@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Id;
 
 public abstract class Account{
 	@Id
-	private Integer id;
+	private String id;
 	private String username;
 	private String password;
 
@@ -14,35 +14,42 @@ public abstract class Account{
 	 * @param username
 	 * @param password
 	 */
-	public Account(Integer id, String username, String password) {
+	public Account(String id, String username, String password) {
 		super();
 		setId(id);
 		setUsername(username);
 		setPassword(password);
 	}
 
-	public Account(Integer id, String password) {
-		setId(id);
+	public Account(Boolean idPres,String idOrUser, String password) {
+		if(idPres)
+			setId(id);
+		else
+			setUsername(username);
 		setPassword(password);
 	}
 	
-	public Account(String username, String password) {
-		setUsername(username);
+	
+	public Account(String password) {
 		setPassword(password);
+	}
+	
+	public Account() {
+		
 	}
 
 
 	/**
 	 * @return the id
 	 */
-	public Integer getId() {
+	public String getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

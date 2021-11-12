@@ -1,6 +1,6 @@
 package com.scarcolo.eventour.model.user;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -14,7 +14,7 @@ public class AddUserRequest {
 	@JsonProperty("sex")
 	public String sex;
 	@JsonProperty("dateOfBirth")
-	public LocalDateTime dateOfBirth;
+	public LocalDate dateOfBirth;
 	@JsonProperty("residence")
 	public String residence;
 	@JsonProperty("types")

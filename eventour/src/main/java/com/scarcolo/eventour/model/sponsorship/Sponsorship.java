@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author stefa
  *
  */
-@Document(collection = "sponsorship")
+@Document(collection = "sponsor")
 public class Sponsorship {
 	
 	@Id

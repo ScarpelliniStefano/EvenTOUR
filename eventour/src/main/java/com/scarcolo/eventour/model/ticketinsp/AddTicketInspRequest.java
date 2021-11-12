@@ -1,6 +1,5 @@
 package com.scarcolo.eventour.model.ticketinsp;
 
-import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

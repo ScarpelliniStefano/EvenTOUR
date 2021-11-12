@@ -6,17 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.scarcolo.eventour.model.booking.AddBookingRequest;
-import com.scarcolo.eventour.model.booking.Booking;
-import com.scarcolo.eventour.model.booking.EditBookingRequest;
-import com.scarcolo.eventour.model.event.AddEventRequest;
-import com.scarcolo.eventour.model.event.EditEventRequest;
-import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
-import com.scarcolo.eventour.repository.booking.BookingRepository;
-import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.ticketisp.TicketInspRepository;
 
 import java.util.ArrayList;

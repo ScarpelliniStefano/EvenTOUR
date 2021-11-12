@@ -2,6 +2,7 @@ package com.scarcolo.eventour.model.event;
 
 import java.time.LocalDateTime;
 
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 

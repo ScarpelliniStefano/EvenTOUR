@@ -1,5 +1,8 @@
 package com.scarcolo.eventour.model.manager;
 
+
+import java.time.LocalDate;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AddManagerRequest {
@@ -11,7 +14,7 @@ public class AddManagerRequest {
 	public String surname;
 	
 	@JsonProperty("dateOfBirth")
-	public String dateOfBirth;
+	public LocalDate dateOfBirth;
 	
 	@JsonProperty("residence")
 	public String residence;

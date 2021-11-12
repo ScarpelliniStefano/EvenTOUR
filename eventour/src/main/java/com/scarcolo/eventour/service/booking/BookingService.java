@@ -9,11 +9,7 @@ import org.springframework.stereotype.Service;
 import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.EditBookingRequest;
-import com.scarcolo.eventour.model.event.AddEventRequest;
-import com.scarcolo.eventour.model.event.EditEventRequest;
-import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
-import com.scarcolo.eventour.repository.event.EventRepository;
 
 import java.util.ArrayList;
 import java.util.List;

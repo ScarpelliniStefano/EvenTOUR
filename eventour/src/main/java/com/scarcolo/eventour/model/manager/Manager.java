@@ -3,9 +3,9 @@
  */
 package com.scarcolo.eventour.model.manager;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.mail.internet.AddressException;
@@ -26,7 +26,7 @@ public class Manager extends Account{
 	
 	private String name;
 	private String surname;
-	private String dateOfBirth;
+	private Date dateOfBirth;
 	private String residence;
 	private String codicePIVA;
 	private String ragioneSociale;
@@ -37,11 +37,11 @@ public class Manager extends Account{
 	 * @throws Exception
 	 */
 	public Manager(AddManagerRequest request) throws Exception {
-		super(request.mail, request.password);
+		super(false,request.mail, request.password);
 		setEmail(request.mail);
 		setName(request.name);
 		setSurname(request.surname);
-		setDateOfBirth(request.dateOfBirth);
+		setDateOfBirth(Functionalities.convertToDate(request.dateOfBirth));
 		setResidence(request.residence);
 		setCodicePIVA(request.codicePIVA);
 		setRagioneSociale(request.ragioneSociale);
@@ -50,79 +50,73 @@ public class Manager extends Account{
 	/**
 	 * @return the name
 	 */
-	protected String getName() {
+	public String getName() {
 		return name;
 	}
 	/**
 	 * @param name the name to set
 	 */
-	protected void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	/**
 	 * @return the surname
 	 */
-	protected String getSurname() {
+	public String getSurname() {
 		return surname;
 	}
 	/**
 	 * @param surname the surname to set
 	 */
-	protected void setSurname(String surname) {
+	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	/**
-	 * @return the dateOfBirth
-	 */
-	protected String getDateOfBirth() {
+
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 	
-	/**
-	 * @return the dateOfBirth
-	 * @throws ParseException 
-	 */
-	protected Date getDateOfBirthDate() throws ParseException {
-		DateFormat df=new SimpleDateFormat("dd/mm/aaaa");
-		return df.parse(dateOfBirth);
-	}
-	/**
-	 * @param dateOfBirth the dateOfBirth to set
-	 */
-	protected void setDateOfBirth(String dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
+	
+	public LocalDate getDateOfBirthLocal() {
+		return Functionalities.convertToLocalDate(this.dateOfBirth);
 	}
 	
-	/**
-	 * @param dateOfBirth the dateOfBirth to set
-	 */
-	protected void setDateOfBirth(Date dateOfBirth) { 
-		DateFormat dateFormat = new SimpleDateFormat("dd/mm/aaaa");  
-		this.dateOfBirth = dateFormat.format(dateOfBirth);
+	
+	private void setDateOfBirthCheck(Date dateOfBirth) throws Exception {
+		if(dateOfBirth.before(new Date())) {
+			this.dateOfBirth = dateOfBirth;
+		}else {
+			throw new Exception("Errore data futura");
+		}
+		
+	}
+	
+	public void setDateOfBirth(Date dateOfBirth) throws Exception {
+		setDateOfBirthCheck(dateOfBirth);
 	}
 	/**
 	 * @return the residence
 	 */
-	protected String getResidence() {
+	public String getResidence() {
 		return residence;
 	}
 	/**
 	 * @param residence the residence to set
 	 */
-	protected void setResidence(String residence) {
+	public void setResidence(String residence) {
 		this.residence = residence;
 	}
 	/**
 	 * @return the codicePIVA
 	 */
-	protected String getCodicePIVA() {
+	public String getCodicePIVA() {
 		return codicePIVA;
 	}
 	/**
 	 * @param codicePIVA the codicePIVA to set
 	 * @throws Exception 
 	 */
-	protected void setCodicePIVA(String codicePIVA) throws Exception {
+	public void setCodicePIVA(String codicePIVA) throws Exception {
 		String res=PartitaIVAFunctions.validate(codicePIVA);
 		if(res==null)
 			this.codicePIVA = codicePIVA;
@@ -132,13 +126,13 @@ public class Manager extends Account{
 	/**
 	 * @return the ragioneSociale
 	 */
-	protected String getRagioneSociale() {
+	public String getRagioneSociale() {
 		return ragioneSociale;
 	}
 	/**
 	 * @param ragioneSociale the ragioneSociale to set
 	 */
-	protected void setRagioneSociale(String ragioneSociale) {
+	public void setRagioneSociale(String ragioneSociale) {
 		this.ragioneSociale = ragioneSociale;
 	}
 	

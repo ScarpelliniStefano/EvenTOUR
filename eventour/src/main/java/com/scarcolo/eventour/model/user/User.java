@@ -3,15 +3,15 @@
  */
 package com.scarcolo.eventour.model.user;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
 import javax.mail.internet.AddressException;
+
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.scarcolo.eventour.functions.BootstrapSingleton;
 import com.scarcolo.eventour.functions.Functionalities;
@@ -24,20 +24,21 @@ import com.scarcolo.eventour.model.Account;
  * @author stefa
  *
  */
+@Document(collection = "users")
 public class User extends Account{
 	private String name;
 	private String surname;
-	private LocalDateTime dateOfBirth;
+	private Date dateOfBirth;
 	private String sex;
 	private String residence;
 	private String[] types;
 	
 	public User(AddUserRequest request) throws Exception {
-        super(request.password);
+        super(false,request.mail,request.password);
         setEmail(request.mail);
-        this.name=request.name;
-        this.surname=request.surname;
-        setDateOfBirth(request.dateOfBirth);
+        setName(request.name);
+        setSurname(request.surname);
+        setDateOfBirth(Functionalities.convertToDate(request.dateOfBirth));
         setSex(request.sex);
     }
 	
@@ -72,13 +73,16 @@ public class User extends Account{
 	/**
 	 * @return the dateOfBirth
 	 */
-	protected LocalDateTime getDateOfBirth() {
+	protected Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 	
+	public LocalDate getDateOfBirthLocal() {
+		return Functionalities.convertToLocalDate(this.dateOfBirth);
+	}
 	
-	private void setDateOfBirthCheck(LocalDateTime dateOfBirth) throws Exception {
-		if(dateOfBirth.isBefore(LocalDateTime.now())) {
+	private void setDateOfBirthCheck(Date dateOfBirth) throws Exception {
+		if(dateOfBirth.before(new Date())) {
 			this.dateOfBirth = dateOfBirth;
 		}else {
 			throw new Exception("Errore data futura");
@@ -86,7 +90,7 @@ public class User extends Account{
 		
 	}
 	
-	public void setDateOfBirth(LocalDateTime dateOfBirth) throws Exception {
+	public void setDateOfBirth(Date dateOfBirth) throws Exception {
 		setDateOfBirthCheck(dateOfBirth);
 	}
 

@@ -23,7 +23,7 @@ public class EventService {
     private EventRepository eventRepository;
 
    
-    public ResponseEntity<Event> add(AddEventRequest request) {
+    public ResponseEntity<Event> add(AddEventRequest request) throws Exception {
         Event event = eventRepository.save(new Event(request));
         return new ResponseEntity<>(event, HttpStatus.OK);
     }

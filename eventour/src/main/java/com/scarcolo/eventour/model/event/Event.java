@@ -5,16 +5,14 @@ package com.scarcolo.eventour.model.event;
 
 
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.scarcolo.eventour.functions.TypesE;
-import com.scarcolo.eventour.functions.BootstrapSingleton;
+import com.scarcolo.eventour.functions.Functionalities;
 
 
 
@@ -33,18 +31,18 @@ public class Event {
 	private String description;
 	private String location;
 	private String[] types;
-	private LocalDateTime dataOra;
+	private Date dataOra;
 	private String managerId;
 	private String urlImage;
 	private Integer freeSeat;
 	private Integer totSeat;
 	
-	public Event(AddEventRequest request) {
+	public Event(AddEventRequest request) throws Exception {
         this.title=request.title;
         this.description=request.description;
         this.location=request.location;
         this.types=request.types;
-        this.setDataOra(request.dataOra);
+        this.setDataOra(Functionalities.convertToDate(request.dataOra));
         this.managerId=request.managerId;
         this.urlImage=request.urlImage;
         this.totSeat=request.totSeat;
@@ -107,7 +105,7 @@ public class Event {
 		return types;
 	}
 	
-	public String[] getTypesName() {
+	/*public String[] getTypesName() {
 		ArrayList<String> provString=new ArrayList<String>();
 		TypesE tipoTrovato;
 		for(String type : types) {
@@ -125,7 +123,7 @@ public class Event {
 			provString.add(tipoTrovato.description());
 		}
 		return (String[]) provString.toArray();
-	}
+	}*/
 
 	public void setTypes(String[] types) {
 		this.types = types;
@@ -138,12 +136,28 @@ public class Event {
 		
 	}
 
-	public LocalDateTime getDataOra() {
+	public Date getDataOra() {
 		return dataOra;
 	}
-
-	public void setDataOra(LocalDateTime dataOra) {
-		this.dataOra = dataOra;
+	
+	public LocalDateTime getDataOraLocal() {
+		return Functionalities.convertToLocalDateTime(this.dataOra);
+	}
+	
+	
+	
+	
+	private void setDateCheck(Date dataOra) throws Exception {
+		if(dataOra.after(new Date())) {
+			this.dataOra = dataOra;
+		}else {
+			throw new Exception("Errore data passata");
+		}
+		
+	}
+	
+	public void setDataOra(Date dataOra) throws Exception {
+		setDateCheck(dataOra);
 	}
 
 	public String getManagerId() {

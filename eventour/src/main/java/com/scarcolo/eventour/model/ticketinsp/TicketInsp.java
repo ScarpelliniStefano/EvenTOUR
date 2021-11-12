@@ -3,20 +3,22 @@
  */
 package com.scarcolo.eventour.model.ticketinsp;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.Account;
-import com.scarcolo.eventour.model.booking.AddBookingRequest;
 
 /**
  * @author stefa
  *
  */
+@Document(collection = "ticketInspectors")
 public class TicketInsp extends Account{
 	private String fullName;
 	private String eventId;
 	
 	public TicketInsp(AddTicketInspRequest request) throws Exception {
-        super(request.password);
+        super(false,request.code,request.password);
         setCode(request.code);
         this.eventId=request.eventId;
         this.fullName=request.fullName;

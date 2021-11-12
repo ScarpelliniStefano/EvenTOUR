@@ -6,7 +6,6 @@ package com.scarcolo.eventour.model.booking;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.scarcolo.eventour.model.event.AddEventRequest;
 
 /**
  * @author stefa

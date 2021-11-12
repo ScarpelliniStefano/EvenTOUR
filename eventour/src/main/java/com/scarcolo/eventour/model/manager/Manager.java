@@ -10,44 +10,43 @@ import java.util.Date;
 
 import javax.mail.internet.AddressException;
 
-import com.scarcolo.eventour.model.Account;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.functions.PartitaIVAFunctions;
+import com.scarcolo.eventour.model.Account;
 
 
 /**
  * @author stefa
  *
  */
+@Document(collection = "managers")
 public class Manager extends Account{
+	
 	private String name;
 	private String surname;
 	private String dateOfBirth;
 	private String residence;
 	private String codicePIVA;
 	private String ragioneSociale;
+
 	/**
-	 * @param id
-	 * @param username
-	 * @param password
-	 * @param name
-	 * @param surname
-	 * @param dateOfBirth
-	 * @param residence
-	 * @param codicePIVA
-	 * @param ragioneSociale
-	 * @throws Exception 
+	 * 
+	 * @param request
+	 * @throws Exception
 	 */
-	public Manager(Integer id, String mail, String password, String name, String surname, String dateOfBirth,
-			String residence, String codicePIVA, String ragioneSociale) throws Exception {
-		super(id, password);
-		setEmail(mail);
-		setName(name);
-		setSurname(surname);
-		setDateOfBirth(dateOfBirth);
-		setResidence(residence);
-		setCodicePIVA(codicePIVA);
-		setRagioneSociale(ragioneSociale);
+	public Manager(AddManagerRequest request) throws Exception {
+		super(request.mail, request.password);
+		setEmail(request.mail);
+		setName(request.name);
+		setSurname(request.surname);
+		setDateOfBirth(request.dateOfBirth);
+		setResidence(request.residence);
+		setCodicePIVA(request.codicePIVA);
+		setRagioneSociale(request.ragioneSociale);
 	}
+	
 	/**
 	 * @return the name
 	 */

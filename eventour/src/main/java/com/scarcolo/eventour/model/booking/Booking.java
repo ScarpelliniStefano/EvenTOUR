@@ -3,6 +3,9 @@
  */
 package com.scarcolo.eventour.model.booking;
 
+import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.user.User;
+
 /**
  * @author stefa
  *

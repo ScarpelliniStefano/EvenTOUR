@@ -1,5 +1,4 @@
-package com.scarcolo.eventour.controller.event;
-
+package com.scarcolo.eventour.controller.sponsorship;
 
 import java.util.List;
 
@@ -15,46 +14,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.scarcolo.eventour.model.event.AddEventRequest;
-import com.scarcolo.eventour.model.event.EditEventRequest;
-import com.scarcolo.eventour.model.event.Event;
-import com.scarcolo.eventour.service.event.EventService;
+import com.scarcolo.eventour.model.sponsorship.AddSponsorshipRequest;
+import com.scarcolo.eventour.model.sponsorship.EditSponsorshipRequest;
+import com.scarcolo.eventour.model.sponsorship.Sponsorship;
+import com.scarcolo.eventour.service.sponsorship.SponsorshipService;
 
 
 @RestController
 @RequestMapping("/api")
-public class EventController {
-	
+public class SponsorshipController {
+
 	@Autowired
-	private EventService eventService;
-	 @PostMapping("/events")
-	    public ResponseEntity<Event> addEvent(@RequestBody AddEventRequest request){
+	private SponsorshipService eventService;
+	 @PostMapping("/sponsorship")
+	    public ResponseEntity<Sponsorship> addEvent(@RequestBody AddSponsorshipRequest request){
 	      return eventService.add(request);
 	    }
 
 	   
-	    @PutMapping("/events")
-	    public ResponseEntity<Event> updateEvent(@RequestBody EditEventRequest request){
+	    @PutMapping("/sponsorship")
+	    public ResponseEntity<Sponsorship> updateEvent(@RequestBody EditSponsorshipRequest request){
 	        return eventService.update(request);
 	    }
 
 
 	   
-	    @GetMapping("/events/{id}")
-	    public ResponseEntity<Event> getEventById(@PathVariable("id") String id){
+	    @GetMapping("/sponsorship/{id}")
+	    public ResponseEntity<Sponsorship> getEventById(@PathVariable("id") String id){
 	        return eventService.getById(id);
 	    }
 	    
 
-	    @GetMapping("/events")
-	    public ResponseEntity<List<Event>> getAllEvents(){
+	    @GetMapping("/sponsorship")
+	    public ResponseEntity<List<Sponsorship>> getAllEvents(){
 	        return eventService.getAll();
 	    }
 
 	   
-	    @DeleteMapping("/events/{id}")
+	    @DeleteMapping("/sponsorship/{id}")
 	    public boolean deleteById(@RequestParam String id){
 	        return eventService.delete(id);
 	    }
 
+	
 }

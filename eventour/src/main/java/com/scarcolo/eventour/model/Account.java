@@ -25,6 +25,12 @@ public abstract class Account{
 		setId(id);
 		setPassword(password);
 	}
+	
+	public Account(String username, String password) {
+		setUsername(username);
+		setPassword(password);
+	}
+
 
 	/**
 	 * @return the id

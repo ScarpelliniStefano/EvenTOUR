@@ -14,6 +14,7 @@ import javax.mail.internet.AddressException;
 import com.scarcolo.eventour.functions.BootstrapSingleton;
 import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.functions.Sex;
+import com.scarcolo.eventour.functions.TypesE;
 import com.scarcolo.eventour.model.Account;
 
 

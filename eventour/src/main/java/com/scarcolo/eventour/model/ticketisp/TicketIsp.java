@@ -3,6 +3,9 @@
  */
 package com.scarcolo.eventour.model.ticketisp;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.Account;
 
@@ -10,9 +13,17 @@ import com.scarcolo.eventour.model.Account;
  * @author stefa
  *
  */
+@Document(collection = "ticketisp")
 public class TicketIsp extends Account{
+	
+	@Id
+	private String id;
+	
+	private String code;
+	private String eventId;
+	private String password;
 	private String fullName;
-	private Event event;
+	
 	/**
 	 * @param id
 	 * @param username
@@ -21,41 +32,70 @@ public class TicketIsp extends Account{
 	 * @param event
 	 * @throws Exception 
 	 */
-	public TicketIsp(Integer id, String code, String password, String fullName, Event event) throws Exception {
-		super(id, password);
-		setCode(code);
-		setFullName(fullName);
-		setEvent(event);
+	public TicketIsp(AddTicketIspRequest request) throws Exception {
+		super(request.code, request.password);
+		setEventId(request.eventId);
+		setPassword(request.password);
+		setFullName(request.fullName);
 	}
+
+
+	/**
+	 * @return the eventId
+	 */
+	public String getEventId() {
+		return eventId;
+	}
+
+
+	/**
+	 * @param eventId the eventId to set
+	 */
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
+	}
+
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+
 	/**
 	 * @return the fullName
 	 */
 	public String getFullName() {
 		return fullName;
 	}
+
+
 	/**
 	 * @param fullName the fullName to set
 	 */
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
+
+
 	/**
-	 * @return the event
+	 * @return the code
 	 */
-	public Event getEvent() {
-		return event;
-	}
-	/**
-	 * @param event the event to set
-	 */
-	public void setEvent(Event event) {
-		this.event = event;
-	}
-	
 	public String getCode() {
-		return getUsername();
+		return code;
 	}
-	
+
+
 	/**
 	 * @param username the username to set
 	 * @throws Exception 

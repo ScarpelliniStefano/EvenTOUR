@@ -3,59 +3,65 @@
  */
 package com.scarcolo.eventour.model.sponsorship;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 /**
  * @author stefa
  *
  */
+@Document(collection = "sponsorship")
 public class Sponsorship {
-	private Integer id;
-	private Event event;
-	private User user;
+	
+	@Id
+	private String id;
+	
+	private String eventId;
+	private String userId;
+	
 	/**
-	 * @param id
-	 * @param event
-	 * @param user
+	 * 
+	 * @param request
 	 */
-	public Sponsorship(Integer id, Event event, User user) {
-		super();
-		setId(id);
-		setEvent(event);
-		setUser(user);
+	public Sponsorship(AddSponsorshipRequest request) {
+		setEventId(request.eventId);
+		setUserId(request.userId);
 	}
+	
 	/**
 	 * @return the id
 	 */
-	protected Integer getId() {
+	public String getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	protected void setId(Integer id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	/**
 	 * @return the event
 	 */
-	protected Event getEvent() {
-		return event;
+	public String getEventId() {
+		return eventId;
 	}
 	/**
 	 * @param event the event to set
 	 */
-	protected void setEvent(Event event) {
-		this.event = event;
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
 	}
 	/**
 	 * @return the user
 	 */
-	protected User getUser() {
-		return user;
+	public String getUser() {
+		return userId;
 	}
 	/**
 	 * @param user the user to set
 	 */
-	protected void setUser(User user) {
-		this.user = user;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

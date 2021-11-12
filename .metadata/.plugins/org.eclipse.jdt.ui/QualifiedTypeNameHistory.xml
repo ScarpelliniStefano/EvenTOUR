@@ -36,4 +36,8 @@
     <fullyQualifiedTypeName name="service.event.EventService"/>
     <fullyQualifiedTypeName name="model.event.AddEventRequest"/>
     <fullyQualifiedTypeName name="model.event.EditEventRequest"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.Account"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Sex"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.BootstrapSingleton"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Functionalities"/>
 </qualifiedTypeNameHistroy>

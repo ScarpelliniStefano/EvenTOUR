@@ -49,7 +49,7 @@ public class EventController {
 	    }
 	    
 
-	    @GetMapping
+	    @GetMapping("/events")
 	    public ResponseEntity<List<Event>> getAllEvents(){
 	        return eventService.getAll();
 	    }

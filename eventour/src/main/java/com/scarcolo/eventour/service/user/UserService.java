@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.scarcolo.eventour.model.user.AddUserRequest;
 import com.scarcolo.eventour.model.user.EditUserRequest;
 import com.scarcolo.eventour.model.user.User;
+import com.scarcolo.eventour.model.user.UserResponse;
 import com.scarcolo.eventour.repository.user.UserRepository;
 
 import java.util.ArrayList;
@@ -23,26 +24,26 @@ public class UserService {
     private UserRepository userRepository;
 
    
-    public ResponseEntity<User> add(AddUserRequest request) throws Exception {
+    public ResponseEntity<UserResponse> add(AddUserRequest request) throws Exception{
     	User user = userRepository.save(new User(request));
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return new ResponseEntity<>(new UserResponse(user), HttpStatus.OK);
     }
 
   
-    public ResponseEntity<User> update(EditUserRequest request) {
+    public ResponseEntity<UserResponse> update(EditUserRequest request) throws Exception {
         Optional<User> optionalUser = userRepository.findById(request.id);
         if (optionalUser.isEmpty()) {
             return null;
         }
-        return new ResponseEntity<>(optionalUser.get(), HttpStatus.OK);
+        return new ResponseEntity<>(new UserResponse(optionalUser.get()), HttpStatus.OK);
     }
 
    
-    public ResponseEntity<User> getById(String id) {
+    public ResponseEntity<UserResponse> getById(String id){
     	Optional<User> userData = userRepository.findById(id);
 
   	  if (userData.isPresent()) {
-  	    return new ResponseEntity<>(userData.get(), HttpStatus.OK);
+  	    return new ResponseEntity<>(new UserResponse(userData.get()), HttpStatus.OK);
   	  } else {
   	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   	  }
@@ -58,14 +59,16 @@ public class UserService {
         return true;
     }
 
-	public ResponseEntity<List<User>> getAll() {
+	public ResponseEntity<List<UserResponse>> getAll() {
 		try {
 			List<User> users = new ArrayList<>();
 			userRepository.findAll().forEach(users::add);
 			if(users.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-			return new ResponseEntity<>(users, HttpStatus.OK);
+			List<UserResponse> userR= new ArrayList<>();
+			for(User user: users) userR.add(new UserResponse(user));
+			return new ResponseEntity<>(userR, HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

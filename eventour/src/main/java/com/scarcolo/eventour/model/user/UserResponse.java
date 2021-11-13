@@ -49,7 +49,7 @@ public class UserResponse extends Account{
 	 * @param request
 	 * @throws Exception
 	 */
-	public UserResponse(User user) throws Exception {
+	public UserResponse(User user){
 		this.id=user.getId();
 		this.mail=user.getEmail();
 		this.password=user.getPassword();

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.scarcolo.eventour.model.event.AddEventRequest;
 import com.scarcolo.eventour.model.event.EditEventRequest;
 import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.repository.event.EventRepository;
 
 import java.util.ArrayList;
@@ -23,26 +24,26 @@ public class EventService {
     private EventRepository eventRepository;
 
    
-    public ResponseEntity<Event> add(AddEventRequest request) throws Exception {
+    public ResponseEntity<EventResponse> add(AddEventRequest request) throws Exception {
         Event event = eventRepository.save(new Event(request));
-        return new ResponseEntity<>(event, HttpStatus.OK);
+        return new ResponseEntity<>(new EventResponse(event), HttpStatus.OK);
     }
 
   
-    public ResponseEntity<Event> update(EditEventRequest request) {
+    public ResponseEntity<EventResponse> update(EditEventRequest request) throws Exception {
         Optional<Event> optionalEvent = eventRepository.findById(request.id);
         if (optionalEvent.isEmpty()) {
             return null;
         }
-        return new ResponseEntity<>(optionalEvent.get(), HttpStatus.OK);
+        return new ResponseEntity<>(new EventResponse(optionalEvent.get()), HttpStatus.OK);
     }
 
    
-    public ResponseEntity<Event> getById(String id) {
+    public ResponseEntity<EventResponse> getById(String id) {
     	Optional<Event> eventData = eventRepository.findById(id);
 
   	  if (eventData.isPresent()) {
-  	    return new ResponseEntity<>(eventData.get(), HttpStatus.OK);
+  	    return new ResponseEntity<>(new EventResponse(eventData.get()), HttpStatus.OK);
   	  } else {
   	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   	  }
@@ -58,14 +59,16 @@ public class EventService {
         return true;
     }
 
-	public ResponseEntity<List<Event>> getAll() {
+	public ResponseEntity<List<EventResponse>> getAll() {
 		try {
 			List<Event> events = new ArrayList<>();
 			eventRepository.findAll().forEach(events::add);
 			if(events.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-			return new ResponseEntity<>(events, HttpStatus.OK);
+			List<EventResponse> eventR= new ArrayList<>();
+			for(Event event: events) eventR.add(new EventResponse(event));
+			return new ResponseEntity<>(eventR, HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

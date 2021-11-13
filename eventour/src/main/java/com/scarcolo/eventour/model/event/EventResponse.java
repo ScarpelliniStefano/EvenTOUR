@@ -47,7 +47,7 @@ public class EventResponse {
 	@JsonProperty("freeSeat")
 	public Integer freeSeat;
 	
-	public EventResponse(Event event) throws Exception {
+	public EventResponse(Event event){
 		this.id=event.getId();
    	    this.title=event.getTitle();
         this.description=event.getDescription();

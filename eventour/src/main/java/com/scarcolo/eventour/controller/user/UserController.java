@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.scarcolo.eventour.model.user.AddUserRequest;
 import com.scarcolo.eventour.model.user.EditUserRequest;
 import com.scarcolo.eventour.model.user.User;
+import com.scarcolo.eventour.model.user.UserResponse;
 import com.scarcolo.eventour.service.user.UserService;
 
 
@@ -27,26 +28,26 @@ public class UserController {
 	private UserService userService;
 	 
 	@PostMapping("/users")
-	public ResponseEntity<User> addUser(@RequestBody AddUserRequest request) throws Exception{
+	public ResponseEntity<UserResponse> addUser(@RequestBody AddUserRequest request) throws Exception{
 	      return userService.add(request);
 	}
 
 	   
 	    @PutMapping("/users")
-	    public ResponseEntity<User> updateUser(@RequestBody EditUserRequest request){
+	    public ResponseEntity<UserResponse> updateUser(@RequestBody EditUserRequest request) throws Exception{
 	        return userService.update(request);
 	    }
 
 
 	   
 	    @GetMapping("/users/{id}")
-	    public ResponseEntity<User> getUserById(@PathVariable("id") String id){
+	    public ResponseEntity<UserResponse> getUserById(@PathVariable("id") String id){
 	        return userService.getById(id);
 	    }
 	    
 
 	    @GetMapping("/users")
-	    public ResponseEntity<List<User>> getAllUsers(){
+	    public ResponseEntity<List<UserResponse>> getAllUsers(){
 	        return userService.getAll();
 	    }
 

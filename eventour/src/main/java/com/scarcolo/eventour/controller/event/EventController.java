@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.scarcolo.eventour.model.event.AddEventRequest;
 import com.scarcolo.eventour.model.event.EditEventRequest;
 import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.service.event.EventService;
 
 
@@ -28,26 +29,26 @@ public class EventController {
 	@Autowired
 	private EventService eventService;
 	 @PostMapping("/events")
-	    public ResponseEntity<Event> addEvent(@RequestBody AddEventRequest request) throws Exception{
+	    public ResponseEntity<EventResponse> addEvent(@RequestBody AddEventRequest request) throws Exception{
 	      return eventService.add(request);
 	    }
 
 	   
 	    @PutMapping("/events")
-	    public ResponseEntity<Event> updateEvent(@RequestBody EditEventRequest request){
+	    public ResponseEntity<EventResponse> updateEvent(@RequestBody EditEventRequest request) throws Exception{
 	        return eventService.update(request);
 	    }
 
 
 	   
 	    @GetMapping("/events/{id}")
-	    public ResponseEntity<Event> getEventById(@PathVariable("id") String id){
+	    public ResponseEntity<EventResponse> getEventById(@PathVariable("id") String id){
 	        return eventService.getById(id);
 	    }
 	    
 
 	    @GetMapping("/events")
-	    public ResponseEntity<List<Event>> getAllEvents(){
+	    public ResponseEntity<List<EventResponse>> getAllEvents(){
 	        return eventService.getAll();
 	    }
 

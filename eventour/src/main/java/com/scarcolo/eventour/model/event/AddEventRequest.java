@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scarcolo.eventour.model.Location;
 
 
 public class AddEventRequest {
@@ -13,7 +14,7 @@ public class AddEventRequest {
 	@JsonProperty("description")
 	public String description;
 	@JsonProperty("location")
-	public String location;
+	public Location location;
 	@JsonProperty("types")
 	public String[] types;
 	@JsonProperty("dataOra")

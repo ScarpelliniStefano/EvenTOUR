@@ -6,9 +6,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
+import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
+import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.ticketisp.TicketInspRepository;
 
 import java.util.ArrayList;
@@ -21,28 +25,30 @@ public class TicketInspService {
 
     @Autowired
     private TicketInspRepository ticketInspRepository;
+    @Autowired
+    private EventRepository eventRepository;
 
    
-    public ResponseEntity<TicketInsp> add(AddTicketInspRequest request) throws Exception {
+    public ResponseEntity<TicketInspResponse> add(AddTicketInspRequest request) throws Exception {
         TicketInsp ticketInsp = ticketInspRepository.save(new TicketInsp(request));
-        return new ResponseEntity<>(ticketInsp, HttpStatus.OK);
+        return new ResponseEntity<>(new TicketInspResponse(ticketInsp), HttpStatus.OK);
     }
 
   
-    public ResponseEntity<TicketInsp> update(EditTicketInspRequest request) {
+    public ResponseEntity<TicketInspResponse> update(EditTicketInspRequest request) {
         Optional<TicketInsp> optionalTicketInsp = ticketInspRepository.findById(request.id);
         if (optionalTicketInsp.isEmpty()) {
             return null;
         }
-        return new ResponseEntity<>(optionalTicketInsp.get(), HttpStatus.OK);
+        return new ResponseEntity<>(new TicketInspResponse(optionalTicketInsp.get()), HttpStatus.OK);
     }
 
    
-    public ResponseEntity<TicketInsp> getById(String id) {
+    public ResponseEntity<TicketInspResponse> getById(String id) {
     	Optional<TicketInsp> ticketInspData = ticketInspRepository.findById(id);
 
   	  if (ticketInspData.isPresent()) {
-  	    return new ResponseEntity<>(ticketInspData.get(), HttpStatus.OK);
+  	    return new ResponseEntity<>(new TicketInspResponse(ticketInspData.get()), HttpStatus.OK);
   	  } else {
   	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   	  }
@@ -58,10 +64,60 @@ public class TicketInspService {
         return true;
     }
 
-	public ResponseEntity<List<TicketInsp>> getAll() {
+	public ResponseEntity<List<TicketInspResponse>> getAll() {
 		try {
 			List<TicketInsp> ticketInsps = new ArrayList<>();
 			ticketInspRepository.findAll().forEach(ticketInsps::add);
+			if(ticketInsps.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			List<TicketInspResponse> ticketR= new ArrayList<>();
+			for(TicketInsp ticket: ticketInsps) ticketR.add(new TicketInspResponse(ticket));
+			return new ResponseEntity<>(ticketR, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
+	public ResponseEntity<List<TicketInspResponse>> getByEventId(String id) {
+		try {
+
+			List<TicketInsp> ticketInsps=ticketInspRepository.findByEventId(id);
+
+			if(ticketInsps.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			List<TicketInspResponse> ticketR= new ArrayList<>();
+			for(TicketInsp ticket: ticketInsps) ticketR.add(new TicketInspResponse(ticket));
+			return new ResponseEntity<>(ticketR, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
+	/*public ResponseEntity<List<TicketInspResponse>> getByManagerId(String id) {
+		try {
+			List<Event> events=eventRepository.findByManagerId(id);
+			if(events.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+			List<TicketInsp> ticketInsps=new ArrayList<>();
+			for(Event event : events) {
+				ticketInsps.addAll(ticketInspRepository.findByEventId(event.getId()));
+			}
+			List<TicketInspResponse> ticketR= new ArrayList<>();
+			for(TicketInsp ticket: ticketInsps) ticketR.add(new TicketInspResponse(ticket));
+			return new ResponseEntity<>(ticketR, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}*/
+	
+	public ResponseEntity<List<Object>> getByManagerId(String id) {
+		try {
+			List<Object> ticketInsps=ticketInspRepository.findByManagerId(id);
 			if(ticketInsps.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
@@ -70,4 +126,5 @@ public class TicketInspService {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 }

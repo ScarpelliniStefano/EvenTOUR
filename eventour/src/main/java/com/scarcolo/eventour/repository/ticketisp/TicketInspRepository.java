@@ -1,8 +1,12 @@
 package com.scarcolo.eventour.repository.ticketisp;
 
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import java.util.List;
 
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+
+import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
 
 
@@ -12,6 +16,12 @@ import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
 
 public interface TicketInspRepository extends MongoRepository<TicketInsp, String> {
 	
+	List<TicketInsp> findByEventId(String eventId);
 	
-	
+	@Query("evenTour.events.aggregate([{$lookup:{from: 'ticketInsps',"+
+	        "localField: 'eventId',foreignField: '_id', as: 'ticketInsps_event'}},"+
+			"$match: {'events.managerId': ?0 }"+
+	        "{$project:{item_id: ?0, fullName: '$ticketInsps_event.fullName',"+
+			"code: '$ticketInsps_event.code'} 	}])")
+	List<Object> findByManagerId(String managerId);
 }

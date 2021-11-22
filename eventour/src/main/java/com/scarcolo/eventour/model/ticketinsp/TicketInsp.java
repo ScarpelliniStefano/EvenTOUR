@@ -3,25 +3,28 @@
  */
 package com.scarcolo.eventour.model.ticketinsp;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.scarcolo.eventour.functions.Functionalities;
-import com.scarcolo.eventour.model.Account;
 
 /**
  * @author stefa
  *
  */
 @Document(collection = "ticketInspectors")
-public class TicketInsp extends Account{
+public class TicketInsp{
+	@Id
+	private String id;
+	private String code;
+	private String password;
 	private String fullName;
 	private String eventId;
-	
 	public TicketInsp(AddTicketInspRequest request) throws Exception {
-        super(false,request.code,request.password);
-        setCode(request.code);
-        this.eventId=request.eventId;
-        this.fullName=request.fullName;
+        this.setPassword(request.password);
+        this.setCode(request.code);
+        this.setEventId(request.eventId);
+        this.setFullName(request.fullName);
     }
 	
 	public TicketInsp() {
@@ -30,6 +33,22 @@ public class TicketInsp extends Account{
 	
 	
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getFullName() {
 		return fullName;
 	}
@@ -47,13 +66,13 @@ public class TicketInsp extends Account{
 	}
 	
 	public String getCode() {
-		return super.getUsername();
+		return this.code;
 	}
 
 	public void setCode(String code) throws Exception {
 		boolean res=Functionalities.isValidCode(code);
 		if(res) {
-			setUsername(code);
+			this.code=code;
 		}else {
 			throw new Exception();
 		}

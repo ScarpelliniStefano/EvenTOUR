@@ -5,15 +5,10 @@ package com.scarcolo.eventour.model.event;
 
 
 
-import java.util.Date;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.model.Location;
 
 
 
@@ -33,7 +28,7 @@ public class EventResponse {
 	@JsonProperty("description")
 	public String description;
 	@JsonProperty("location")
-	public String location;
+	public Location location;
 	@JsonProperty("types")
 	public String[] types;
 	@JsonProperty("dataOra")
@@ -49,15 +44,15 @@ public class EventResponse {
 	
 	public EventResponse(Event event){
 		this.id=event.getId();
-   	    this.title=event.getTitle();
-        this.description=event.getDescription();
-        this.location=event.getLocation();
-        this.types=event.getTypes();
-        this.dataOra=event.getDataOraLocal();
-        this.managerId=event.getManagerId();
-        this.urlImage=event.getUrlImage();
-        this.totSeat=event.getTotSeat();
-        this.freeSeat=event.getFreeSeat();
+		this.setTitle(event.getTitle());
+        this.setDescription(event.getDescription());
+        this.setLocation(event.getLocation());
+        this.setTypes(event.getTypes());
+        this.setDataOra(event.getDataOraLocal());
+        this.setManagerId(event.getManagerId());
+        this.setUrlImage(event.getUrlImage());
+        this.setTotSeat(event.getTotSeat());
+        this.setFreeSeat(event.getFreeSeat());
     }
 	
 	 public EventResponse() {
@@ -87,11 +82,11 @@ public class EventResponse {
 		this.description = description;
 	}
 
-	public String getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 
-	public void setLocation(String location) {
+	public void setLocation(Location location) {
 		this.location = location;
 	}
 

@@ -5,17 +5,8 @@ package com.scarcolo.eventour.model.manager;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-
-import javax.mail.internet.AddressException;
-
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.scarcolo.eventour.functions.Functionalities;
-import com.scarcolo.eventour.functions.PartitaIVAFunctions;
-import com.scarcolo.eventour.model.Account;
+import com.scarcolo.eventour.model.Location;
 
 
 /**
@@ -23,49 +14,41 @@ import com.scarcolo.eventour.model.Account;
  *
  */
 
-public class ManagerResponse extends Account{
+public class ManagerResponse{
 	@JsonProperty("id")
 	private String id;
-	
 	@JsonProperty("name")
 	private String name;
-	
 	@JsonProperty("surname")
 	private String surname;
-	
 	@JsonProperty("dateOfBirth")
 	private LocalDate dateOfBirth;
-	
 	@JsonProperty("residence")
-	private String residence;
-	
+	private Location residence;
 	@JsonProperty("codicePIVA")
 	private String codicePIVA;
-	
-	@JsonProperty("RagioneSociale")
+	@JsonProperty("ragioneSociale")
 	private String ragioneSociale;
-	
 	@JsonProperty("mail")
 	private String mail;
-	
 	@JsonProperty("password")
 	private String password;
+	
 
 	/**
 	 * 
 	 * @param request
-	 * @throws Exception
 	 */
-	public ManagerResponse(Manager manager) throws Exception {
-		this.id=manager.getId();
-		this.mail=manager.getEmail();
-		this.password=manager.getPassword();
-		this.codicePIVA=manager.getCodicePIVA();
-		this.ragioneSociale=manager.getRagioneSociale();
-		this.name=manager.getName();
-		this.surname=manager.getSurname();
-		this.dateOfBirth=manager.getDateOfBirthLocal();
-		this.residence=manager.getResidence();
+	public ManagerResponse(Manager manager){
+		this.setId(manager.getId());
+		this.setMail(manager.getMail());
+		this.setPassword(manager.getPassword());
+		this.setName(manager.getName());
+		this.setSurname(manager.getSurname());
+		this.setCodicePIVA(manager.getCodicePIVA());
+		this.setDateOfBirth(manager.getDateOfBirthLocal());
+		this.setResidence(manager.getResidence());
+		this.setRagioneSociale(manager.getRagioneSociale());
 	}
 
 	public String getId() {
@@ -100,11 +83,11 @@ public class ManagerResponse extends Account{
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public String getResidence() {
+	public Location getResidence() {
 		return residence;
 	}
 
-	public void setResidence(String residence) {
+	public void setResidence(Location residence) {
 		this.residence = residence;
 	}
 

@@ -5,17 +5,8 @@ package com.scarcolo.eventour.model.user;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
-
-import javax.mail.internet.AddressException;
-
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.scarcolo.eventour.functions.Functionalities;
-import com.scarcolo.eventour.functions.PartitaIVAFunctions;
-import com.scarcolo.eventour.model.Account;
+import com.scarcolo.eventour.model.Location;
 
 
 /**
@@ -23,10 +14,9 @@ import com.scarcolo.eventour.model.Account;
  *
  */
 
-public class UserResponse extends Account{
+public class UserResponse{
 	@JsonProperty("id")
 	private String id;
-	
 	@JsonProperty("name")
 	private String name;
 	@JsonProperty("surname")
@@ -36,28 +26,31 @@ public class UserResponse extends Account{
 	@JsonProperty("dateOfBirth")
 	private LocalDate dateOfBirth;
 	@JsonProperty("residence")
-	private String residence;
+	private Location residence;
 	@JsonProperty("types")
 	private String[] types;
 	@JsonProperty("mail")
 	private String mail;
 	@JsonProperty("password")
 	private String password;
+	@JsonProperty("username")
+	private String username;
 
 	/**
 	 * 
 	 * @param request
-	 * @throws Exception
 	 */
 	public UserResponse(User user){
-		this.id=user.getId();
-		this.mail=user.getEmail();
-		this.password=user.getPassword();
-		this.name=user.getName();
-		this.surname=user.getSurname();
-		this.dateOfBirth=user.getDateOfBirthLocal();
-		this.residence=user.getResidence();
-		this.types=user.getTypes();
+		this.setId(user.getId());
+		this.setUsername(user.getUsername());
+		this.setMail(user.getEmail());
+		this.setPassword(user.getPassword());
+		this.setName(user.getName());
+		this.setSurname(user.getSurname());
+		this.setSex(user.getSex());
+		this.setDateOfBirth(user.getDateOfBirthLocal());
+		this.setResidence(user.getResidence());
+		this.setTypes(user.getTypes());
 	}
 
 	public String getId() {
@@ -66,6 +59,14 @@ public class UserResponse extends Account{
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getName() {
@@ -100,11 +101,11 @@ public class UserResponse extends Account{
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public String getResidence() {
+	public Location getResidence() {
 		return residence;
 	}
 
-	public void setResidence(String residence) {
+	public void setResidence(Location residence) {
 		this.residence = residence;
 	}
 

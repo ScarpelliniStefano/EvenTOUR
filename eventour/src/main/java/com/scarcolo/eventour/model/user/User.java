@@ -4,19 +4,19 @@
 package com.scarcolo.eventour.model.user;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
 import javax.mail.internet.AddressException;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.scarcolo.eventour.functions.BootstrapSingleton;
 import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.functions.TypesE;
-import com.scarcolo.eventour.model.Account;
+import com.scarcolo.eventour.model.Location;
 
 
 
@@ -25,27 +25,59 @@ import com.scarcolo.eventour.model.Account;
  *
  */
 @Document(collection = "users")
-public class User extends Account{
+public class User{
+	@Id
+	private String id;
+	private String username;
+	private String mail;
+	private String password;
 	private String name;
 	private String surname;
 	private Date dateOfBirth;
 	private String sex;
-	private String residence;
+	private Location residence;
 	private String[] types;
 	
 	public User(AddUserRequest request) throws Exception {
-        super(false,request.mail,request.password);
-        setEmail(request.mail);
-        setName(request.name);
-        setSurname(request.surname);
-        setDateOfBirth(Functionalities.convertToDate(request.dateOfBirth));
-        setSex(request.sex);
+		this.setUsername(request.username);
+        this.setEmail(request.mail);
+        this.setPassword(request.password);
+        this.setName(request.name);
+        this.setSurname(request.surname);
+        this.setDateOfBirth(Functionalities.convertToDate(request.dateOfBirth));
+        this.setSex(request.sex);
+        this.setResidence(request.residence);
+        this.setTypes(request.types);
     }
 	
 	public User() {
 		super();
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	/**
 	 * @return the name
 	 */
@@ -99,7 +131,7 @@ public class User extends Account{
 	}
 
 	public void setSex(String sex) {
-		this.sex = sex=="M" ? "M" : "F";
+		this.sex = (sex=="M") ? "M" : "F";
 	}
 
 	public String[] getTypes() {
@@ -141,13 +173,13 @@ public class User extends Account{
 	/**
 	 * @return the residence
 	 */
-	protected String getResidence() {
+	protected Location getResidence() {
 		return residence;
 	}
 	/**
 	 * @param residence the residence to set
 	 */
-	protected void setResidence(String residence) {
+	protected void setResidence(Location residence) {
 		this.residence = residence;
 	}
 	
@@ -155,7 +187,7 @@ public class User extends Account{
 	 * @return the username
 	 */
 	public String getEmail() {
-		return getUsername();
+		return this.mail;
 	}
 
 	/**
@@ -165,7 +197,7 @@ public class User extends Account{
 	public void setEmail(String mail) throws AddressException {
 		boolean res=Functionalities.isValidEmailAddress(mail);
 		if(res) {
-			setUsername(mail);
+			this.mail=mail;
 		}else {
 			throw new AddressException();
 		}

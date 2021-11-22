@@ -20,9 +20,9 @@ public class Booking {
 	private Integer prenotedSeat;	
 	
 	public Booking(AddBookingRequest request) {
-        this.userId=request.userId;
-        this.eventId=request.eventId;
-        this.prenotedSeat=request.prenotedSeat;
+        this.setUserId(request.userId);
+        this.setEventId(request.eventId);
+        this.setPrenotedSeat(request.prenotedSeat);
     }
 	
 	public Booking() {

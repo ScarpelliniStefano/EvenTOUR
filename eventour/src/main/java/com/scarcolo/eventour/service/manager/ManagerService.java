@@ -9,9 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.manager.AddManagerRequest;
 import com.scarcolo.eventour.model.manager.EditManagerRequest;
 import com.scarcolo.eventour.model.manager.Manager;
+import com.scarcolo.eventour.model.manager.ManagerResponse;
+import com.scarcolo.eventour.model.user.User;
+import com.scarcolo.eventour.model.user.UserResponse;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 
 @Service
@@ -20,29 +25,29 @@ public class ManagerService {
 	@Autowired
 	private ManagerRepository managerRepository;
 	
-	public ResponseEntity<Manager> add(AddManagerRequest request) throws Exception{
+	public ResponseEntity<ManagerResponse> add(AddManagerRequest request) throws Exception{
 		Manager Manager = managerRepository.save(new Manager(request));
-		return new ResponseEntity<>(Manager, HttpStatus.OK);
+		return new ResponseEntity<>(new ManagerResponse(Manager), HttpStatus.OK);
 	}
 	
-	public ResponseEntity<Manager> update(EditManagerRequest request) {
+	public ResponseEntity<ManagerResponse> update(EditManagerRequest request) {
         Optional<Manager> optionalManager = managerRepository.findById(request.id);
         if (optionalManager.isEmpty()) {
             return null;
         }
-        return new ResponseEntity<>(optionalManager.get(), HttpStatus.OK);
+        return new ResponseEntity<>(new ManagerResponse(optionalManager.get()), HttpStatus.OK);
     }
 
    
-    public ResponseEntity<Manager> getById(String id) {
-    	Optional<Manager> ManagerData = managerRepository.findById(id);
+	 public ResponseEntity<ManagerResponse> getById(String id){
+	    	Optional<Manager> managerData = managerRepository.findById(id);
 
-  	  if (ManagerData.isPresent()) {
-  	    return new ResponseEntity<>(ManagerData.get(), HttpStatus.OK);
-  	  } else {
-  	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-  	  }
-    }
+	  	  if (managerData.isPresent()) {
+	  	    return new ResponseEntity<>(new ManagerResponse(managerData.get()), HttpStatus.OK);
+	  	  } else {
+	  	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	  	  }
+	 }
   
     public boolean delete(String id) {
         Optional<Manager> optionalManager = managerRepository.findById(id);
@@ -53,14 +58,16 @@ public class ManagerService {
         return true;
     }
 
-	public ResponseEntity<List<Manager>> getAll() {
+	public ResponseEntity<List<ManagerResponse>> getAll() {
 		try {
-			List<Manager> Managers = new ArrayList<>();
-			managerRepository.findAll().forEach(Managers::add);
-			if(Managers.isEmpty()) {
+			List<Manager> managers = new ArrayList<>();
+			managerRepository.findAll().forEach(managers::add);
+			if(managers.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
-			return new ResponseEntity<>(Managers, HttpStatus.OK);
+			List<ManagerResponse> managerR= new ArrayList<>();
+			for(Manager manager: managers) managerR.add(new ManagerResponse(manager));
+			return new ResponseEntity<>(managerR, HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

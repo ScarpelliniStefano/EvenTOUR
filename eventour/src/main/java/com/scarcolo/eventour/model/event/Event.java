@@ -13,6 +13,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.model.Location;
 
 
 
@@ -29,7 +30,7 @@ public class Event {
 	private String id;
 	private String title;
 	private String description;
-	private String location;
+	private Location location;
 	private String[] types;
 	private Date dataOra;
 	private String managerId;
@@ -38,15 +39,15 @@ public class Event {
 	private Integer totSeat;
 	
 	public Event(AddEventRequest request) throws Exception {
-        this.title=request.title;
-        this.description=request.description;
-        this.location=request.location;
-        this.types=request.types;
+        this.setTitle(request.title);
+        this.setDescription(request.description);
+        this.setLocation(request.location);
+        this.setTypes(request.types);
         this.setDataOra(Functionalities.convertToDate(request.dataOra));
-        this.managerId=request.managerId;
-        this.urlImage=request.urlImage;
-        this.totSeat=request.totSeat;
-        this.freeSeat=request.totSeat;
+        this.setManagerId(request.managerId);
+        this.setUrlImage(request.urlImage);
+        this.setTotSeat(request.totSeat);
+        this.setFreeSeat(request.totSeat);
     }
 	
 	 public Event() {
@@ -91,13 +92,13 @@ public class Event {
 	/**
 	 * @return the location
 	 */
-	public String getLocation() {
+	public Location getLocation() {
 		return location;
 	}
 	/**
 	 * @param location the location to set
 	 */
-	public void setLocation(String location) {
+	public void setLocation(Location location) {
 		this.location = location;
 	}
 	

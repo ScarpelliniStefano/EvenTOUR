@@ -5,16 +5,16 @@ package com.scarcolo.eventour.model.manager;
 
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.mail.internet.AddressException;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.functions.PartitaIVAFunctions;
-import com.scarcolo.eventour.model.Account;
+import com.scarcolo.eventour.model.Location;
 
 
 /**
@@ -22,31 +22,67 @@ import com.scarcolo.eventour.model.Account;
  *
  */
 @Document(collection = "managers")
-public class Manager extends Account{
-	
+public class Manager{
+	@Id
+	private String id;
+	private String mail;
+	private String password;
 	private String name;
 	private String surname;
 	private Date dateOfBirth;
-	private String residence;
+	private Location residence;
 	private String codicePIVA;
 	private String ragioneSociale;
 
 	/**
 	 * 
 	 * @param request
-	 * @throws Exception
+	 * @throws Exception 
 	 */
-	public Manager(AddManagerRequest request) throws Exception {
-		super(false,request.mail, request.password);
-		setEmail(request.mail);
-		setName(request.name);
-		setSurname(request.surname);
-		setDateOfBirth(Functionalities.convertToDate(request.dateOfBirth));
-		setResidence(request.residence);
-		setCodicePIVA(request.codicePIVA);
-		setRagioneSociale(request.ragioneSociale);
+	public Manager(AddManagerRequest request) throws Exception{
+		this.setMail(request.mail);
+		this.setPassword(request.password);
+		this.setName(request.name);
+		this.setSurname(request.surname);
+		this.setDateOfBirth(Functionalities.convertToDate(request.dateOfBirth));
+		this.setResidence(request.residence);
+		this.setCodicePIVA(request.codicePIVA);
+		this.setRagioneSociale(request.ragioneSociale);
 	}
 	
+	public Manager() {
+		super();
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getMail() {
+		return mail;
+	}
+
+	public void setMail(String mail) throws AddressException {
+		boolean res=Functionalities.isValidEmailAddress(mail);
+		if(res) {
+			this.mail=mail;
+		}else {
+			throw new AddressException();
+		}
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	/**
 	 * @return the name
 	 */
@@ -97,13 +133,13 @@ public class Manager extends Account{
 	/**
 	 * @return the residence
 	 */
-	public String getResidence() {
+	public Location getResidence() {
 		return residence;
 	}
 	/**
 	 * @param residence the residence to set
 	 */
-	public void setResidence(String residence) {
+	public void setResidence(Location residence) {
 		this.residence = residence;
 	}
 	/**
@@ -118,7 +154,7 @@ public class Manager extends Account{
 	 */
 	public void setCodicePIVA(String codicePIVA) throws Exception {
 		String res=PartitaIVAFunctions.validate(codicePIVA);
-		if(res==null)
+		if(res=="ok")
 			this.codicePIVA = codicePIVA;
 		else
 			throw new Exception(res);
@@ -135,26 +171,8 @@ public class Manager extends Account{
 	public void setRagioneSociale(String ragioneSociale) {
 		this.ragioneSociale = ragioneSociale;
 	}
-	
-	/**
-	 * @return the username
-	 */
-	public String getEmail() {
-		return getUsername();
-	}
 
-	/**
-	 * @param username the username to set
-	 * @throws AddressException 
-	 */
-	public void setEmail(String mail) throws AddressException {
-		boolean res=Functionalities.isValidEmailAddress(mail);
-		if(res) {
-			setUsername(mail);
-		}else {
-			throw new AddressException();
-		}
-			
-	}
+	
+	
 	
 }

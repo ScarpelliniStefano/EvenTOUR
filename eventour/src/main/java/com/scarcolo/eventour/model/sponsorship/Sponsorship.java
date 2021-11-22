@@ -24,8 +24,8 @@ public class Sponsorship {
 	 * @param request
 	 */
 	public Sponsorship(AddSponsorshipRequest request) {
-		setEventId(request.eventId);
-		setUserId(request.userId);
+		this.setEventId(request.eventId);
+		this.setUserId(request.userId);
 	}
 	
 	/**

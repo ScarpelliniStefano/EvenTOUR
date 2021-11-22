@@ -18,10 +18,10 @@ public interface TicketInspRepository extends MongoRepository<TicketInsp, String
 	@Query("{eventId:new ObjectId(?0)}")
 	List<TicketInsp> findByEventId(ObjectId objectId);
 	
-	@Query("evenTour.events.aggregate([{$lookup:{from: 'ticketInsps',"+
+	/*@Query("evenTour.events.aggregate([{$lookup:{from: 'ticketInsps',"+
 	        "localField: 'eventId',foreignField: '_id', as: 'ticketInsps_event'}},"+
 			"$match: {'events.managerId': ?0 }"+
 	        "{$project:{item_id: ?0, fullName: '$ticketInsps_event.fullName',"+
 			"code: '$ticketInsps_event.code'} 	}])")
-	List<Object> findByManagerId(String managerId);
+	List<Object> findByManagerId(String managerId);*/
 }

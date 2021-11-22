@@ -9,14 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.scarcolo.eventour.model.event.Event;
-import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.manager.AddManagerRequest;
 import com.scarcolo.eventour.model.manager.EditManagerRequest;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
-import com.scarcolo.eventour.model.user.User;
-import com.scarcolo.eventour.model.user.UserResponse;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 
 @Service
@@ -72,5 +68,6 @@ public class ManagerService {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
 
 }

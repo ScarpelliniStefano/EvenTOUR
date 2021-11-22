@@ -3,19 +3,18 @@ package com.scarcolo.eventour.service.ticketisp;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.scarcolo.eventour.model.event.Event;
-import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
 import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
-import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 import com.scarcolo.eventour.repository.ticketisp.TicketInspRepository;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +26,6 @@ public class TicketInspService {
 
     @Autowired
     private TicketInspRepository ticketInspRepository;
-    @Autowired
-    private ManagerRepository managerRepository;
 
    
     public ResponseEntity<TicketInspResponse> add(AddTicketInspRequest request) throws Exception {
@@ -116,10 +113,13 @@ public class TicketInspService {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}*/
-	
+	@Autowired
+	private ManagerRepository managerRepository;
 	public ResponseEntity<List<Object>> getByManagerId(String id) {
 		try {
-			List<Object> ticketInsps=managerRepository.findAllTicketInsps(new ObjectId(id));
+			AggregationResults<Object> ticketInspsA=managerRepository.findAllTicketInsps(new ObjectId(id));
+			System.out.println(ticketInspsA.getMappedResults());
+			List<Object> ticketInsps=ticketInspsA.getMappedResults();
 			if(ticketInsps.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}

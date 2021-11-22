@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="repository.event.EventRepository"/>
-    <fullyQualifiedTypeName name="model.event.EventResponse"/>
-    <fullyQualifiedTypeName name="model.event.Event"/>
-    <fullyQualifiedTypeName name="service.event.EventService"/>
-    <fullyQualifiedTypeName name="model.event.AddEventRequest"/>
-    <fullyQualifiedTypeName name="model.event.EditEventRequest"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Sex"/>
-    <fullyQualifiedTypeName name="org.springframework.data.annotation.Id"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.Account"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.TypesE"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.BootstrapSingleton"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.booking.AddBookingRequest"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.booking.EditBookingRequest"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.booking.Booking"/>
@@ -38,13 +28,11 @@
     <fullyQualifiedTypeName name="org.springframework.data.domain.Sort.Order"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="org.springframework.data.mongodb.core.query.Criteria"/>
     <fullyQualifiedTypeName name="java.text.DateFormat"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="java.text.ParseException"/>
     <fullyQualifiedTypeName name="java.util.Calendar"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
-    <fullyQualifiedTypeName name="org.springframework.data.domain.Sort"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.Location"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.ManagerResponse"/>
@@ -59,5 +47,17 @@
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="com.mongodb.DBObject"/>
     <fullyQualifiedTypeName name="com.mongodb.BasicDBObjectBuilder"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.core.MongoTemplate"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.core.aggregation.AggregationOperation"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.core.aggregation.Aggregation"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.core.query.Criteria"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Sort"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.core.aggregation.TypedAggregation"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.repository.Aggregation"/>
+    <fullyQualifiedTypeName name="org.springframework.data.mongodb.core.aggregation.AggregationResults"/>
     <fullyQualifiedTypeName name="org.bson.types.ObjectId"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.service.manager.ManagerService"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.manager.ManagerRepository"/>
 </qualifiedTypeNameHistroy>

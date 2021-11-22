@@ -25,8 +25,8 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	@Query("{freeSeat: {$gt: 0} , dataOra: {$gt: new Date()} }")
 	Page<Event> findByfreeSeatGreaterThanZero(Pageable paging);
 	
-	@Query("{dataOra: {$gt: new Date()} }")
-	Page<Event> findByManagerId(ObjectId managerId,Pageable paging);
+	@Query("{managerId:new ObjectId(?0), dataOra: {$gt: new Date()} }")
+	Page<Event> findByManagerId(ObjectId objectId,Pageable paging);
 	
 	@Query("{ 'location.regione' : { '$regex' : ?0 , $options: 'i'}, dataOra: {$gt: new Date()} }")
 	Page<Event> findByLocation_RegioneLike(String regione, Pageable paging);

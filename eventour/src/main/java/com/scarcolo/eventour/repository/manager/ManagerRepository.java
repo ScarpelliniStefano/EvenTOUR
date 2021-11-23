@@ -1,6 +1,8 @@
 package com.scarcolo.eventour.repository.manager;
 
 
+import java.util.List;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.repository.Aggregation;
@@ -41,5 +43,7 @@ public interface ManagerRepository extends MongoRepository<Manager, String>{
 			+ "        }\n"
 			+ "    }"})
 	       AggregationResults<Object> findAllTicketInsps(ObjectId id);
+
+	List<Manager> findByMail(String user);
 	
 }

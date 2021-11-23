@@ -1,7 +1,10 @@
 package com.scarcolo.eventour.service.booking;
 
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.EditBookingRequest;
+import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
 
 import java.util.ArrayList;
@@ -39,13 +43,14 @@ public class BookingService {
 
    
     public ResponseEntity<Booking> getById(String id) {
-    	Optional<Booking> bookingData = bookingRepository.findById(id);
+    		Optional<Booking> bookingData = bookingRepository.findById(id);
 
-  	  if (bookingData.isPresent()) {
-  	    return new ResponseEntity<>(bookingData.get(), HttpStatus.OK);
-  	  } else {
-  	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-  	  }
+    		if (bookingData.isPresent()) {
+    			return new ResponseEntity<>(bookingData.get(), HttpStatus.OK);
+    		} else {
+    			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    		}
+    	
     }
 
   
@@ -69,5 +74,17 @@ public class BookingService {
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+
+	public ResponseEntity<List<EventBookedResponse>> getByIdUser(String id) {
+		try {
+			AggregationResults<EventBookedResponse> eventsA=bookingRepository.findByUserId(new ObjectId(id));
+			List<EventBookedResponse> eventR=eventsA.getMappedResults();
+			return new ResponseEntity<>(eventR, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
 	}
 }

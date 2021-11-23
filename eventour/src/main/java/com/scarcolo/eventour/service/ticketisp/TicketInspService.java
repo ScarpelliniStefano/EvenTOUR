@@ -115,10 +115,11 @@ public class TicketInspService {
 	}*/
 	@Autowired
 	private ManagerRepository managerRepository;
+	
+	
 	public ResponseEntity<List<Object>> getByManagerId(String id) {
 		try {
 			AggregationResults<Object> ticketInspsA=managerRepository.findAllTicketInsps(new ObjectId(id));
-			System.out.println(ticketInspsA.getMappedResults());
 			List<Object> ticketInsps=ticketInspsA.getMappedResults();
 			if(ticketInsps.isEmpty()) {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);

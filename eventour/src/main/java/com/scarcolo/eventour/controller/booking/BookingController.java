@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.EditBookingRequest;
+import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.service.booking.BookingService;
 
 @CrossOrigin(origins = "http://localhost:8081")
@@ -43,6 +44,11 @@ public class BookingController {
 	    @GetMapping("/bookings/{id}")
 	    public ResponseEntity<Booking> getBookingById(@PathVariable("id") String id){
 	        return bookingService.getById(id);
+	    }
+	    
+	    @GetMapping("/bookings/u/{id}")
+	    public ResponseEntity<List<EventBookedResponse>> getBookingByIdUser(@PathVariable("id") String id){
+	        return bookingService.getByIdUser(id);
 	    }
 	    
 

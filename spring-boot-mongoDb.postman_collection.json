@@ -186,18 +186,18 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{prefix}}/events/data=2022-02-18,2022-04-18?page=1&size=15",
+									"raw": "{{prefix}}/events/data=2021-11-05,2022-01-18?page=0&size=15",
 									"host": [
 										"{{prefix}}"
 									],
 									"path": [
 										"events",
-										"data=2022-02-18,2022-04-18"
+										"data=2021-11-05,2022-01-18"
 									],
 									"query": [
 										{
 											"key": "page",
-											"value": "1"
+											"value": "0"
 										},
 										{
 											"key": "size",
@@ -300,23 +300,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{prefix}}/events/disp?size=15&page=1",
+									"raw": "{{prefix}}/events/disp",
 									"host": [
 										"{{prefix}}"
 									],
 									"path": [
 										"events",
 										"disp"
-									],
-									"query": [
-										{
-											"key": "size",
-											"value": "15"
-										},
-										{
-											"key": "page",
-											"value": "1"
-										}
 									]
 								}
 							},
@@ -895,19 +885,45 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{prefix}}/bookings/ID",
+							"raw": "{{prefix}}/bookings/",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
 								"bookings",
-								"ID"
+								""
 							]
 						}
 					},
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"Elita8@email.it\",\r\n    \"password\" : \"nusabaju\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{prefix}}/account",
+					"host": [
+						"{{prefix}}"
+					],
+					"path": [
+						"account"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"event": [
@@ -932,8 +948,7 @@
 	],
 	"variable": [
 		{
-			"value": "",
-			"disabled": true
+			"value": ""
 		}
 	]
 }

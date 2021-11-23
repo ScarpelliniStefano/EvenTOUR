@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
+import com.scarcolo.eventour.model.booking.CheckBookingRequest;
 import com.scarcolo.eventour.model.booking.EditBookingRequest;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.service.booking.BookingService;
@@ -61,6 +62,11 @@ public class BookingController {
 	    @DeleteMapping("/bookings/{id}")
 	    public boolean deleteBookingById(@PathVariable("id") String id){
 	        return bookingService.delete(id);
+	    }
+	    
+	    @PostMapping("/bookings/check")
+	    public ResponseEntity<String> getCheckBooking(@RequestBody CheckBookingRequest request){
+	        return bookingService.getCheck(request.bookingNr,request.eventId);
 	    }
 
 }

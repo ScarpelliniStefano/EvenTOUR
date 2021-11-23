@@ -3,6 +3,7 @@
  */
 package com.scarcolo.eventour.model.booking;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,13 +16,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Booking {
 	@Id
 	private String id;
-	private String userId;
-	private String eventId;
+	private ObjectId userId;
+	private ObjectId eventId;
 	private Integer prenotedSeat;	
 	
 	public Booking(AddBookingRequest request) {
-        this.setUserId(request.userId);
-        this.setEventId(request.eventId);
+        this.setUserId(new ObjectId(request.userId));
+        this.setEventId(new ObjectId(request.eventId));
         this.setPrenotedSeat(request.prenotedSeat);
     }
 	
@@ -38,18 +39,18 @@ public class Booking {
 	}
 
 	public String getUserId() {
-		return userId;
+		return userId.toHexString();
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(ObjectId userId) {
 		this.userId = userId;
 	}
 
 	public String getEventId() {
-		return eventId;
+		return eventId.toHexString();
 	}
 
-	public void setEventId(String eventId) {
+	public void setEventId(ObjectId eventId) {
 		this.eventId = eventId;
 	}
 

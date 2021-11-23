@@ -9,6 +9,7 @@ import java.util.Date;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -33,7 +34,7 @@ public class Event {
 	private Location location;
 	private String[] types;
 	private Date dataOra;
-	private String managerId;
+	private ObjectId managerId;
 	private String urlImage;
 	private Integer freeSeat;
 	private Integer totSeat;
@@ -162,11 +163,11 @@ public class Event {
 	}
 
 	public String getManagerId() {
-		return managerId;
+		return managerId.toHexString();
 	}
 
 	public void setManagerId(String managerId) {
-		this.managerId = managerId;
+		this.managerId = new ObjectId(managerId);
 	}
 
 	public String getUrlImage() {

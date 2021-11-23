@@ -8,10 +8,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.scarcolo.eventour.model.AccountResponse;
+import com.scarcolo.eventour.model.booking.Booking;
+import com.scarcolo.eventour.model.booking.CheckBookingRequest;
+import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventResponse;
+import com.scarcolo.eventour.model.manager.Manager;
+import com.scarcolo.eventour.model.manager.ManagerResponse;
 import com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
 import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
+import com.scarcolo.eventour.model.user.User;
+import com.scarcolo.eventour.model.user.UserResponse;
+import com.scarcolo.eventour.repository.booking.BookingRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 import com.scarcolo.eventour.repository.ticketisp.TicketInspRepository;
 
@@ -129,5 +139,9 @@ public class TicketInspService {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+	@Autowired
+	private BookingRepository bookingRepository;
+	 
 	
 }

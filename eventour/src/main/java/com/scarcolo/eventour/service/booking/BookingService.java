@@ -13,6 +13,7 @@ import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.EditBookingRequest;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
+import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
 
 import java.util.ArrayList;
@@ -87,4 +88,17 @@ public class BookingService {
 		}
 		
 	}
+	
+	public ResponseEntity<String> getCheck(String idBooking,String idEvent) {
+    	Optional<Booking> bookingData = bookingRepository.findById(idBooking);
+
+  	  	if (bookingData.isPresent()) {
+  	  		if(bookingData.get().getEventId().equals(idEvent))
+  	  			return new ResponseEntity<>("ACCESS GRANTED", HttpStatus.OK);
+  	  		else
+  	  			return new ResponseEntity<>("ACCESS REFUSED", HttpStatus.OK);
+  	  	} else {
+  	  		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  	  	}
+    }
 }

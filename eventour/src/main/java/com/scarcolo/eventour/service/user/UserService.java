@@ -91,7 +91,7 @@ public class UserService {
 		if(user.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
-		Object objResp=new ArrayList<>();
+		Object objResp;
 		try {
 			if(!user.contains("@")) {
 				List<TicketInsp> tickets = ticketInspRepository.findByCode(user);

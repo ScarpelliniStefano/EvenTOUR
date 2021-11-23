@@ -3,6 +3,7 @@
  */
 package com.scarcolo.eventour.model.ticketinsp;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,7 +20,7 @@ public class TicketInsp{
 	private String code;
 	private String password;
 	private String fullName;
-	private String eventId;
+	private ObjectId eventId;
 	public TicketInsp(AddTicketInspRequest request) throws Exception {
         this.setPassword(request.password);
         this.setCode(request.code);
@@ -58,11 +59,11 @@ public class TicketInsp{
 	}
 
 	public String getEventId() {
-		return eventId;
+		return eventId.toHexString();
 	}
 
 	public void setEventId(String eventId) {
-		this.eventId = eventId;
+		this.eventId = new ObjectId(eventId);
 	}
 	
 	public String getCode() {

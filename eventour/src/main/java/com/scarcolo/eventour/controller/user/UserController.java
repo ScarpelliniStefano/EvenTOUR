@@ -23,7 +23,7 @@ import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.model.user.UserResponse;
 import com.scarcolo.eventour.service.user.UserService;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -41,8 +41,6 @@ public class UserController {
 	    public ResponseEntity<UserResponse> updateUser(@RequestBody EditUserRequest request) throws Exception{
 	        return userService.update(request);
 	    }
-
-
 	   
 	    @GetMapping("/users/{id}")
 	    public ResponseEntity<UserResponse> getUserById(@PathVariable("id") String id){

@@ -26,7 +26,7 @@ import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.service.event.EventService;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class EventController {

@@ -21,7 +21,7 @@ import com.scarcolo.eventour.model.booking.EditBookingRequest;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.service.booking.BookingService;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class BookingController {

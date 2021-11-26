@@ -20,7 +20,7 @@ import com.scarcolo.eventour.model.sponsorship.EditSponsorshipRequest;
 import com.scarcolo.eventour.model.sponsorship.Sponsorship;
 import com.scarcolo.eventour.service.sponsorship.SponsorshipService;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class SponsorshipController {

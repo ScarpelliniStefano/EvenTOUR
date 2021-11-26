@@ -22,7 +22,7 @@ import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
 import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
 import com.scarcolo.eventour.service.ticketisp.TicketInspService;
 
-@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class TicketInspController {

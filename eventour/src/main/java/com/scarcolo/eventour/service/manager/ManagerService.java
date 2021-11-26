@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
+import com.scarcolo.eventour.model.event.EventManResponse;
 import com.scarcolo.eventour.model.manager.AddManagerRequest;
 import com.scarcolo.eventour.model.manager.EditManagerRequest;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
+import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 
 @Service
@@ -65,6 +70,20 @@ public class ManagerService {
 			for(Manager manager: managers) managerR.add(new ManagerResponse(manager));
 			return new ResponseEntity<>(managerR, HttpStatus.OK);
 		}catch(Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@Autowired
+	private EventRepository eventRepository;
+	
+	public ResponseEntity<EventManResponse> getManagerFromEvent(String id) {
+		try {
+			AggregationResults<EventManResponse> userEventA=eventRepository.findManagerById(new ObjectId(id));
+			List<EventManResponse> eventR=userEventA.getMappedResults();
+			return new ResponseEntity<>(eventR.get(0), HttpStatus.OK);
+		}catch(Exception e) {
+			System.out.println(e);
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

@@ -7,10 +7,13 @@ import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
 import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventManResponse;
 
 public interface EventRepository extends MongoRepository<Event, String> {
 	@Query("{dataOra: {$gt: new Date()} }")
@@ -59,6 +62,20 @@ public interface EventRepository extends MongoRepository<Event, String> {
 
 	@Query("{ 'location.regione' : { '$regex' : ?0 , $options: 'i'}, 'freeSeat': {$gt: 0},  'dataOra': {$gt: new Date()} }")
 	List<Event> findByLocation_RegioneLikeAndFreeSeatGreaterThanZero(String regione,Sort sorted);
+
+	@Aggregation(pipeline = {"{\n"
+			+ "        '$match': {\n"
+			+ "            	'_id': ObjectId('?0')\n"
+			+ "        }\n"
+			+ "    }"," {\n"
+			+ "        '$lookup': {\n"
+			+ "            'from': 'managers', \n"
+			+ "            'localField': 'managerId', \n"
+			+ "            'foreignField': '_id', \n"
+			+ "            'as': 'manager'\n"
+			+ "        }\n"
+			+ "    }"})
+	AggregationResults<EventManResponse> findManagerById(ObjectId objectId);
 
 
 	

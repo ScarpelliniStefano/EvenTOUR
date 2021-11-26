@@ -44,13 +44,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{prefix}}/events/6198d42f8a29dbfc5b1caeea",
+									"raw": "{{prefix}}/events/61a0a85ebce0e98fbb2d860f",
 									"host": [
 										"{{prefix}}"
 									],
 									"path": [
 										"events",
-										"6198d42f8a29dbfc5b1caeea"
+										"61a0a85ebce0e98fbb2d860f"
 									]
 								}
 							},
@@ -117,14 +117,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{prefix}}/events/manager/6198d2de8a29dbfc5b1caeca",
+									"raw": "{{prefix}}/events/manager/61a0a0eeb5f9b12d06e9523a",
 									"host": [
 										"{{prefix}}"
 									],
 									"path": [
 										"events",
 										"manager",
-										"6198d2de8a29dbfc5b1caeca"
+										"61a0a0eeb5f9b12d06e9523a"
 									]
 								}
 							},
@@ -500,14 +500,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{prefix}}/ticketInsps/event/6198d42f8a29dbfc5b1caeea",
+							"raw": "{{prefix}}/ticketInsps/event/61a0a85ebce0e98fbb2d9117",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
 								"ticketInsps",
 								"event",
-								"6198d42f8a29dbfc5b1caeea"
+								"61a0a85ebce0e98fbb2d9117"
 							]
 						}
 					},
@@ -726,17 +726,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{prefix}}/managers/event/6198d42f8a29dbfc5b1caeea  ///DA FARE",
+							"raw": "{{prefix}}/managers/event/61a0a85ebce0e98fbb2d860f",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
 								"managers",
 								"event",
-								"6198d42f8a29dbfc5b1caeea  ",
-								"",
-								"",
-								"DA FARE"
+								"61a0a85ebce0e98fbb2d860f"
 							]
 						}
 					},
@@ -789,13 +786,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{prefix}}/bookings/61a0b071bce0e98fbb2dad71/all",
+							"raw": "{{prefix}}/bookings/61a0b071bce0e98fbb2dad72/all",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
 								"bookings",
-								"61a0b071bce0e98fbb2dad71",
+								"61a0b071bce0e98fbb2dad72",
 								"all"
 							]
 						}
@@ -808,14 +805,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{prefix}}/bookings/event/ID",
+							"raw": "{{prefix}}/bookings/event/61a0a85ebce0e98fbb2d9949",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
 								"bookings",
 								"event",
-								"ID"
+								"61a0a85ebce0e98fbb2d9949"
 							]
 						}
 					},
@@ -847,7 +844,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"bookingNr\":\"619cb97c34edcfe6118be281\",\r\n    \"eventId\":\"6198d42f8a29dbfc5b1caeea\"\r\n}",
+							"raw": "{\r\n    \"bookingNr\":\"61a0b071bce0e98fbb2dad71\",\r\n    \"eventId\":\"61a0a85ebce0e98fbb2d9949\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

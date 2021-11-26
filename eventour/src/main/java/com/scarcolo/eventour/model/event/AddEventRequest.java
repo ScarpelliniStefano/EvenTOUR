@@ -25,5 +25,7 @@ public class AddEventRequest {
 	public String urlImage;
 	@JsonProperty("totSeat")
 	public Integer totSeat;
+	@JsonProperty("price")
+	public Integer price;
 
 }

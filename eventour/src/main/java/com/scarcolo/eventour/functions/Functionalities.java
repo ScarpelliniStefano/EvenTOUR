@@ -55,4 +55,17 @@ public class Functionalities {
 	      dateToConvert.toInstant(), ZoneId.systemDefault());
 	}
 	
+	public static boolean similType(String evTyp, String usTyp) {
+		System.out.println(evTyp+ " " +usTyp);
+		String[] splittedE=evTyp.split("\\.");
+		String[] splittedU=usTyp.split("\\.");
+		if(!splittedE[0].equalsIgnoreCase(splittedU[0]))
+			return false;
+		if(splittedE.length>2) {
+			if(!splittedE[1].equalsIgnoreCase(splittedU[1]))
+				return false;
+		}
+		return true;
+	}
+	
 }

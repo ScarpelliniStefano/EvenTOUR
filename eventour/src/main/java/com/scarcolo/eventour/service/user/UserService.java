@@ -2,11 +2,16 @@ package com.scarcolo.eventour.service.user;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.AccountResponse;
+import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
@@ -15,6 +20,7 @@ import com.scarcolo.eventour.model.user.AddUserRequest;
 import com.scarcolo.eventour.model.user.EditUserRequest;
 import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.model.user.UserResponse;
+import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 import com.scarcolo.eventour.repository.ticketisp.TicketInspRepository;
 import com.scarcolo.eventour.repository.user.UserRepository;
@@ -134,4 +140,80 @@ public class UserService {
 		}
 		
 	}
+	
+	@Autowired
+	private EventRepository eventRepository;
+	public ResponseEntity<List<EventResponse>> getEvenTour(String userId,Integer n) {
+		Optional<User> userData = userRepository.findById(userId);
+		User u=null;
+	  	if (userData.isPresent()) {
+	  	    u=userData.get();
+	  	} else {
+	  	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	  	}
+		//1.filtra per regione
+		//2.ordinamento dataOra
+		List<Event> eventR=eventRepository.findByLocation_RegioneLikeAndFreeSeatGreaterThanZero(u.getResidence().getRegione() ,Sort.by("dataOra").ascending());
+		//3.ciclo 
+		List<Event> s=new ArrayList<>();
+		Integer c=0;
+		Boolean sel=false;
+		for(int i=0;i<eventR.size();i++) {
+			if(c==n) {
+				List<EventResponse> eventResponse=new ArrayList<>();
+				for(Event e : s) {
+					eventResponse.add(new EventResponse(e));
+				}
+				return new ResponseEntity<>(eventResponse,HttpStatus.OK);
+			}
+			sel=false;
+			for(int j=0;!sel && j<eventR.get(i).getTypes().length;j++) {
+				for(String k: u.getTypes()) {
+					if(!sel) {
+						if(eventR.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {
+							s.add(eventR.get(i));
+							sel=true;
+							c++;
+						}
+					}
+				}
+			}
+		}
+		
+		
+	
+		for(int i=0;i<eventR.size();i++) {
+			if(c==n) {
+				List<EventResponse> eventResponse=new ArrayList<>();
+				for(Event e : s) {
+					eventResponse.add(new EventResponse(e));
+				}
+				return new ResponseEntity<>(eventResponse,HttpStatus.OK);
+			}
+			if(!s.contains(eventR.get(i))) {
+				sel=false;
+				for(int j=0;!sel && j<eventR.get(i).getTypes().length;j++) {
+					for(String k: u.getTypes()) {
+						if(!sel) {
+							if(Functionalities.similType(eventR.get(i).getTypes()[j],k)) {
+								s.add(eventR.get(i));
+								sel=true;
+								c++;
+							}
+						}
+					}
+				}
+			}
+		}
+		List<EventResponse> eventResponse=new ArrayList<>();
+		for(Event e : s) {
+			eventResponse.add(new EventResponse(e));
+		}
+		return new ResponseEntity<>(eventResponse,HttpStatus.OK);
+		
+		
+		
+	}
+	
+	
 }

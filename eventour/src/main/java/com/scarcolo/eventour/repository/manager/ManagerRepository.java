@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import com.scarcolo.eventour.model.manager.Manager;
+import com.scarcolo.eventour.model.manager.TicketManResponse;
 
 public interface ManagerRepository extends MongoRepository<Manager, String>{
 	/*@Query("{eventId:new ObjectId(?0)}")*/

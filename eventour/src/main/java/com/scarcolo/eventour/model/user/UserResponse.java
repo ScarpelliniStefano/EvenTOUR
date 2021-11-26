@@ -48,7 +48,7 @@ public class UserResponse{
 		this.setName(user.getName());
 		this.setSurname(user.getSurname());
 		this.setSex(user.getSex());
-		this.setDateOfBirth(user.getDateOfBirthLocal());
+		this.setDateOfBirth(user.getDateOfBirth());
 		this.setResidence(user.getResidence());
 		this.setTypes(user.getTypes());
 	}

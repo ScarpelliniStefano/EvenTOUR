@@ -17,13 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.scarcolo.eventour.model.AccountRequest;
 import com.scarcolo.eventour.model.AccountResponse;
+import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.user.AddUserRequest;
 import com.scarcolo.eventour.model.user.EditUserRequest;
 import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.model.user.UserResponse;
 import com.scarcolo.eventour.service.user.UserService;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -55,8 +56,13 @@ public class UserController {
 	        return userService.getAll();
 	    }
 	    
+	    @GetMapping("/users/{id}/eventour/{num}")
+	    public ResponseEntity<List<EventResponse>> getEvenTour(@PathVariable("id") String id,@PathVariable("num") int num){
+	        return userService.getEvenTour(id, num);
+	    }
+	    
 	    @PostMapping("/account")
-	    public ResponseEntity<AccountResponse> getAllUsers(@RequestBody AccountRequest request){
+	    public ResponseEntity<AccountResponse> getAccount(@RequestBody AccountRequest request){
 	        return userService.getAccount(request.username,request.password);
 	    }
 

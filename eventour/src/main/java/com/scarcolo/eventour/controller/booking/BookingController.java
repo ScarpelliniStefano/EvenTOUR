@@ -18,10 +18,12 @@ import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.CheckBookingRequest;
 import com.scarcolo.eventour.model.booking.EditBookingRequest;
+import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
+import com.scarcolo.eventour.model.user.UserBookedResponse;
 import com.scarcolo.eventour.service.booking.BookingService;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api")
 public class BookingController {
@@ -47,9 +49,19 @@ public class BookingController {
 	        return bookingService.getById(id);
 	    }
 	    
+	    @GetMapping("/bookings/{id}/all")
+	    public ResponseEntity<UserEventBookedResponse> getBookingByIdAll(@PathVariable("id") String id){
+	        return bookingService.getByIdDetails(id);
+	    }
+	    
 	    @GetMapping("/bookings/u/{id}")
 	    public ResponseEntity<List<EventBookedResponse>> getBookingByIdUser(@PathVariable("id") String id){
 	        return bookingService.getByIdUser(id);
+	    }
+	    
+	    @GetMapping("/bookings/event/{id}")
+	    public ResponseEntity<List<UserBookedResponse>> getBookingByIdEvent(@PathVariable("id") String id){
+	        return bookingService.getByIdEvent(id);
 	    }
 	    
 

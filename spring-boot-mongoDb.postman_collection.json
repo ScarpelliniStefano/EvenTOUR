@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f3f630cb-b9e5-4936-8877-fd4d749c4baa",
+		"_postman_id": "e6a058af-d57e-446b-8496-0bf610288fe5",
 		"name": "spring-boot-mongoDb",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -271,14 +271,14 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{prefix}}/events/manager/6198d2de8a29dbfc5b1caec0",
+									"raw": "{{prefix}}/events/manager/61a0a0eeb5f9b12d06e9523a",
 									"host": [
 										"{{prefix}}"
 									],
 									"path": [
 										"events",
 										"manager",
-										"6198d2de8a29dbfc5b1caec0"
+										"61a0a0eeb5f9b12d06e9523a"
 									]
 								}
 							},
@@ -308,13 +308,13 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{prefix}}/events/6198d42f8a29dbfc5b1caeea",
+									"raw": "{{prefix}}/events/61a0a85ebce0e98fbb2d860f",
 									"host": [
 										"{{prefix}}"
 									],
 									"path": [
 										"events",
-										"6198d42f8a29dbfc5b1caeea"
+										"61a0a85ebce0e98fbb2d860f"
 									]
 								}
 							},
@@ -479,14 +479,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{prefix}}/ticketInsps/manager/6198d2de8a29dbfc5b1caeca //da sistemare",
+							"raw": "{{prefix}}/ticketInsps/manager/61a0a0eeb5f9b12d06e9523a //da sistemare",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
 								"ticketInsps",
 								"manager",
-								"6198d2de8a29dbfc5b1caeca ",
+								"61a0a0eeb5f9b12d06e9523a ",
 								"",
 								"da sistemare"
 							]
@@ -595,13 +595,33 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{prefix}}/users/6198d4c48a29dbfc5b1cb2d5",
+							"raw": "{{prefix}}/users/61a0a933bce0e98fbb2d999d",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
 								"users",
-								"6198d4c48a29dbfc5b1cb2d5"
+								"61a0a933bce0e98fbb2d999d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get users (READ) eventour",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/users/61a0a933bce0e98fbb2d999d/eventour/5",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"users",
+								"61a0a933bce0e98fbb2d999d",
+								"eventour",
+								"5"
 							]
 						}
 					},
@@ -728,13 +748,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{prefix}}/managers/6198d2de8a29dbfc5b1caebc",
+							"raw": "{{prefix}}/managers/61a0a0eeb5f9b12d06e95237",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
 								"managers",
-								"6198d2de8a29dbfc5b1caebc"
+								"61a0a0eeb5f9b12d06e95237"
 							]
 						}
 					},
@@ -769,13 +789,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{prefix}}/bookings/ID",
+							"raw": "{{prefix}}/bookings/61a0b071bce0e98fbb2dad71/all",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
 								"bookings",
-								"ID"
+								"61a0b071bce0e98fbb2dad71",
+								"all"
 							]
 						}
 					},
@@ -806,14 +827,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{prefix}}/bookings/u/6198d2de8a29dbfc5b1caeca",
+							"raw": "{{prefix}}/bookings/u/61a0a933bce0e98fbb2da05a",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
 								"bookings",
 								"u",
-								"6198d2de8a29dbfc5b1caeca"
+								"61a0a933bce0e98fbb2da05a"
 							]
 						}
 					},
@@ -899,7 +920,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"user\": \"Elita8@email.it\",\r\n    \"password\" : \"nusabaju\"\r\n}",
+					"raw": "{\r\n    \"user\": \"Colombano72@hotmail.com\",\r\n    \"password\" : \"yelukare\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

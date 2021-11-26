@@ -22,7 +22,7 @@ import com.scarcolo.eventour.model.manager.ManagerResponse;
 import com.scarcolo.eventour.service.manager.ManagerService;
 
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api")
 public class ManagerController {

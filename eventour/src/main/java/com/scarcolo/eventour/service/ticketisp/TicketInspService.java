@@ -15,6 +15,7 @@ import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
+import com.scarcolo.eventour.model.manager.TicketManResponse;
 import com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;

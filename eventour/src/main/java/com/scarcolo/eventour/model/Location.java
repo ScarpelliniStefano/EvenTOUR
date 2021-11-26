@@ -8,6 +8,8 @@ public class Location {
 	private String provincia;
 	private String sigla;
 	private String regione;
+	private Float lat;
+	private Float lng;
 	public String getLocality() {
 		return locality;
 	}
@@ -43,5 +45,17 @@ public class Location {
 	}
 	public void setRegione(String regione) {
 		this.regione = regione;
+	}
+	public Float getLat() {
+		return lat;
+	}
+	public void setLat(Float lat) {
+		this.lat = lat;
+	}
+	public Float getLng() {
+		return lng;
+	}
+	public void setLng(Float lng) {
+		this.lng = lng;
 	}
 }

@@ -23,7 +23,7 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	Page<Event> findByTypes(String[] type, Pageable paging);
 	
 	@Query("{freeSeat: {$gt: 0} , dataOra: {$gt: new Date()} }")
-	Page<Event> findByfreeSeatGreaterThanZero(Pageable paging);
+	Page<Event> findByFreeSeatGreaterThanZero(Pageable paging);
 	
 	@Query("{managerId:new ObjectId(?0), dataOra: {$gt: new Date()} }")
 	Page<Event> findByManagerId(ObjectId objectId,Pageable paging);
@@ -56,6 +56,9 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	
 	@Query("{ 'location.city' : { '$regex' : ?0 , $options: 'i'}}")
 	List<Event> findByLocation_CityLike(String city);
+
+	@Query("{ 'location.regione' : { '$regex' : ?0 , $options: 'i'}, 'freeSeat': {$gt: 0},  'dataOra': {$gt: new Date()} }")
+	List<Event> findByLocation_RegioneLikeAndFreeSeatGreaterThanZero(String regione,Sort sorted);
 
 
 	

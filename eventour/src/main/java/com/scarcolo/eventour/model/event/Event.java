@@ -38,6 +38,7 @@ public class Event {
 	private String urlImage;
 	private Integer freeSeat;
 	private Integer totSeat;
+	private Float price;
 	
 	public Event(AddEventRequest request) throws Exception {
         this.setTitle(request.title);
@@ -49,6 +50,7 @@ public class Event {
         this.setUrlImage(request.urlImage);
         this.setTotSeat(request.totSeat);
         this.setFreeSeat(request.totSeat);
+        this.setFreeSeat(request.price);
     }
 	
 	 public Event() {
@@ -138,11 +140,8 @@ public class Event {
 		
 	}
 
-	public Date getDataOra() {
-		return dataOra;
-	}
 	
-	public LocalDateTime getDataOraLocal() {
+	public LocalDateTime getDataOra() {
 		return Functionalities.convertToLocalDateTime(this.dataOra);
 	}
 	
@@ -159,6 +158,7 @@ public class Event {
 	}
 	
 	public void setDataOra(Date dataOra) throws Exception {
+		
 		setDateCheck(dataOra);
 	}
 
@@ -192,6 +192,14 @@ public class Event {
 
 	public void setTotSeat(Integer totSeat) {
 		this.totSeat = totSeat;
+	}
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
 	}
 	
 }

@@ -19,11 +19,13 @@ public class Booking {
 	private ObjectId userId;
 	private ObjectId eventId;
 	private Integer prenotedSeat;	
+	private Boolean come;	
 	
 	public Booking(AddBookingRequest request) {
         this.setUserId(new ObjectId(request.userId));
         this.setEventId(new ObjectId(request.eventId));
         this.setPrenotedSeat(request.prenotedSeat);
+        this.setCome(false);
     }
 	
 	public Booking() {
@@ -60,5 +62,13 @@ public class Booking {
 
 	public void setPrenotedSeat(Integer prenotedSeat) {
 		this.prenotedSeat = prenotedSeat;
+	}
+
+	public Boolean getCome() {
+		return come;
+	}
+
+	public void setCome(Boolean come) {
+		this.come = come;
 	}
 }

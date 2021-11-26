@@ -264,7 +264,7 @@ public class EventService {
 			Sort sort = Sort.by("dataOra").ascending().and(Sort.by("freeSeat").ascending());
 			Pageable paging = PageRequest.of(page, size,sort);
 			Page<Event> pageEvents;
-			pageEvents = eventRepository.findByfreeSeatGreaterThanZero(paging);
+			pageEvents = eventRepository.findByFreeSeatGreaterThanZero(paging);
 			List<Event> events=pageEvents.getContent();
 		  	if (events.isEmpty()) {
 		  	    return new ResponseEntity<>(HttpStatus.NO_CONTENT);

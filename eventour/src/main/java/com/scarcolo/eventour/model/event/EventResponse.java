@@ -41,6 +41,8 @@ public class EventResponse {
 	public Integer totSeat;
 	@JsonProperty("freeSeat")
 	public Integer freeSeat;
+	@JsonProperty("price")
+	public Float price;
 	
 	public EventResponse(Event event){
 		this.id=event.getId();
@@ -48,11 +50,12 @@ public class EventResponse {
         this.setDescription(event.getDescription());
         this.setLocation(event.getLocation());
         this.setTypes(event.getTypes());
-        this.setDataOra(event.getDataOraLocal());
+        this.setDataOra(event.getDataOra());
         this.setManagerId(event.getManagerId());
         this.setUrlImage(event.getUrlImage());
         this.setTotSeat(event.getTotSeat());
         this.setFreeSeat(event.getFreeSeat());
+        this.setPrice(event.getPrice());
     }
 	
 	 public EventResponse() {
@@ -137,6 +140,14 @@ public class EventResponse {
 
 	public void setFreeSeat(Integer freeSeat) {
 		this.freeSeat = freeSeat;
+	}
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
 	}
 	
 	

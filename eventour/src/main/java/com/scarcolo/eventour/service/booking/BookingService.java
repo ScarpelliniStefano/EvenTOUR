@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.EditBookingRequest;
+import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.model.event.EventResponse;
+import com.scarcolo.eventour.model.user.UserBookedResponse;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
 
 import java.util.ArrayList;
@@ -33,7 +35,14 @@ public class BookingService {
         return new ResponseEntity<>(booking, HttpStatus.OK);
     }
 
-  
+    private void modify(String id) {
+    	Optional<Booking> optionalBooking = bookingRepository.findById(id);
+    	if (!optionalBooking.isEmpty()) {
+            Booking book=optionalBooking.get();
+            book.setCome(true);
+            bookingRepository.save(book);
+    	}
+    }
     public ResponseEntity<Booking> update(EditBookingRequest request) {
         Optional<Booking> optionalBooking = bookingRepository.findById(request.id);
         if (optionalBooking.isEmpty()) {
@@ -93,12 +102,37 @@ public class BookingService {
     	Optional<Booking> bookingData = bookingRepository.findById(idBooking);
 
   	  	if (bookingData.isPresent()) {
-  	  		if(bookingData.get().getEventId().equals(idEvent))
+  	  		if(bookingData.get().getEventId().equals(idEvent)) {
+  	  			modify(idBooking);
   	  			return new ResponseEntity<>("ACCESS GRANTED", HttpStatus.OK);
-  	  		else
+  	  		}else
   	  			return new ResponseEntity<>("ACCESS REFUSED", HttpStatus.OK);
   	  	} else {
   	  		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   	  	}
     }
+
+	public ResponseEntity<List<UserBookedResponse>> getByIdEvent(String id) {
+		try {
+			AggregationResults<UserBookedResponse> userA=bookingRepository.findByEventId(new ObjectId(id));
+			List<UserBookedResponse> eventR=userA.getMappedResults();
+			return new ResponseEntity<>(eventR, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	
+
+	public ResponseEntity<UserEventBookedResponse> getByIdDetails(String id) {
+		try {
+			AggregationResults<UserEventBookedResponse> userEventA=bookingRepository.findByIdDetails(new ObjectId(id));
+			//System.out.println(userEventA.getRawResults());
+			List<UserEventBookedResponse> eventR=userEventA.getMappedResults();
+			return new ResponseEntity<>(eventR.get(0), HttpStatus.OK);
+		}catch(Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

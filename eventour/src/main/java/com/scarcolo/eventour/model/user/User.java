@@ -102,14 +102,9 @@ public class User{
 	protected void setSurname(String surname) {
 		this.surname = surname;
 	}
-	/**
-	 * @return the dateOfBirth
-	 */
-	protected Date getDateOfBirth() {
-		return dateOfBirth;
-	}
+
 	
-	public LocalDate getDateOfBirthLocal() {
+	public LocalDate getDateOfBirth() {
 		return Functionalities.convertToLocalDate(this.dateOfBirth);
 	}
 	
@@ -138,7 +133,7 @@ public class User{
 		return types;
 	}
 	
-	public String[] getTypesName() {
+	/*public String[] getTypesName() {
 		ArrayList<String> provString=new ArrayList<String>();
 		TypesE tipoTrovato;
 		for(String type : types) {
@@ -156,7 +151,7 @@ public class User{
 			provString.add(tipoTrovato.description());
 		}
 		return (String[]) provString.toArray();
-	}
+	}*/
 
 	public void setTypes(String[] types) {
 		this.types = types;
@@ -173,13 +168,13 @@ public class User{
 	/**
 	 * @return the residence
 	 */
-	protected Location getResidence() {
+	public Location getResidence() {
 		return residence;
 	}
 	/**
 	 * @param residence the residence to set
 	 */
-	protected void setResidence(Location residence) {
+	public void setResidence(Location residence) {
 		this.residence = residence;
 	}
 	

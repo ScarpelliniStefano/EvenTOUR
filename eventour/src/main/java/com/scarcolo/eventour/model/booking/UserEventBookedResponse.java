@@ -1,9 +1,11 @@
-package com.scarcolo.eventour.model.event;
+package com.scarcolo.eventour.model.booking;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.scarcolo.eventour.model.Location;
+import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.user.User;
 
-public class EventBookedResponse {
+public class UserEventBookedResponse {
 	@JsonProperty("id")
 	private String id;
 	@JsonProperty("userId")
@@ -14,17 +16,20 @@ public class EventBookedResponse {
 	private Integer prenotedSeat;
 	@JsonProperty("come")
 	private Boolean come;
+	@JsonProperty("user")
+	private User[] user;
 	@JsonProperty("event")
 	private Event[] event;
 	
-	public EventBookedResponse(String id, String userId, String eventId, Integer prenotedSeat,Boolean come, Event[] event) {
+	public UserEventBookedResponse(String id, String userId, String eventId, Integer prenotedSeat,Boolean come, User[] user,Event[] event ) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.eventId = eventId;
 		this.prenotedSeat = prenotedSeat;
 		this.come = come;
-		this.event=event;
+		this.user = user;
+		this.event = event;
 	}
 	public String getId() {
 		return id;
@@ -60,7 +65,13 @@ public class EventBookedResponse {
 		return event;
 	}
 	public void setEvent(Event[] event) {
-		this.event=event;
+		this.event = event;
+	}
+	public User[] getUser() {
+		return user;
+	}
+	public void setUser(User[] user) {
+		this.user = user;
 	}
 	
 }

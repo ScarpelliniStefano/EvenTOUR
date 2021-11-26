@@ -32,7 +32,7 @@ public class BookingController {
 	private BookingService bookingService;
 	 
 	@PostMapping("/bookings")
-	public ResponseEntity<Booking> addBooking(@RequestBody AddBookingRequest request){
+	public ResponseEntity<Object> addBooking(@RequestBody AddBookingRequest request){
 	      return bookingService.add(request);
 	}
 

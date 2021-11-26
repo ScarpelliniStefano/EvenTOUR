@@ -26,6 +26,6 @@ public class AddEventRequest {
 	@JsonProperty("totSeat")
 	public Integer totSeat;
 	@JsonProperty("price")
-	public Integer price;
+	public Double price;
 
 }

@@ -42,7 +42,7 @@ public class EventResponse {
 	@JsonProperty("freeSeat")
 	public Integer freeSeat;
 	@JsonProperty("price")
-	public Float price;
+	public Double price;
 	
 	public EventResponse(Event event){
 		this.id=event.getId();
@@ -142,12 +142,12 @@ public class EventResponse {
 		this.freeSeat = freeSeat;
 	}
 
-	public Float getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Float price) {
-		this.price = price;
+	public void setPrice(Double double1) {
+		this.price = double1;
 	}
 	
 	

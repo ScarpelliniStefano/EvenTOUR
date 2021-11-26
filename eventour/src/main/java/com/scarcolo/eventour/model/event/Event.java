@@ -38,7 +38,7 @@ public class Event {
 	private String urlImage;
 	private Integer freeSeat;
 	private Integer totSeat;
-	private Float price;
+	private Double price;
 	
 	public Event(AddEventRequest request) throws Exception {
         this.setTitle(request.title);
@@ -50,7 +50,7 @@ public class Event {
         this.setUrlImage(request.urlImage);
         this.setTotSeat(request.totSeat);
         this.setFreeSeat(request.totSeat);
-        this.setFreeSeat(request.price);
+        this.setPrice(request.price);
     }
 	
 	 public Event() {
@@ -194,11 +194,11 @@ public class Event {
 		this.totSeat = totSeat;
 	}
 
-	public Float getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Float price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 	

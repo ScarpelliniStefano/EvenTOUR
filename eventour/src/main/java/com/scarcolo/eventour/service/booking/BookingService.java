@@ -13,10 +13,12 @@ import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.EditBookingRequest;
 import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
+import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.user.UserBookedResponse;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
+import com.scarcolo.eventour.repository.event.EventRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +30,28 @@ public class BookingService {
 
     @Autowired
     private BookingRepository bookingRepository;
+    
+    @Autowired
+    private EventRepository eventRepository;
 
    
-    public ResponseEntity<Booking> add(AddBookingRequest request) {
+    public ResponseEntity<Object> add(AddBookingRequest request) {
         Booking booking = bookingRepository.save(new Booking(request));
+        Optional<Event> optionalEvent = eventRepository.findById(booking.getEventId());
+        if (!optionalEvent.isEmpty()) {
+            Event eventM=optionalEvent.get();
+            if(eventM.getFreeSeat()-booking.getPrenotedSeat()>=0) {
+            	eventM.setFreeSeat(eventM.getFreeSeat()-booking.getPrenotedSeat());
+            	eventRepository.save(eventM);
+            } else {
+            	bookingRepository.delete(booking);
+            	return new ResponseEntity<>(new String("ERROR. no enough seats available."), HttpStatus.OK);
+            }
+            	
+            
+    	}
         return new ResponseEntity<>(booking, HttpStatus.OK);
+        
     }
 
     private void modify(String id) {
@@ -69,6 +88,13 @@ public class BookingService {
         if (optionalBooking.isEmpty()) {
             return false;
         }
+        
+        Optional<Event> optionalEvent = eventRepository.findById(optionalBooking.get().getEventId());
+        if (!optionalEvent.isEmpty()) {
+            Event eventM=optionalEvent.get();
+            eventM.setFreeSeat(eventM.getFreeSeat()+optionalBooking.get().getPrenotedSeat());
+            eventRepository.save(eventM);
+    	}
         bookingRepository.deleteById(optionalBooking.get().getId());
         return true;
     }

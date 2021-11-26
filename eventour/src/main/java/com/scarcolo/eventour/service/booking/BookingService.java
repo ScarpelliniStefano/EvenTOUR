@@ -136,7 +136,6 @@ public class BookingService {
 	public ResponseEntity<UserEventBookedResponse> getByIdDetails(String id) {
 		try {
 			AggregationResults<UserEventBookedResponse> userEventA=bookingRepository.findByIdDetails(new ObjectId(id));
-			//System.out.println(userEventA.getRawResults());
 			List<UserEventBookedResponse> eventR=userEventA.getMappedResults();
 			return new ResponseEntity<>(eventR.get(0), HttpStatus.OK);
 		}catch(Exception e) {

@@ -86,7 +86,16 @@ public class BookingService {
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+	}
+	
+	public ResponseEntity<List<EventBookedResponse>> getByUserAndEvent(String id, String idEv) {
+		try {
+			AggregationResults<EventBookedResponse> eventsA=bookingRepository.findByUserAndEvent(new ObjectId(id), new ObjectId(idEv));
+			List<EventBookedResponse> eventR=eventsA.getMappedResults();
+			return new ResponseEntity<>(eventR, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	public ResponseEntity<String> getCheck(String idBooking,String idEvent) {

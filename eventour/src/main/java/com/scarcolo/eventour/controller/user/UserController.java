@@ -23,7 +23,7 @@ import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.model.user.UserResponse;
 import com.scarcolo.eventour.service.user.UserService;
 
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class UserController {

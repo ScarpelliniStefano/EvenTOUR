@@ -30,26 +30,26 @@ public class ManagerController {
 	@Autowired
 	private ManagerService managerService;
 	 @PostMapping("/managers")
-	    public ResponseEntity<ManagerResponse> addEvent(@RequestBody AddManagerRequest request) throws Exception{
+	    public ResponseEntity<ManagerResponse> addManager(@RequestBody AddManagerRequest request) throws Exception{
 	      return managerService.add(request);
 	    }
 
 	   
 	    @PutMapping("/managers")
-	    public ResponseEntity<ManagerResponse> updateEvent(@RequestBody EditManagerRequest request){
+	    public ResponseEntity<ManagerResponse> updateManager(@RequestBody EditManagerRequest request){
 	        return managerService.update(request);
 	    }
 
 
 	   
 	    @GetMapping("/managers/{id}")
-	    public ResponseEntity<ManagerResponse> getEventById(@PathVariable("id") String id){
+	    public ResponseEntity<ManagerResponse> getManagerById(@PathVariable("id") String id){
 	        return managerService.getById(id);
 	    }
 	    
 
 	    @GetMapping("/managers")
-	    public ResponseEntity<List<ManagerResponse>> getAllEvents(){
+	    public ResponseEntity<List<ManagerResponse>> getAllManagers(){
 	        return managerService.getAll();
 	    }
 	    

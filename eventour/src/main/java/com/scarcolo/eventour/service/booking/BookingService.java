@@ -135,7 +135,9 @@ public class BookingService {
 	
 	public ResponseEntity<String> getCheck(String idBooking,String idEvent) {
     	Optional<Booking> bookingData = bookingRepository.findById(idBooking);
-
+    	System.out.println(bookingData);
+    	System.out.println(idBooking);
+    	System.out.println(idEvent);
   	  	if (bookingData.isPresent()) {
   	  		if(bookingData.get().getEventId().equals(idEvent)) {
   	  			modify(idBooking);

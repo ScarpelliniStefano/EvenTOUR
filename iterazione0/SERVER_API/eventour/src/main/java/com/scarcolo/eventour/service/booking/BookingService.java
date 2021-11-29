@@ -19,16 +19,28 @@ import java.util.List;
 import java.util.Optional;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BookingService.
+ */
 @Service
 public class BookingService {
 
+    /** The booking repository. */
     @Autowired
     private BookingRepository bookingRepository;
     
+    /** The event repository. */
     @Autowired
     private EventRepository eventRepository;
 
    
+    /**
+     * Adds new booking.
+     *
+     * @param request the request of new booking
+     * @return the response entity
+     */
     public ResponseEntity<Object> add(AddBookingRequest request) {
         Booking booking = bookingRepository.save(new Booking(request));
         Optional<Event> optionalEvent = eventRepository.findById(booking.getEventId());
@@ -48,6 +60,11 @@ public class BookingService {
         
     }
 
+    /**
+     * Modify.
+     *
+     * @param id the id
+     */
     private void modify(String id) {
     	Optional<Booking> optionalBooking = bookingRepository.findById(id);
     	if (!optionalBooking.isEmpty()) {
@@ -58,6 +75,12 @@ public class BookingService {
     }
 
   
+    /**
+     * Delete one booking.
+     *
+     * @param id the id
+     * @return true, if successful
+     */
     public boolean delete(String id) {
         Optional<Booking> optionalBooking = bookingRepository.findById(id);
         if (optionalBooking.isEmpty()) {
@@ -75,6 +98,12 @@ public class BookingService {
     }
 
 
+	/**
+	 * Gets all bookings by id user.
+	 *
+	 * @param id the id
+	 * @return the by id user
+	 */
 	public ResponseEntity<List<EventBookedResponse>> getByIdUser(String id) {
 		try {
 			AggregationResults<EventBookedResponse> eventsA=bookingRepository.findByUserId(new ObjectId(id));
@@ -85,6 +114,13 @@ public class BookingService {
 		}
 	}
 	
+	/**
+	 * Gets if user have a booking.
+	 *
+	 * @param idBooking the id booking
+	 * @param idEvent the id event
+	 * @return the check
+	 */
 	public ResponseEntity<String> getCheck(String idBooking,String idEvent) {
     	Optional<Booking> bookingData = bookingRepository.findById(idBooking);
     	System.out.println(bookingData);

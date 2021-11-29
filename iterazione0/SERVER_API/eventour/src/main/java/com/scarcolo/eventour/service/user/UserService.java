@@ -20,16 +20,32 @@ import com.scarcolo.eventour.repository.user.UserRepository;
 import java.util.List;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserService.
+ */
 @Service
 public class UserService {
 
+    /** The user repository. */
     @Autowired
     private UserRepository userRepository;
+	
+	/** The manager repository. */
 	@Autowired
 	private ManagerRepository managerRepository;
+	
+	/** The ticket insp repository. */
 	@Autowired
 	private TicketInspRepository ticketInspRepository;
 	
+	/**
+	 * Get account, given mail or code and password.
+	 *
+	 * @param user the username (mail or code)
+	 * @param psw the password
+	 * @return the account
+	 */
 	public ResponseEntity<AccountResponse> getAccount(String user, String psw) {
 		
 		if(user.isEmpty()) {

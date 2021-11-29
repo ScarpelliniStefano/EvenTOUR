@@ -17,13 +17,24 @@ import java.util.List;
 import java.util.Optional;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TicketInspService.
+ */
 @Service
 public class TicketInspService {
 
+    /** The ticket insp repository. */
     @Autowired
     private TicketInspRepository ticketInspRepository;
 
    
+    /**
+     * Get ticket inspector by id.
+     *
+     * @param id the id
+     * @return the by id
+     */
     public ResponseEntity<TicketInspResponse> getById(String id) {
     	Optional<TicketInsp> ticketInspData = ticketInspRepository.findById(id);
 
@@ -35,6 +46,12 @@ public class TicketInspService {
     }
 
 
+	/**
+	 * Get all ticket inspector by event id.
+	 *
+	 * @param id the id
+	 * @return list of ticket inspector of a event
+	 */
 	public ResponseEntity<List<TicketInspResponse>> getByEventId(String id) {
 		try {
 

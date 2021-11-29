@@ -23,13 +23,25 @@ import java.util.Map;
 import java.util.Optional;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventService.
+ */
 @Service
 public class EventService {
 
+    /** The event repository. */
     @Autowired
     private EventRepository eventRepository;
 
    
+    /**
+     * Add a event.
+     *
+     * @param request the request
+     * @return the response entity
+     * @throws Exception the exception
+     */
     public ResponseEntity<EventResponse> add(AddEventRequest request) throws Exception {
         Event event = eventRepository.save(new Event(request));
         return new ResponseEntity<>(new EventResponse(event), HttpStatus.OK);
@@ -37,6 +49,12 @@ public class EventService {
 
 
    
+    /**
+     * Get a event by id.
+     *
+     * @param id the id
+     * @return the by id
+     */
     public ResponseEntity<EventResponse> getById(String id) {
     	Optional<Event> eventData = eventRepository.findById(id);
 
@@ -47,6 +65,15 @@ public class EventService {
   	  }
     }
 
+	/**
+	 * Get all events.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param ordered the order
+	 * @param param the parameter to order on
+	 * @return all events ordered, if necessary, and divided by page of size
+	 */
 	public ResponseEntity<Map<String, Object>> getAll(int page, int size, String ordered,String param) {
 		try {
 			List<Event> events = new ArrayList<>();
@@ -100,6 +127,14 @@ public class EventService {
 	}
 
 
+	/**
+	 * Gets all events by id manager.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param id the id manager
+	 * @return page required of size with the events
+	 */
 	public ResponseEntity<Map<String, Object>> getByIdMan(int page, int size, String id) {
 		try {
 			Pageable paging = PageRequest.of(page, size,Sort.by("dataOra").ascending());

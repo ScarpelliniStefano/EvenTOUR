@@ -3,12 +3,20 @@
  */
 package com.scarcolo.eventour.functions;
 
+// TODO: Auto-generated Javadoc
 /**
- * @author stefa
+ * The Enum Sex.
  *
+ * @author stefa
  */
 public enum Sex {
+		
+		/** The man. */
 		MAN,
+		
+		/** The woman. */
 		WOMAN,
+		
+		/** The other. */
 		OTHER
 }

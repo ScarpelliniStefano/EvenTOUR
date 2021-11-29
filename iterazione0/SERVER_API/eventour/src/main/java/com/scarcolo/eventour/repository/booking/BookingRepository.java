@@ -9,11 +9,18 @@ import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
 
 
-
-
-
-
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface BookingRepository.
+ */
 public interface BookingRepository extends MongoRepository<Booking, String> {
+	
+	/**
+	 * Find by user id.
+	 *
+	 * @param id the id
+	 * @return the aggregation results
+	 */
 	@Aggregation(pipeline = {"{\n"
 			+ "        '$match': {\n"
 			+ "            'userId': ObjectId('?0')\n"

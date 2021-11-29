@@ -18,32 +18,68 @@ import com.scarcolo.eventour.model.event.AddEventRequest;
 import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.service.event.EventService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventController.
+ */
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class EventController {
 	
+	/** The event service. */
 	@Autowired
 	private EventService eventService;
-	 @PostMapping("/events")
+	 
+ 	/**
+ 	 * Adds the event.
+ 	 *
+ 	 * @param request the request
+ 	 * @return the response entity
+ 	 * @throws Exception the exception
+ 	 */
+ 	@PostMapping("/events")
 	    public ResponseEntity<EventResponse> addEvent(@RequestBody AddEventRequest request) throws Exception{
 	      return eventService.add(request);
 	    }
 
 	   
-	    @GetMapping("/events/{id}")
+	    /**
+    	 * Gets the event by id.
+    	 *
+    	 * @param id the id
+    	 * @return the event by id
+    	 */
+    	@GetMapping("/events/{id}")
 	    public ResponseEntity<EventResponse> getEventById(@PathVariable("id") String id){
 	        return eventService.getById(id);
 	    }
 	    
 
-	    @GetMapping("/events")
+	    /**
+    	 * Gets the all events.
+    	 *
+    	 * @param page the page
+    	 * @param size the size
+    	 * @param ordered the ordered
+    	 * @param param the param
+    	 * @return the all events
+    	 */
+    	@GetMapping("/events")
 	    public ResponseEntity<Map<String, Object>> getAllEvents(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "20") int size, @RequestParam(required = false) String ordered, @RequestParam(required = false) String param){
 	        return eventService.getAll(page,size,ordered,param);
 	    }
 	    
 	    
-	    @GetMapping("/events/manager/{id}")
+	    /**
+    	 * Gets the event manager by id.
+    	 *
+    	 * @param page the page
+    	 * @param size the size
+    	 * @param id the id
+    	 * @return the event manager by id
+    	 */
+    	@GetMapping("/events/manager/{id}")
 	    public ResponseEntity<Map<String, Object>> getEventManagerById(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "20") int size,@PathVariable("id") String id){
 	        return eventService.getByIdMan(page,size,id);
 	    }

@@ -85,7 +85,7 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'as': 'event'\n"
 			+ "        }\n"
 			+ "    }"})
-	AggregationResults<EventBookedResponse> findByUserAndEvent(ObjectId id, Object idEv);
+	AggregationResults<EventBookedResponse> findByUserAndEvent(ObjectId id, ObjectId idEv);
 
 	
 

@@ -1,0 +1,157 @@
+C:\Users\Simone\Desktop\eventour Project\frontend-springboot-event\src\components\ListEvents.vue
+    5:31   warning  'cols' should be on a new line                                                   vue/max-attributes-per-line
+    5:41   warning  'sm' should be on a new line                                                     vue/max-attributes-per-line
+    6:11   warning  Require self-closing on Vue.js custom components (<v-text-field>)                vue/html-self-closing      
+   15:31   warning  'cols' should be on a new line                                                   vue/max-attributes-per-line
+   15:41   warning  'sm' should be on a new line                                                     vue/max-attributes-per-line
+   16:11   warning  Require self-closing on Vue.js custom components (<v-text-field>)                vue/html-self-closing      
+   24:31   warning  'cols' should be on a new line                                                   vue/max-attributes-per-line
+   24:41   warning  'sm' should be on a new line                                                     vue/max-attributes-per-line
+   25:11   warning  Require self-closing on Vue.js custom components (<v-select>)                    vue/html-self-closing      
+   28:13   warning  Attribute "v-model" should go before ":items"                                    vue/attributes-order       
+   33:31   warning  'cols' should be on a new line                                                   vue/max-attributes-per-line
+   33:41   warning  'sm' should be on a new line                                                     vue/max-attributes-per-line
+   34:11   warning  Require self-closing on Vue.js custom components (<v-select>)                    vue/html-self-closing      
+   37:13   warning  Attribute "v-model" should go before ":items"                                    vue/attributes-order       
+   41:26   warning  'sm' should be on a new line                                                     vue/max-attributes-per-line
+   42:18   warning  'width' should be on a new line                                                  vue/max-attributes-per-line
+   42:31   warning  '@click' should be on a new line                                                 vue/max-attributes-per-line
+   42:50   warning  'depressed' should be on a new line                                              vue/max-attributes-per-line
+   42:50   warning  Attribute "depressed" should go before "@click"                                  vue/attributes-order       
+   42:60   warning  'color' should be on a new line                                                  vue/max-attributes-per-line
+   42:60   warning  Attribute "color" should go before "@click"                                      vue/attributes-order
+   42:75   warning  Expected no line breaks before closing bracket, but 1 line break found           vue/html-closing-bracket-newline
+   43:1    warning  Expected indentation of 10 spaces but found 12 spaces                            vue/html-indent
+   43:14   warning  Expected 1 line break after opening tag (`<v-btn>`), but no line breaks found    vue/multiline-html-element-content-newline
+   43:19   warning  Expected 1 line break before closing tag (`</v-btn>`), but no line breaks found  vue/multiline-html-element-content-newline
+   43:26   warning  Expected no line breaks before closing bracket, but 1 line break found           vue/html-closing-bracket-newline
+   49:29   warning  'justify' should be on a new line                                                vue/max-attributes-per-line
+   74:1    warning  Expected indentation of 16 spaces but found 20 spaces                            vue/html-indent
+   75:1    warning  Expected indentation of 14 spaces but found 18 spaces                            vue/html-indent
+   76:1    warning  Expected indentation of 14 spaces but found 18 spaces                            vue/html-indent
+   77:1    warning  Expected indentation of 16 spaces but found 20 spaces                            vue/html-indent
+   78:1    warning  Expected indentation of 16 spaces but found 20 spaces                            vue/html-indent
+   78:21   warning  Disallow self-closing on HTML void elements (<br/>)                              vue/html-self-closing
+   79:1    warning  Expected indentation of 16 spaces but found 20 spaces                            vue/html-indent
+   80:1    warning  Expected indentation of 16 spaces but found 20 spaces                            vue/html-indent
+   80:21   warning  Disallow self-closing on HTML void elements (<br/>)                              vue/html-self-closing
+   81:1    warning  Expected indentation of 16 spaces but found 20 spaces                            vue/html-indent
+   82:1    warning  Expected indentation of 18 spaces but found 22 spaces                            vue/html-indent
+   83:1    warning  Expected indentation of 20 spaces but found 22 spaces                            vue/html-indent
+   84:1    warning  Expected indentation of 20 spaces but found 22 spaces                            vue/html-indent
+   85:1    warning  Expected indentation of 20 spaces but found 22 spaces                            vue/html-indent
+   86:1    warning  Expected indentation of 20 spaces but found 22 spaces                            vue/html-indent
+   87:1    warning  Expected indentation of 20 spaces but found 22 spaces                            vue/html-indent
+   88:1    warning  Expected indentation of 20 spaces but found 22 spaces                            vue/html-indent
+   89:1    warning  Expected indentation of 20 spaces but found 22 spaces                            vue/html-indent
+   90:1    warning  Expected indentation of 20 spaces but found 22 spaces                            vue/html-indent
+   91:1    warning  Expected indentation of 16 spaces but found 20 spaces                            vue/html-indent
+   92:1    warning  Expected indentation of 14 spaces but found 18 spaces                            vue/html-indent
+   94:17   warning  Require self-closing on HTML elements (<div>)                                    vue/html-self-closing
+   94:22   warning  Expected 1 line break after opening tag (`<div>`), but 2 line breaks found       vue/multiline-html-element-content-newline
+   95:1    error    Trailing spaces not allowed                                                      no-trailing-spaces
+   97:17   warning  Require self-closing on Vue.js custom components (<v-spacer>)                    vue/html-self-closing
+   98:29   warning  'v-on:click' should be on a new line                                             vue/max-attributes-per-line
+   98:29   warning  Expected '@' instead of 'v-on:'                                                  vue/v-on-style
+  111:33   error    Strings must use singlequote                                                     quotes
+  111:69   error    Extra semicolon                                                                  semi
+  114:9    error    Strings must use singlequote                                                     quotes
+  116:18   error    Unexpected trailing comma                                                        comma-dangle
+  120:19   error    Strings must use singlequote                                                     quotes
+  120:30   error    Strings must use singlequote                                                     quotes
+  120:37   error    Strings must use singlequote                                                     quotes
+  121:19   error    Strings must use singlequote                                                     quotes
+  121:26   error    Strings must use singlequote                                                     quotes
+  121:34   error    Strings must use singlequote                                                     quotes
+  122:11   error    Strings must use singlequote                                                     quotes
+  123:11   error    Strings must use singlequote                                                     quotes
+  124:12   error    Strings must use singlequote                                                     quotes
+  125:12   error    Strings must use singlequote                                                     quotes
+  125:14   error    Unexpected trailing comma                                                        comma-dangle
+  128:14   error    Missing space before function parentheses                                        space-before-function-paren
+  128:18   error    Missing space before opening brace                                               space-before-blocks
+  129:28   error    Strings must use singlequote                                                     quotes
+  129:44   error    Extra semicolon                                                                  semi
+  131:12   error    Missing space before function parentheses                                        space-before-function-paren
+  132:7    error    Expected an assignment or function call and instead saw an expression            no-unused-expressions
+  132:18   error    Expected '===' and instead saw '=='                                              eqeqeq
+  132:21   error    Strings must use singlequote                                                     quotes
+  132:43   error    Extra semicolon                                                                  semi
+  133:7    error    Expected an assignment or function call and instead saw an expression            no-unused-expressions
+  133:18   error    Expected '===' and instead saw '=='                                              eqeqeq
+  133:21   error    Strings must use singlequote                                                     quotes
+  134:7    error    Expected space or tab after '//' in comment                                      spaced-comment
+  135:7    error    Expected space(s) after "if"                                                     keyword-spacing
+  135:21   error    Missing space before opening brace                                               space-before-blocks
+  136:9    error    Expected space(s) after "if"                                                     keyword-spacing
+  136:24   error    Missing space before opening brace                                               space-before-blocks
+  137:24   error    Strings must use singlequote                                                     quotes
+  137:29   error    Extra semicolon                                                                  semi
+  141:19   error    A space is required after '{'                                                    object-curly-spacing
+  141:36   error    A space is required before '}'                                                   object-curly-spacing
+  147:11   error    Extra semicolon                                                                  semi
+  148:1    error    Expected indentation of 6 spaces but found 8                                     indent
+  149:1    error    Expected indentation of 8 spaces but found 10                                    indent
+  151:19   error    A space is required after '{'                                                    object-curly-spacing
+  151:36   error    A space is required before '}'                                                   object-curly-spacing
+  153:29   error    Unexpected trailing comma                                                        comma-dangle
+  155:11   error    Extra semicolon                                                                  semi
+  156:1    error    Expected indentation of 6 spaces but found 8                                     indent
+  157:1    error    Expected indentation of 6 spaces but found 8                                     indent
+  157:26   error    Extra semicolon                                                                  semi
+  158:7    error    Expected exception block, space or tab after '/*' in comment                     spaced-comment
+  158:7    error    Expected space or tab before '*/' in comment                                     spaced-comment
+  165:19   error    Missing space before function parentheses                                        space-before-function-paren
+  168:37   error    Extra semicolon                                                                  semi
+  169:45   error    Extra semicolon                                                                  semi
+  172:25   error    Extra semicolon                                                                  semi
+  173:11   error    Extra semicolon                                                                  semi
+  174:6    error    Unexpected trailing comma                                                        comma-dangle
+  176:3    warning  The "created" property should be above the "methods" property on line 127        vue/order-in-components
+  176:10   error    Missing space before function parentheses                                        space-before-function-paren
+  177:5    warning  Unexpected var, use let or const instead                                         no-var
+  177:36   error    Extra semicolon                                                                  semi
+  178:5    warning  Unexpected var, use let or const instead                                         no-var
+  178:40   error    Extra semicolon                                                                  semi
+  179:5    warning  Unexpected var, use let or const instead                                         no-var
+  179:40   error    Extra semicolon                                                                  semi
+  180:5    warning  Unexpected var, use let or const instead                                         no-var
+  180:37   error    Extra semicolon                                                                  semi
+  181:18   error    Operator '<' must be spaced                                                      space-infix-ops
+  181:25   error    Expected '===' and instead saw '=='                                              eqeqeq
+  181:25   error    Operator '==' must be spaced                                                     space-infix-ops
+  181:44   error    Extra semicolon                                                                  semi
+  182:18   error    Operator '<' must be spaced                                                      space-infix-ops
+  182:26   error    Expected '===' and instead saw '=='                                              eqeqeq
+  182:26   error    Operator '==' must be spaced                                                     space-infix-ops
+  182:46   error    Extra semicolon                                                                  semi
+  183:24   error    Expected '===' and instead saw '=='                                              eqeqeq
+  183:27   error    Strings must use singlequote                                                     quotes
+  183:45   error    Strings must use singlequote                                                     quotes
+  183:55   error    Extra semicolon                                                                  semi
+  184:24   error    Expected '===' and instead saw '=='                                              eqeqeq
+  184:27   error    Strings must use singlequote                                                     quotes
+  184:45   error    Strings must use singlequote                                                     quotes
+  184:55   error    Extra semicolon                                                                  semi
+  186:27   error    Operator '<=' must be spaced                                                     space-infix-ops
+  186:35   error    Expected '===' and instead saw '=='                                              eqeqeq
+  186:35   error    Operator '==' must be spaced                                                     space-infix-ops
+  186:55   error    Operator '-' must be spaced                                                      space-infix-ops
+  186:61   error    Operator '<=' must be spaced                                                     space-infix-ops
+  186:69   error    Expected '===' and instead saw '=='                                              eqeqeq
+  186:69   error    Operator '==' must be spaced                                                     space-infix-ops
+  186:97   error    Expected '===' and instead saw '=='                                              eqeqeq
+  186:97   error    Operator '==' must be spaced                                                     space-infix-ops
+  186:99   error    Strings must use singlequote                                                     quotes
+  186:101  error    Operator '||' must be spaced                                                     space-infix-ops
+  186:134  error    Expected '===' and instead saw '=='                                              eqeqeq
+  186:134  error    Operator '==' must be spaced                                                     space-infix-ops
+  186:136  error    Strings must use singlequote                                                     quotes
+  186:138  error    Operator '||' must be spaced                                                     space-infix-ops
+  186:152  error    Strings must use singlequote                                                     quotes
+  186:166  error    Extra semicolon                                                                  semi
+  188:3    warning  The "mounted" property should be above the "methods" property on line 127        vue/order-in-components
+  188:10   error    Missing space before function parentheses                                        space-before-function-paren
+  189:5    error    Expected exception block, space or tab after '/*' in comment                     spaced-comment
+  195:4    error    Unexpected trailing comma                                                        comma-dangle
+  196:2    error    Extra semicolon       

@@ -1,0 +1,92 @@
+C:\Users\Simone\Desktop\eventour Project\frontend-springboot-event\src\pages\EventManager.vue
+   2:1   warning  Expected indentation of 2 spaces but found 0 spaces                               vue/html-indent
+   3:1   warning  Expected indentation of 4 spaces but found 2 spaces                               vue/html-indent
+   4:1   warning  Expected indentation of 6 spaces but found 4 spaces                               vue/html-indent
+   4:34  warning  'tile' should be on a new line                                                    vue/max-attributes-per-line
+   4:39  warning  'fab' should be on a new line                                                     vue/max-attributes-per-line
+   4:43  warning  'v-on:click' should be on a new line                                              vue/max-attributes-per-line
+   4:43  warning  Expected '@' instead of 'v-on:'                                                   vue/v-on-style
+   4:67  error    Trailing spaces not allowed                                                       no-trailing-spaces
+   5:30  warning  Expected 1 line break after opening tag (`<v-icon>`), but no line breaks found    vue/singleline-html-element-content-newline
+   5:38  warning  Expected 1 line break before closing tag (`</v-icon>`), but no line breaks found  vue/singleline-html-element-content-newline
+   5:47  error    Trailing spaces not allowed                                                       no-trailing-spaces
+   6:1   warning  Expected indentation of 6 spaces but found 4 spaces                               vue/html-indent
+   7:1   warning  Expected indentation of 6 spaces but found 4 spaces                               vue/html-indent
+   8:1   warning  Expected indentation of 8 spaces but found 6 spaces                               vue/html-indent
+   9:1   warning  Expected indentation of 8 spaces but found 6 spaces                               vue/html-indent
+  10:1   warning  Expected indentation of 8 spaces but found 6 spaces                               vue/html-indent
+  11:1   warning  Expected indentation of 6 spaces but found 4 spaces                               vue/html-indent
+  12:1   warning  Expected indentation of 8 spaces but found 6 spaces                               vue/html-indent
+  13:1   warning  Expected indentation of 8 spaces but found 6 spaces                               vue/html-indent
+  14:1   warning  Expected indentation of 10 spaces but found 8 spaces                              vue/html-indent
+  15:1   warning  Expected indentation of 10 spaces but found 8 spaces                              vue/html-indent
+  15:17  warning  Unexpected usage of 'this'                                                        vue/this-in-template
+  16:1   warning  Expected indentation of 10 spaces but found 8 spaces                              vue/html-indent
+  16:17  warning  Unexpected usage of 'this'                                                        vue/this-in-template
+  16:55  warning  Unexpected usage of 'this'                                                        vue/this-in-template
+  17:1   warning  Expected indentation of 10 spaces but found 8 spaces                              vue/html-indent
+  17:14  warning  Expected 1 line break after opening tag (`<div>`), but no line breaks found       vue/multiline-html-element-content-newline
+  18:1   warning  Expected indentation of 12 spaces but found 16 spaces                             vue/html-indent
+  19:1   warning  Expected indentation of 14 spaces but found 27 spaces                             vue/html-indent
+  20:1   warning  Expected indentation of 14 spaces but found 16 spaces                             vue/html-indent
+  21:1   warning  Expected indentation of 14 spaces but found 22 spaces                             vue/html-indent
+  22:1   warning  Expected indentation of 14 spaces but found 16 spaces                             vue/html-indent
+  23:1   warning  Expected indentation of 14 spaces but found 22 spaces                             vue/html-indent
+  24:1   warning  Expected indentation of 14 spaces but found 16 spaces                             vue/html-indent
+  25:1   warning  Expected indentation of 14 spaces but found 22 spaces                             vue/html-indent
+  26:1   warning  Expected indentation of 14 spaces but found 16 spaces                             vue/html-indent
+  27:1   warning  Expected indentation of 10 spaces but found 13 spaces                             vue/html-indent
+  27:16  warning  Expected 1 line break before closing tag (`</div>`), but no line breaks found     vue/multiline-html-element-content-newline
+  28:1   warning  Expected indentation of 8 spaces but found 6 spaces                               vue/html-indent
+  29:1   warning  Expected indentation of 6 spaces but found 4 spaces                               vue/html-indent
+  29:14  warning  Expected 1 line break before closing tag (`</div>`), but 2 line breaks found      vue/multiline-html-element-content-newline
+  31:1   warning  Expected indentation of 4 spaces but found 2 spaces                               vue/html-indent
+  32:1   warning  Expected indentation of 4 spaces but found 2 spaces                               vue/html-indent
+  33:1   warning  Expected indentation of 6 spaces but found 4 spaces                               vue/html-indent
+  33:26  warning  Attribute ':idEvent' must be hyphenated                                           vue/attribute-hyphenation
+  33:36  warning  Unexpected usage of 'this'                                                        vue/this-in-template
+  33:49  warning  Expected a space before '/>', but not found                                       vue/html-closing-bracket-spacing
+  34:1   warning  Expected indentation of 4 spaces but found 2 spaces                               vue/html-indent
+  35:1   warning  Expected indentation of 2 spaces but found 0 spaces                               vue/html-indent
+  39:33  error    Strings must use singlequote                                                      quotes
+  39:66  error    Extra semicolon                                                                   semi
+  40:31  error    Strings must use singlequote                                                      quotes
+  43:9   error    Strings must use singlequote                                                      quotes
+  47:20  error    Unexpected trailing comma                                                         comma-dangle
+  49:3   warning  The "props" property should be above the "data" property on line 44               vue/order-in-components
+  51:5   warning  Prop 'idAccount' requires default value to be set                                 vue/require-default-prop
+  51:22  error    Unexpected trailing comma                                                         comma-dangle
+  53:3   warning  The "components" property should be above the "props" property on line 49         vue/order-in-components
+  53:14  error    Missing space before value for key 'components'                                   key-spacing
+  57:10  error    Missing space before function parentheses                                         space-before-function-paren
+  58:29  error    Trailing spaces not allowed                                                       no-trailing-spaces
+  59:15  error    Strings must use singlequote                                                      quotes
+  60:16  error    Missing space before value for key 'params'                                       key-spacing
+  62:10  error    Trailing spaces not allowed                                                       no-trailing-spaces
+  63:9   error    Extra semicolon                                                                   semi
+  65:13  error    Missing space before function parentheses                                         space-before-function-paren
+  66:36  error    Strings must use singlequote                                                      quotes
+  66:52  error    Extra semicolon                                                                   semi
+  68:13  error    Missing space before function parentheses                                         space-before-function-paren
+  69:43  error    Extra semicolon                                                                   semi
+  71:39  error    Extra semicolon                                                                   semi
+  72:9   error    Extra semicolon                                                                   semi
+  74:15  error    Missing space before function parentheses                                         space-before-function-paren
+  79:1   error    Expected indentation of 8 spaces but found 12                                     indent
+  79:76  error    Extra semicolon                                                                   semi
+  80:1   error    Expected indentation of 8 spaces but found 12                                     indent
+  80:30  error    Extra semicolon                                                                   semi
+  81:1   error    Expected indentation of 8 spaces but found 12                                     indent
+  81:29  error    Extra semicolon                                                                   semi
+  82:9   error    Extra semicolon                                                                   semi
+  83:6   error    Unexpected trailing comma                                                         comma-dangle
+  85:3   warning  The "created" property should be above the "methods" property on line 56          vue/order-in-components
+  85:10  error    Missing space before function parentheses                                         space-before-function-paren
+  86:5   error    Expected space or tab after '//' in comment                                       spaced-comment
+  87:5   error    Expected space or tab after '//' in comment                                       spaced-comment
+  89:3   warning  The "mounted" property should be above the "methods" property on line 56          vue/order-in-components
+  89:10  error    Missing space before function parentheses                                         space-before-function-paren
+  90:20  error    Extra semicolon                                                                   semi
+  91:4   error    Unexpected trailing comma                                                         comma-dangle
+  92:2   error    Extra semicolon                                                                   semi
+  96:9   error    Newline required at end of file but not found                                     eol-last

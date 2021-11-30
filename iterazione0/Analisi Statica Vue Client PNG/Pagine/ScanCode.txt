@@ -1,0 +1,154 @@
+C:\Users\Simone\Desktop\eventour Project\frontend-springboot-event\src\pages\ScanCode.vue
+   2:1   warning  Expected indentation of 2 spaces but found 4 spaces                                vue/html-indent
+   4:1   warning  Expected indentation of 6 spaces but found 8 spaces                                vue/html-indent
+   5:1   warning  Expected indentation of 6 spaces but found 8 spaces                                vue/html-indent
+   6:1   warning  Expected indentation of 8 spaces but found 12 spaces                               vue/html-indent
+   6:13  warning  Require self-closing on Vue.js custom components (<v-text-field>)                  vue/html-self-closing
+   6:56  warning  'v-model' should be on a new line                                                  vue/max-attributes-per-line
+   6:56  warning  Attribute "v-model" should go before "placeholder"                                 vue/attributes-order
+   7:1   warning  Expected indentation of 6 spaces but found 8 spaces                                vue/html-indent
+   8:1   warning  Expected indentation of 6 spaces but found 8 spaces                                vue/html-indent
+   9:1   warning  Expected indentation of 8 spaces but found 12 spaces                               vue/html-indent
+   9:20  warning  Expected '@' instead of 'v-on:'                                                    vue/v-on-style
+   9:65  error    Trailing spaces not allowed                                                        no-trailing-spaces
+  10:1   warning  Expected indentation of 10 spaces but found 16 spaces                              vue/html-indent
+  11:1   warning  Expected indentation of 10 spaces but found 16 spaces                              vue/html-indent
+  12:1   warning  Expected indentation of 8 spaces but found 12 spaces                               vue/html-indent
+  13:1   warning  Expected indentation of 6 spaces but found 8 spaces                                vue/html-indent
+  15:35  warning  ':value' should be on a new line                                                   vue/max-attributes-per-line
+  16:11  warning  Expected 1 space after '{{', but not found                                         vue/mustache-interpolation-spacing
+  16:24  warning  Expected 1 space before '}}', but not found                                        vue/mustache-interpolation-spacing
+  18:30  error    Trailing spaces not allowed                                                        no-trailing-spaces
+  19:1   warning  Expected indentation of 6 spaces but found 8 spaces                                vue/html-indent
+  20:1   warning  Expected indentation of 6 spaces but found 8 spaces                                vue/html-indent
+  20:16  warning  Expected '@' instead of 'v-on:'                                                    vue/v-on-style
+  20:40  warning  Expected 1 line break after opening tag (`<v-btn>`), but no line breaks found      vue/singleline-html-element-content-newline
+  20:44  warning  Expected 1 line break before closing tag (`</v-btn>`), but no line breaks found    vue/singleline-html-element-content-newline
+  22:1   warning  Expected indentation of 2 spaces but found 4 spaces                                vue/html-indent
+  22:11  warning  Expected 1 line break before closing tag (`</template>`), but 2 line breaks found  vue/multiline-html-element-content-newline
+  23:1   error    Trailing spaces not allowed                                                        no-trailing-spaces
+  27:1   error    Expected space or tab after '//' in comment                                        spaced-comment
+  28:1   error    Expected space or tab after '//' in comment                                        spaced-comment
+  29:1   error    Expected space or tab after '//' in comment                                        spaced-comment
+  30:1   error    Expected space or tab after '//' in comment                                        spaced-comment
+  31:1   error    Expected space or tab after '//' in comment                                        spaced-comment
+  32:66  error    Extra semicolon                                                                    semi
+  34:1   error    Expected indentation of 2 spaces but found 4                                       indent
+  34:11  error    Strings must use singlequote                                                       quotes
+  35:1   error    Expected indentation of 2 spaces but found 4                                       indent
+  36:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  36:15  error    Strings must use singlequote                                                       quotes
+  37:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  37:22  error    Strings must use singlequote                                                       quotes
+  38:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  38:21  error    Strings must use singlequote                                                       quotes
+  39:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  40:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  40:19  error    Missing space before value for key 'colorBack'                                     key-spacing
+  40:19  error    Strings must use singlequote                                                       quotes
+  41:1   error    Expected indentation of 2 spaces but found 4                                       indent
+  42:1   error    Expected indentation of 2 spaces but found 4                                       indent
+  42:5   warning  The "props" property should be above the "data" property on line 35                vue/order-in-components
+  43:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  44:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  44:9   warning  Prop 'idAccount' requires default value to be set                                  vue/require-default-prop
+  45:1   error    Expected indentation of 2 spaces but found 4                                       indent
+  46:1   error    Expected indentation of 2 spaces but found 4                                       indent
+  47:1   error    Expected indentation of 4 spaces but found 6                                       indent
+  48:1   error    Expected indentation of 6 spaces but found 8                                       indent
+  49:1   error    Expected indentation of 8 spaces but found 10                                      indent
+  50:1   error    Expected indentation of 6 spaces but found 8                                       indent
+  51:1   error    Expected indentation of 6 spaces but found 8                                       indent
+  51:25  error    Operator '=' must be spaced                                                        space-infix-ops
+  51:26  error    Strings must use singlequote                                                       quotes
+  51:28  error    Extra semicolon                                                                    semi
+  52:1   error    Expected indentation of 6 spaces but found 8                                       indent
+  52:23  error    Operator '=' must be spaced                                                        space-infix-ops
+  52:24  error    Strings must use singlequote                                                       quotes
+  52:31  error    Extra semicolon                                                                    semi
+  53:1   error    Expected indentation of 4 spaces but found 6                                       indent
+  53:8   error    Unexpected trailing comma                                                          comma-dangle
+  54:1   error    Expected indentation of 2 spaces but found 4                                       indent
+  55:1   error    Expected indentation of 2 spaces but found 4                                       indent
+  56:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  56:15  error    Missing space before function parentheses                                          space-before-function-paren
+  57:1   error    Expected indentation of 6 spaces but found 12                                      indent
+  57:24  error    Custom event name 'authInsp' must be kebab-case                                    vue/custom-event-name-casing
+  57:24  error    Strings must use singlequote                                                       quotes
+  57:42  error    Extra semicolon                                                                    semi
+  58:1   error    Expected indentation of 6 spaces but found 12                                      indent
+  58:42  error    Strings must use singlequote                                                       quotes
+  58:51  error    Extra semicolon                                                                    semi
+  59:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  60:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  60:17  error    Missing space before function parentheses                                          space-before-function-paren
+  60:19  error    Missing space before opening brace                                                 space-before-blocks
+  61:1   error    Expected indentation of 6 spaces but found 12                                      indent
+  61:34  error    A space is required after '{'                                                      object-curly-spacing
+  61:41  error    Strings must use singlequote                                                       quotes
+  61:47  error    A space is required before '}'                                                     object-curly-spacing
+  61:49  error    Extra semicolon                                                                    semi
+  62:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  63:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  63:16  error    Missing space before function parentheses                                          space-before-function-paren
+  63:18  error    Missing space before opening brace                                                 space-before-blocks
+  64:1   error    Expected indentation of 6 spaces but found 12                                      indent
+  65:1   error    Expected indentation of 8 spaces but found 16                                      indent
+  66:1   error    Expected indentation of 8 spaces but found 16                                      indent
+  67:1   error    Expected indentation of 6 spaces but found 12                                      indent
+  68:1   error    Expected indentation of 8 spaces but found 16                                      indent
+  68:43  error    Extra semicolon                                                                    semi
+  69:1   error    Expected indentation of 8 spaces but found 16                                      indent
+  69:17  error    Expected space(s) after "if"                                                       keyword-spacing
+  69:33  error    Expected '===' and instead saw '=='                                                eqeqeq
+  69:33  error    Operator '==' must be spaced                                                       space-infix-ops
+  69:35  error    Strings must use singlequote                                                       quotes
+  69:52  error    Missing space before opening brace                                                 space-before-blocks
+  70:1   error    Expected indentation of 10 spaces but found 20                                     indent
+  70:35  error    Operator '=' must be spaced                                                        space-infix-ops
+  70:36  error    Strings must use singlequote                                                       quotes
+  70:43  error    Extra semicolon                                                                    semi
+  71:1   error    Expected indentation of 8 spaces but found 16                                      indent
+  71:18  error    Expected space(s) before "else"                                                    keyword-spacing
+  71:18  error    Expected space(s) after "else"                                                     keyword-spacing
+  72:1   error    Expected indentation of 10 spaces but found 20                                     indent
+  72:35  error    Operator '=' must be spaced                                                        space-infix-ops
+  72:36  error    Strings must use singlequote                                                       quotes
+  72:41  error    Extra semicolon                                                                    semi
+  73:1   error    Expected indentation of 8 spaces but found 16                                      indent
+  74:1   error    Expected indentation of 8 spaces but found 15                                      indent
+  74:32  error    Operator '=' must be spaced                                                        space-infix-ops
+  74:46  error    Extra semicolon                                                                    semi
+  75:1   error    Expected indentation of 8 spaces but found 15                                      indent
+  75:25  error    Operator '=' must be spaced                                                        space-infix-ops
+  75:26  error    Strings must use singlequote                                                       quotes
+  75:28  error    Extra semicolon                                                                    semi
+  76:1   error    Expected indentation of 6 spaces but found 12                                      indent
+  77:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  78:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  78:18  error    Missing space before function parentheses                                          space-before-function-paren
+  78:20  error    Missing space before opening brace                                                 space-before-blocks
+  79:1   error    Expected indentation of 6 spaces but found 12                                      indent
+  79:13  error    Expected space(s) after "if"                                                       keyword-spacing
+  79:31  error    Expected '===' and instead saw '=='                                                eqeqeq
+  79:31  error    Operator '==' must be spaced                                                       space-infix-ops
+  79:33  error    Strings must use singlequote                                                       quotes
+  79:36  error    Missing space before opening brace                                                 space-before-blocks
+  80:1   error    Expected indentation of 8 spaces but found 16                                      indent
+  81:1   error    Expected indentation of 10 spaces but found 44                                     indent
+  82:1   error    Expected indentation of 12 spaces but found 48                                     indent
+  82:64  error    Operator '=' must be spaced                                                        space-infix-ops
+  82:86  error    Extra semicolon                                                                    semi
+  83:1   error    Expected indentation of 12 spaces but found 48                                     indent
+  83:63  error    Extra semicolon                                                                    semi
+  84:1   error    Expected indentation of 10 spaces but found 44                                     indent
+  85:1   error    Expected indentation of 6 spaces but found 12                                      indent
+  85:14  error    Expected space(s) before "else"                                                    keyword-spacing
+  85:14  error    Expected space(s) after "else"                                                     keyword-spacing
+  86:1   error    Expected indentation of 8 spaces but found 16                                      indent
+  87:1   error    Expected indentation of 6 spaces but found 12                                      indent
+  87:14  error    Block must not be padded by blank lines                                            padded-blocks
+  88:1   error    Trailing spaces not allowed                                                        no-trailing-spaces
+  89:1   error    Expected indentation of 4 spaces but found 8                                       indent
+  90:1   error    Expected indentation of 2 spaces but found 4                                       indent
+  96:9   error    Newline required at end of file but not found                                      eol-last

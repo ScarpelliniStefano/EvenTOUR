@@ -1,0 +1,39 @@
+C:\Users\Simone\Desktop\eventour Project\frontend-springboot-event\src\components\EventListElem.vue
+   2:1   warning  Expected indentation of 2 spaces but found 4 spaces            vue/html-indent
+   2:28  warning  'width' should be on a new line                                vue/max-attributes-per-line
+   2:42  warning  'height' should be on a new line                               vue/max-attributes-per-line
+   3:1   warning  Expected indentation of 4 spaces but found 8 spaces            vue/html-indent
+   3:9   warning  Require self-closing on Vue.js custom components (<v-img>)     vue/html-self-closing      
+   3:21  warning  Expected to be enclosed by double quotes                       vue/html-quotes
+   3:28  warning  'height' should be on a new line                               vue/max-attributes-per-line
+   3:43  warning  'width' should be on a new line                                vue/max-attributes-per-line
+   4:1   warning  Expected indentation of 4 spaces but found 8 spaces            vue/html-indent
+   5:1   error    Trailing spaces not allowed                                    no-trailing-spaces
+   6:1   warning  Expected indentation of 4 spaces but found 8 spaces            vue/html-indent
+   7:1   warning  Expected indentation of 6 spaces but found 12 spaces           vue/html-indent
+   8:1   warning  Expected indentation of 8 spaces but found 16 spaces           vue/html-indent
+   9:1   warning  Expected indentation of 10 spaces but found 20 spaces          vue/html-indent
+  10:1   warning  Expected indentation of 8 spaces but found 16 spaces           vue/html-indent
+  11:1   warning  Expected indentation of 8 spaces but found 16 spaces           vue/html-indent
+  12:1   warning  Expected indentation of 10 spaces but found 20 spaces          vue/html-indent
+  13:1   warning  Expected indentation of 8 spaces but found 16 spaces           vue/html-indent
+  14:1   warning  Expected indentation of 6 spaces but found 12 spaces           vue/html-indent
+  15:1   warning  Expected indentation of 6 spaces but found 12 spaces           vue/html-indent
+  15:13  warning  Require self-closing on Vue.js custom components (<v-spacer>)  vue/html-self-closing
+  16:1   warning  Expected indentation of 6 spaces but found 12 spaces           vue/html-indent
+  17:1   warning  Expected indentation of 8 spaces but found 16 spaces           vue/html-indent
+  18:1   warning  Expected indentation of 6 spaces but found 12 spaces           vue/html-indent
+  19:1   warning  Expected indentation of 4 spaces but found 8 spaces            vue/html-indent
+  20:1   warning  Expected indentation of 2 spaces but found 4 spaces            vue/html-indent
+  25:1   error    Expected indentation of 2 spaces but found 4                   indent
+  26:1   error    Expected indentation of 2 spaces but found 4                   indent
+  27:1   error    Expected indentation of 4 spaces but found 8                   indent
+  27:9   warning  Prop 'imgURL' requires default value to be set                 vue/require-default-prop
+  28:1   error    Expected indentation of 4 spaces but found 8                   indent
+  28:9   warning  Prop 'title' requires default value to be set                  vue/require-default-prop
+  29:1   error    Expected indentation of 4 spaces but found 8                   indent
+  29:9   warning  Prop 'location' requires default value to be set               vue/require-default-prop
+  30:1   error    Expected indentation of 4 spaces but found 8                   indent
+  30:9   warning  Prop 'time' requires default value to be set                   vue/require-default-prop
+  31:1   error    Expected indentation of 2 spaces but found 4                   indent
+  37:9   error    Newline required at end of file but not found                  eol-last

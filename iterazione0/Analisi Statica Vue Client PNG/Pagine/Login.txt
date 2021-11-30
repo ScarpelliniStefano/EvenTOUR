@@ -1,0 +1,132 @@
+C:\Users\Simone\Desktop\eventour Project\frontend-springboot-event\src\pages\Login.vue
+   11:9   warning  Attribute "v-model" should go before "name"                                      vue/attributes-order
+   17:9   warning  Attribute "v-model" should go before "name"                                      vue/attributes-order
+   25:34  warning  'align' should be on a new line                                                  vue/max-attributes-per-line
+   25:49  warning  'justify' should be on a new line                                                vue/max-attributes-per-line
+   26:28  warning  'cols' should be on a new line                                                   vue/max-attributes-per-line
+   26:37  warning  'sm' should be on a new line                                                     vue/max-attributes-per-line
+   26:44  warning  'md' should be on a new line                                                     vue/max-attributes-per-line
+   26:52  warning  'lg' should be on a new line                                                     vue/max-attributes-per-line
+   26:60  warning  'xl' should be on a new line                                                     vue/max-attributes-per-line
+   27:18  warning  Expected '@' instead of 'v-on:'                                                  vue/v-on-style
+   27:59  warning  Expected 1 line break after opening tag (`<v-btn>`), but no line breaks found    vue/singleline-html-element-content-newline
+   27:64  warning  Expected 1 line break before closing tag (`</v-btn>`), but no line breaks found  vue/singleline-html-element-content-newline
+   29:29  warning  'cols' should be on a new line                                                   vue/max-attributes-per-line
+   29:38  warning  'sm' should be on a new line                                                     vue/max-attributes-per-line
+   29:45  warning  'md' should be on a new line                                                     vue/max-attributes-per-line
+   29:52  warning  'lg' should be on a new line                                                     vue/max-attributes-per-line
+   29:59  warning  'xl' should be on a new line                                                     vue/max-attributes-per-line
+   30:18  warning  Expected '@' instead of 'v-on:'                                                  vue/v-on-style
+   30:40  warning  Expected 1 line break after opening tag (`<v-btn>`), but no line breaks found    vue/singleline-html-element-content-newline
+   30:46  warning  Expected 1 line break before closing tag (`</v-btn>`), but no line breaks found  vue/singleline-html-element-content-newline
+   32:29  warning  'cols' should be on a new line                                                   vue/max-attributes-per-line
+   32:38  warning  'sm' should be on a new line                                                     vue/max-attributes-per-line
+   32:45  warning  'md' should be on a new line                                                     vue/max-attributes-per-line
+   32:52  warning  'lg' should be on a new line                                                     vue/max-attributes-per-line
+   32:59  warning  'xl' should be on a new line                                                     vue/max-attributes-per-line
+   33:18  warning  Expected '@' instead of 'v-on:'                                                  vue/v-on-style
+   33:47  warning  Expected 1 line break after opening tag (`<v-btn>`), but no line breaks found    vue/singleline-html-element-content-newline
+   33:61  warning  Expected 1 line break before closing tag (`</v-btn>`), but no line breaks found  vue/singleline-html-element-content-newline
+   37:1   warning  Expected indentation of 4 spaces but found 5 spaces                              vue/html-indent
+   37:36  warning  ':value' should be on a new line                                                 vue/max-attributes-per-line
+   38:11  warning  Expected 1 space after '{{', but not found                                       vue/mustache-interpolation-spacing
+   38:27  warning  Expected 1 space before '}}', but not found                                      vue/mustache-interpolation-spacing
+   44:33  error    Strings must use singlequote                                                     quotes
+   44:69  error    Extra semicolon                                                                  semi
+   46:9   error    Strings must use singlequote                                                     quotes
+   49:17  error    Strings must use singlequote                                                     quotes
+   50:17  error    Strings must use singlequote                                                     quotes
+   50:19  error    Unexpected trailing comma                                                        comma-dangle
+   53:12  error    Extra space after key 'overlay'                                                  key-spacing
+   54:15  error    Missing space before value for key 'colorBack'                                   key-spacing
+   54:15  error    Strings must use singlequote                                                     quotes
+   55:20  error    Missing space before value for key 'textErrorLogin'                              key-spacing
+   55:20  error    Strings must use singlequote                                                     quotes
+   57:1   error    Expected indentation of 6 spaces but found 10                                    indent
+   58:1   error    Expected indentation of 6 spaces but found 10                                    indent
+   61:3   warning  The "props" property should be above the "data" property on line 47              vue/order-in-components
+   61:11  error    Strings must use singlequote                                                     quotes
+   61:11  warning  Prop "auth" should define at least its type                                      vue/require-prop-types
+   61:19  error    Strings must use singlequote                                                     quotes
+   61:19  warning  Prop "authIsp" should define at least its type                                   vue/require-prop-types
+   61:30  error    Strings must use singlequote                                                     quotes
+   61:30  warning  Prop "authManager" should define at least its type                               vue/require-prop-types
+   63:1   error    Expected indentation of 4 spaces but found 6                                     indent
+   64:1   error    Expected indentation of 6 spaces but found 8                                     indent
+   65:1   error    Expected indentation of 8 spaces but found 10                                    indent
+   66:1   error    Expected indentation of 6 spaces but found 8                                     indent
+   67:1   error    Expected indentation of 4 spaces but found 6                                     indent
+   67:8   error    Unexpected trailing comma                                                        comma-dangle
+   68:1   error    Expected indentation of 2 spaces but found 4                                     indent
+   70:10  error    Missing space before function parentheses                                        space-before-function-paren
+   71:31  error    Expected '!==' and instead saw '!='                                              eqeqeq
+   71:34  error    Strings must use singlequote                                                     quotes
+   71:60  error    Expected '!==' and instead saw '!='                                              eqeqeq
+   71:63  error    Strings must use singlequote                                                     quotes
+   74:40  error    Unexpected trailing comma                                                        comma-dangle
+   77:34  error    Extra semicolon                                                                  semi
+   78:40  error    Expected '!==' and instead saw '!='                                              eqeqeq
+   78:43  error    Strings must use singlequote                                                     quotes
+   79:29  error    Operator '=' must be spaced                                                      space-infix-ops
+   79:30  error    Strings must use singlequote                                                     quotes
+   81:17  error    Custom event name 'infoAccount' must be kebab-case                               vue/custom-event-name-casing
+   81:17  error    Strings must use singlequote                                                     quotes
+   84:16  error    Extra semicolon                                                                  semi
+   85:42  error    Expected '===' and instead saw '=='                                              eqeqeq
+   85:45  error    Strings must use singlequote                                                     quotes
+   86:28  error    Strings must use singlequote                                                     quotes
+   86:41  error    Extra semicolon                                                                  semi
+   87:17  warning  Unexpected var, use let or const instead                                         no-var
+   87:48  error    Extra semicolon                                                                  semi
+   88:17  warning  Unexpected var, use let or const instead                                         no-var
+   88:52  error    Extra semicolon                                                                  semi
+   89:17  warning  Unexpected var, use let or const instead                                         no-var
+   89:52  error    Extra semicolon                                                                  semi
+   90:17  warning  Unexpected var, use let or const instead                                         no-var
+   90:47  error    Extra semicolon                                                                  semi
+   92:27  error    Expected '!==' and instead saw '!='                                              eqeqeq
+   94:27  error    Strings must use singlequote                                                     quotes
+   99:36  error    Expected '!==' and instead saw '!='                                              eqeqeq
+   99:51  error    Strings must use singlequote                                                     quotes
+   99:64  error    Unexpected trailing comma                                                        comma-dangle
+  100:22  error    Unexpected trailing comma                                                        comma-dangle
+  101:21  error    Extra semicolon                                                                  semi
+  104:27  error    Strings must use singlequote                                                     quotes
+  107:31  error    Unexpected trailing comma                                                        comma-dangle
+  108:22  error    Unexpected trailing comma                                                        comma-dangle
+  109:21  error    Extra semicolon                                                                  semi
+  112:42  error    Expected '===' and instead saw '=='                                              eqeqeq
+  112:45  error    Strings must use singlequote                                                     quotes
+  113:28  error    Custom event name 'authInsp' must be kebab-case                                  vue/custom-event-name-casing
+  113:28  error    Strings must use singlequote                                                     quotes
+  113:45  error    Extra semicolon                                                                  semi
+  114:46  error    Strings must use singlequote                                                     quotes
+  114:59  error    Extra semicolon                                                                  semi
+  116:42  error    Expected '===' and instead saw '=='                                              eqeqeq
+  116:45  error    Strings must use singlequote                                                     quotes
+  117:28  error    Custom event name 'authManager' must be kebab-case                               vue/custom-event-name-casing
+  117:28  error    Strings must use singlequote                                                     quotes
+  117:48  error    Extra semicolon                                                                  semi
+  118:46  error    Strings must use singlequote                                                     quotes
+  119:17  error    Expected space or tab after '//' in comment                                      spaced-comment
+  121:14  error    Expected space(s) before "else"                                                  keyword-spacing
+  121:14  error    Expected space(s) after "else"                                                   keyword-spacing
+  122:29  error    Operator '=' must be spaced                                                      space-infix-ops
+  122:30  error    Strings must use singlequote                                                     quotes
+  123:34  error    Operator '=' must be spaced                                                      space-infix-ops
+  123:53  error    Extra semicolon                                                                  semi
+  123:54  error    Expected space or tab after '//' in comment                                      spaced-comment
+  127:27  error    Extra semicolon                                                                  semi
+  128:13  error    Extra semicolon                                                                  semi
+  128:14  error    Block must not be padded by blank lines                                          padded-blocks
+  130:1   error    More than 1 blank line not allowed                                               no-multiple-empty-lines
+  133:11  error    Missing space before function parentheses                                        space-before-function-paren
+  134:36  error    Strings must use singlequote                                                     quotes
+  134:47  error    Extra semicolon                                                                  semi
+  136:18  error    Missing space before function parentheses                                        space-before-function-paren
+  137:36  error    Strings must use singlequote                                                     quotes
+  137:50  error    Extra semicolon                                                                  semi
+  138:6   error    Unexpected trailing comma                                                        comma-dangle
+  139:4   error    Unexpected trailing comma                                                        comma-dangle
+  140:2   error    Extra semicolon                                                                  semi
+  154:9   error    Newline required at end of file but not found                                    eol-last

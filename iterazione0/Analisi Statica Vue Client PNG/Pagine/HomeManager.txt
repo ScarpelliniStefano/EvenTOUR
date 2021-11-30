@@ -1,0 +1,83 @@
+C:\Users\Simone\Desktop\eventour Project\frontend-springboot-event\src\pages\HomeManager.vue
+   3:44  warning  ':idAccount' should be on a new line            vue/max-attributes-per-line
+   3:44  warning  Attribute ':idAccount' must be hyphenated       vue/attribute-hyphenation
+   8:31  error    Strings must use singlequote                    quotes
+   8:68  error    Extra semicolon                                 semi
+  11:9   error    Strings must use singlequote                    quotes
+  14:22  error    Unexpected trailing comma                       comma-dangle
+  20:11  error    Strings must use singlequote                    quotes
+  21:11  error    Strings must use singlequote                    quotes
+  22:12  error    Strings must use singlequote                    quotes
+  23:12  error    Strings must use singlequote                    quotes
+  26:10  error    Missing space before function parentheses       space-before-function-paren
+  27:24  error    Strings must use singlequote                    quotes
+  27:39  error    Expected '===' and instead saw '=='             eqeqeq
+  27:42  error    Strings must use singlequote                    quotes
+  28:36  error    Strings must use singlequote                    quotes
+  28:49  error    Extra semicolon                                 semi
+  29:12  error    Expected space(s) after "if"                    keyword-spacing
+  29:30  error    Strings must use singlequote                    quotes
+  29:45  error    Expected '===' and instead saw '=='             eqeqeq
+  29:48  error    Strings must use singlequote                    quotes
+  29:55  error    Missing space before opening brace              space-before-blocks
+  30:36  error    Strings must use singlequote                    quotes
+  30:42  error    A space is required before '}'                  object-curly-spacing
+  31:12  error    Expected space(s) after "if"                    keyword-spacing
+  31:30  error    Strings must use singlequote                    quotes
+  31:45  error    Expected '===' and instead saw '=='             eqeqeq
+  31:70  error    Strings must use singlequote                    quotes
+  31:76  error    Strings must use singlequote                    quotes
+  31:84  error    Missing space before opening brace              space-before-blocks
+  32:36  error    Strings must use singlequote                    quotes
+  32:42  error    A space is required before '}'                  object-curly-spacing
+  33:7   error    Expected space(s) after "else"                  keyword-spacing
+  34:39  error    Strings must use singlequote                    quotes
+  34:51  error    Extra semicolon                                 semi
+  37:10  error    Missing space before function parentheses       space-before-function-paren
+  38:24  error    Strings must use singlequote                    quotes
+  38:39  error    Expected '===' and instead saw '=='             eqeqeq
+  38:42  error    Strings must use singlequote                    quotes
+  39:36  error    Strings must use singlequote                    quotes
+  39:49  error    Extra semicolon                                 semi
+  40:12  error    Expected space(s) after "if"                    keyword-spacing
+  40:30  error    Strings must use singlequote                    quotes
+  40:45  error    Expected '===' and instead saw '=='             eqeqeq
+  40:48  error    Strings must use singlequote                    quotes
+  40:55  error    Missing space before opening brace              space-before-blocks
+  41:36  error    Strings must use singlequote                    quotes
+  41:42  error    A space is required before '}'                  object-curly-spacing
+  42:12  error    Expected space(s) after "if"                    keyword-spacing
+  42:30  error    Strings must use singlequote                    quotes
+  42:45  error    Expected '===' and instead saw '=='             eqeqeq
+  42:70  error    Strings must use singlequote                    quotes
+  42:76  error    Strings must use singlequote                    quotes
+  42:84  error    Missing space before opening brace              space-before-blocks
+  43:36  error    Strings must use singlequote                    quotes
+  43:42  error    A space is required before '}'                  object-curly-spacing
+  44:7   error    Expected space(s) after "else"                  keyword-spacing
+  45:39  error    Strings must use singlequote                    quotes
+  45:51  error    Extra semicolon                                 semi
+  49:14  error    Missing space before function parentheses       space-before-function-paren
+  50:7   warning  Unexpected var, use let or const instead        no-var
+  50:45  error    Strings must use singlequote                    quotes
+  50:49  error    Extra semicolon                                 semi
+  51:12  warning  Unexpected var, use let or const instead        no-var
+  52:9   warning  Unexpected var, use let or const instead        no-var
+  52:45  error    Strings must use singlequote                    quotes
+  52:49  error    Extra semicolon                                 semi
+  53:18  error    Expected '===' and instead saw '=='             eqeqeq
+  54:51  error    Extra semicolon                                 semi
+  57:18  error    Extra semicolon                                 semi
+  59:11  error    Missing space before function parentheses       space-before-function-paren
+  60:18  error    Strings must use singlequote                    quotes
+  60:32  error    Extra semicolon                                 semi
+  61:36  error    Strings must use singlequote                    quotes
+  61:45  error    Extra semicolon                                 semi
+  63:1   error    Expected indentation of 4 spaces but found 5    indent
+  63:11  error    Missing space before function parentheses       space-before-function-paren
+  64:28  error    Expected a line break after this opening brace  object-curly-newline
+  64:36  error    Strings must use singlequote                    quotes
+  71:9   error    Extra semicolon                                 semi
+  72:6   error    Unexpected trailing comma                       comma-dangle
+  73:4   error    Unexpected trailing comma                       comma-dangle
+  74:2   error    Extra semicolon                                 semi

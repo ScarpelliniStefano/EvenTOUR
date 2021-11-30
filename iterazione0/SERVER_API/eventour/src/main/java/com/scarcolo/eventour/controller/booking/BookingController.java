@@ -44,10 +44,10 @@ public class BookingController {
 
 	    
 	   /**
-   	 * Gets the booking by userId and eventId.
+   	 * Gets the booking by user and event.
    	 *
-   	 * @param id the idUser
-   	 * @param idE the idEvent
+   	 * @param id the id
+   	 * @param idE the id E
    	 * @return the booking by user and event
    	 */
    	@GetMapping("/bookings/user/{id}/event/{idEv}")

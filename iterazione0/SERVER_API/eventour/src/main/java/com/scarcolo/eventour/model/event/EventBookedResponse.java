@@ -24,7 +24,7 @@ public class EventBookedResponse {
 	@JsonProperty("prenotedSeat")
 	private Integer prenotedSeat;
 	
-	/** Come? */
+	/** The come. */
 	@JsonProperty("come")
 	private Boolean come;
 	
@@ -125,7 +125,7 @@ public class EventBookedResponse {
 	}
 	
 	/**
-	 * Gets if the user come or not.
+	 * Gets the come.
 	 *
 	 * @return the come
 	 */
@@ -134,7 +134,7 @@ public class EventBookedResponse {
 	}
 	
 	/**
-	 * Sets come.
+	 * Sets the come.
 	 *
 	 * @param come the new come
 	 */

@@ -14,10 +14,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  * @author stefa
  */
-/**
- * @author stefa
- *
- */
 @Document(collection="bookings")
 public class Booking {
 	
@@ -34,7 +30,7 @@ public class Booking {
 	/** The prenoted seat. */
 	private Integer prenotedSeat;	
 	
-	/** The come. */
+	/** Come? */
 	private Boolean come;	
 	
 	/**

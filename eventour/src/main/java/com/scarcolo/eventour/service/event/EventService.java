@@ -7,10 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.data.domain.Sort.Order;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,10 +18,8 @@ import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.repository.event.EventRepository;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -34,28 +28,53 @@ import java.util.Map;
 import java.util.Optional;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventService.
+ */
 @Service
 public class EventService {
 
+    /** The event repository. */
     @Autowired
     private EventRepository eventRepository;
 
    
+    /**
+     * Add a event.
+     *
+     * @param request the request
+     * @return the response entity
+     * @throws Exception the exception
+     */
     public ResponseEntity<EventResponse> add(AddEventRequest request) throws Exception {
         Event event = eventRepository.save(new Event(request));
         return new ResponseEntity<>(new EventResponse(event), HttpStatus.OK);
     }
 
   
-    /*public ResponseEntity<EventResponse> update(EditEventRequest request) throws Exception {
+    /**
+     * Update a event.
+     *
+     * @param request the request
+     * @return the response entity
+     * @throws Exception the exception
+     */
+    public ResponseEntity<EventResponse> update(EditEventRequest request) throws Exception {
         Optional<Event> optionalEvent = eventRepository.findById(request.id);
         if (optionalEvent.isEmpty()) {
             return null;
         }
         return new ResponseEntity<>(new EventResponse(optionalEvent.get()), HttpStatus.OK);
-    }*/
+    }
 
    
+    /**
+     * Get a event by id.
+     *
+     * @param id the id
+     * @return the event by id
+     */
     public ResponseEntity<EventResponse> getById(String id) {
     	Optional<Event> eventData = eventRepository.findById(id);
 
@@ -67,15 +86,30 @@ public class EventService {
     }
 
   
-    /*public boolean delete(String id) {
+    /**
+     * Delete a event.
+     *
+     * @param id the id
+     * @return true, if successful
+     */
+    public boolean delete(String id) {
         Optional<Event> optionalEvent = eventRepository.findById(id);
         if (optionalEvent.isEmpty()) {
             return false;
         }
         eventRepository.deleteById(optionalEvent.get().getId());
         return true;
-    }*/
+    }
 
+    /**
+	 * Get all events.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param ordered the order
+	 * @param param the parameter to order on
+	 * @return all events ordered, if necessary, and divided by page of size
+	 */
 	public ResponseEntity<Map<String, Object>> getAll(int page, int size, String ordered,String param) {
 		try {
 			List<Event> events = new ArrayList<>();
@@ -128,6 +162,14 @@ public class EventService {
 		}
 	}
 
+	/**
+	 * Gets all events by data or interval of data.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param dataS the data string
+	 * @return the by data
+	 */
 	public ResponseEntity<Map<String, Object>> getByData(int page, int size, String dataS) {
 		try {
 			Date dataI,dataF;
@@ -168,6 +210,15 @@ public class EventService {
 	}
 
 
+	/**
+	 * Gets all events by location.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param loc the location name
+	 * @param type the type of location (regione, provincia, city)
+	 * @return the all events by location
+	 */
 	public ResponseEntity<Map<String, Object>> getByLoc(int page, int size, String loc, String type) {
 		try {
 			List<Event> events = new ArrayList<>();
@@ -175,11 +226,11 @@ public class EventService {
 			
 			Page<Event> pageEvents;
 			if(type.equalsIgnoreCase("regione")) {
-				pageEvents = eventRepository.findByLocation_RegioneLike(loc,paging);
+				pageEvents = eventRepository.findByLocationLike("location.regione",loc,paging);
 			}else if(type.equalsIgnoreCase("provincia")) {
-				pageEvents = eventRepository.findByLocation_ProvinciaLike(loc,paging);
+				pageEvents = eventRepository.findByLocationLike("location.provincia",loc,paging);
 			}else if(type.equalsIgnoreCase("city")) {
-				pageEvents = eventRepository.findByLocation_CityLike(loc,paging);
+				pageEvents = eventRepository.findByLocationLike("location.city",loc,paging);
 			}else {
 				pageEvents=eventRepository.findAll(paging);
 			}
@@ -202,11 +253,27 @@ public class EventService {
 	}
 
 
+	/**
+	 * Gets all events by preferences.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param pref the preferences
+	 * @return the by preferences
+	 */
 	public ResponseEntity<Map<String, Object>> getByPreferences(int page, int size, String pref) {
 		return this.getByTypes(page, size, pref);
 	}
 
 
+	/**
+	 * Gets all events by types.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param type the types array
+	 * @return all event of a given types
+	 */
 	public ResponseEntity<Map<String, Object>> getByTypes(int page, int size, String type) {
 		try {
 			String[] types=type.split(",");
@@ -233,6 +300,14 @@ public class EventService {
 	}
 
 
+	/**
+	 * Gets all events by id manager.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param id the id manager
+	 * @return page required of size with the events
+	 */
 	public ResponseEntity<Map<String, Object>> getByIdMan(int page, int size, String id) {
 		try {
 			Pageable paging = PageRequest.of(page, size,Sort.by("dataOra").ascending());
@@ -258,6 +333,13 @@ public class EventService {
 	}
 
 
+	/**
+	 * Gets all events with free seats.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @return the events with free seats
+	 */
 	public ResponseEntity<Map<String, Object>> getEventsDisp(int page, int size) {
 		try {
 			
@@ -286,7 +368,9 @@ public class EventService {
 
 	
 
-/*
+	  /*
+	   * API OF EVENTS WITHOUT PAGE AND SIZE, BUT WITH SAME SIGNATURE
+	   *
 	public ResponseEntity<List<EventResponse>> getAll(String ordered, String param) {
 		try {
 			List<Event> events = new ArrayList<>();
@@ -362,11 +446,11 @@ public class EventService {
 		try {
 			List<Event> events = new ArrayList<>();
 			if(type.equalsIgnoreCase("regione")) {
-				events = eventRepository.findByLocation_RegioneLike(loc);
+				events = eventRepository.findByLocationLike("location.regione",loc);
 			}else if(type.equalsIgnoreCase("provincia")) {
-				events = eventRepository.findByLocation_ProvinciaLike(loc);
+				events = eventRepository.findByLocationLike("location.provincia",loc);
 			}else if(type.equalsIgnoreCase("city")) {
-				events = eventRepository.findByLocation_CityLike(loc);
+				events = eventRepository.findByLocationLike("location.city",loc);
 			}else {
 				System.out.println("else");
 				eventRepository.findAll().forEach(events::add);

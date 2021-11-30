@@ -20,41 +20,76 @@ import com.scarcolo.eventour.model.sponsorship.EditSponsorshipRequest;
 import com.scarcolo.eventour.model.sponsorship.Sponsorship;
 import com.scarcolo.eventour.service.sponsorship.SponsorshipService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SponsorshipController.
+ */
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class SponsorshipController {
 
+	/** The sponsorship service. */
 	@Autowired
-	private SponsorshipService eventService;
-	 @PostMapping("/sponsorship")
-	    public ResponseEntity<Sponsorship> addEvent(@RequestBody AddSponsorshipRequest request){
-	      return eventService.add(request);
+	private SponsorshipService sponsorshipService;
+	 
+ 	/**
+ 	 * Adds the sponsorship.
+ 	 *
+ 	 * @param request the request
+ 	 * @return the response entity
+ 	 */
+ 	@PostMapping("/sponsorship")
+	    public ResponseEntity<Sponsorship> addSponsorship(@RequestBody AddSponsorshipRequest request){
+	      return sponsorshipService.add(request);
 	    }
 
 	   
-	    @PutMapping("/sponsorship")
-	    public ResponseEntity<Sponsorship> updateEvent(@RequestBody EditSponsorshipRequest request){
-	        return eventService.update(request);
+	    /**
+    	 * Update sponsorship.
+    	 *
+    	 * @param request the request
+    	 * @return the response entity
+    	 */
+    	@PutMapping("/sponsorship")
+	    public ResponseEntity<Sponsorship> updateSponsorship(@RequestBody EditSponsorshipRequest request){
+	        return sponsorshipService.update(request);
 	    }
 
 
 	   
-	    @GetMapping("/sponsorship/{id}")
-	    public ResponseEntity<Sponsorship> getEventById(@PathVariable("id") String id){
-	        return eventService.getById(id);
+	    /**
+    	 * Gets the sponsorship by id.
+    	 *
+    	 * @param id the id
+    	 * @return the sponsorship by id
+    	 */
+    	@GetMapping("/sponsorship/{id}")
+	    public ResponseEntity<Sponsorship> getSponsorshipById(@PathVariable("id") String id){
+	        return sponsorshipService.getById(id);
 	    }
 	    
 
-	    @GetMapping("/sponsorship")
-	    public ResponseEntity<List<Sponsorship>> getAllEvents(){
-	        return eventService.getAll();
+	    /**
+    	 * Gets all sponsorships.
+    	 *
+    	 * @return the all sponsorship
+    	 */
+    	@GetMapping("/sponsorship")
+	    public ResponseEntity<List<Sponsorship>> getAllSponsorships(){
+	        return sponsorshipService.getAll();
 	    }
 
 	   
-	    @DeleteMapping("/sponsorship/{id}")
+	    /**
+    	 * Delete by id.
+    	 *
+    	 * @param id the id
+    	 * @return true, if successful
+    	 */
+    	@DeleteMapping("/sponsorship/{id}")
 	    public boolean deleteById(@RequestParam String id){
-	        return eventService.delete(id);
+	        return sponsorshipService.delete(id);
 	    }
 
 	

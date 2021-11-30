@@ -4,7 +4,6 @@ package com.scarcolo.eventour.service.booking;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import com.scarcolo.eventour.model.booking.EditBookingRequest;
 import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
-import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.user.UserBookedResponse;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
 import com.scarcolo.eventour.repository.event.EventRepository;
@@ -25,16 +23,28 @@ import java.util.List;
 import java.util.Optional;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BookingService.
+ */
 @Service
 public class BookingService {
 
+    /** The booking repository. */
     @Autowired
     private BookingRepository bookingRepository;
     
+    /** The event repository. */
     @Autowired
     private EventRepository eventRepository;
 
    
+    /**
+     * Adds new booking.
+     *
+     * @param request the request of new booking
+     * @return the response entity
+     */
     public ResponseEntity<Object> add(AddBookingRequest request) {
         Booking booking = bookingRepository.save(new Booking(request));
         Optional<Event> optionalEvent = eventRepository.findById(booking.getEventId());
@@ -54,6 +64,11 @@ public class BookingService {
         
     }
 
+    /**
+     * Modify if user comes.
+     *
+     * @param id the id
+     */
     private void modify(String id) {
     	Optional<Booking> optionalBooking = bookingRepository.findById(id);
     	if (!optionalBooking.isEmpty()) {
@@ -62,6 +77,13 @@ public class BookingService {
             bookingRepository.save(book);
     	}
     }
+    
+    /**
+     * Update one booking.
+     *
+     * @param request the request
+     * @return the response entity
+     */
     public ResponseEntity<Booking> update(EditBookingRequest request) {
         Optional<Booking> optionalBooking = bookingRepository.findById(request.id);
         if (optionalBooking.isEmpty()) {
@@ -71,6 +93,12 @@ public class BookingService {
     }
 
    
+    /**
+     * Gets one booking by id.
+     *
+     * @param id the id
+     * @return the event by id
+     */
     public ResponseEntity<Booking> getById(String id) {
     		Optional<Booking> bookingData = bookingRepository.findById(id);
 
@@ -83,6 +111,12 @@ public class BookingService {
     }
 
   
+    /**
+     * Delete one booking.
+     *
+     * @param id the id
+     * @return true, if successful
+     */
     public boolean delete(String id) {
         Optional<Booking> optionalBooking = bookingRepository.findById(id);
         if (optionalBooking.isEmpty()) {
@@ -99,6 +133,11 @@ public class BookingService {
         return true;
     }
 
+	/**
+	 * Get all bookings.
+	 *
+	 * @return all bookings
+	 */
 	public ResponseEntity<List<Booking>> getAll() {
 		try {
 			List<Booking> bookings = new ArrayList<>();
@@ -113,6 +152,12 @@ public class BookingService {
 	}
 
 
+	/**
+	 * Gets all booking by id user.
+	 *
+	 * @param id the id user
+	 * @return bookings by id user
+	 */
 	public ResponseEntity<List<EventBookedResponse>> getByIdUser(String id) {
 		try {
 			AggregationResults<EventBookedResponse> eventsA=bookingRepository.findByUserId(new ObjectId(id));
@@ -123,6 +168,13 @@ public class BookingService {
 		}
 	}
 	
+	/**
+	 * Gets booking by user and event.
+	 *
+	 * @param idUser the id user
+	 * @param idEvent the id event
+	 * @return the booking by user and event
+	 */
 	public ResponseEntity<List<EventBookedResponse>> getByUserAndEvent(String id, String idEv) {
 		try {
 			AggregationResults<EventBookedResponse> eventsA=bookingRepository.findByUserAndEvent(new ObjectId(id), new ObjectId(idEv));
@@ -133,6 +185,13 @@ public class BookingService {
 		}
 	}
 	
+	/**
+	 * Gets if user have a booking.
+	 *
+	 * @param idBooking the id booking
+	 * @param idEvent the id event
+	 * @return the check
+	 */
 	public ResponseEntity<String> getCheck(String idBooking,String idEvent) {
     	Optional<Booking> bookingData = bookingRepository.findById(idBooking);
     	System.out.println(bookingData);
@@ -149,6 +208,12 @@ public class BookingService {
   	  	}
     }
 
+	/**
+	 * Gets the by id event.
+	 *
+	 * @param id the id
+	 * @return the by id event
+	 */
 	public ResponseEntity<List<UserBookedResponse>> getByIdEvent(String id) {
 		try {
 			AggregationResults<UserBookedResponse> userA=bookingRepository.findByEventId(new ObjectId(id));
@@ -161,6 +226,12 @@ public class BookingService {
 
 	
 
+	/**
+	 * Gets the by id details.
+	 *
+	 * @param id the id
+	 * @return the by id details
+	 */
 	public ResponseEntity<UserEventBookedResponse> getByIdDetails(String id) {
 		try {
 			AggregationResults<UserEventBookedResponse> userEventA=bookingRepository.findByIdDetails(new ObjectId(id));

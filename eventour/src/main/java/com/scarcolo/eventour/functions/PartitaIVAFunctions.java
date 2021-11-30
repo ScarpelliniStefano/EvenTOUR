@@ -4,7 +4,7 @@ package com.scarcolo.eventour.functions;
  * Italian Partita IVA normalization, formatting and validation routines.
  * A Partita IVA (PI) is composed of 11 digits; the last digit is the control
  * code. Example: 12345678903.
- * @author Umberto Salsi <salsi@icosaedro.it>
+ * @author Umberto Salsi (salsi@icosaedro.it)
  * @version 2020-01-24
  */
 public class PartitaIVAFunctions {

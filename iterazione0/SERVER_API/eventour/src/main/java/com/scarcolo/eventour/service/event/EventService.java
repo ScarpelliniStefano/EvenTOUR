@@ -53,7 +53,7 @@ public class EventService {
      * Get a event by id.
      *
      * @param id the id
-     * @return the by id
+     * @return the event by id
      */
     public ResponseEntity<EventResponse> getById(String id) {
     	Optional<Event> eventData = eventRepository.findById(id);

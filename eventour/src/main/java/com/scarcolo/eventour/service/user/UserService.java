@@ -2,7 +2,6 @@ package com.scarcolo.eventour.service.user;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,19 +29,50 @@ import java.util.List;
 import java.util.Optional;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserService.
+ */
 @Service
 public class UserService {
 
+	/** The user repository. */
     @Autowired
     private UserRepository userRepository;
+	
+	/** The manager repository. */
+	@Autowired
+	private ManagerRepository managerRepository;
+	
+	/** The ticket insp repository. */
+	@Autowired
+	private TicketInspRepository ticketInspRepository;
+	
+	/** The event repository. */
+	@Autowired
+	private EventRepository eventRepository;
 
    
+    /**
+     * Add a user.
+     *
+     * @param request the request
+     * @return the response entity
+     * @throws Exception the exception
+     */
     public ResponseEntity<UserResponse> add(AddUserRequest request) throws Exception{
     	User user = userRepository.save(new User(request));
         return new ResponseEntity<>(new UserResponse(user), HttpStatus.OK);
     }
 
   
+    /**
+     * Update a user.
+     *
+     * @param request the request
+     * @return the response entity
+     * @throws Exception the exception
+     */
     public ResponseEntity<UserResponse> update(EditUserRequest request) throws Exception {
         Optional<User> optionalUser = userRepository.findById(request.id);
         if (optionalUser.isEmpty()) {
@@ -52,6 +82,12 @@ public class UserService {
     }
 
    
+    /**
+     * Gets the user by id.
+     *
+     * @param id the id
+     * @return the user by id
+     */
     public ResponseEntity<UserResponse> getById(String id){
     	Optional<User> userData = userRepository.findById(id);
 
@@ -63,6 +99,12 @@ public class UserService {
     }
 
   
+    /**
+     * Delete a user.
+     *
+     * @param id the id
+     * @return true, if successful
+     */
     public boolean delete(String id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()) {
@@ -72,6 +114,11 @@ public class UserService {
         return true;
     }
 
+	/**
+	 * Gets all users.
+	 *
+	 * @return all users
+	 */
 	public ResponseEntity<List<UserResponse>> getAll() {
 		try {
 			List<User> users = new ArrayList<>();
@@ -86,12 +133,14 @@ public class UserService {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
-	@Autowired
-	private ManagerRepository managerRepository;
-	@Autowired
-	private TicketInspRepository ticketInspRepository;
 	
+	/**
+	 * Gets the account of a given mail/code and password.
+	 *
+	 * @param user the user
+	 * @param psw the psw
+	 * @return the account
+	 */
 	public ResponseEntity<AccountResponse> getAccount(String user, String psw) {
 		
 		if(user.isEmpty()) {
@@ -141,8 +190,14 @@ public class UserService {
 		
 	}
 	
-	@Autowired
-	private EventRepository eventRepository;
+	
+	/**
+	 * Gets the even tour.
+	 *
+	 * @param userId the user id
+	 * @param n the number of events wanted
+	 * @return the even tour
+	 */
 	public ResponseEntity<List<EventResponse>> getEvenTour(String userId,Integer n) {
 		Optional<User> userData = userRepository.findById(userId);
 		User u=null;

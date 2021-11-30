@@ -24,48 +24,97 @@ import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.model.user.UserResponse;
 import com.scarcolo.eventour.service.user.UserService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserController.
+ */
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class UserController {
 	
+	/** The user service. */
 	@Autowired
 	private UserService userService;
 	 
+	/**
+	 * Adds the user.
+	 *
+	 * @param request the request
+	 * @return the response entity
+	 * @throws Exception the exception
+	 */
 	@PostMapping("/users")
 	public ResponseEntity<UserResponse> addUser(@RequestBody AddUserRequest request) throws Exception{
 	      return userService.add(request);
 	}
 
 	   
-	    @PutMapping("/users")
+	    /**
+    	 * Update user.
+    	 *
+    	 * @param request the request
+    	 * @return the response entity
+    	 * @throws Exception the exception
+    	 */
+    	@PutMapping("/users")
 	    public ResponseEntity<UserResponse> updateUser(@RequestBody EditUserRequest request) throws Exception{
 	        return userService.update(request);
 	    }
 	   
-	    @GetMapping("/users/{id}")
+	    /**
+    	 * Gets the user by id.
+    	 *
+    	 * @param id the id
+    	 * @return the user by id
+    	 */
+    	@GetMapping("/users/{id}")
 	    public ResponseEntity<UserResponse> getUserById(@PathVariable("id") String id){
 	        return userService.getById(id);
 	    }
 	    
 
-	    @GetMapping("/users")
+	    /**
+    	 * Gets the all users.
+    	 *
+    	 * @return the all users
+    	 */
+    	@GetMapping("/users")
 	    public ResponseEntity<List<UserResponse>> getAllUsers(){
 	        return userService.getAll();
 	    }
 	    
-	    @GetMapping("/users/{id}/eventour/{num}")
+	    /**
+    	 * Gets the even tour.
+    	 *
+    	 * @param id the id
+    	 * @param num the num
+    	 * @return the even tour
+    	 */
+    	@GetMapping("/users/{id}/eventour/{num}")
 	    public ResponseEntity<List<EventResponse>> getEvenTour(@PathVariable("id") String id,@PathVariable("num") int num){
 	        return userService.getEvenTour(id, num);
 	    }
 	    
-	    @PostMapping("/account")
+	    /**
+    	 * Gets the account.
+    	 *
+    	 * @param request the request
+    	 * @return the account
+    	 */
+    	@PostMapping("/account")
 	    public ResponseEntity<AccountResponse> getAccount(@RequestBody AccountRequest request){
 	        return userService.getAccount(request.username,request.password);
 	    }
 
 	   
-	    @DeleteMapping("/users/{id}")
+	    /**
+    	 * Delete user by id.
+    	 *
+    	 * @param id the id
+    	 * @return true, if successful
+    	 */
+    	@DeleteMapping("/users/{id}")
 	    public boolean deleteUserById(@PathVariable("id") String id){
 	        return userService.delete(id);
 	    }

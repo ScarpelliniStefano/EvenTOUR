@@ -98,11 +98,11 @@ public class BookingService {
     }
 
 
-	/**
-	 * Gets all bookings by id user.
+    /**
+	 * Gets all booking by id user.
 	 *
-	 * @param id the id
-	 * @return the by id user
+	 * @param id the id user
+	 * @return bookings by id user
 	 */
 	public ResponseEntity<List<EventBookedResponse>> getByIdUser(String id) {
 		try {

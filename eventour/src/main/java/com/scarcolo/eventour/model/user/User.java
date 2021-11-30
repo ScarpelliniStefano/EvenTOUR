@@ -4,7 +4,6 @@
 package com.scarcolo.eventour.model.user;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -13,31 +12,57 @@ import javax.mail.internet.AddressException;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import com.scarcolo.eventour.functions.BootstrapSingleton;
 import com.scarcolo.eventour.functions.Functionalities;
-import com.scarcolo.eventour.functions.TypesE;
 import com.scarcolo.eventour.model.Location;
 
 
 
+// TODO: Auto-generated Javadoc
 /**
- * @author stefa
+ * The Class User.
  *
+ * @author stefa
  */
 @Document(collection = "users")
 public class User{
+	
+	/** The id. */
 	@Id
 	private String id;
+	
+	/** The username. */
 	private String username;
+	
+	/** The mail. */
 	private String mail;
+	
+	/** The password. */
 	private String password;
+	
+	/** The name. */
 	private String name;
+	
+	/** The surname. */
 	private String surname;
+	
+	/** The date of birth. */
 	private Date dateOfBirth;
+	
+	/** The sex. */
 	private String sex;
+	
+	/** The residence. */
 	private Location residence;
+	
+	/** The types. */
 	private String[] types;
 	
+	/**
+	 * Instantiates a new user.
+	 *
+	 * @param request the request
+	 * @throws Exception the exception
+	 */
 	public User(AddUserRequest request) throws Exception {
 		this.setUsername(request.username);
         this.setEmail(request.mail);
@@ -50,53 +75,97 @@ public class User{
         this.setTypes(request.types);
     }
 	
+	/**
+	 * Instantiates a new user.
+	 */
 	public User() {
 		super();
 	}
 	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public String getId() {
 		return id;
 	}
 
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
 	public void setId(String id) {
 		this.id = id;
 	}
 
+	/**
+	 * Gets the username.
+	 *
+	 * @return the username
+	 */
 	public String getUsername() {
 		return username;
 	}
 
+	/**
+	 * Sets the username.
+	 *
+	 * @param username the new username
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+	/**
+	 * Gets the password.
+	 *
+	 * @return the password
+	 */
 	public String getPassword() {
 		return password;
 	}
 
+	/**
+	 * Sets the password.
+	 *
+	 * @param password the new password
+	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	/**
+	 * Gets the name.
+	 *
 	 * @return the name
 	 */
 	protected String getName() {
 		return name;
 	}
+	
 	/**
+	 * Sets the name.
+	 *
 	 * @param name the name to set
 	 */
 	protected void setName(String name) {
 		this.name = name;
 	}
+	
 	/**
+	 * Gets the surname.
+	 *
 	 * @return the surname
 	 */
 	protected String getSurname() {
 		return surname;
 	}
+	
 	/**
+	 * Sets the surname.
+	 *
 	 * @param surname the surname to set
 	 */
 	protected void setSurname(String surname) {
@@ -104,10 +173,21 @@ public class User{
 	}
 
 	
+	/**
+	 * Gets the date of birth.
+	 *
+	 * @return the date of birth
+	 */
 	public LocalDate getDateOfBirth() {
 		return Functionalities.convertToLocalDate(this.dateOfBirth);
 	}
 	
+	/**
+	 * Sets the date of birth check.
+	 *
+	 * @param dateOfBirth the new date of birth check
+	 * @throws Exception the exception
+	 */
 	private void setDateOfBirthCheck(Date dateOfBirth) throws Exception {
 		if(dateOfBirth.before(new Date())) {
 			this.dateOfBirth = dateOfBirth;
@@ -117,18 +197,39 @@ public class User{
 		
 	}
 	
+	/**
+	 * Sets the date of birth.
+	 *
+	 * @param dateOfBirth the new date of birth
+	 * @throws Exception the exception
+	 */
 	public void setDateOfBirth(Date dateOfBirth) throws Exception {
 		setDateOfBirthCheck(dateOfBirth);
 	}
 
+	/**
+	 * Gets the sex.
+	 *
+	 * @return the sex
+	 */
 	public String getSex() {
 		return sex;
 	}
 
+	/**
+	 * Sets the sex.
+	 *
+	 * @param sex the new sex
+	 */
 	public void setSex(String sex) {
 		this.sex = (sex=="M") ? "M" : "F";
 	}
 
+	/**
+	 * Gets the types.
+	 *
+	 * @return the types
+	 */
 	public String[] getTypes() {
 		return types;
 	}
@@ -153,10 +254,20 @@ public class User{
 		return (String[]) provString.toArray();
 	}*/
 
+	/**
+	 * Sets the types.
+	 *
+	 * @param types the new types
+	 */
 	public void setTypes(String[] types) {
 		this.types = types;
 	}
 	
+	/**
+	 * Adds the type.
+	 *
+	 * @param type the type
+	 */
 	public void addType(String type) {
 		String[] newArr=Arrays.copyOf(this.types, this.types.length+1);
 		newArr[this.types.length+1]=type;
@@ -166,12 +277,17 @@ public class User{
 
 	
 	/**
+	 * Gets the residence.
+	 *
 	 * @return the residence
 	 */
 	public Location getResidence() {
 		return residence;
 	}
+	
 	/**
+	 * Sets the residence.
+	 *
 	 * @param residence the residence to set
 	 */
 	public void setResidence(Location residence) {
@@ -179,6 +295,8 @@ public class User{
 	}
 	
 	/**
+	 * Gets the email.
+	 *
 	 * @return the username
 	 */
 	public String getEmail() {
@@ -186,8 +304,10 @@ public class User{
 	}
 
 	/**
-	 * @param username the username to set
-	 * @throws AddressException 
+	 * Sets the email.
+	 *
+	 * @param mail the new email
+	 * @throws AddressException the address exception
 	 */
 	public void setEmail(String mail) throws AddressException {
 		boolean res=Functionalities.isValidEmailAddress(mail);

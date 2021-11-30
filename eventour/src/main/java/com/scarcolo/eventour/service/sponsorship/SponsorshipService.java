@@ -14,19 +14,36 @@ import com.scarcolo.eventour.model.sponsorship.EditSponsorshipRequest;
 import com.scarcolo.eventour.model.sponsorship.Sponsorship;
 import com.scarcolo.eventour.repository.sponsorship.SponsorshipRepository;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SponsorshipService.
+ */
 @Service
 public class SponsorshipService {
 	
+	/** The sponsorship repository. */
 	@Autowired
     private SponsorshipRepository sponsorshipRepository;
 
    
+    /**
+     * Add a sponsorship.
+     *
+     * @param request the request
+     * @return the response entity
+     */
     public ResponseEntity<Sponsorship> add(AddSponsorshipRequest request) {
         Sponsorship event = sponsorshipRepository.save(new Sponsorship(request));
         return new ResponseEntity<>(event, HttpStatus.OK);
     }
 
   
+    /**
+     * Update a sponsorship.
+     *
+     * @param request the request
+     * @return the response entity
+     */
     public ResponseEntity<Sponsorship> update(EditSponsorshipRequest request) {
         Optional<Sponsorship> optionalEvent = sponsorshipRepository.findById(request.id);
         if (optionalEvent.isEmpty()) {
@@ -36,6 +53,12 @@ public class SponsorshipService {
     }
 
    
+    /**
+     * Gets a sponsorship by id.
+     *
+     * @param id the id of sponsorship
+     * @return the sponsorship by id
+     */
     public ResponseEntity<Sponsorship> getById(String id) {
     	Optional<Sponsorship> eventData = sponsorshipRepository.findById(id);
 
@@ -47,6 +70,12 @@ public class SponsorshipService {
     }
 
   
+    /**
+     * Delete a sponsorship.
+     *
+     * @param id the id
+     * @return true, if successful
+     */
     public boolean delete(String id) {
         Optional<Sponsorship> optionalEvent = sponsorshipRepository.findById(id);
         if (optionalEvent.isEmpty()) {
@@ -56,6 +85,11 @@ public class SponsorshipService {
         return true;
     }
 
+	/**
+	 * Gets all sponsorships.
+	 *
+	 * @return all sponsorships
+	 */
 	public ResponseEntity<List<Sponsorship>> getAll() {
 		try {
 			List<Sponsorship> events = new ArrayList<>();

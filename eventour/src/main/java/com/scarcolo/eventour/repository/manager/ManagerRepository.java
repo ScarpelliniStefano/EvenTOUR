@@ -7,11 +7,21 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import com.scarcolo.eventour.model.manager.Manager;
-import com.scarcolo.eventour.model.manager.TicketManResponse;
 
+import com.scarcolo.eventour.model.manager.Manager;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ManagerRepository.
+ */
 public interface ManagerRepository extends MongoRepository<Manager, String>{
-	/*@Query("{eventId:new ObjectId(?0)}")*/
+	
+	/**
+	 * Find all ticket insps of a manager.
+	 *
+	 * @param id the id manager
+	 * @return the aggregation results
+	 */
 	 @Aggregation(pipeline = {" {\n"
 			+ "        '$match': {\n"
 			+ "            '_id': ObjectId('?0')\n"
@@ -45,6 +55,12 @@ public interface ManagerRepository extends MongoRepository<Manager, String>{
 			+ "    }"})
 	       AggregationResults<Object> findAllTicketInsps(ObjectId id);
 
+	/**
+	 * Find by mail.
+	 *
+	 * @param user the user
+	 * @return the list
+	 */
 	List<Manager> findByMail(String user);
 	
 }

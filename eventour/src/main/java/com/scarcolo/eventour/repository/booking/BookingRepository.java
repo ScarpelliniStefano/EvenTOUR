@@ -1,14 +1,10 @@
 package com.scarcolo.eventour.repository.booking;
 
 
-import java.util.List;
-
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
@@ -19,7 +15,18 @@ import com.scarcolo.eventour.model.user.UserBookedResponse;
 
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface BookingRepository.
+ */
 public interface BookingRepository extends MongoRepository<Booking, String> {
+	
+	/**
+	 * Find by user id.
+	 *
+	 * @param userId the id
+	 * @return the aggregation results
+	 */
 	@Aggregation(pipeline = {"{\n"
 			+ "        '$match': {\n"
 			+ "            'userId': ObjectId('?0')\n"
@@ -32,8 +39,14 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'as': 'event'\n"
 			+ "        }\n"
 			+ "    }"})
-	AggregationResults<EventBookedResponse> findByUserId(ObjectId id);
+	AggregationResults<EventBookedResponse> findByUserId(ObjectId userId);
 	
+	/**
+	 * Find by event id.
+	 *
+	 * @param eventId the eventId
+	 * @return the aggregation results
+	 */
 	@Aggregation(pipeline = {"{\n"
 			+ "        '$match': {\n"
 			+ "            'eventId': ObjectId('?0')\n"
@@ -46,9 +59,15 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'as': 'user'\n"
 			+ "        }\n"
 			+ "    }"})
-	AggregationResults<UserBookedResponse> findByEventId(ObjectId objectId);
+	AggregationResults<UserBookedResponse> findByEventId(ObjectId eventId);
 
 	
+	/**
+	 * Find by id details.
+	 *
+	 * @param id the id of booking
+	 * @return the aggregation results
+	 */
 	@Aggregation(pipeline = {" {\n"
 			+ "        '$match': {\n"
 			+ "            '_id': ObjectId('?0')\n"
@@ -70,8 +89,15 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'as': 'event'\n"
 			+ "        }\n"
 			+ "    }"})
-	AggregationResults<UserEventBookedResponse> findByIdDetails(ObjectId objectId);
+	AggregationResults<UserEventBookedResponse> findByIdDetails(ObjectId id);
 	
+	/**
+	 * Find by user and event.
+	 *
+	 * @param idUser the id of user
+	 * @param idEvent the id of event
+	 * @return the aggregation results
+	 */
 	@Aggregation(pipeline = {"{\n"
 			+ "        '$match': {\n"
 			+ "            	'userId': ObjectId('?0')\n"
@@ -85,7 +111,7 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'as': 'event'\n"
 			+ "        }\n"
 			+ "    }"})
-	AggregationResults<EventBookedResponse> findByUserAndEvent(ObjectId id, ObjectId idEv);
+	AggregationResults<EventBookedResponse> findByUserAndEvent(ObjectId idUser, ObjectId idEvent);
 
 	
 

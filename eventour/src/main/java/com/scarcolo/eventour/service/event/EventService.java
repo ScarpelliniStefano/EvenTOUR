@@ -114,7 +114,7 @@ public class EventService {
 		try {
 			List<Event> events = new ArrayList<>();
 			
-			Pageable paging = PageRequest.of(page, size);
+			Pageable paging = PageRequest.of(page, size,Sort.by("dataOra").ascending());
 			
 			Page<Event> pageEvents;
 			if(param==null)
@@ -179,6 +179,11 @@ public class EventService {
 			if(dataS.contains(",")) {
 				dataI=new SimpleDateFormat("yyyy-MM-dd").parse(dataS.split(",")[0]);
 				dataF=new SimpleDateFormat("yyyy-MM-dd").parse(dataS.split(",")[1]);
+				Calendar c = Calendar.getInstance(); 
+			    c.setTime(dataF); 
+			    c.add(Calendar.DATE, 1);
+			    dataF = c.getTime();
+				System.out.println(dataI+" "+dataF);
 			}else {
 				Date data=new SimpleDateFormat("yyyy-MM-dd").parse(dataS) ;
 				DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

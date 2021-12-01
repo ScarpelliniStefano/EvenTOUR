@@ -38,7 +38,7 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	 * @param paging the paging
 	 * @return the page
 	 */
-	@Query("{ dataOra : { $gte: ?0, $lte: ?1, $gt : new Date() }}")
+	@Query("{ dataOra : { $gte: ?0, $lt: ?1, $gt : new Date() }}")
 	Page<Event> findByDataOraBetweenOrderByDataOraAsc(Date dataOraGT, Date dataOraLT, Pageable paging);
 	
 	/**

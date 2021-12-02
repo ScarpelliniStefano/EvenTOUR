@@ -3,6 +3,10 @@ package com.scarcolo.eventour.service.booking;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -154,16 +158,22 @@ public class BookingService {
 
 	/**
 	 * Gets all booking by id user.
+	 * @param size 
+	 * @param page 
 	 *
 	 * @param id the id user
 	 * @return bookings by id user
 	 */
-	public ResponseEntity<List<EventBookedResponse>> getByIdUser(String id) {
+	public ResponseEntity<List<EventBookedResponse>> getByIdUser(int page, int size, String id) {
 		try {
-			AggregationResults<EventBookedResponse> eventsA=bookingRepository.findByUserId(new ObjectId(id));
+			System.out.println(page+" "+size+" "+id);
+			AggregationResults<EventBookedResponse> eventsA=bookingRepository.findByUserId(new ObjectId(id),page*size,size);
 			List<EventBookedResponse> eventR=eventsA.getMappedResults();
+			
 			return new ResponseEntity<>(eventR, HttpStatus.OK);
 		}catch(Exception e) {
+			
+			System.out.println(e);
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.scarcolo.eventour.model.event.EventManResponse;
 import com.scarcolo.eventour.model.manager.AddManagerRequest;
 import com.scarcolo.eventour.model.manager.EditManagerRequest;
+import com.scarcolo.eventour.model.manager.EventReportResponse;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
+import com.scarcolo.eventour.model.manager.ReportManResponse;
 import com.scarcolo.eventour.service.manager.ManagerService;
 
 
@@ -93,6 +95,17 @@ public class ManagerController {
     	@GetMapping("/managers/event/{id}")
 	    public ResponseEntity<EventManResponse> getManagerFromIdEvent(@PathVariable("id") String id){
 	        return managerService.getManagerFromEvent(id);
+	    }
+    	
+    	/**
+    	 * Gets the manager from a id event.
+    	 *
+    	 * @param id the id of event
+    	 * @return the manager from id event
+    	 */
+    	@GetMapping("/managers/{id}/reports")
+	    public ResponseEntity<List<EventReportResponse>> getManagerReport(@PathVariable("id") String id){
+	        return managerService.getManagerReport(id);
 	    }
 
 	   

@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.scarcolo.eventour.model.manager.Manager;
+import com.scarcolo.eventour.model.manager.ReportManResponse;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -62,5 +63,7 @@ public interface ManagerRepository extends MongoRepository<Manager, String>{
 	 * @return the list
 	 */
 	List<Manager> findByMail(String user);
+
+	
 	
 }

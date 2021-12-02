@@ -1,5 +1,6 @@
 package com.scarcolo.eventour.service.manager;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -11,11 +12,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.scarcolo.eventour.model.Location;
+import com.scarcolo.eventour.model.booking.Booking;
+import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventManResponse;
+import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.manager.AddManagerRequest;
 import com.scarcolo.eventour.model.manager.EditManagerRequest;
+import com.scarcolo.eventour.model.manager.EventReportResponse;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
+import com.scarcolo.eventour.model.manager.ReportManResponse;
 import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 
@@ -123,6 +130,37 @@ public class ManagerService {
 			AggregationResults<EventManResponse> userEventA=eventRepository.findManagerById(new ObjectId(id));
 			List<EventManResponse> eventR=userEventA.getMappedResults();
 			return new ResponseEntity<>(eventR.get(0), HttpStatus.OK);
+		}catch(Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	public ResponseEntity<List<EventReportResponse>> getManagerReport(String id) {
+		try {
+			AggregationResults<ReportManResponse> reportA=eventRepository.findReports(new ObjectId(id));
+			List<ReportManResponse> reportMongo=reportA.getMappedResults();
+			List<EventReportResponse> reportR=new ArrayList<>();
+			Integer occuped=0;
+			Integer comedPeople=0;
+			Double saldo=0d;
+			Double perdita=0d;
+			Event eventDetails=null;
+			for(ReportManResponse resp : reportMongo) {
+				
+				occuped=resp.getTotSeat()-resp.getFreeSeat();
+				comedPeople=0;
+				for(Booking book: resp.getBooking()) {
+					comedPeople+=(book.getCome()==true ? book.getPrenotedSeat() : 0);
+				}
+				saldo=comedPeople*resp.getPrice();
+				perdita=(occuped-comedPeople)*resp.getPrice();
+				eventDetails=new Event(resp.getId(), resp.getTitle(), resp.getDescription(), resp.getLocation(), resp.getTypes(),
+						resp.getDataOra(), resp.getManagerId(),resp.getUrlImage(), resp.getTotSeat(), resp.getFreeSeat(), resp.getPrice());
+				reportR.add(new EventReportResponse(resp.getId(), resp.getTitle(), new EventResponse(eventDetails), occuped, comedPeople, saldo, perdita));
+			}
+			
+			return new ResponseEntity<>(reportR, HttpStatus.OK);
 		}catch(Exception e) {
 			System.out.println(e);
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

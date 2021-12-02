@@ -2,6 +2,8 @@ package com.scarcolo.eventour.repository.booking;
 
 
 import org.bson.types.ObjectId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -38,8 +40,16 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'foreignField': '_id', \n"
 			+ "            'as': 'event'\n"
 			+ "        }\n"
+			+ "    }","{\n"
+			+ "        '$skip': ?1\n"
+			+ "    }"," {\n"
+			+ "        '$limit': ?2\n"
+			+ "    }"," {\n"
+			+ "        '$sort': {\n"
+			+ "            'event.dataOra': 1\n"
+			+ "        }\n"
 			+ "    }"})
-	AggregationResults<EventBookedResponse> findByUserId(ObjectId userId);
+	AggregationResults<EventBookedResponse> findByUserId(ObjectId userId,int page_size, int size);
 	
 	/**
 	 * Find by event id.

@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.repository.Query;
 
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventManResponse;
+import com.scarcolo.eventour.model.manager.ReportManResponse;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -159,7 +160,24 @@ public interface EventRepository extends MongoRepository<Event, String> {
 			+ "    }"})
 	AggregationResults<EventManResponse> findManagerById(ObjectId manId);
 
-
 	
+	@Aggregation(pipeline = {"{\n"
+			+ "        '$match': {\n"
+			+ "            'managerId': ObjectId('?0'),\n"
+			+ "            'dataOra': {$lt: new Date()},\n"
+			+ "        }\n"
+			+ "    }"," {\n"
+			+ "        '$lookup': {\n"
+			+ "            'from': 'bookings', \n"
+			+ "            'localField': '_id', \n"
+			+ "            'foreignField': 'eventId', \n"
+			+ "            'as': 'booking'\n"
+			+ "        }\n"
+			+ "    }","{\n"
+			+ "        '$sort': {\n"
+			+ "            'dataOra': 1\n"
+			+ "        }\n"
+			+ "    }"})
+	AggregationResults<ReportManResponse> findReports(ObjectId Id);
 
 }

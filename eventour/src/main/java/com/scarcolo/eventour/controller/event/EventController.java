@@ -214,7 +214,7 @@ public class EventController {
   	 * @return true, if successful
   	 */
   	@DeleteMapping("/events/{id}")
-	    public boolean deleteEventById(@RequestParam String id){
+	    public boolean deleteEventById(@PathVariable("id") String id){
 	        return eventService.delete(id);
 	    }
 

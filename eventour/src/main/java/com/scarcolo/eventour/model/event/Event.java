@@ -88,6 +88,22 @@ public class Event {
  	public Event() {
 	    }
 	
+	public Event(String id, String title, String description, Location location, String[] types,
+			LocalDateTime dataOra, String managerId, String urlImage, Integer totSeat, Integer freeSeat,
+			Double price) throws Exception {
+		this.id=id;
+		this.title=title;
+        this.description=description;
+        this.location=location;
+        this.types=types;
+        this.dataOra=Functionalities.convertToDate(dataOra);
+        this.setManagerId(managerId);
+        this.urlImage=urlImage;
+        this.totSeat=totSeat;
+        this.freeSeat=freeSeat;
+        this.price=price;
+	}
+
 	/**
 	 * Gets the id.
 	 *

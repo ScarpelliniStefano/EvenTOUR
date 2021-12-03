@@ -15,14 +15,28 @@ import org.springframework.stereotype.Service;
 import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.EditBookingRequest;
+import com.scarcolo.eventour.model.booking.PaymentRequest;
 import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
+import com.scarcolo.eventour.model.manager.Manager;
+import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.model.user.UserBookedResponse;
+import com.scarcolo.eventour.model.user.UserResponse;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
 import com.scarcolo.eventour.repository.event.EventRepository;
+import com.scarcolo.eventour.repository.manager.ManagerRepository;
+import com.scarcolo.eventour.repository.user.UserRepository;
+import com.stripe.model.Charge;
+import com.stripe.model.Customer;
+import com.stripe.model.Order;
 
+import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -251,5 +265,64 @@ public class BookingService {
 			System.out.println(e);
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	/** The user repository. */
+    @Autowired
+    private UserRepository userRepository;
+    
+    /** The manager repository. */
+    @Autowired
+    private ManagerRepository managerRepository;
+    //CARDNR: tutte quelle che iniziano con 400000380000 son accettate
+    //CVV: almeno un 2 deve esserci
+    //data come "MM/AA"
+	public ResponseEntity<String> checkerPayment(String type, PaymentRequest request) {
+		LocalDate dt=LocalDate.of(Integer.parseInt("20"+request.dateScad.split("/")[1]), Integer.parseInt(request.dateScad.split("/")[0]),01);
+		request.cardNr=request.cardNr.replaceAll(" ", "");
+		request.cardNr=request.cardNr.replaceAll("-", "");
+		if(dt.isBefore(LocalDate.now())) {
+        	return new ResponseEntity<>("INVALID DATE",HttpStatus.OK);
+        }else if(request.amount.compareTo(0d)<=0) {
+        	return new ResponseEntity<>("AMOUNT INVALID",HttpStatus.OK);
+        }else if(request.authNr.length()!=3 || request.cardNr.length()!=16) {
+        	return new ResponseEntity<>("CARD NUMBER OR CVV INVALID",HttpStatus.OK);
+        }else {
+        	if(type.toUpperCase()=="USER") {
+        		Optional<User> optionalUser = userRepository.findById(request.idUser);
+        		if (optionalUser.isEmpty()) {
+        			return null;
+        		}
+        		User user=optionalUser.get();
+        		System.out.println(user.getEmail());
+        	}else if(type.toUpperCase()=="MANAGER"){
+        		Optional<Manager> optionalMan = managerRepository.findById(request.idUser);
+        		if (optionalMan.isEmpty()) {
+        			return null;
+        		}
+        		Manager man=optionalMan.get();
+        		System.out.println(man.getMail());
+        	}
+            
+            
+            PaymentService ps = new PaymentServiceImpl();
+        	//Customer cust=ps.createCustomer("payment for booking", user.getName(),user.getSurname(), user.getEmail());
+        	//System.out.println(cust);
+        	Order order=new Order();
+        	/*order.setCurrency("EUR");
+        	order.setCustomerObject(cust);
+        	order.setAmount(request.amount.longValue());*/
+        	String cs;
+			try {
+				cs = ps.chargeCreditCard(order,request.cardNr,String.valueOf(dt.getMonthValue()),String.valueOf(dt.getYear()),request.authNr);
+				if(cs=="cb5e100e5a9a3e7f6d1fd97512215282") {
+					return new ResponseEntity<>("ERROR with payment. Transaction: "+cs,HttpStatus.OK);
+				}
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				return new ResponseEntity<>("ERROR",HttpStatus.OK);
+			}
+        	return new ResponseEntity<>("OK. Transaction: "+cs,HttpStatus.OK);
+        }
 	}
 }

@@ -11,6 +11,8 @@ import java.util.Date;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
+import com.scarcolo.eventour.model.booking.PaymentRequest;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Functionalities.
@@ -112,6 +114,11 @@ public class Functionalities {
 				return false;
 		}
 		return true;
+	}
+
+	public static String checkerPayment(PaymentRequest request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

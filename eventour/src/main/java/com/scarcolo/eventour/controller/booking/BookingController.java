@@ -1,9 +1,12 @@
 package com.scarcolo.eventour.controller.booking;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,10 +23,12 @@ import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.CheckBookingRequest;
 import com.scarcolo.eventour.model.booking.EditBookingRequest;
+import com.scarcolo.eventour.model.booking.PaymentRequest;
 import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.model.user.UserBookedResponse;
 import com.scarcolo.eventour.service.booking.BookingService;
+import com.scarcolo.eventour.functions.Functionalities;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -151,5 +156,11 @@ public class BookingController {
 	    public ResponseEntity<String> getCheckBooking(@RequestBody CheckBookingRequest request){
 	        return bookingService.getCheck(request.bookingNr,request.eventId);
 	    }
+    	
+    	@PostMapping("/bookings/{type}/payment")
+    	public ResponseEntity<String> doPayment(@PathVariable("type") String type,@RequestBody PaymentRequest request){
+    	      return bookingService.checkerPayment(type,request);
+    	}
+
 
 }

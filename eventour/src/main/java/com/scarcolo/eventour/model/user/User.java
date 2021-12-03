@@ -141,7 +141,7 @@ public class User{
 	 *
 	 * @return the name
 	 */
-	protected String getName() {
+	public String getName() {
 		return name;
 	}
 	
@@ -150,7 +150,7 @@ public class User{
 	 *
 	 * @param name the name to set
 	 */
-	protected void setName(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 	
@@ -159,7 +159,7 @@ public class User{
 	 *
 	 * @return the surname
 	 */
-	protected String getSurname() {
+	public String getSurname() {
 		return surname;
 	}
 	
@@ -168,7 +168,7 @@ public class User{
 	 *
 	 * @param surname the surname to set
 	 */
-	protected void setSurname(String surname) {
+	public void setSurname(String surname) {
 		this.surname = surname;
 	}
 

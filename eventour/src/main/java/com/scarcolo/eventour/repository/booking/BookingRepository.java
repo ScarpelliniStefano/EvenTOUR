@@ -1,6 +1,8 @@
 package com.scarcolo.eventour.repository.booking;
 
 
+import java.util.List;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,6 +52,30 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "        }\n"
 			+ "    }"})
 	AggregationResults<EventBookedResponse> findByUserId(ObjectId userId,int page_size, int size);
+	
+	/**
+	 * Find by user id.
+	 *
+	 * @param userId the id
+	 * @return the aggregation results
+	 */
+	@Aggregation(pipeline = {"{\n"
+			+ "        '$match': {\n"
+			+ "            'userId': ObjectId('?0')\n"
+			+ "        }\n"
+			+ "    }"," {\n"
+			+ "        '$lookup': {\n"
+			+ "            'from': 'events', \n"
+			+ "            'localField': 'eventId', \n"
+			+ "            'foreignField': '_id', \n"
+			+ "            'as': 'event'\n"
+			+ "        }\n"
+			+ "    }"," {\n"
+			+ "        '$sort': {\n"
+			+ "            'event.dataOra': 1\n"
+			+ "        }\n"
+			+ "    }"})
+	List<EventBookedResponse> findByUserId(ObjectId userId);
 	
 	/**
 	 * Find by event id.

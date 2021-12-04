@@ -11,10 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.event.AddEventRequest;
 import com.scarcolo.eventour.model.event.EditEventRequest;
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventResponse;
+import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.repository.event.EventRepository;
 
 import java.text.DateFormat;
@@ -65,7 +67,33 @@ public class EventService {
         if (optionalEvent.isEmpty()) {
             return null;
         }
-        return new ResponseEntity<>(new EventResponse(optionalEvent.get()), HttpStatus.OK);
+        Event e=optionalEvent.get();
+        if(request.title!=null) {
+        	e.setTitle(request.title);
+        }
+        if(request.description!=null) {
+        	e.setTitle(request.description);
+        }
+        if(request.dataOra!=null) {
+        	e.setDataOra(Functionalities.convertToDate(request.dataOra));
+        }
+        if(request.location!=null) {
+        	e.setLocation(request.location);
+        }
+        if(request.price!=null) {
+        	e.setPrice(request.price);
+        }
+        if(request.totSeat!=null) {
+        	e.setTotSeat(request.totSeat);
+        }
+        if(request.urlImage!=null) {
+        	e.setUrlImage(request.urlImage);
+        }
+        if(request.types!=null) {
+        	e.setTypes(request.types);
+        }
+        eventRepository.save(e);
+        return new ResponseEntity<>(new EventResponse(e), HttpStatus.OK);
     }
 
    

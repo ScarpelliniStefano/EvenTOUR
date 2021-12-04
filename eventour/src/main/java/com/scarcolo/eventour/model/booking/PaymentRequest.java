@@ -19,6 +19,10 @@ public class PaymentRequest {
 	@JsonProperty("cardNr")
 	public String cardNr;
 	
+	/** The card number */
+	@JsonProperty("cardName")
+	public String cardName;
+	
 	/** The autorization code */
 	@JsonProperty("authNr")
 	public String authNr;

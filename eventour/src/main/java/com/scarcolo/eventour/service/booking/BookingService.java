@@ -192,6 +192,8 @@ public class BookingService {
 		}
 	}
 	
+	
+	
 	/**
 	 * Gets booking by user and event.
 	 *
@@ -274,10 +276,11 @@ public class BookingService {
     /** The manager repository. */
     @Autowired
     private ManagerRepository managerRepository;
-    //CARDNR: tutte quelle che iniziano con 400000380000 son accettate
+    //CARDNR: tutte quelle che iniziano con 400000380000 son accettate, previo superamento check vari
     //CVV: almeno un 2 deve esserci
     //data come "MM/AA"
 	public ResponseEntity<String> checkerPayment(String type, PaymentRequest request) {
+		System.out.println(request.dateScad);
 		LocalDate dt=LocalDate.of(Integer.parseInt("20"+request.dateScad.split("/")[1]), Integer.parseInt(request.dateScad.split("/")[0]),01);
 		request.cardNr=request.cardNr.replaceAll(" ", "");
 		request.cardNr=request.cardNr.replaceAll("-", "");

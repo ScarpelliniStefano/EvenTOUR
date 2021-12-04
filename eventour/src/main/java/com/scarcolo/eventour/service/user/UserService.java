@@ -1,8 +1,10 @@
 package com.scarcolo.eventour.service.user;
 
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.AccountResponse;
 import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
@@ -19,6 +22,7 @@ import com.scarcolo.eventour.model.user.AddUserRequest;
 import com.scarcolo.eventour.model.user.EditUserRequest;
 import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.model.user.UserResponse;
+import com.scarcolo.eventour.repository.booking.BookingRepository;
 import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 import com.scarcolo.eventour.repository.ticketisp.TicketInspRepository;
@@ -74,11 +78,20 @@ public class UserService {
      * @throws Exception the exception
      */
     public ResponseEntity<UserResponse> update(EditUserRequest request) throws Exception {
+    	System.out.println(request.residence.getCity());
         Optional<User> optionalUser = userRepository.findById(request.id);
         if (optionalUser.isEmpty()) {
             return null;
         }
-        return new ResponseEntity<>(new UserResponse(optionalUser.get()), HttpStatus.OK);
+        User u=optionalUser.get();
+        if(request.residence!=null) {
+        	u.setResidence(request.residence);
+        }
+        if(request.types!=null) {
+        	u.setTypes(request.types);
+        }
+        userRepository.save(u);
+        return new ResponseEntity<>(new UserResponse(u), HttpStatus.OK);
     }
 
    
@@ -154,7 +167,8 @@ public class UserService {
 					return new ResponseEntity<>(new AccountResponse("NONE","ERROR. unregistered ticket inspector"),HttpStatus.OK);
 				}else {
 					for(TicketInsp ticket : tickets) {
-						if(ticket.getPassword().equals(psw)) {
+						
+						if(Functionalities.getMd5(ticket.getPassword()).equals(psw)) {
 							objResp=new TicketInspResponse(ticket);
 							return new ResponseEntity<>(new AccountResponse("TicketInsp",objResp),HttpStatus.OK);
 						}
@@ -168,14 +182,14 @@ public class UserService {
 					return new ResponseEntity<>(new AccountResponse("NONE","ERROR. unregistered user"),HttpStatus.OK);
 				}else {
 					if(!users.isEmpty()) {
-						if(users.get(0).getPassword().equals(psw)) {
+						if(Functionalities.getMd5(users.get(0).getPassword()).equals(psw)) {
 							objResp=new UserResponse(users.get(0));
 							return new ResponseEntity<>(new AccountResponse("User",objResp),HttpStatus.OK);
 						}else {
 							return new ResponseEntity<>(new AccountResponse("User","ERROR. invalid password"),HttpStatus.OK);
 						}
 					}else {
-						if(managers.get(0).getPassword().equals(psw)) {
+						if(Functionalities.getMd5(managers.get(0).getPassword()).equals(psw)) {
 							objResp=new ManagerResponse(managers.get(0));
 							return new ResponseEntity<>(new AccountResponse("Manager",objResp),HttpStatus.OK);
 						}else {
@@ -190,6 +204,23 @@ public class UserService {
 		
 	}
 	
+	private BookingRepository bookingRepository;
+	
+	
+	/**
+	 * Gets all booking by id user
+	 * @param id the id user
+	 * @return bookings by id user
+	 */
+	private List<EventBookedResponse> getByIdUser(String id) {
+		try {
+			List<EventBookedResponse> eventR=bookingRepository.findByUserId(new ObjectId(id));
+			return eventR;
+		}catch(Exception e) {
+			System.out.println(e);
+			return null;
+		}
+	}
 	
 	/**
 	 * Gets the even tour.
@@ -206,6 +237,7 @@ public class UserService {
 	  	} else {
 	  	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	  	}
+	  	List<EventBookedResponse> bookingData = this.getByIdUser(userId);
 		//1.filtra per regione
 		//2.ordinamento dataOra
 		List<Event> eventR=eventRepository.findByLocation_RegioneLikeAndFreeSeatGreaterThanZero(u.getResidence().getRegione() ,Sort.by("dataOra").ascending());
@@ -213,6 +245,10 @@ public class UserService {
 		List<Event> s=new ArrayList<>();
 		Integer c=0;
 		Boolean sel=false;
+		Boolean finded=false;
+		for(int j=0;!finded && j<bookingData.size();j++) {
+			eventR.remove(bookingData.get(j).getEvent()[0]);
+		}
 		for(int i=0;i<eventR.size();i++) {
 			if(c==n) {
 				List<EventResponse> eventResponse=new ArrayList<>();
@@ -226,13 +262,17 @@ public class UserService {
 				for(String k: u.getTypes()) {
 					if(!sel) {
 						if(eventR.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {
-							s.add(eventR.get(i));
-							sel=true;
-							c++;
+							//controllo data 
+							if(!s.get(i-1).getDataOra().toLocalDate().isEqual(s.get(i).getDataOra().toLocalDate())) {
+								s.add(eventR.get(i));
+								sel=true;
+								c++;
+							}
 						}
 					}
 				}
 			}
+			
 		}
 		
 		
@@ -250,10 +290,13 @@ public class UserService {
 				for(int j=0;!sel && j<eventR.get(i).getTypes().length;j++) {
 					for(String k: u.getTypes()) {
 						if(!sel) {
-							if(Functionalities.similType(eventR.get(i).getTypes()[j],k)) {
-								s.add(eventR.get(i));
-								sel=true;
-								c++;
+							//controllo data 
+							if(!s.get(i-1).getDataOra().toLocalDate().isEqual(s.get(i).getDataOra().toLocalDate())) {
+								if(Functionalities.similType(eventR.get(i).getTypes()[j],k)) {
+									s.add(eventR.get(i));
+									sel=true;
+									c++;
+								}
 							}
 						}
 					}

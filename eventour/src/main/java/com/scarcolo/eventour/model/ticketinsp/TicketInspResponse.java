@@ -6,6 +6,7 @@ package com.scarcolo.eventour.model.ticketinsp;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scarcolo.eventour.functions.Functionalities;
 
 
 
@@ -146,7 +147,7 @@ public class TicketInspResponse {
 	 * @param password the new password
 	 */
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Functionalities.getMd5(password);
 	}
 
 	

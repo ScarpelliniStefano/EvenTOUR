@@ -6,6 +6,7 @@ package com.scarcolo.eventour.model.user;
 
 import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.Location;
 
 
@@ -253,7 +254,7 @@ public class UserResponse{
 	 * @param password the new password
 	 */
 	public void setPassword(String password) {
-		this.password = password;
+		this.password = Functionalities.getMd5(password);
 	}
 
 	

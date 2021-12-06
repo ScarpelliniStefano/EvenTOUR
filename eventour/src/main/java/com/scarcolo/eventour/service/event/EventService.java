@@ -50,6 +50,7 @@ public class EventService {
      * @throws Exception the exception
      */
     public ResponseEntity<EventResponse> add(AddEventRequest request) throws Exception {
+    	System.out.println(request.managerId);
         Event event = eventRepository.save(new Event(request));
         return new ResponseEntity<>(new EventResponse(event), HttpStatus.OK);
     }

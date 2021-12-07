@@ -159,21 +159,18 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{prefix}}/events?ordered=asc&param=dataOra",
+									"raw": "{{prefix}}/events/events?ordered='asc'",
 									"host": [
 										"{{prefix}}"
 									],
 									"path": [
+										"events",
 										"events"
 									],
 									"query": [
 										{
 											"key": "ordered",
-											"value": "asc"
-										},
-										{
-											"key": "param",
-											"value": "dataOra"
+											"value": "'asc'"
 										}
 									]
 								}
@@ -381,18 +378,13 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{prefix}}/events?id=615bf7d5f520087931c96159",
+							"raw": "{{prefix}}/events/615bf7d5f520087931c96159",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
-								"events"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "615bf7d5f520087931c96159"
-								}
+								"events",
+								"615bf7d5f520087931c96159"
 							]
 						}
 					},
@@ -843,14 +835,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{prefix}}/bookings/u/61a0a933bce0e98fbb2da05a",
+							"raw": "{{prefix}}/managers/61a0a0eeb5f9b12d06e95237/reports",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
-								"bookings",
-								"u",
-								"61a0a933bce0e98fbb2da05a"
+								"managers",
+								"61a0a0eeb5f9b12d06e95237",
+								"reports"
 							]
 						}
 					},
@@ -928,6 +920,38 @@
 					"response": []
 				},
 				{
+					"name": "eventour",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/users/61a0a933bce0e98fbb2da05a/eventour/100",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"users",
+								"61a0a933bce0e98fbb2da05a",
+								"eventour",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Remove booking event",
 					"request": {
 						"method": "DELETE",
@@ -982,7 +1006,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"user\": \"TI-3696-7018\",\r\n    \"password\" : \"cetixiye\"\r\n}",
+					"raw": "{\r\n    \"user\": \"Colombano72@hotmail.com\",\r\n    \"password\" : \"6f23b7131aa46be689e3cdb9d2e50a7f\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

@@ -28,6 +28,7 @@ import com.scarcolo.eventour.repository.manager.ManagerRepository;
 import com.scarcolo.eventour.repository.ticketisp.TicketInspRepository;
 import com.scarcolo.eventour.repository.user.UserRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -204,6 +205,7 @@ public class UserService {
 		
 	}
 	
+	@Autowired
 	private BookingRepository bookingRepository;
 	
 	
@@ -243,11 +245,17 @@ public class UserService {
 		List<Event> eventR=eventRepository.findByLocation_RegioneLikeAndFreeSeatGreaterThanZero(u.getResidence().getRegione() ,Sort.by("dataOra").ascending());
 		//3.ciclo 
 		List<Event> s=new ArrayList<>();
+		List<Event> sSub=new ArrayList<>();
 		Integer c=0;
+		Integer cSub=0;
 		Boolean sel=false;
-		Boolean finded=false;
-		for(int j=0;!finded && j<bookingData.size();j++) {
-			eventR.remove(bookingData.get(j).getEvent()[0]);
+		Boolean selSub=false;
+		if(bookingData!=null) {
+			for(int j=0;j<bookingData.size();j++) {
+				eventR.remove(bookingData.get(j).getEvent()[0]);
+				LocalDate dateE=bookingData.get(j).getEvent()[0].getDataOra().toLocalDate();
+				eventR.removeIf(e -> dateE.isEqual(e.getDataOra().toLocalDate()));
+			}
 		}
 		for(int i=0;i<eventR.size();i++) {
 			if(c==n) {
@@ -258,25 +266,40 @@ public class UserService {
 				return new ResponseEntity<>(eventResponse,HttpStatus.OK);
 			}
 			sel=false;
+			selSub=false;
 			for(int j=0;!sel && j<eventR.get(i).getTypes().length;j++) {
 				for(String k: u.getTypes()) {
-					if(!sel) {
-						if(eventR.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {
-							//controllo data 
-							if(!s.get(i-1).getDataOra().toLocalDate().isEqual(s.get(i).getDataOra().toLocalDate())) {
+						if(!sel && (s.isEmpty() || !s.get(s.size()-1).getDataOra().toLocalDate().isEqual(eventR.get(i).getDataOra().toLocalDate()))) {
+							//controllo data
+							if(eventR.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {
+								if(sSub.get(sSub.size()-1).getId().equalsIgnoreCase(eventR.get(i).getId()))
+									sSub.remove(sSub.size()-1);
 								s.add(eventR.get(i));
 								sel=true;
 								c++;
+							}else if(!selSub && cSub<n && Functionalities.similType(eventR.get(i).getTypes()[j],k)){
+								sSub.add(eventR.get(i));
+								selSub=true;
+								cSub++;
 							}
 						}
-					}
 				}
 			}
 			
 		}
 		
+		for(int h=0;h<(n-s.size());h++) {
+			s.add(sSub.get(h));
+		}
 		
-	
+		s=Functionalities.orderByData(s);
+		
+		List<EventResponse> eventResponse=new ArrayList<>();
+		for(Event e : s) {
+			eventResponse.add(new EventResponse(e));
+		}
+		return new ResponseEntity<>(eventResponse,HttpStatus.OK);
+	/*
 		for(int i=0;i<eventR.size();i++) {
 			if(c==n) {
 				List<EventResponse> eventResponse=new ArrayList<>();
@@ -291,7 +314,7 @@ public class UserService {
 					for(String k: u.getTypes()) {
 						if(!sel) {
 							//controllo data 
-							if(!s.get(i-1).getDataOra().toLocalDate().isEqual(s.get(i).getDataOra().toLocalDate())) {
+							if(s.isEmpty() || !s.get(s.size()-1).getDataOra().toLocalDate().isEqual(eventR.get(i).getDataOra().toLocalDate())) {
 								if(Functionalities.similType(eventR.get(i).getTypes()[j],k)) {
 									s.add(eventR.get(i));
 									sel=true;
@@ -308,7 +331,7 @@ public class UserService {
 			eventResponse.add(new EventResponse(e));
 		}
 		return new ResponseEntity<>(eventResponse,HttpStatus.OK);
-		
+		*/
 		
 		
 	}

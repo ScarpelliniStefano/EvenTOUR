@@ -25,7 +25,6 @@
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.EventReportResponse"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.event.EventResponse"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.event.Event"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.Location"/>
     <fullyQualifiedTypeName name="java.net.URL"/>
     <fullyQualifiedTypeName name="java.net.URLConnection"/>
@@ -45,7 +44,6 @@
     <fullyQualifiedTypeName name="java.util.Currency"/>
     <fullyQualifiedTypeName name="com.stripe.model.Charge"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
-    <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="com.stripe.model.Charge.PaymentMethodDetails"/>
     <fullyQualifiedTypeName name="com.stripe.model.Card"/>
     <fullyQualifiedTypeName name="com.stripe.model.Token"/>
@@ -55,9 +53,11 @@
     <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.manager.ManagerRepository"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.Manager"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.booking.BookingRepository"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.security.MessageDigest"/>
     <fullyQualifiedTypeName name="java.math.BigInteger"/>
     <fullyQualifiedTypeName name="java.security.NoSuchAlgorithmException"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Functionalities"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.event.Event"/>
 </qualifiedTypeNameHistroy>

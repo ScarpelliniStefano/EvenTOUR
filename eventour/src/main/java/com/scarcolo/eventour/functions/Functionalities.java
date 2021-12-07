@@ -10,11 +10,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 import com.scarcolo.eventour.model.booking.PaymentRequest;
+import com.scarcolo.eventour.model.event.Event;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -107,7 +109,6 @@ public class Functionalities {
 	 * @return true, if successful
 	 */
 	public static boolean similType(String evTyp, String usTyp) {
-		System.out.println(evTyp+ " " +usTyp);
 		String[] splittedE=evTyp.split("\\.");
 		String[] splittedU=usTyp.split("\\.");
 		if(!splittedE[0].equalsIgnoreCase(splittedU[0]))
@@ -117,6 +118,20 @@ public class Functionalities {
 				return false;
 		}
 		return true;
+	}
+	
+	public static List<Event> orderByData(List<Event> listToOrder){
+		for(int i=0;i<listToOrder.size();i++) {
+			for(int j=i+1;j<listToOrder.size();j++) {
+				if(listToOrder.get(i).getDataOra().isAfter(listToOrder.get(j).getDataOra())) {
+					Event tmp=listToOrder.get(j);
+					listToOrder.set(j, listToOrder.get(i));
+					listToOrder.set(i, tmp);
+				}
+			}
+		}
+		return listToOrder;
+		
 	}
 
 	public static String getMd5(String input)

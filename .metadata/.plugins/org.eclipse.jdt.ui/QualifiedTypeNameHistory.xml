@@ -22,7 +22,6 @@
     <fullyQualifiedTypeName name="org.springframework.data.domain.Page"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.ReportManResponse"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.booking.Booking"/>
-    <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.EventReportResponse"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.event.EventResponse"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.Location"/>
@@ -37,7 +36,6 @@
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.booking.PaymentRequest"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.user.User"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.user.UserRepository"/>
     <fullyQualifiedTypeName name="com.stripe.model.Customer"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.service.booking.PaymentService"/>
     <fullyQualifiedTypeName name="com.stripe.model.Order"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.event.Event"/>
+    <fullyQualifiedTypeName name="java.util.Arrays"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.user.UserRepository"/>
 </qualifiedTypeNameHistroy>

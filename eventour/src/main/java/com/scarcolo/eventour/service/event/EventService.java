@@ -18,10 +18,12 @@ import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.repository.event.EventRepository;
+import com.scarcolo.eventour.repository.user.UserRepository;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -40,6 +42,10 @@ public class EventService {
     /** The event repository. */
     @Autowired
     private EventRepository eventRepository;
+    
+    /** The user repository. */
+    @Autowired
+    private UserRepository userRepository;
 
    
     /**
@@ -122,7 +128,7 @@ public class EventService {
      * @return true, if successful
      */
     public boolean delete(String id) {
-        Optional<Event> optionalEvent = eventRepository.findById(id);
+    	Optional<Event> optionalEvent = eventRepository.findById(id);
         if (optionalEvent.isEmpty()) {
             return false;
         }
@@ -292,11 +298,46 @@ public class EventService {
 	 *
 	 * @param page the page
 	 * @param size the size
-	 * @param pref the preferences
+	 * @param locInclude 
+	 * @param pref the preferences of types
 	 * @return the by preferences
 	 */
-	public ResponseEntity<Map<String, Object>> getByPreferences(int page, int size, String pref) {
-		return this.getByTypes(page, size, pref);
+	public ResponseEntity<Map<String, Object>> getByPreferences(int page, int size, String idPref, boolean locInclude) {
+		Optional<User> userData = userRepository.findById(idPref);
+
+	  	  if (userData.isPresent()) {
+	  		  if(!locInclude)
+	  			  return this.getByTypes(page, size, Arrays.toString(userData.get().getTypes()).replace(" ", "").replace("[", "").replace("]", ""));
+	  		  else
+	  			  return this.getByTypesWithLoc(page, size, userData.get().getTypes(),userData.get().getResidence().getRegione());
+	  	  } else {
+	  	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	  	  }
+		
+	}
+
+
+	private ResponseEntity<Map<String, Object>> getByTypesWithLoc(int page, int size, String[] types, String region) {
+		try {
+			Pageable paging = PageRequest.of(page, size,Sort.by("dataOra").ascending());
+			Page<Event> pageEvents;
+			pageEvents = eventRepository.findByTypesAndLocation_RegioneLike(types,region,paging);
+			List<Event> events=pageEvents.getContent();
+		  	  if (events.isEmpty()) {
+		  	    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		  	  } 
+		  	  List<EventResponse> eventR= new ArrayList<>();
+			  for(Event event: events) eventR.add(new EventResponse(event));
+			  Map<String, Object> response = new HashMap<>();
+			  response.put("events", eventR);
+			  response.put("currentPage", pageEvents.getNumber());
+			  response.put("totalItems", pageEvents.getTotalElements());
+			  response.put("totalPages", pageEvents.getTotalPages());
+			  return new ResponseEntity<>(response, HttpStatus.OK);
+			  
+			}catch(Exception e) {
+				return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 	}
 
 

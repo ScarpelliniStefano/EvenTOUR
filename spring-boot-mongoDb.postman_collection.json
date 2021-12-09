@@ -159,12 +159,11 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{prefix}}/events/events?ordered='asc'",
+									"raw": "{{prefix}}/events?ordered='asc'",
 									"host": [
 										"{{prefix}}"
 									],
 									"path": [
-										"events",
 										"events"
 									],
 									"query": [
@@ -257,6 +256,25 @@
 											"key": "page",
 											"value": "1"
 										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get event (READ) pref",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{prefix}}/events/pref/61a0a933bce0e98fbb2d999d",
+									"host": [
+										"{{prefix}}"
+									],
+									"path": [
+										"events",
+										"pref",
+										"61a0a933bce0e98fbb2d999d"
 									]
 								}
 							},
@@ -899,7 +917,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userId\":\"61a0a933bce0e98fbb2d999d\",\r\n    \"eventId\":\"61a0a85ebce0e98fbb2d8610\",\r\n    \"prenotedSeat\":1\r\n}",
+							"raw": "{\r\n    \"userId\":\"61a0a933bce0e98fbb2da05a\",\r\n    \"eventId\":\"61a0a85ebce0e98fbb2d8aa5\",\r\n    \"prenotedSeat\":1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -976,7 +994,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"idUser\": \"61a0a933bce0e98fbb2d999d\",\r\n    \"cardNr\":\"4000003800000001\", \r\n    \"authNr\":\"222\", \r\n    \"date\":\"02/22\",\r\n    \"amount\":10.00\r\n\r\n}",
+							"raw": "{\r\n    \"idUser\": \"61a0a933bce0e98fbb2d999d\",\r\n    \"cardNr\":\"4000003800000008\", \r\n    \"authNr\":\"222\", \r\n    \"date\":\"02/22\",\r\n    \"amount\":10.00\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

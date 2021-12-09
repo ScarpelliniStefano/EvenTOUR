@@ -137,9 +137,9 @@ public class EventController {
     	 * @param pref the preference
     	 * @return the events by pref
     	 */
-    	@GetMapping("/events/pref={pref}")
-	    public ResponseEntity<Map<String, Object>> getEventsByPref(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "20") int size,@PathVariable("pref") String pref){
-	    	 return eventService.getByPreferences(page,size,pref);
+    	@GetMapping("/events/pref/{id}")
+	    public ResponseEntity<Map<String, Object>> getEventsByPref(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "20") int size,@PathVariable("id") String idPref,@RequestParam(defaultValue = "false") boolean locInclude){
+	    	 return eventService.getByPreferences(page,size,idPref,locInclude);
 	    }
 	    
 	    /**

@@ -2,6 +2,7 @@ package com.scarcolo.eventour.repository.event;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
@@ -52,6 +53,8 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	@Query("{types : {$in : ?0}, dataOra: {$gt: new Date()} }")
 	Page<Event> findByTypes(String[] type, Pageable paging);
 	
+	@Query("{types : {$in : ?0}, 'location.regione' : { '$regex' : ?1 , $options: 'i'}, dataOra: {$gt: new Date()}}")
+	Page<Event> findByTypesAndLocation_RegioneLike(String[] type,String regione, Pageable paging);
 	/**
 	 * Find by free seat greater than zero.
 	 *
@@ -102,6 +105,8 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	 */
 	@Query("{types : {$in : ?0}}")
 	List<Event> findByTypes(String[] type);
+	
+	
 	
 	/**
 	 * Find by free seat greater than zero.

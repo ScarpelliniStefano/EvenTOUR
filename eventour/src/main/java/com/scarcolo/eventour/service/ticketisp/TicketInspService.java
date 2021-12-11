@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
@@ -163,6 +164,18 @@ public class TicketInspService {
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+
+	public boolean deleteAllTicketsFromEvent(String eventId) {
+		try {
+			ticketInspRepository.deleteByEventId(new ObjectId(eventId));
+			return true;
+		}catch(Exception e) {
+			return false;
+		}
+		
+		
 	}
 	 
 	

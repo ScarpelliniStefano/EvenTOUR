@@ -4,6 +4,7 @@ package com.scarcolo.eventour.repository.ticketisp;
 import java.util.List;
 
 import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.repository.DeleteQuery;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -36,5 +37,8 @@ public interface TicketInspRepository extends MongoRepository<TicketInsp, String
 	 * @return the list
 	 */
 	List<TicketInsp> findByCode(String code);
+	
+	@DeleteQuery
+    void deleteByEventId(ObjectId objectId);
 	
 }

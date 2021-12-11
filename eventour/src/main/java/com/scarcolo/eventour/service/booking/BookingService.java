@@ -3,15 +3,12 @@ package com.scarcolo.eventour.service.booking;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.scarcolo.eventour.functions.Mail;
 import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.EditBookingRequest;
@@ -22,21 +19,15 @@ import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.model.user.UserBookedResponse;
-import com.scarcolo.eventour.model.user.UserResponse;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
 import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 import com.scarcolo.eventour.repository.user.UserRepository;
-import com.stripe.model.Charge;
-import com.stripe.model.Customer;
 import com.stripe.model.Order;
 
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Currency;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -327,5 +318,22 @@ public class BookingService {
 			}
         	return new ResponseEntity<>("OK. Transaction: "+cs,HttpStatus.OK);
         }
+	}
+
+	public boolean deleteAllBookingFromEvent(Event event) {
+		ResponseEntity<List<UserBookedResponse>> bookings=this.getByIdEvent(event.getId());
+		if(bookings.getStatusCode().is2xxSuccessful()) {
+			for(UserBookedResponse book : bookings.getBody()) {
+				boolean result=Mail.sendDeleteEventMsg(book.getUser()[0].getEmail(),event);
+				if(!result) {
+					System.out.println("error in sending mail");
+				}
+				this.delete(book.getId());
+			}
+			return true;
+		}
+		return false;
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -19,6 +19,8 @@ import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.user.UserRepository;
+import com.scarcolo.eventour.service.booking.BookingService;
+import com.scarcolo.eventour.service.ticketisp.TicketInspService;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -121,6 +123,12 @@ public class EventService {
     }
 
   
+    @Autowired
+    BookingService bookingService;
+    
+    @Autowired
+    TicketInspService ticketService;
+    
     /**
      * Delete a event.
      *
@@ -131,6 +139,14 @@ public class EventService {
     	Optional<Event> optionalEvent = eventRepository.findById(id);
         if (optionalEvent.isEmpty()) {
             return false;
+        }
+        boolean resp=bookingService.deleteAllBookingFromEvent(optionalEvent.get());
+        if(resp==false) {
+        	System.out.println("error in deleting bookings");
+        }
+        resp=ticketService.deleteAllTicketsFromEvent(optionalEvent.get().getId());
+        if(resp==false) {
+        	System.out.println("error in deleting tickets");
         }
         eventRepository.deleteById(optionalEvent.get().getId());
         return true;

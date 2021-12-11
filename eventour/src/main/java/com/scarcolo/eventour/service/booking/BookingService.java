@@ -320,6 +320,13 @@ public class BookingService {
         }
 	}
 
+	
+	//access to mail:
+	//username: eventourcs@gmail.com
+	//psw: #eventour96
+	
+	//for checking mail sended:
+	//access to mailtrap with google account (credential written up here)
 	public boolean deleteAllBookingFromEvent(Event event) {
 		ResponseEntity<List<UserBookedResponse>> bookings=this.getByIdEvent(event.getId());
 		if(bookings.getStatusCode().is2xxSuccessful()) {

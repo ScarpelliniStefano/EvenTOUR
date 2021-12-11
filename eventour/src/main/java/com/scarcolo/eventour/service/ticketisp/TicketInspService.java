@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
@@ -41,7 +42,11 @@ public class TicketInspService {
      * @throws Exception the exception
      */
     public ResponseEntity<TicketInspResponse> add(AddTicketInspRequest request) throws Exception {
-        TicketInsp ticketInsp = ticketInspRepository.save(new TicketInsp(request));
+    	TicketInsp tick=new TicketInsp(request);
+    	Integer numRand=(int) (Math.random()*9999);
+    	tick.setCode("TI-"+request.eventId.substring(request.eventId.length()-5)+"-"+numRand);
+    	tick.setPassword(Functionalities.generatePassayPassword(8));
+        TicketInsp ticketInsp = ticketInspRepository.save(tick);
         return new ResponseEntity<>(new TicketInspResponse(ticketInsp), HttpStatus.OK);
     }
 

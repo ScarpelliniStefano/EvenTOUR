@@ -147,7 +147,7 @@ public class TicketInspResponse {
 	 * @param password the new password
 	 */
 	public void setPassword(String password) {
-		this.password = Functionalities.getMd5(password);
+		this.password = password;
 	}
 
 	

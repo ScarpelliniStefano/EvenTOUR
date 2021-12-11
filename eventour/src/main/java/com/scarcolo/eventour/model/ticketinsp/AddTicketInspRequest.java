@@ -10,10 +10,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class AddTicketInspRequest {
 	
-	/** The code. */
-	@JsonProperty("code")
-	public String code;
-	
 	/** The full name. */
 	@JsonProperty("fullName")
 	public String fullName;
@@ -21,10 +17,6 @@ public class AddTicketInspRequest {
 	/** The event id. */
 	@JsonProperty("eventId")
 	public String eventId;
-	
-	/** The password. */
-	@JsonProperty("password")
-	public String password;
 
 
 }

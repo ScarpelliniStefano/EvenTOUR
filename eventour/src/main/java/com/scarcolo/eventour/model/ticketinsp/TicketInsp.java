@@ -41,8 +41,6 @@ public class TicketInsp{
 	 * @throws Exception the exception
 	 */
 	public TicketInsp(AddTicketInspRequest request) throws Exception {
-        this.setPassword(request.password);
-        this.setCode(request.code);
         this.setEventId(request.eventId);
         this.setFullName(request.fullName);
     }

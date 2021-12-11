@@ -15,7 +15,11 @@ import java.util.List;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
-import com.scarcolo.eventour.model.booking.PaymentRequest;
+import org.passay.CharacterRule;
+import org.passay.EnglishCharacterData;
+import org.passay.CharacterData;
+import org.passay.PasswordGenerator;
+
 import com.scarcolo.eventour.model.event.Event;
 
 // TODO: Auto-generated Javadoc
@@ -162,4 +166,39 @@ public class Functionalities {
         }
     }
 	
+	
+	public static String generatePassayPassword(int lenght) {
+	    PasswordGenerator gen = new PasswordGenerator();
+	    CharacterData lowerCaseChars = EnglishCharacterData.LowerCase;
+	    CharacterRule lowerCaseRule = new CharacterRule(lowerCaseChars);
+	    lowerCaseRule.setNumberOfCharacters(2);
+
+	    EnglishCharacterData upperCaseChars = EnglishCharacterData.UpperCase;
+	    CharacterRule upperCaseRule = new CharacterRule(upperCaseChars);
+	    upperCaseRule.setNumberOfCharacters(2);
+
+	    EnglishCharacterData digitChars = EnglishCharacterData.Digit;
+	    CharacterRule digitRule = new CharacterRule(digitChars);
+	    digitRule.setNumberOfCharacters(2);
+
+	    CharacterData date=new CharacterData() {
+
+			@Override
+			public String getErrorCode() {
+				return "";
+			}
+
+			@Override
+			public String getCharacters() {
+				return "!@#$%^&*()_+";
+			}
+	    	
+	    };
+	    CharacterRule splCharRule = new CharacterRule(date);
+	    splCharRule.setNumberOfCharacters(2);
+
+	    String password = gen.generatePassword(lenght, splCharRule, lowerCaseRule, 
+	      upperCaseRule, digitRule);
+	    return password;
+	}
 }

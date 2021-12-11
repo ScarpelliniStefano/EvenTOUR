@@ -210,11 +210,13 @@ public class BookingService {
 	 * @return the check
 	 */
 	public ResponseEntity<String> getCheck(String idBooking,String idEvent) {
-    	Optional<Booking> bookingData = bookingRepository.findById(idBooking);
-    	System.out.println(bookingData);
-    	System.out.println(idBooking);
+		System.out.println(idBooking);
     	System.out.println(idEvent);
+    	Optional<Booking> bookingData = bookingRepository.findById(idBooking);
+    	
+    	
   	  	if (bookingData.isPresent()) {
+  	  		System.out.println(bookingData.get().getId());
   	  		if(bookingData.get().getEventId().equalsIgnoreCase(idEvent)) {
   	  			modify(idBooking);
   	  			return new ResponseEntity<>("ACCESS GRANTED", HttpStatus.OK);

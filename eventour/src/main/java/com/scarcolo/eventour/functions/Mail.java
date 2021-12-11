@@ -57,9 +57,9 @@ public class Mail {
 				  "\" che si svolge in data " +
 				  event.getDataOra().getDayOfMonth() + "/"+event.getDataOra().getMonthValue()+"/"+event.getDataOra().getYear()+
 				  " alle ore "+("0"+event.getDataOra().getHour()).substring(-2)+":"+("0"+event.getDataOra().getMinute()).substring(-2)+
-				  " e' stato cancellato dall'organizzatore. <br>"+
-				  "Verrai contattato, in caso di evento a pagamento, per il rimborso del biglietto dall'organizzatore.<br><br>"+
-				  "Buona giornata<br><br> <b>Il team evenTour<b>";
+				  " e' stato cancellato dall'organizzatore. <br>";
+				  if(event.getPrice()>0){msg+="Il rimborso del biglietto verrà effettuato nei prossimi giorni.<br><br>";}
+				  msg+="Buona giornata<br><br> <b>Il team evenTour<b>";
 		try{
 			sendMail(destination,"Cancellazione evento "+event.getTitle(),msg);
 			return true;

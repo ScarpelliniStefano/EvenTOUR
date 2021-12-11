@@ -272,7 +272,7 @@ public class UserService {
 						if(!sel && (s.isEmpty() || !s.get(s.size()-1).getDataOra().toLocalDate().isEqual(eventR.get(i).getDataOra().toLocalDate()))) {
 							//controllo data
 							if(eventR.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {
-								if(sSub.get(sSub.size()-1).getId().equalsIgnoreCase(eventR.get(i).getId()))
+								if(!sSub.isEmpty() && sSub.get(sSub.size()-1).getId().equalsIgnoreCase(eventR.get(i).getId()))
 									sSub.remove(sSub.size()-1);
 								s.add(eventR.get(i));
 								sel=true;

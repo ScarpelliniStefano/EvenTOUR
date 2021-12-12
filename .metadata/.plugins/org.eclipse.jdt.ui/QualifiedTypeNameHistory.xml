@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.ReportManResponse"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.booking.Booking"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.EventReportResponse"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.event.EventResponse"/>
@@ -8,7 +7,6 @@
     <fullyQualifiedTypeName name="java.net.URLConnection"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="java.net.HttpURLConnection"/>
-    <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="org.apache.tomcat.util.json.JSONParser"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Value"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
@@ -44,7 +42,6 @@
     <fullyQualifiedTypeName name="com.scarcolo.eventour.service.booking.BookingService"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.user.UserBookedResponse"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Functionalities"/>
-    <fullyQualifiedTypeName name="java.net.URL"/>
     <fullyQualifiedTypeName name="java.util.Properties"/>
     <fullyQualifiedTypeName name="javax.mail.Session"/>
     <fullyQualifiedTypeName name="javax.mail.Authenticator"/>
@@ -60,4 +57,7 @@
     <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Mail"/>
     <fullyQualifiedTypeName name="org.springframework.data.mongodb.repository.DeleteQuery"/>
+    <fullyQualifiedTypeName name="java.net.URL"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
 </qualifiedTypeNameHistroy>

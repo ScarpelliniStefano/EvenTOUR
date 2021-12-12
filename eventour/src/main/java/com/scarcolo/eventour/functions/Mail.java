@@ -1,6 +1,10 @@
 package com.scarcolo.eventour.functions;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.Properties;
+import java.util.Scanner;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -51,17 +55,35 @@ public class Mail {
 		Transport.send(message);
 	}
 	
-	public static boolean sendDeleteEventMsg(String destination, Event event) {
+	public static boolean sendDeleteEventMsg(String destination, Event event){
+		String hh=("0"+event.getDataOra().getHour());
+		String mm=("0"+event.getDataOra().getMinute());
 		String msg = "Ciao, purtroppo dobbiamo informarti che l'evento \""+
 				  event.getTitle()+
 				  "\" che si svolge in data " +
 				  event.getDataOra().getDayOfMonth() + "/"+event.getDataOra().getMonthValue()+"/"+event.getDataOra().getYear()+
-				  " alle ore "+("0"+event.getDataOra().getHour()).substring(-2)+":"+("0"+event.getDataOra().getMinute()).substring(-2)+
+				  " alle ore "+hh.substring(hh.length()-2)+":"+mm.substring(mm.length()-2)+
 				  " e' stato cancellato dall'organizzatore. <br>";
 				  if(event.getPrice()>0){msg+="Il rimborso del biglietto verrà effettuato nei prossimi giorni.<br><br>";}
 				  msg+="Buona giornata<br><br> <b>Il team evenTour<b>";
+		/*String textHTML="";
+		File file = new File("./mailModel/textDelete.txt");
+		Scanner in=null;
+		try {
+			 in = new Scanner(file);
+			 while(in.hasNextLine()) {
+					textHTML+=in.nextLine();
+			}
+		} catch (FileNotFoundException e1) {
+			System.out.println(e1);
+		}finally {
+			if(in!=null) {
+				in.close();
+			}
+		}*/
+		
 		try{
-			sendMail(destination,"Cancellazione evento "+event.getTitle(),msg);
+			sendMail(destination,"Cancellazione evento "+event.getTitle(),/*textHTML.replaceFirst("%s", "GENTILE cliente").replaceFirst("%s",*/msg/*)*/);
 			return true;
 		} catch (MessagingException e) {
 			return false;

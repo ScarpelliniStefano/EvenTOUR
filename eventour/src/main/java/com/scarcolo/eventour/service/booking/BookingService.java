@@ -25,6 +25,7 @@ import com.scarcolo.eventour.repository.manager.ManagerRepository;
 import com.scarcolo.eventour.repository.user.UserRepository;
 import com.stripe.model.Order;
 
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -333,7 +334,12 @@ public class BookingService {
 		ResponseEntity<List<UserBookedResponse>> bookings=this.getByIdEvent(event.getId());
 		if(bookings.getStatusCode().is2xxSuccessful()) {
 			for(UserBookedResponse book : bookings.getBody()) {
-				boolean result=Mail.sendDeleteEventMsg(book.getUser()[0].getEmail(),event);
+				boolean result=false;
+				try {
+					result = Mail.sendDeleteEventMsg(book.getUser()[0].getEmail(),event);
+				} catch (IOException e) {
+					System.out.println(e);
+				}
 				if(!result) {
 					System.out.println("error in sending mail");
 				}

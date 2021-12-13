@@ -1,7 +1,12 @@
 package com.scarcolo.eventour.functions;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Properties;
 import java.util.Scanner;
@@ -55,7 +60,7 @@ public class Mail {
 		Transport.send(message);
 	}
 	
-	public static boolean sendDeleteEventMsg(String destination, Event event){
+	public static boolean sendDeleteEventMsg(String destination, Event event) throws IOException{
 		String hh=("0"+event.getDataOra().getHour());
 		String mm=("0"+event.getDataOra().getMinute());
 		String msg = "Ciao, purtroppo dobbiamo informarti che l'evento \""+
@@ -66,24 +71,20 @@ public class Mail {
 				  " e' stato cancellato dall'organizzatore. <br>";
 				  if(event.getPrice()>0){msg+="Il rimborso del biglietto verrà effettuato nei prossimi giorni.<br><br>";}
 				  msg+="Buona giornata<br><br> <b>Il team evenTour<b>";
-		/*String textHTML="";
-		File file = new File("./mailModel/textDelete.txt");
-		Scanner in=null;
-		try {
-			 in = new Scanner(file);
-			 while(in.hasNextLine()) {
-					textHTML+=in.nextLine();
-			}
-		} catch (FileNotFoundException e1) {
-			System.out.println(e1);
-		}finally {
-			if(in!=null) {
-				in.close();
-			}
-		}*/
 		
+	    InputStream inputStream = new FileInputStream("./src/main/java/com/scarcolo/eventour/functions/mailModel/textDelete.txt");
+		StringBuilder resultStringBuilder = new StringBuilder();
+	    try (BufferedReader br
+	      = new BufferedReader(new InputStreamReader(inputStream))) {
+	        String line;
+	        while ((line = br.readLine()) != null) {
+	            resultStringBuilder.append(line).append("\n");
+	        }
+	    }
+	    String textHTML=resultStringBuilder.toString();
+
 		try{
-			sendMail(destination,"Cancellazione evento "+event.getTitle(),/*textHTML.replaceFirst("%s", "GENTILE cliente").replaceFirst("%s",*/msg/*)*/);
+			sendMail(destination,"Cancellazione evento "+event.getTitle(),textHTML.replaceFirst("##title1##", "GENTILE cliente").replaceFirst("##title2##", "SCUSACI!").replaceFirst("##text##",msg));
 			return true;
 		} catch (MessagingException e) {
 			return false;

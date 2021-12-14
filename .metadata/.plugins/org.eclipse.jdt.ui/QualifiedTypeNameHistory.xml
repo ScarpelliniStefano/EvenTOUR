@@ -1,19 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.Location"/>
-    <fullyQualifiedTypeName name="java.net.URLConnection"/>
-    <fullyQualifiedTypeName name="java.net.HttpURLConnection"/>
-    <fullyQualifiedTypeName name="org.apache.tomcat.util.json.JSONParser"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Value"/>
-    <fullyQualifiedTypeName name="java.sql.Date"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.booking.PaymentRequest"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.user.User"/>
-    <fullyQualifiedTypeName name="com.stripe.model.Customer"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.service.booking.PaymentService"/>
-    <fullyQualifiedTypeName name="com.stripe.model.Order"/>
-    <fullyQualifiedTypeName name="java.util.Currency"/>
-    <fullyQualifiedTypeName name="com.stripe.model.Charge"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
     <fullyQualifiedTypeName name="com.stripe.model.Charge.PaymentMethodDetails"/>
     <fullyQualifiedTypeName name="com.stripe.model.Card"/>
@@ -27,7 +13,6 @@
     <fullyQualifiedTypeName name="java.security.MessageDigest"/>
     <fullyQualifiedTypeName name="java.math.BigInteger"/>
     <fullyQualifiedTypeName name="java.security.NoSuchAlgorithmException"/>
-    <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.user.UserRepository"/>
@@ -37,7 +22,6 @@
     <fullyQualifiedTypeName name="org.passay.CharacterData"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.service.booking.BookingService"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.user.UserBookedResponse"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Functionalities"/>
     <fullyQualifiedTypeName name="java.util.Properties"/>
     <fullyQualifiedTypeName name="javax.mail.Session"/>
     <fullyQualifiedTypeName name="javax.mail.Authenticator"/>
@@ -45,7 +29,6 @@
     <fullyQualifiedTypeName name="javax.mail.Message"/>
     <fullyQualifiedTypeName name="javax.mail.internet.MimeMessage"/>
     <fullyQualifiedTypeName name="javax.mail.internet.InternetAddress"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.event.Event"/>
     <fullyQualifiedTypeName name="javax.mail.internet.MimeBodyPart"/>
     <fullyQualifiedTypeName name="javax.mail.Multipart"/>
     <fullyQualifiedTypeName name="javax.mail.internet.MimeMultipart"/>
@@ -60,4 +43,21 @@
     <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.booking.Booking"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.event.Event"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.manager.RequestRepository"/>
+    <fullyQualifiedTypeName name="org.bson.types.ObjectId"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.service.admin.AdminService"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.admin.AdminResponse"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.admin.ManagerReportResponse"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.admin.AdminRepository"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.admin.Admin"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.admin.ReportAdmResponse"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.ManagerPlus"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.service.manager.RequestService"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.request.Request"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.ManagerPlusResponse"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Functionalities"/>
 </qualifiedTypeNameHistroy>

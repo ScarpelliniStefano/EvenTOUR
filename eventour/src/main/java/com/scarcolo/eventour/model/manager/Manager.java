@@ -78,6 +78,19 @@ public class Manager{
 		super();
 	}
 	
+	public Manager(String id, String name, String surname, String mail, String codicePIVA, Date dateOfBirth,
+			String psw, String ragioneSociale, Location residence) throws Exception {
+		this.setId(id);
+		this.setMail(mail);
+		this.setPassword(psw);
+		this.setName(name);
+		this.setSurname(surname);
+		this.setDateOfBirth(dateOfBirth);
+		this.setResidence(residence);
+		this.setCodicePIVA(codicePIVA);
+		this.setRagioneSociale(ragioneSociale);
+	}
+
 	/**
 	 * Gets the id.
 	 *

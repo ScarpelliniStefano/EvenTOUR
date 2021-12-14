@@ -56,15 +56,28 @@ public class BookingService {
      * @return the response entity
      */
     public ResponseEntity<Object> add(AddBookingRequest request) {
-        Booking booking = bookingRepository.save(new Booking(request));
+        Booking booking = new Booking(request);
         Optional<Event> optionalEvent = eventRepository.findById(booking.getEventId());
         if (!optionalEvent.isEmpty()) {
             Event eventM=optionalEvent.get();
             if(eventM.getFreeSeat()-booking.getPrenotedSeat()>=0) {
             	eventM.setFreeSeat(eventM.getFreeSeat()-booking.getPrenotedSeat());
             	eventRepository.save(eventM);
+            	
+            	Optional<User> optionalUser= userRepository.findById(booking.getUserId());
+            	if(optionalUser.isPresent()) {
+            		boolean result=false;
+            		Booking book=bookingRepository.save(booking);
+            		try {
+            			result = Mail.sendBookingEventMsg(optionalUser.get().getEmail(),eventM,book);
+            		} catch (IOException e) {
+            			System.out.println(e);
+            		}
+            		if(!result) {
+            			System.out.println("error in sending mail");
+            		}
+            	}
             } else {
-            	bookingRepository.delete(booking);
             	return new ResponseEntity<>(new String("ERROR. no enough seats available."), HttpStatus.OK);
             }
             	
@@ -274,7 +287,6 @@ public class BookingService {
     //CVV: almeno un 2 deve esserci
     //data come "MM/AA"
 	public ResponseEntity<String> checkerPayment(String type, PaymentRequest request) {
-		System.out.println(request.dateScad);
 		LocalDate dt=LocalDate.of(Integer.parseInt("20"+request.dateScad.split("/")[1]), Integer.parseInt(request.dateScad.split("/")[0]),01);
 		request.cardNr=request.cardNr.replaceAll(" ", "");
 		request.cardNr=request.cardNr.replaceAll("-", "");

@@ -1,27 +1,16 @@
 package com.scarcolo.eventour.service.booking;
 
-import java.nio.charset.StandardCharsets;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
-
 import org.springframework.stereotype.Service;
 
-import com.stripe.exception.CardException;
 import com.stripe.exception.StripeException;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.stripe.Stripe;
-import com.stripe.model.Card;
-import com.stripe.model.Charge;
-import com.stripe.model.Charge.PaymentMethodDetails;
 import com.stripe.model.Customer;
 import com.stripe.model.Order;
-import com.stripe.model.Token;
 
 @Service("paymentService")
 public class PaymentServiceImpl implements PaymentService {

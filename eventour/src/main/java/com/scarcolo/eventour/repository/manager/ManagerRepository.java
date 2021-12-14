@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import com.scarcolo.eventour.model.admin.ReportAdmResponse;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ReportManResponse;
 
@@ -63,6 +64,21 @@ public interface ManagerRepository extends MongoRepository<Manager, String>{
 	 * @return the list
 	 */
 	List<Manager> findByMail(String user);
+
+	
+	@Aggregation(pipeline = {" {\n"
+			+ "        '$lookup': {\n"
+			+ "            'from': 'events', \n"
+			+ "            'localField': '_id', \n"
+			+ "            'foreignField': 'managerId', \n"
+			+ "            'as': 'events'\n"
+			+ "        }\n"
+			+ "    }","{\n"
+			+ "        '$sort': {\n"
+			+ "            'dataOra': 1\n"
+			+ "        }\n"
+			+ "    }"})
+	AggregationResults<ReportAdmResponse> findReports();
 
 	
 	

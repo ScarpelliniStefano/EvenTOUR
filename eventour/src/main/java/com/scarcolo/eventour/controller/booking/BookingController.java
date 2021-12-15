@@ -1,12 +1,8 @@
 package com.scarcolo.eventour.controller.booking;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +24,6 @@ import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.model.user.UserBookedResponse;
 import com.scarcolo.eventour.service.booking.BookingService;
-import com.scarcolo.eventour.functions.Functionalities;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -98,7 +93,29 @@ public class BookingController {
     	 */
     	@GetMapping("/bookings/u/{id}")
 	    public ResponseEntity<List<EventBookedResponse>> getBookingByIdUser(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "20") int size,@PathVariable("id") String id){
-	        return bookingService.getByIdUser(page,size,id);
+	        return bookingService.getByIdUser(page,size,id,'n');
+	    }
+    	
+    	/**
+    	 * Get all future booking by id user .
+    	 *
+    	 * @param id the id of the user
+    	 * @return the booking by id user
+    	 */
+    	@GetMapping("/bookings/u/{id}/f")
+	    public ResponseEntity<List<EventBookedResponse>> getBookingByIdUserFuture(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "20") int size,@PathVariable("id") String id){
+	        return bookingService.getByIdUser(page,size,id,'f');
+	    }
+    	
+    	/**
+    	 * Get all bookings past by id user .
+    	 *
+    	 * @param id the id of the user
+    	 * @return the booking by id user
+    	 */
+    	@GetMapping("/bookings/u/{id}/p")
+	    public ResponseEntity<List<EventBookedResponse>> getBookingByIdUserPast(@RequestParam(defaultValue = "0") int page,@RequestParam(defaultValue = "20") int size,@PathVariable("id") String id){
+	        return bookingService.getByIdUser(page,size,id,'p');
 	    }
 	    
 	    /**

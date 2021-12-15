@@ -70,6 +70,70 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'foreignField': '_id', \n"
 			+ "            'as': 'event'\n"
 			+ "        }\n"
+			+ "    }","{\n"
+			+ "        '$match': {\n"
+			+ "            'event.dataOra': {$gt: new Date() }\n"
+			+ "        }\n"
+			+ "    }"+"{\n"
+			+ "        '$skip': ?1\n"
+			+ "    }"," {\n"
+			+ "        '$limit': ?2\n"
+			+ "    }"," {\n"
+			+ "        '$sort': {\n"
+			+ "            'event.dataOra': 1\n"
+			+ "        }\n"
+			+ "    }"})
+	AggregationResults<EventBookedResponse> findByUserIdFuture(ObjectId userId,int page_size, int size);
+	
+	/**
+	 * Find by user id.
+	 *
+	 * @param userId the id
+	 * @return the aggregation results
+	 */
+	@Aggregation(pipeline = {"{\n"
+			+ "        '$match': {\n"
+			+ "            'userId': ObjectId('?0')\n"
+			+ "        }\n"
+			+ "    }"," {\n"
+			+ "        '$lookup': {\n"
+			+ "            'from': 'events', \n"
+			+ "            'localField': 'eventId', \n"
+			+ "            'foreignField': '_id', \n"
+			+ "            'as': 'event'\n"
+			+ "        }\n"
+			+ "    }","{\n"
+			+ "        '$match': {\n"
+			+ "            'event.dataOra': {$lt: new Date() }\n"
+			+ "        }\n"
+			+ "    }"+"{\n"
+			+ "        '$skip': ?1\n"
+			+ "    }"," {\n"
+			+ "        '$limit': ?2\n"
+			+ "    }"," {\n"
+			+ "        '$sort': {\n"
+			+ "            'event.dataOra': 1\n"
+			+ "        }\n"
+			+ "    }"})
+	AggregationResults<EventBookedResponse> findByUserIdPast(ObjectId userId,int page_size, int size);
+	
+	/**
+	 * Find by user id.
+	 *
+	 * @param userId the id
+	 * @return the aggregation results
+	 */
+	@Aggregation(pipeline = {"{\n"
+			+ "        '$match': {\n"
+			+ "            'userId': ObjectId('?0')\n"
+			+ "        }\n"
+			+ "    }"," {\n"
+			+ "        '$lookup': {\n"
+			+ "            'from': 'events', \n"
+			+ "            'localField': 'eventId', \n"
+			+ "            'foreignField': '_id', \n"
+			+ "            'as': 'event'\n"
+			+ "        }\n"
 			+ "    }"," {\n"
 			+ "        '$sort': {\n"
 			+ "            'event.dataOra': 1\n"

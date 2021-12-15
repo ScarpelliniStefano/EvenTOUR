@@ -181,12 +181,18 @@ public class BookingService {
 	 * @param page 
 	 *
 	 * @param id the id user
+	 * @param past_future 
 	 * @return bookings by id user
 	 */
-	public ResponseEntity<List<EventBookedResponse>> getByIdUser(int page, int size, String id) {
+	public ResponseEntity<List<EventBookedResponse>> getByIdUser(int page, int size, String id, char pastFuture) {
 		try {
-			System.out.println(page+" "+size+" "+id);
-			AggregationResults<EventBookedResponse> eventsA=bookingRepository.findByUserId(new ObjectId(id),page*size,size);
+			AggregationResults<EventBookedResponse> eventsA=null;
+			if(pastFuture=='f')
+				eventsA=bookingRepository.findByUserIdFuture(new ObjectId(id),page*size,size);
+			else if(pastFuture=='p')
+				eventsA=bookingRepository.findByUserIdPast(new ObjectId(id),page*size,size);
+			else
+				eventsA=bookingRepository.findByUserId(new ObjectId(id),page*size,size);
 			List<EventBookedResponse> eventR=eventsA.getMappedResults();
 			
 			return new ResponseEntity<>(eventR, HttpStatus.OK);

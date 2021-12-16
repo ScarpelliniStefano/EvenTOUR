@@ -60,7 +60,12 @@ public class ManagerService {
         if (optionalManager.isEmpty()) {
             return null;
         }
-        return new ResponseEntity<>(new ManagerResponse(optionalManager.get()), HttpStatus.OK);
+        Manager m = optionalManager.get();
+        if(request.residence != null) {
+        	m.setResidence(request.residence);
+        }
+        managerRepository.save(m);
+        return new ResponseEntity<>(new ManagerResponse(m), HttpStatus.OK);
     }
 
    

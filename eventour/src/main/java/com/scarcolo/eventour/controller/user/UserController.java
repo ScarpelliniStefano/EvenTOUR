@@ -106,6 +106,17 @@ public class UserController {
 	    public ResponseEntity<AccountResponse> getAccount(@RequestBody AccountRequest request){
 	        return userService.getAccount(request.username,request.password);
 	    }
+    	
+    	/**
+    	 * Gets the account.
+    	 *
+    	 * @param request the request
+    	 * @return the account
+    	 */
+    	@PostMapping("/account/changePsw")
+	    public ResponseEntity<AccountResponse> setAccountPsw(@RequestBody AccountRequest request){
+	        return userService.setAccountPsw(request.username,request.password);
+	    }
 
 	   
 	    /**

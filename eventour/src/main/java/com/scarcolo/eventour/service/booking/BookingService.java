@@ -291,7 +291,10 @@ public class BookingService {
 		try {
 			AggregationResults<UserEventBookedResponse> userEventA=bookingRepository.findByIdDetails(new ObjectId(id));
 			List<UserEventBookedResponse> eventR=userEventA.getMappedResults();
-			return new ResponseEntity<>(eventR.get(0), HttpStatus.OK);
+			if(!eventR.isEmpty())
+				return new ResponseEntity<>(eventR.get(0), HttpStatus.OK);
+			else
+				return new ResponseEntity<>(null, HttpStatus.ALREADY_REPORTED);
 		}catch(Exception e) {
 			System.out.println(e);
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

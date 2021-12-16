@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.AccountResponse;
+import com.scarcolo.eventour.model.admin.Admin;
+import com.scarcolo.eventour.model.admin.AdminResponse;
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.model.event.EventResponse;
@@ -24,6 +26,7 @@ import com.scarcolo.eventour.model.user.AddUserRequest;
 import com.scarcolo.eventour.model.user.EditUserRequest;
 import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.model.user.UserResponse;
+import com.scarcolo.eventour.repository.admin.AdminRepository;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
 import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
@@ -52,6 +55,10 @@ public class UserService {
 	/** The manager repository. */
 	@Autowired
 	private ManagerRepository managerRepository;
+	
+	/** The manager repository. */
+	@Autowired
+	private AdminRepository adminRepository;
 	
 	/** The manager repository. */
 	@Autowired
@@ -188,7 +195,16 @@ public class UserService {
 				List<User> users = userRepository.findByMail(user);
 				List<Manager> managers = managerRepository.findByMail(user);
 				if(users.isEmpty()&&managers.isEmpty()) {
-					return new ResponseEntity<>(new AccountResponse("NONE","ERROR. unregistered user"),HttpStatus.OK);
+					List<Admin> admin=adminRepository.findByMail(user);
+					if(admin.isEmpty())
+						return new ResponseEntity<>(new AccountResponse("NONE","ERROR. unregistered user"),HttpStatus.OK);
+					else
+						if(Functionalities.getMd5(admin.get(0).getPassword()).equals(psw)) {
+							objResp=new AdminResponse(admin.get(0));
+							return new ResponseEntity<>(new AccountResponse("Admin",objResp),HttpStatus.OK);
+						}else {
+							return new ResponseEntity<>(new AccountResponse("Admin","ERROR. invalid password"),HttpStatus.OK);
+						}
 				}else {
 					if(!users.isEmpty()) {
 						if(Functionalities.getMd5(users.get(0).getPassword()).equals(psw)) {
@@ -352,6 +368,45 @@ public class UserService {
 		*/
 		
 		
+	}
+
+
+	public ResponseEntity<AccountResponse> setAccountPsw(String user, String psw) {
+		if(user.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		Object objResp;
+		try {
+			if(user.contains("@")) {
+				List<Manager> managers = managerRepository.findByMail(user);
+				if(managers.isEmpty()) {
+						List<User> users = userRepository.findByMail(user);
+						if(user.isEmpty()) 
+							return new ResponseEntity<>(new AccountResponse("NONE","ERROR. invalid mail"),HttpStatus.OK);
+						users.get(0).setPassword(psw);
+						userRepository.save(users.get(0));
+						return new ResponseEntity<>(new AccountResponse("User",users.get(0)),HttpStatus.OK);
+				}else {
+						Request req= requestRepository.findByManagerId(managers.get(0).getId()).get(0);
+						if(!req.isActive()) {
+							return new ResponseEntity<>(new AccountResponse("Manager","ERROR. no active manager"),HttpStatus.OK);
+						}
+						LocalDate dateCheck=Functionalities.convertToLocalDate(req.getDateRenewal()).plusYears(1);
+						if(dateCheck.isAfter(LocalDate.now())) {
+							managers.get(0).setPassword(psw);
+							managerRepository.save(managers.get(0));
+							objResp=new ManagerPlusResponse(managers.get(0),req);
+							return new ResponseEntity<>(new AccountResponse("Manager",objResp),HttpStatus.OK);
+						}else {
+							return new ResponseEntity<>(new AccountResponse("Manager","ERROR. renewal date is passed"),HttpStatus.OK);
+						}		
+				}
+			}else {
+				return new ResponseEntity<>(new AccountResponse("NONE","ERROR. invalid mail"),HttpStatus.OK);
+			}
+		}catch(Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 	
 	

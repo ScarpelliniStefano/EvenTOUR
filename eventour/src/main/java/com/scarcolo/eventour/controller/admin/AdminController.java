@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.scarcolo.eventour.model.admin.AdminResponse;
+import com.scarcolo.eventour.model.manager.ManagerPlusResponse;
 import com.scarcolo.eventour.model.admin.AdminReportResponse;
 import com.scarcolo.eventour.service.admin.AdminService;
 
@@ -72,6 +73,16 @@ public class AdminController {
     	@GetMapping("/admins/reports")
 	    public ResponseEntity<List<AdminReportResponse>> getAdminReport(){
 	        return adminService.getAdminReport();
+	    }
+    	
+    	/**
+    	 * Get requests.
+    	 *
+    	 * @return the all managers
+    	 */
+    	@GetMapping("/admins/requests")
+	    public ResponseEntity<List<ManagerPlusResponse>> getRequests(@RequestParam(defaultValue = "1") int active, @RequestParam(defaultValue = "0") int scadute){
+    		return adminService.getRequest(active>0?true:false,scadute>0?true : false);
 	    }
 
 	   

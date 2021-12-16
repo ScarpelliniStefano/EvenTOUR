@@ -96,7 +96,7 @@ public class AdminService {
 	
 	
 	@Autowired
-	BookingRepository bookingRepository;
+	private BookingRepository bookingRepository;
 	
 	public ResponseEntity<List<AdminReportResponse>> getAdminReport() {
 		try {
@@ -149,6 +149,18 @@ public class AdminService {
 	  	  } else {
 	  	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	  	  }
+	}
+	
+	@Autowired
+	private RequestService requestService;
+
+	public ResponseEntity<List<ManagerPlusResponse>> getRequest(boolean active,boolean scadute) {
+		try {
+			List<ManagerPlusResponse> reqManager=requestService.getAll(active,scadute);
+			return new ResponseEntity<>(reqManager, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
 

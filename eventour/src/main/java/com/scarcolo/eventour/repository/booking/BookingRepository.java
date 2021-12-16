@@ -178,8 +178,6 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'localField': 'userId', \n"
 			+ "            'foreignField': '_id', \n"
 			+ "            'as': 'user'\n"
-			+ "            	'userId': ObjectId('?0')\n"
-			+ "				'eventId': ObjectId('?1')\n"
 			+ "        }\n"
 			+ "    }"," {\n"
 			+ "        '$lookup': {\n"

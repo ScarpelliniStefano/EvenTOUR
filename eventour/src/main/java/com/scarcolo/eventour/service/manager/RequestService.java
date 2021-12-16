@@ -3,11 +3,13 @@ package com.scarcolo.eventour.service.manager;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ import com.scarcolo.eventour.model.manager.AddManagerRequest;
 import com.scarcolo.eventour.model.manager.EditManagerRequest;
 import com.scarcolo.eventour.model.manager.ManagerReportResponse;
 import com.scarcolo.eventour.model.manager.Manager;
+import com.scarcolo.eventour.model.manager.ManagerPlusResponse;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
 import com.scarcolo.eventour.model.manager.ReportManResponse;
 import com.scarcolo.eventour.model.request.Request;
@@ -40,6 +43,10 @@ public class RequestService {
 	/** The request repository. */
 	@Autowired
 	private RequestRepository requestRepository;
+	
+	/** The request repository. */
+	@Autowired
+	private ManagerRepository managerRepository;
 	
 	/**
 	 * Adds a request.
@@ -142,6 +149,38 @@ public class RequestService {
         requestRepository.deleteById(optionalRequest.get(0).getId().toString());
         return true;
     }
+
+	public List<ManagerPlusResponse> getAll(boolean active, boolean scaduto) {
+		List<ManagerPlusResponse> man=null;
+		List<Request> reqs=new ArrayList<>();
+		if(active) {
+			Date dt=Functionalities.convertToDate(LocalDate.now().minusYears(1));
+			System.out.println(dt);
+			reqs=requestRepository.findAllActive(Sort.by("dateRenewal").ascending());
+			if(scaduto) {
+				System.out.println("active scad");
+				for(Request r : reqs) {
+					if(r.getDateRenewal().after(dt)) 
+						reqs.remove(r);
+				}
+			}else {
+				System.out.println("active not scad");
+				for(Request r : reqs) {
+					if(r.getDateRenewal().before(dt)) 
+						reqs.remove(r);
+				}
+			}
+		}
+		else
+			reqs=requestRepository.findAllNotActive(Sort.by("dateRenewal").ascending());
+		if(!reqs.isEmpty()) {
+			man=new ArrayList<>();
+			for(Request req:reqs) {
+				man.add(new ManagerPlusResponse(managerRepository.findById(req.getManagerId().toString()).get(),req));
+			}
+		}
+		return man;
+	}
 
 	
 

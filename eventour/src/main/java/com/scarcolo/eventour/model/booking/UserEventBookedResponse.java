@@ -30,6 +30,10 @@ public class UserEventBookedResponse {
 	@JsonProperty("come")
 	private Boolean come;
 	
+	/** The review. */
+	@JsonProperty("review")
+	private Integer review;
+	
 	/** The user. */
 	@JsonProperty("user")
 	private User[] user;
@@ -49,13 +53,14 @@ public class UserEventBookedResponse {
 	 * @param user the user
 	 * @param event the event
 	 */
-	public UserEventBookedResponse(String id, String userId, String eventId, Integer prenotedSeat,Boolean come, User[] user,Event[] event ) {
+	public UserEventBookedResponse(String id, String userId, String eventId, Integer prenotedSeat,Boolean come, int review, User[] user,Event[] event ) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.eventId = eventId;
 		this.prenotedSeat = prenotedSeat;
 		this.come = come;
+		this.review = review;
 		this.user = user;
 		this.event = event;
 	}
@@ -148,6 +153,14 @@ public class UserEventBookedResponse {
 	 */
 	public void setCome(Boolean come) {
 		this.come = come;
+	}
+	
+	public int getReview() {
+		return review;
+	}
+
+	public void setReview(int review) {
+		this.review = (review>0&&review<6) ? review : -1;
 	}
 	
 	/**

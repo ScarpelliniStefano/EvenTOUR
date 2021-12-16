@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.internet.AddressException;
+
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
@@ -19,12 +21,15 @@ import com.scarcolo.eventour.model.event.EventManResponse;
 import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.manager.AddManagerRequest;
 import com.scarcolo.eventour.model.manager.EditManagerRequest;
-import com.scarcolo.eventour.model.manager.EventReportResponse;
+import com.scarcolo.eventour.model.manager.ManagerReportResponse;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
 import com.scarcolo.eventour.model.manager.ReportManResponse;
+import com.scarcolo.eventour.model.request.Request;
+import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
+import com.scarcolo.eventour.repository.manager.RequestRepository;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -37,6 +42,14 @@ public class ManagerService {
 	@Autowired
 	private ManagerRepository managerRepository;
 	
+	/** The manager repository. */
+	@Autowired
+	private RequestRepository requestRepository;	
+	
+	/** The event repository. */
+	@Autowired
+	private EventRepository eventRepository;
+	
 	/**
 	 * Adds a manager.
 	 *
@@ -46,6 +59,7 @@ public class ManagerService {
 	 */
 	public ResponseEntity<ManagerResponse> add(AddManagerRequest request) throws Exception{
 		Manager Manager = managerRepository.save(new Manager(request));
+		requestRepository.save(new Request(Manager.getId()));
 		return new ResponseEntity<>(new ManagerResponse(Manager), HttpStatus.OK);
 	}
 	
@@ -54,13 +68,25 @@ public class ManagerService {
 	 *
 	 * @param request the request
 	 * @return the response entity
+	 * @throws AddressException 
 	 */
-	public ResponseEntity<ManagerResponse> update(EditManagerRequest request) {
+	public ResponseEntity<ManagerResponse> update(EditManagerRequest request) throws AddressException {
         Optional<Manager> optionalManager = managerRepository.findById(request.id);
         if (optionalManager.isEmpty()) {
             return null;
         }
-        return new ResponseEntity<>(new ManagerResponse(optionalManager.get()), HttpStatus.OK);
+        Manager m=optionalManager.get();
+        if(request.residence!=null) {
+        	m.setResidence(request.residence);
+        }
+        if(request.mail!=null) {
+        	m.setMail(request.mail);
+        }
+        if(request.password!=null) {
+        	m.setPassword(request.password);
+        }
+        Manager man=managerRepository.save(m);
+        return new ResponseEntity<>(new ManagerResponse(man), HttpStatus.OK);
     }
 
    
@@ -92,6 +118,8 @@ public class ManagerService {
             return false;
         }
         managerRepository.deleteById(optionalManager.get().getId().toString());
+        Request r=requestRepository.findByManagerId(optionalManager.get().getId().toString()).get(0);
+        requestRepository.deleteById(r.getId());
         return true;
     }
 
@@ -115,9 +143,7 @@ public class ManagerService {
 		}
 	}
 
-	/** The event repository. */
-	@Autowired
-	private EventRepository eventRepository;
+
 	
 	/**
 	 * Gets a manager from event id.
@@ -136,28 +162,33 @@ public class ManagerService {
 		}
 	}
 
-	public ResponseEntity<List<EventReportResponse>> getManagerReport(String id) {
+	public ResponseEntity<List<ManagerReportResponse>> getManagerReport(String id) {
 		try {
 			AggregationResults<ReportManResponse> reportA=eventRepository.findReports(new ObjectId(id));
 			List<ReportManResponse> reportMongo=reportA.getMappedResults();
-			List<EventReportResponse> reportR=new ArrayList<>();
+			List<ManagerReportResponse> reportR=new ArrayList<>();
 			Integer occuped=0;
 			Integer comedPeople=0;
 			Double saldo=0d;
 			Double perdita=0d;
 			Event eventDetails=null;
+			Double review=0d;
 			for(ReportManResponse resp : reportMongo) {
-				
-				occuped=resp.getTotSeat()-resp.getFreeSeat();
-				comedPeople=0;
-				for(Booking book: resp.getBooking()) {
-					comedPeople+=(book.getCome()==true ? book.getPrenotedSeat() : 0);
+				if(resp.getDataOra().isBefore(LocalDateTime.now())) {
+					occuped=resp.getTotSeat()-resp.getFreeSeat();
+					comedPeople=0;
+					for(Booking book: resp.getBooking()) {
+						comedPeople+=(book.getCome()==true ? book.getPrenotedSeat() : 0);
+						review+=book.getReview()>0 ? book.getReview() : 0;
+					}
+					review=review/(resp.getBooking().length);
+					saldo=comedPeople*resp.getPrice();
+					perdita=resp.getFreeSeat()*resp.getPrice();
+					eventDetails=new Event(resp.getId(), resp.getTitle(), resp.getDescription(), resp.getLocation(), resp.getTypes(),
+							resp.getDataOra(), resp.getManagerId(),resp.getUrlImage(), resp.getTotSeat(), resp.getFreeSeat(), resp.getPrice());
+					reportR.add(new ManagerReportResponse(resp.getId(), resp.getTitle(), new EventResponse(eventDetails), occuped, comedPeople, saldo, perdita, review));
+			
 				}
-				saldo=comedPeople*resp.getPrice();
-				perdita=(occuped-comedPeople)*resp.getPrice();
-				eventDetails=new Event(resp.getId(), resp.getTitle(), resp.getDescription(), resp.getLocation(), resp.getTypes(),
-						resp.getDataOra(), resp.getManagerId(),resp.getUrlImage(), resp.getTotSeat(), resp.getFreeSeat(), resp.getPrice());
-				reportR.add(new EventReportResponse(resp.getId(), resp.getTitle(), new EventResponse(eventDetails), occuped, comedPeople, saldo, perdita));
 			}
 			
 			return new ResponseEntity<>(reportR, HttpStatus.OK);

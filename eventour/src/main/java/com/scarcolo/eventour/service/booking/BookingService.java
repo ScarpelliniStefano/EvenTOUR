@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.functions.Mail;
 import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
@@ -17,12 +18,15 @@ import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.model.manager.Manager;
+import com.scarcolo.eventour.model.request.Request;
 import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.model.user.UserBookedResponse;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
 import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
+import com.scarcolo.eventour.repository.manager.RequestRepository;
 import com.scarcolo.eventour.repository.user.UserRepository;
+import com.scarcolo.eventour.service.manager.RequestService;
 import com.stripe.model.Order;
 
 import java.io.IOException;
@@ -92,11 +96,25 @@ public class BookingService {
      *
      * @param id the id
      */
-    private void modify(String id) {
+    private void modifyComed(String id) {
     	Optional<Booking> optionalBooking = bookingRepository.findById(id);
     	if (!optionalBooking.isEmpty()) {
             Booking book=optionalBooking.get();
             book.setCome(true);
+            bookingRepository.save(book);
+    	}
+    }
+    
+    /**
+     * Modify the review of a booking.
+     *
+     * @param id the id
+     */
+    private void modifyReview(String id, int review) {
+    	Optional<Booking> optionalBooking = bookingRepository.findById(id);
+    	if (!optionalBooking.isEmpty()) {
+            Booking book=optionalBooking.get();
+            book.setReview(review);
             bookingRepository.save(book);
     	}
     }
@@ -230,15 +248,13 @@ public class BookingService {
 	 * @return the check
 	 */
 	public ResponseEntity<String> getCheck(String idBooking,String idEvent) {
-		System.out.println(idBooking);
-    	System.out.println(idEvent);
     	Optional<Booking> bookingData = bookingRepository.findById(idBooking);
     	
     	
   	  	if (bookingData.isPresent()) {
   	  		System.out.println(bookingData.get().getId());
   	  		if(bookingData.get().getEventId().equalsIgnoreCase(idEvent)) {
-  	  			modify(idBooking);
+  	  			modifyComed(idBooking);
   	  			return new ResponseEntity<>("ACCESS GRANTED", HttpStatus.OK);
   	  		}else
   	  			return new ResponseEntity<>("ACCESS REFUSED", HttpStatus.OK);
@@ -289,6 +305,11 @@ public class BookingService {
     /** The manager repository. */
     @Autowired
     private ManagerRepository managerRepository;
+    
+    /** The manager repository. */
+    @Autowired
+    private RequestService requestService;
+    
     //CARDNR: tutte quelle che iniziano con 400000380000 son accettate, previo superamento check vari
     //CVV: almeno un 2 deve esserci
     //data come "MM/AA"
@@ -303,20 +324,20 @@ public class BookingService {
         }else if(request.authNr.length()!=3 || request.cardNr.length()!=16) {
         	return new ResponseEntity<>("CARD NUMBER OR CVV INVALID",HttpStatus.OK);
         }else {
+        	Manager man=null;
         	if(type.toUpperCase()=="USER") {
         		Optional<User> optionalUser = userRepository.findById(request.idUser);
         		if (optionalUser.isEmpty()) {
         			return null;
         		}
         		User user=optionalUser.get();
-        		System.out.println(user.getEmail());
         	}else if(type.toUpperCase()=="MANAGER"){
         		Optional<Manager> optionalMan = managerRepository.findById(request.idUser);
         		if (optionalMan.isEmpty()) {
         			return null;
         		}
-        		Manager man=optionalMan.get();
-        		System.out.println(man.getMail());
+        		man=optionalMan.get();
+        		
         	}
             
             
@@ -336,6 +357,9 @@ public class BookingService {
 			} catch (NoSuchAlgorithmException e) {
 				// TODO Auto-generated catch block
 				return new ResponseEntity<>("ERROR",HttpStatus.OK);
+			}
+			if(man!=null) {
+				requestService.updateRenewal(man.getId());
 			}
         	return new ResponseEntity<>("OK. Transaction: "+cs,HttpStatus.OK);
         }
@@ -368,5 +392,18 @@ public class BookingService {
 		return false;
 		// TODO Auto-generated method stub
 		
+	}
+
+	public ResponseEntity<String> setReview(String idBooking, Integer review) {
+		Optional<Booking> bookingData = bookingRepository.findById(idBooking);
+  	  	if (bookingData.isPresent()) {
+  	  		if(review>0 && review<6) {
+  	  			modifyReview(idBooking,review);
+  	  			return new ResponseEntity<>("MODIFIED", HttpStatus.OK);
+  	  		}else
+  	  			return new ResponseEntity<>("INVALID REVIEW", HttpStatus.OK);
+  	  	} else {
+  	  		return new ResponseEntity<>("INVALID BOOKING CODE",HttpStatus.OK);
+  	  	}
 	}
 }

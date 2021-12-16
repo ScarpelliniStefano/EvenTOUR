@@ -2,6 +2,8 @@ package com.scarcolo.eventour.controller.manager;
 
 import java.util.List;
 
+import javax.mail.internet.AddressException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,13 +17,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.scarcolo.eventour.model.booking.PaymentRequest;
 import com.scarcolo.eventour.model.event.EventManResponse;
 import com.scarcolo.eventour.model.manager.AddManagerRequest;
 import com.scarcolo.eventour.model.manager.EditManagerRequest;
-import com.scarcolo.eventour.model.manager.EventReportResponse;
+import com.scarcolo.eventour.model.manager.ManagerReportResponse;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
 import com.scarcolo.eventour.model.manager.ReportManResponse;
+import com.scarcolo.eventour.service.booking.BookingService;
 import com.scarcolo.eventour.service.manager.ManagerService;
 
 
@@ -37,6 +41,10 @@ public class ManagerController {
 	/** The manager service. */
 	@Autowired
 	private ManagerService managerService;
+	
+	/** The manager service. */
+	@Autowired
+	private BookingService bookingService;
 	 
  	/**
  	 * Adds the manager.
@@ -56,9 +64,10 @@ public class ManagerController {
     	 *
     	 * @param request the request
     	 * @return the response entity
+	     * @throws AddressException 
     	 */
     	@PutMapping("/managers")
-	    public ResponseEntity<ManagerResponse> updateManager(@RequestBody EditManagerRequest request){
+	    public ResponseEntity<ManagerResponse> updateManager(@RequestBody EditManagerRequest request) throws AddressException{
 	        return managerService.update(request);
 	    }
 
@@ -104,7 +113,7 @@ public class ManagerController {
     	 * @return the manager from id event
     	 */
     	@GetMapping("/managers/{id}/reports")
-	    public ResponseEntity<List<EventReportResponse>> getManagerReport(@PathVariable("id") String id){
+	    public ResponseEntity<List<ManagerReportResponse>> getManagerReport(@PathVariable("id") String id){
 	        return managerService.getManagerReport(id);
 	    }
 
@@ -119,5 +128,10 @@ public class ManagerController {
 	    public boolean deleteById(@RequestParam String id){
 	        return managerService.delete(id);
 	    }
+    	
+    	@PostMapping("/managers/payment")
+    	public ResponseEntity<String> doPayment(@PathVariable("type") String type,@RequestBody PaymentRequest request){
+    	      return bookingService.checkerPayment("MANAGER",request);
+    	}
 
 }

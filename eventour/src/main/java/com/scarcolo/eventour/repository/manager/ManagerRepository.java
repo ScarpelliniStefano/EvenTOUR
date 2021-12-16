@@ -4,6 +4,7 @@ package com.scarcolo.eventour.repository.manager;
 import java.util.List;
 
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -72,6 +73,13 @@ public interface ManagerRepository extends MongoRepository<Manager, String>{
 			+ "            'localField': '_id', \n"
 			+ "            'foreignField': 'managerId', \n"
 			+ "            'as': 'events'\n"
+			+ "        }\n"
+			+ "    }"," {\n"
+			+ "        '$lookup': {\n"
+			+ "            'from': 'requests', \n"
+			+ "            'localField': '_id', \n"
+			+ "            'foreignField': 'managerId', \n"
+			+ "            'as': 'request'\n"
 			+ "        }\n"
 			+ "    }","{\n"
 			+ "        '$sort': {\n"

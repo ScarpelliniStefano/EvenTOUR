@@ -201,4 +201,12 @@ public class Functionalities {
 	      upperCaseRule, digitRule);
 	    return password;
 	}
+
+	public static Integer dataFutura(Event[] event) {
+		int i=0;
+		for(Event e : event) {
+			if(e.getDataOra().isAfter(LocalDateTime.now())) i++;
+		}
+		return i;
+	}
 }

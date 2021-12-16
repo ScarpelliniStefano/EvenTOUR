@@ -33,7 +33,8 @@ public class Booking {
 	/** Come? */
 	private Boolean come;	
 	
-	private int rating;
+	/** review */
+	private int review;
 	
 	/**
 	 * Instantiates a new booking.
@@ -45,7 +46,7 @@ public class Booking {
         this.setEventId(new ObjectId(request.eventId));
         this.setPrenotedSeat(request.prenotedSeat);
         this.setCome(false);
-        this.setRating(-1);
+        this.setReview(-1);
     }
 	
 	/**
@@ -145,11 +146,11 @@ public class Booking {
 		this.come = come;
 	}
 
-	public int getRating() {
-		return rating;
+	public int getReview() {
+		return review;
 	}
 
-	public void setRating(int rating) {
-		this.rating = rating;
+	public void setReview(int review) {
+		this.review = (review>0&&review<6) ? review : -1;
 	}
 }

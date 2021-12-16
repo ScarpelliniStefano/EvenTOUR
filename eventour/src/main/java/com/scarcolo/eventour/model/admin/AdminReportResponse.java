@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.manager.ManagerPlusResponse;
 
-public class ManagerReportResponse {
+public class AdminReportResponse {
 
 	/** The id. */
 	@JsonProperty("id")
@@ -22,22 +22,32 @@ public class ManagerReportResponse {
 	@JsonProperty("numEventi")
 	private Integer numEventi;
 	
-	/** The media of occupation. */
-	@JsonProperty("OccupationMean")
-	private Double occupationMean;
+	/** The num events. */
+	@JsonProperty("numFuturi")
+	private Integer numFuturi;
+	
+	/** The media of person comes. */
+	@JsonProperty("comesMean")
+	private Double comesMean;
+	
+	/** The media of person prenoted in future events. */
+	@JsonProperty("prenotedMean")
+	private Double prenotedMean;
 	
 	/** The rating. */
 	@JsonProperty("rating")
 	private Double rating;
 	
 	
-	public ManagerReportResponse(String id, String codicePIVA, ManagerPlusResponse managerPlusResponse,
-			Integer numEventi, Double mediaOccuped, Double rating) {
+	public AdminReportResponse(String id, String codicePIVA, ManagerPlusResponse managerPlusResponse,
+			Integer numEventi, Integer numFuturi, Double mediaComes, Double mediaPrenotati, Double rating) {
 		this.setId(id);
 		this.setCodicePIVA(codicePIVA);
 		this.setManager(managerPlusResponse);
 		this.setNumEventi(numEventi);
-		this.setOccupationMean(mediaOccuped);
+		this.setComesMean(mediaComes);
+		this.setNumFuturi(numFuturi);
+		this.setPrenotedMean(mediaPrenotati);
 		this.setRating(rating);
 	}
 
@@ -82,13 +92,33 @@ public class ManagerReportResponse {
 	}
 
 
-	public Double getOccupationMean() {
-		return occupationMean;
+	public Integer getNumFuturi() {
+		return numFuturi;
 	}
 
 
-	public void setOccupationMean(Double occupationMean) {
-		this.occupationMean = occupationMean;
+	public void setNumFuturi(Integer numFuturi) {
+		this.numFuturi = numFuturi;
+	}
+
+
+	public Double getComesMean() {
+		return comesMean;
+	}
+
+
+	public void setComesMean(Double comesMean) {
+		this.comesMean = comesMean;
+	}
+
+
+	public Double getPrenotedMean() {
+		return prenotedMean;
+	}
+
+
+	public void setPrenotedMean(Double prenotedMean) {
+		this.prenotedMean = prenotedMean;
 	}
 
 

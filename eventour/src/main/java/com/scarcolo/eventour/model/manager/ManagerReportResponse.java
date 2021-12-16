@@ -3,7 +3,7 @@ package com.scarcolo.eventour.model.manager;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.scarcolo.eventour.model.event.EventResponse;
 
-public class EventReportResponse {
+public class ManagerReportResponse {
 	
 	/** The id. */
 	@JsonProperty("id")
@@ -32,9 +32,13 @@ public class EventReportResponse {
 	/** The estimate loss. */
 	@JsonProperty("lost")
 	private Double perdita;
+	
+	/** The estimate loss. */
+	@JsonProperty("reviewMean")
+	private Double review;
 
-	public EventReportResponse(String id, String title, EventResponse event, Integer occupedSeat, Integer comedPeople,
-			Double saldo, Double perdita) {
+	public ManagerReportResponse(String id, String title, EventResponse event, Integer occupedSeat, Integer comedPeople,
+			Double saldo, Double perdita, Double meanReview) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -43,6 +47,7 @@ public class EventReportResponse {
 		this.comedPeople = comedPeople;
 		this.saldo = Math.round(saldo*100.0)/100.0;
 		this.perdita = Math.round(perdita*100.0)/100.0;
+		this.review = meanReview;
 	}
 
 	public String getId() {

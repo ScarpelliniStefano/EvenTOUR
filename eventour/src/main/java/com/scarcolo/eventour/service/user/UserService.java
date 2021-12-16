@@ -15,7 +15,9 @@ import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.manager.Manager;
+import com.scarcolo.eventour.model.manager.ManagerPlusResponse;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
+import com.scarcolo.eventour.model.request.Request;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
 import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
 import com.scarcolo.eventour.model.user.AddUserRequest;
@@ -25,11 +27,13 @@ import com.scarcolo.eventour.model.user.UserResponse;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
 import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
+import com.scarcolo.eventour.repository.manager.RequestRepository;
 import com.scarcolo.eventour.repository.ticketisp.TicketInspRepository;
 import com.scarcolo.eventour.repository.user.UserRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,6 +52,10 @@ public class UserService {
 	/** The manager repository. */
 	@Autowired
 	private ManagerRepository managerRepository;
+	
+	/** The manager repository. */
+	@Autowired
+	private RequestRepository requestRepository;
 	
 	/** The ticket insp repository. */
 	@Autowired
@@ -191,8 +199,18 @@ public class UserService {
 						}
 					}else {
 						if(Functionalities.getMd5(managers.get(0).getPassword()).equals(psw)) {
-							objResp=new ManagerResponse(managers.get(0));
-							return new ResponseEntity<>(new AccountResponse("Manager",objResp),HttpStatus.OK);
+							Request req= requestRepository.findByManagerId(managers.get(0).getId()).get(0);
+							if(!req.isActive()) {
+								return new ResponseEntity<>(new AccountResponse("Manager","ERROR. no active manager"),HttpStatus.OK);
+							}
+							LocalDate dateCheck=Functionalities.convertToLocalDate(req.getDateRenewal()).plusYears(1);
+							if(dateCheck.isAfter(LocalDate.now())) {
+								objResp=new ManagerPlusResponse(managers.get(0),req);
+								return new ResponseEntity<>(new AccountResponse("Manager",objResp),HttpStatus.OK);
+							}else {
+								return new ResponseEntity<>(new AccountResponse("Manager","ERROR. renewal date is passed"),HttpStatus.OK);
+							}
+							
 						}else {
 							return new ResponseEntity<>(new AccountResponse("Manager","ERROR. invalid password"),HttpStatus.OK);
 						}

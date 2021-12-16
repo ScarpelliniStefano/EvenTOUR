@@ -20,6 +20,7 @@ import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.CheckBookingRequest;
 import com.scarcolo.eventour.model.booking.EditBookingRequest;
 import com.scarcolo.eventour.model.booking.PaymentRequest;
+import com.scarcolo.eventour.model.booking.ReviewBookingRequest;
 import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.model.user.UserBookedResponse;
@@ -174,9 +175,20 @@ public class BookingController {
 	        return bookingService.getCheck(request.bookingNr,request.eventId);
 	    }
     	
-    	@PostMapping("/bookings/{type}/payment")
-    	public ResponseEntity<String> doPayment(@PathVariable("type") String type,@RequestBody PaymentRequest request){
-    	      return bookingService.checkerPayment(type,request);
+    	/**
+    	 * Gets the check booking.
+    	 *
+    	 * @param request the request
+    	 * @return the check booking
+    	 */
+    	@PostMapping("/bookings/review")
+	    public ResponseEntity<String> setReviewBooking(@RequestBody ReviewBookingRequest request){
+	        return bookingService.setReview(request.bookingNr,request.review);
+	    }
+    	
+    	@PostMapping("/bookings/payment")
+    	public ResponseEntity<String> doPayment(@RequestBody PaymentRequest request){
+    	      return bookingService.checkerPayment("USER",request);
     	}
 
 

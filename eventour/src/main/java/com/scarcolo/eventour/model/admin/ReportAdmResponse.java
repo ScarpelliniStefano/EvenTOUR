@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.scarcolo.eventour.model.Location;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.request.Request;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -55,12 +56,16 @@ public class ReportAdmResponse {
 	private LocalDate dateRenewal;
 	
 	/** The bookings. */
-	@JsonProperty("event")
+	@JsonProperty("events")
 	private Event[] event;
+	
+	/** The bookings. */
+	@JsonProperty("request")
+	private Request[] request;
 
 	public ReportAdmResponse(String id, String name, String surname, LocalDate dateOfBirth, Location residence,
 			String codicePIVA, String ragioneSociale, String mail, boolean active, LocalDate dateRenewal,
-			Event[] event) {
+			Event[] event, Request[] request) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -73,6 +78,7 @@ public class ReportAdmResponse {
 		this.active = active;
 		this.dateRenewal = dateRenewal;
 		this.event = event;
+		this.request = request;
 	}
 
 	public String getId() {
@@ -161,6 +167,14 @@ public class ReportAdmResponse {
 
 	public void setEvent(Event[] event) {
 		this.event = event;
+	}
+
+	public Request[] getRequest() {
+		return request;
+	}
+
+	public void setRequest(Request[] request) {
+		this.request = request;
 	}
 
 	

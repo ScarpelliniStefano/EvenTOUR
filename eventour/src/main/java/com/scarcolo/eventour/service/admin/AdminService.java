@@ -1,9 +1,11 @@
 package com.scarcolo.eventour.service.admin;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
@@ -13,13 +15,16 @@ import org.springframework.stereotype.Service;
 import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.admin.Admin;
 import com.scarcolo.eventour.model.admin.AdminResponse;
-import com.scarcolo.eventour.model.admin.ManagerReportResponse;
+import com.scarcolo.eventour.model.admin.AdminReportResponse;
 import com.scarcolo.eventour.model.admin.ReportAdmResponse;
+import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerPlusResponse;
 import com.scarcolo.eventour.model.request.Request;
+import com.scarcolo.eventour.model.user.UserBookedResponse;
 import com.scarcolo.eventour.repository.admin.AdminRepository;
+import com.scarcolo.eventour.repository.booking.BookingRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 import com.scarcolo.eventour.service.manager.RequestService;
 
@@ -89,32 +94,44 @@ public class AdminService {
 		}
 	}
 	
-	@Autowired
-	RequestService requestService;
 	
-	public ResponseEntity<List<ManagerReportResponse>> getAdminReport() {
+	@Autowired
+	BookingRepository bookingRepository;
+	
+	public ResponseEntity<List<AdminReportResponse>> getAdminReport() {
 		try {
 			AggregationResults<ReportAdmResponse> reportA=managerRepository.findReports();
 			List<ReportAdmResponse> reportMongo=reportA.getMappedResults();
-			List<ManagerReportResponse> reportR=new ArrayList<>();
+			List<AdminReportResponse> reportR=new ArrayList<>();
 			
 			Integer numEventi=0;
-			Double mediaOccuped=0d;
+			Integer numFuturi=0;
+			Double mediaComes=0d;
+			Double mediaPrenotati=0d;
 			Double rating=0d;
+			List<UserBookedResponse> books=null;
 
 			for(ReportAdmResponse resp : reportMongo) {
-				
 				numEventi=resp.getEvent().length;
-				mediaOccuped=0d;
+				numFuturi=Functionalities.dataFutura(resp.getEvent());
+				mediaComes=0d;
+				mediaPrenotati=0d;
+				rating=0d;
 				for(Event event: resp.getEvent()) {
-					mediaOccuped+=(100*(event.getTotSeat()-event.getFreeSeat()/event.getTotSeat()));
+					if(event.getDataOra().isBefore(LocalDateTime.now())) {
+						mediaComes+=(100*(event.getTotSeat()-event.getFreeSeat()/event.getTotSeat()));
+						books=bookingRepository.findByEventId(new ObjectId(event.getId())).getMappedResults();
+						for(UserBookedResponse book : books)
+							rating+=book.getReview()>0 ? book.getReview() : 0;
+					}else
+						mediaPrenotati+=(100*(event.getTotSeat()-event.getFreeSeat()/event.getTotSeat()));
 				}
-				mediaOccuped=mediaOccuped/numEventi;
-				//rating=0d;
+				mediaComes=mediaComes/(numEventi-numFuturi);
+				mediaPrenotati=mediaPrenotati/numFuturi;
+				rating=rating/(numEventi-numFuturi);
 				Manager manager=new Manager(resp.getId(),resp.getName(), resp.getSurname(), resp.getMail(),resp.getCodicePIVA(),Functionalities.convertToDate(resp.getDateOfBirth()),
 											null, resp.getRagioneSociale(), resp.getResidence());
-				Request req=requestService.getById(resp.getId());
-				reportR.add(new ManagerReportResponse(resp.getId(), resp.getCodicePIVA(), new ManagerPlusResponse(manager,req), numEventi, mediaOccuped, rating));
+				reportR.add(new AdminReportResponse(resp.getId(), resp.getCodicePIVA(), new ManagerPlusResponse(manager,resp.getRequest()[0]), numEventi, numFuturi, mediaComes, mediaPrenotati, rating));
 			}
 			
 			return new ResponseEntity<>(reportR, HttpStatus.OK);

@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
-    <fullyQualifiedTypeName name="com.stripe.model.Charge.PaymentMethodDetails"/>
-    <fullyQualifiedTypeName name="com.stripe.model.Card"/>
     <fullyQualifiedTypeName name="com.stripe.model.Token"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="java.nio.charset.StandardCharsets"/>
     <fullyQualifiedTypeName name="java.util.Random"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.manager.ManagerRepository"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.Manager"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.booking.BookingRepository"/>
     <fullyQualifiedTypeName name="java.security.MessageDigest"/>
     <fullyQualifiedTypeName name="java.math.BigInteger"/>
     <fullyQualifiedTypeName name="java.security.NoSuchAlgorithmException"/>
@@ -20,7 +16,6 @@
     <fullyQualifiedTypeName name="org.passay.CharacterRule"/>
     <fullyQualifiedTypeName name="org.passay.EnglishCharacterData"/>
     <fullyQualifiedTypeName name="org.passay.CharacterData"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.service.booking.BookingService"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.user.UserBookedResponse"/>
     <fullyQualifiedTypeName name="java.util.Properties"/>
     <fullyQualifiedTypeName name="javax.mail.Session"/>
@@ -43,10 +38,7 @@
     <fullyQualifiedTypeName name="java.io.InputStreamReader"/>
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.booking.Booking"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.event.Event"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.manager.RequestRepository"/>
-    <fullyQualifiedTypeName name="org.bson.types.ObjectId"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.service.admin.AdminService"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.admin.AdminResponse"/>
@@ -55,9 +47,17 @@
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.admin.Admin"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.admin.ReportAdmResponse"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.ManagerPlus"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.service.manager.RequestService"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.request.Request"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.booking.ReviewBookingRequest"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.booking.Booking"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.booking.BookingRepository"/>
+    <fullyQualifiedTypeName name="org.bson.types.ObjectId"/>
+    <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.ManagerPlusResponse"/>
+    <fullyQualifiedTypeName name="javax.security.auth.message.callback.PrivateKeyCallback.Request"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.manager.RequestRepository"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.request.Request"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Functionalities"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.service.manager.RequestService"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.service.booking.BookingService"/>
 </qualifiedTypeNameHistroy>

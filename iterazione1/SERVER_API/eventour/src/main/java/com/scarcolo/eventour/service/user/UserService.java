@@ -82,7 +82,6 @@ public class UserService {
      * @throws Exception the exception
      */
     public ResponseEntity<UserResponse> update(EditUserRequest request) throws Exception {
-    	System.out.println(request.residence.getCity());
         Optional<User> optionalUser = userRepository.findById(request.id);
         if (optionalUser.isEmpty()) {
             return null;
@@ -221,7 +220,7 @@ public class UserService {
 			List<EventBookedResponse> eventR=bookingRepository.findByUserId(new ObjectId(id));
 			return eventR;
 		}catch(Exception e) {
-			System.out.println(e);
+			//System.out.println(e);
 			return null;
 		}
 	}

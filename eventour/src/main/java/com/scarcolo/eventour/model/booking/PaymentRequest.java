@@ -1,8 +1,6 @@
 package com.scarcolo.eventour.model.booking;
 
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 // TODO: Auto-generated Javadoc

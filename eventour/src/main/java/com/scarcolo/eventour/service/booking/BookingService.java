@@ -351,15 +351,15 @@ public class BookingService {
         		}
         		User user=optionalUser.get();
         	}else if(type.toUpperCase()=="MANAGER"){
-        		Optional<Manager> optionalMan = managerRepository.findById(request.idUser);
-        		if (optionalMan.isEmpty()) {
-        			return null;
+        		if(!request.idUser.matches("0000")) {
+        			Optional<Manager> optionalMan = managerRepository.findById(request.idUser);
+        			if (optionalMan.isEmpty()) {
+        				return null;
+        			}
+        			man=optionalMan.get();
         		}
-        		man=optionalMan.get();
         		
         	}
-            
-            
             PaymentService ps = new PaymentServiceImpl();
         	//Customer cust=ps.createCustomer("payment for booking", user.getName(),user.getSurname(), user.getEmail());
         	//System.out.println(cust);
@@ -367,7 +367,7 @@ public class BookingService {
         	/*order.setCurrency("EUR");
         	order.setCustomerObject(cust);
         	order.setAmount(request.amount.longValue());*/
-        	String cs;
+        	String cs = "";
 			try {
 				cs = ps.chargeCreditCard(order,request.cardNr,String.valueOf(dt.getMonthValue()),String.valueOf(dt.getYear()),request.authNr);
 				if(cs=="cb5e100e5a9a3e7f6d1fd97512215282") {

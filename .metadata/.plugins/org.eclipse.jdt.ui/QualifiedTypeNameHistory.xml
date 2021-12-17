@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.manager.ManagerRepository"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.Manager"/>
     <fullyQualifiedTypeName name="java.security.MessageDigest"/>
     <fullyQualifiedTypeName name="java.math.BigInteger"/>
     <fullyQualifiedTypeName name="java.security.NoSuchAlgorithmException"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.Arrays"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.user.UserRepository"/>
     <fullyQualifiedTypeName name="org.passay.PasswordGenerator"/>
@@ -24,8 +21,6 @@
     <fullyQualifiedTypeName name="javax.mail.Multipart"/>
     <fullyQualifiedTypeName name="javax.mail.internet.MimeMultipart"/>
     <fullyQualifiedTypeName name="javax.mail.Transport"/>
-    <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Mail"/>
     <fullyQualifiedTypeName name="org.springframework.data.mongodb.repository.DeleteQuery"/>
     <fullyQualifiedTypeName name="java.net.URL"/>
     <fullyQualifiedTypeName name="java.io.File"/>
@@ -35,7 +30,6 @@
     <fullyQualifiedTypeName name="java.io.InputStream"/>
     <fullyQualifiedTypeName name="java.io.FileInputStream"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.event.Event"/>
-    <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.service.admin.AdminService"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.admin.ManagerReportResponse"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.admin.ReportAdmResponse"/>
@@ -43,7 +37,6 @@
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.booking.ReviewBookingRequest"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.booking.Booking"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.booking.BookingRepository"/>
-    <fullyQualifiedTypeName name="org.bson.types.ObjectId"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.manager.ManagerPlusResponse"/>
     <fullyQualifiedTypeName name="javax.security.auth.message.callback.PrivateKeyCallback.Request"/>
@@ -56,8 +49,15 @@
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.admin.AdminResponse"/>
     <fullyQualifiedTypeName name="org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.Sort"/>
-    <fullyQualifiedTypeName name="java.util.Date"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Functionalities"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.model.event.EventPlus"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.repository.event.EventPlusRepository"/>
+    <fullyQualifiedTypeName name="java.util.Date"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.service.user.UserService"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Mail"/>
+    <fullyQualifiedTypeName name="org.springframework.data.domain.Pageable"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="org.bson.types.ObjectId"/>
 </qualifiedTypeNameHistroy>

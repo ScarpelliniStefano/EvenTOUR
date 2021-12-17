@@ -53,6 +53,7 @@ public class PaymentServiceImpl implements PaymentService {
 				StringBuilder str = new StringBuilder();
 				for(int i = 0; i < bytes.length; i++)
 					str.append(Integer.toHexString( ( bytes[i] & 0xFF ) | 0x100 ).substring(1, 3));
+				
 		  return str.toString();
 	  }else {
 		  return "cb5e100e5a9a3e7f6d1fd97512215282"; //hash of "error" string

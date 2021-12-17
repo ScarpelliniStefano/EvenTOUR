@@ -15,6 +15,7 @@ import org.springframework.data.mongodb.repository.Query;
 
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventManResponse;
+import com.scarcolo.eventour.model.event.EventPlus;
 import com.scarcolo.eventour.model.manager.ReportManResponse;
 
 // TODO: Auto-generated Javadoc
@@ -184,5 +185,8 @@ public interface EventRepository extends MongoRepository<Event, String> {
 			+ "        }\n"
 			+ "    }"})
 	AggregationResults<ReportManResponse> findReports(ObjectId Id);
+	
+	@Query("{ '_id' : new ObjectId('?0') }")
+	Optional<EventPlus> findEventPlusById(ObjectId id);
 
 }

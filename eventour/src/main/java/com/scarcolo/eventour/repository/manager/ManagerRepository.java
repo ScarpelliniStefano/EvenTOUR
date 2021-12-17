@@ -83,7 +83,7 @@ public interface ManagerRepository extends MongoRepository<Manager, String>{
 			+ "        }\n"
 			+ "    }","{\n"
 			+ "        '$sort': {\n"
-			+ "            'dataOra': 1\n"
+			+ "            'ragioneSociale': 1\n"
 			+ "        }\n"
 			+ "    }"})
 	AggregationResults<ReportAdmResponse> findReports();

@@ -30,24 +30,19 @@ public class AdminReportResponse {
 	@JsonProperty("comesMean")
 	private Double comesMean;
 	
-	/** The media of person prenoted in future events. */
-	@JsonProperty("prenotedMean")
-	private Double prenotedMean;
-	
 	/** The rating. */
 	@JsonProperty("rating")
 	private Double rating;
 	
 	
 	public AdminReportResponse(String id, String codicePIVA, ManagerPlusResponse managerPlusResponse,
-			Integer numEventi, Integer numFuturi, Double mediaComes, Double mediaPrenotati, Double rating) {
+			Integer numEventi, Integer numFuturi, Double mediaComes, Double rating) {
 		this.setId(id);
 		this.setCodicePIVA(codicePIVA);
 		this.setManager(managerPlusResponse);
 		this.setNumEventi(numEventi);
 		this.setComesMean(mediaComes);
 		this.setNumFuturi(numFuturi);
-		this.setPrenotedMean(mediaPrenotati);
 		this.setRating(rating);
 	}
 
@@ -108,17 +103,7 @@ public class AdminReportResponse {
 
 
 	public void setComesMean(Double comesMean) {
-		this.comesMean = comesMean;
-	}
-
-
-	public Double getPrenotedMean() {
-		return prenotedMean;
-	}
-
-
-	public void setPrenotedMean(Double prenotedMean) {
-		this.prenotedMean = prenotedMean;
+		this.comesMean = Math.round(comesMean*100.0)/100.0;
 	}
 
 
@@ -128,7 +113,7 @@ public class AdminReportResponse {
 
 
 	public void setRating(Double rating) {
-		this.rating = rating;
+		this.rating = Math.round(rating*100.0)/100.0;
 	}
 	
 }

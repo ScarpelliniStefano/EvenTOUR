@@ -47,7 +47,7 @@ public class ManagerReportResponse {
 		this.comedPeople = comedPeople;
 		this.saldo = Math.round(saldo*100.0)/100.0;
 		this.perdita = Math.round(perdita*100.0)/100.0;
-		this.review = meanReview;
+		this.review = Math.round(meanReview*100.0)/100.0;
 	}
 
 	public String getId() {

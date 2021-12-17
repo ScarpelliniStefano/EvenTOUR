@@ -17,11 +17,13 @@ import com.scarcolo.eventour.model.booking.PaymentRequest;
 import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
+import com.scarcolo.eventour.model.event.EventPlus;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.request.Request;
 import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.model.user.UserBookedResponse;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
+import com.scarcolo.eventour.repository.event.EventPlusRepository;
 import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 import com.scarcolo.eventour.repository.manager.RequestRepository;
@@ -51,6 +53,10 @@ public class BookingService {
     /** The event repository. */
     @Autowired
     private EventRepository eventRepository;
+    
+    /** The event repository. */
+    @Autowired
+    private EventPlusRepository eventPlusRepository;
 
    
     /**
@@ -105,6 +111,8 @@ public class BookingService {
     	}
     }
     
+    
+    
     /**
      * Modify the review of a booking.
      *
@@ -114,7 +122,15 @@ public class BookingService {
     	Optional<Booking> optionalBooking = bookingRepository.findById(id);
     	if (!optionalBooking.isEmpty()) {
             Booking book=optionalBooking.get();
+            EventPlus ev=eventPlusRepository.findById(book.getEventId()).get();
+            if(book.getReview()>0) {
+            	ev.setReviewSum(ev.getReviewSum()-book.getReview());
+            	ev.setReviewTot(ev.getReviewTot()-1);
+            }
             book.setReview(review);
+            ev.setReviewSum(ev.getReviewSum()+book.getReview());
+            ev.setReviewTot(ev.getReviewTot()+1);
+            eventPlusRepository.save(ev);
             bookingRepository.save(book);
     	}
     }

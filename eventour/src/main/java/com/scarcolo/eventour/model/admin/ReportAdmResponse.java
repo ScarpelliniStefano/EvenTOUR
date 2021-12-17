@@ -2,11 +2,14 @@ package com.scarcolo.eventour.model.admin;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.Location;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventPlus;
 import com.scarcolo.eventour.model.request.Request;
 
 // TODO: Auto-generated Javadoc
@@ -29,7 +32,7 @@ public class ReportAdmResponse {
 	
 	/** The date of birth. */
 	@JsonProperty("dateOfBirth")
-	private LocalDate dateOfBirth;
+	private Date dateOfBirth;
 	
 	/** The residence. */
 	@JsonProperty("residence")
@@ -47,25 +50,16 @@ public class ReportAdmResponse {
 	@JsonProperty("mail")
 	private String mail;
 	
-	/** The activation. */
-	@JsonProperty("active")
-	private boolean active;
-	
-	/** The date of renewal. */
-	@JsonProperty("dateRenewal")
-	private LocalDate dateRenewal;
-	
 	/** The bookings. */
 	@JsonProperty("events")
-	private Event[] event;
+	private EventPlus[] events;
 	
 	/** The bookings. */
 	@JsonProperty("request")
 	private Request[] request;
 
-	public ReportAdmResponse(String id, String name, String surname, LocalDate dateOfBirth, Location residence,
-			String codicePIVA, String ragioneSociale, String mail, boolean active, LocalDate dateRenewal,
-			Event[] event, Request[] request) {
+	public ReportAdmResponse(String id, String name, String surname, Date dateOfBirth, Location residence,
+			String codicePIVA, String ragioneSociale, String mail, EventPlus[] events, Request[] request) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -75,9 +69,7 @@ public class ReportAdmResponse {
 		this.codicePIVA = codicePIVA;
 		this.ragioneSociale = ragioneSociale;
 		this.mail = mail;
-		this.active = active;
-		this.dateRenewal = dateRenewal;
-		this.event = event;
+		this.events = events;
 		this.request = request;
 	}
 
@@ -105,11 +97,11 @@ public class ReportAdmResponse {
 		this.surname = surname;
 	}
 
-	public LocalDate getDateOfBirth() {
+	public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
-	public void setDateOfBirth(LocalDate dateOfBirth) {
+	public void setDateOfBirth(Date dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 
@@ -145,28 +137,12 @@ public class ReportAdmResponse {
 		this.mail = mail;
 	}
 
-	public boolean isActive() {
-		return active;
+	public EventPlus[] getEvent() {
+		return events;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	public LocalDate getDateRenewal() {
-		return dateRenewal;
-	}
-
-	public void setDateRenewal(LocalDate dateRenewal) {
-		this.dateRenewal = dateRenewal;
-	}
-
-	public Event[] getEvent() {
-		return event;
-	}
-
-	public void setEvent(Event[] event) {
-		this.event = event;
+	public void setEvent(EventPlus[] event) {
+		this.events = event;
 	}
 
 	public Request[] getRequest() {

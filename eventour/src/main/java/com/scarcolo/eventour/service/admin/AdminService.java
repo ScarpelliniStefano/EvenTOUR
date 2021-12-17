@@ -19,6 +19,7 @@ import com.scarcolo.eventour.model.admin.AdminReportResponse;
 import com.scarcolo.eventour.model.admin.ReportAdmResponse;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventPlus;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerPlusResponse;
 import com.scarcolo.eventour.model.request.Request;
@@ -107,33 +108,28 @@ public class AdminService {
 			Integer numEventi=0;
 			Integer numFuturi=0;
 			Double mediaComes=0d;
-			Double mediaPrenotati=0d;
 			Double rating=0d;
-			List<UserBookedResponse> books=null;
-
-			for(ReportAdmResponse resp : reportMongo) {
-				numEventi=resp.getEvent().length;
-				numFuturi=Functionalities.dataFutura(resp.getEvent());
-				mediaComes=0d;
-				mediaPrenotati=0d;
-				rating=0d;
-				for(Event event: resp.getEvent()) {
-					if(event.getDataOra().isBefore(LocalDateTime.now())) {
-						mediaComes+=(100*(event.getTotSeat()-event.getFreeSeat()/event.getTotSeat()));
-						books=bookingRepository.findByEventId(new ObjectId(event.getId())).getMappedResults();
-						for(UserBookedResponse book : books)
-							rating+=book.getReview()>0 ? book.getReview() : 0;
-					}else
-						mediaPrenotati+=(100*(event.getTotSeat()-event.getFreeSeat()/event.getTotSeat()));
-				}
-				mediaComes=mediaComes/(numEventi-numFuturi);
-				mediaPrenotati=mediaPrenotati/numFuturi;
-				rating=rating/(numEventi-numFuturi);
-				Manager manager=new Manager(resp.getId(),resp.getName(), resp.getSurname(), resp.getMail(),resp.getCodicePIVA(),Functionalities.convertToDate(resp.getDateOfBirth()),
-											null, resp.getRagioneSociale(), resp.getResidence());
-				reportR.add(new AdminReportResponse(resp.getId(), resp.getCodicePIVA(), new ManagerPlusResponse(manager,resp.getRequest()[0]), numEventi, numFuturi, mediaComes, mediaPrenotati, rating));
-			}
 			
+			for(ReportAdmResponse resp : reportMongo) {
+				if(resp.getEvent()!=null) {
+					numEventi=resp.getEvent().length;
+					numFuturi=Functionalities.dataFutura(resp.getEvent());
+					mediaComes=0d;
+					rating=0d;
+					for(EventPlus event: resp.getEvent()) {
+						if(event.getDataOra().isBefore(LocalDateTime.now())) {
+							mediaComes+=(event.getTotSeat()-event.getFreeSeat())*1.0d/event.getTotSeat();
+							rating=(event.getReviewSum()*1.0d)/event.getReviewTot();
+						}
+						
+					}
+					rating=rating/(numEventi-numFuturi);
+					mediaComes=100*mediaComes/(numEventi-numFuturi);
+				}
+				Manager manager=new Manager(resp.getId(),resp.getName(), resp.getSurname(), resp.getMail(),resp.getCodicePIVA(),resp.getDateOfBirth(),
+						"", resp.getRagioneSociale(), resp.getResidence());
+				reportR.add(new AdminReportResponse(resp.getId(), resp.getCodicePIVA(), new ManagerPlusResponse(manager,resp.getRequest()[0]), numEventi, numFuturi, mediaComes, rating));
+			}
 			return new ResponseEntity<>(reportR, HttpStatus.OK);
 		}catch(Exception e) {
 			System.out.println(e);

@@ -1,7 +1,6 @@
 package com.scarcolo.eventour.repository.manager;
 
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Sort;

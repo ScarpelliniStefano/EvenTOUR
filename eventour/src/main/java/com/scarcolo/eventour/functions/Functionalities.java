@@ -21,6 +21,7 @@ import org.passay.CharacterData;
 import org.passay.PasswordGenerator;
 
 import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventPlus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -202,9 +203,9 @@ public class Functionalities {
 	    return password;
 	}
 
-	public static Integer dataFutura(Event[] event) {
+	public static Integer dataFutura(EventPlus[] eventPlus) {
 		int i=0;
-		for(Event e : event) {
+		for(EventPlus e : eventPlus) {
 			if(e.getDataOra().isAfter(LocalDateTime.now())) i++;
 		}
 		return i;

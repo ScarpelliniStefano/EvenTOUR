@@ -80,7 +80,7 @@ public class AdminController {
     	 *
     	 * @return done
     	 */
-    	@GetMapping("/admins/reports")
+    	@GetMapping("/admins/newsletter")
 	    public ResponseEntity<Integer> sendNewsletter(){
 	        return adminService.sendNewsletter();
 	    }

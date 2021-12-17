@@ -15,7 +15,7 @@ import com.scarcolo.eventour.model.request.Request;
  */
 public interface RequestRepository extends MongoRepository<Request, String>{
 
-	
+	@Query("{managerId : new ObjectId('?0')}")
 	List<Request> findByManagerId(String id);
 
 	@Query("{active : true}")

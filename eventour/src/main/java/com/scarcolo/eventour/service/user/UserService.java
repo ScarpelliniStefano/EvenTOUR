@@ -193,7 +193,7 @@ public class UserService {
 							return new ResponseEntity<>(new AccountResponse("TicketInsp",objResp),HttpStatus.OK);
 						}
 					}
-					return new ResponseEntity<>(new AccountResponse("TicketInsp","ERROR. invalid password"),HttpStatus.OK);
+					return new ResponseEntity<>(new AccountResponse("TicketInsp","ERROR. invalid password"),HttpStatus.NON_AUTHORITATIVE_INFORMATION);
 				}
 			}else {
 				List<User> users = userRepository.findByMail(user);
@@ -207,7 +207,7 @@ public class UserService {
 							objResp=new AdminResponse(admin.get(0));
 							return new ResponseEntity<>(new AccountResponse("Admin",objResp),HttpStatus.OK);
 						}else {
-							return new ResponseEntity<>(new AccountResponse("Admin","ERROR. invalid password"),HttpStatus.OK);
+							return new ResponseEntity<>(new AccountResponse("Admin","ERROR. invalid password"),HttpStatus.NON_AUTHORITATIVE_INFORMATION);
 						}
 				}else {
 					if(!users.isEmpty()) {
@@ -215,24 +215,24 @@ public class UserService {
 							objResp=new UserResponse(users.get(0));
 							return new ResponseEntity<>(new AccountResponse("User",objResp),HttpStatus.OK);
 						}else {
-							return new ResponseEntity<>(new AccountResponse("User","ERROR. invalid password"),HttpStatus.OK);
+							return new ResponseEntity<>(new AccountResponse("User","ERROR. invalid password"),HttpStatus.NON_AUTHORITATIVE_INFORMATION);
 						}
 					}else {
 						if(Functionalities.getMd5(managers.get(0).getPassword()).equals(psw)) {
 							Request req= requestRepository.findByManagerId(managers.get(0).getId()).get(0);
 							if(!req.isActive()) {
-								return new ResponseEntity<>(new AccountResponse("Manager","ERROR. no active manager"),HttpStatus.OK);
+								return new ResponseEntity<>(new AccountResponse("NONE","ERROR. no active manager"),HttpStatus.OK);
 							}
 							LocalDate dateCheck=Functionalities.convertToLocalDate(req.getDateRenewal()).plusYears(1);
 							if(dateCheck.isAfter(LocalDate.now())) {
 								objResp=new ManagerPlusResponse(managers.get(0),req);
 								return new ResponseEntity<>(new AccountResponse("Manager",objResp),HttpStatus.OK);
 							}else {
-								return new ResponseEntity<>(new AccountResponse("Manager","ERROR. renewal date is passed"),HttpStatus.OK);
+								return new ResponseEntity<>(new AccountResponse("NONE","ERROR. renewal date is passed"),HttpStatus.OK);
 							}
 							
 						}else {
-							return new ResponseEntity<>(new AccountResponse("Manager","ERROR. invalid password"),HttpStatus.OK);
+							return new ResponseEntity<>(new AccountResponse("Manager","ERROR. invalid password"),HttpStatus.NON_AUTHORITATIVE_INFORMATION);
 						}
 					}
 				}

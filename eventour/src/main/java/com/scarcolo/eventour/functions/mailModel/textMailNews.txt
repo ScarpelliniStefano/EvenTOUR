@@ -110,7 +110,7 @@
 				</table>
 				<!-- END Top -->
 
-				<table width="600" border="0" cellspacing="0" cellpadding="0" class="mobile-shell">
+				<table width="1200" border="0" cellspacing="0" cellpadding="0" class="mobile-shell">
 					<tr>
 						<td class="td" style="font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; width:600px; min-width:600px; Margin:0" width="600">
 							<!-- Header -->
@@ -209,7 +209,7 @@
 															<td class="content-spacing" style="font-size:0pt; line-height:0pt; text-align:left" width="20"></td>
 														</tr>
 													</table>
-													<div class="fluid-img" style="font-size:0pt; line-height:0pt; text-align:left"><a href="#" target="_blank"><img src="https://d1pgqke3goo8l6.cloudfront.net/INqi55TjRoOqXGNSngcN_img_1.jpg" border="0" width="600" height="220" alt="" /></a></div>
+													<div class="fluid-img" style="font-size:0pt; line-height:0pt; text-align:left"></div>
 												</td>
 											</tr>
 										</table>

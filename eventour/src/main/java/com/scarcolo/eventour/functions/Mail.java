@@ -27,7 +27,7 @@ import com.scarcolo.eventour.model.event.Event;
 public class Mail {
 	static Properties prop;
 	
-	private static void sendMail(String destination, String obj, String title1, String title2, String msg) throws MessagingException, IOException
+	private static void sendMail(String NameTemplate, String destination, String obj, String title1, String title2, String msg) throws MessagingException, IOException
 	{
 		prop = new Properties();
 		prop.put("mail.smtp.auth", true);
@@ -48,7 +48,7 @@ public class Mail {
 		  Message.RecipientType.TO, InternetAddress.parse(destination));
 		message.setSubject(obj);
 		
-		InputStream inputStream = new FileInputStream("./src/main/java/com/scarcolo/eventour/functions/mailModel/textMail.txt");
+		InputStream inputStream = new FileInputStream("./src/main/java/com/scarcolo/eventour/functions/mailModel/"+NameTemplate+".txt");
 		StringBuilder resultStringBuilder = new StringBuilder();
 	    try (BufferedReader br
 	      = new BufferedReader(new InputStreamReader(inputStream))) {
@@ -70,6 +70,16 @@ public class Mail {
 		message.setContent(multipart);
 
 		Transport.send(message);
+	}
+	
+	private static void sendMail(String destination, String obj, String title1, String title2, String msg) throws MessagingException, IOException
+	{
+		sendMail("textMail",destination,obj,title1,title2,msg);
+	}
+	
+	private static void sendMailNews(String destination, String obj, String title1, String title2, String msg) throws MessagingException, IOException
+	{
+		sendMail("textMailNews",destination,obj,title1,title2,msg);
 	}
 	
 	public static boolean sendDeleteEventMsg(String destination, Event event) throws IOException{
@@ -124,14 +134,14 @@ public class Mail {
 				 msg+="<ul><li><b>Nome evento: </b> "+event.getTitle()+"</li>"+
 				  "<li><b>Data: </b> "+event.getDataOra().format(DateTimeFormatter.ofPattern("d MMM yyyy"))+"</li>"+
 				  "<li><b>Ora: </b> "+event.getDataOra().format(DateTimeFormatter.ofPattern("hh:mm"))+"</li>"+
-				  "<center><img src=\""+event.getUrlImage()+"\" width=\"400px\" height=\"400px\"></center>"+
-				  "<li><b>Prezzo: </b> "+(event.getPrice()*100.0)/100.0+"</li></ul><br><br>";
+				  "<center><img src=\""+event.getUrlImage()+"\" width=\"640px\" height=\"480px\"></center>"+
+				  "<li><b>Prezzo: </b> "+(event.getPrice()*100.0)/100.0+"&euro;</li></ul><br><hr><br>";
 		msg+="<br><br>Ti aspettiamo sul nostro sito per il tuo prossimo evento!<br><br>";
 				 
 				  msg+="Buona giornata<br><br> <p style=\"text-align:right\"><b>Il team evenTour</b></p>";
 
 		try{
-			sendMail(destination,"Newsletter EvenTour","Gentile cliente","TI PROPONIAMO...",msg);
+			sendMailNews(destination,"Newsletter EvenTour","Gentile cliente","TI PROPONIAMO...",msg);
 			return true;
 		} catch (MessagingException e) {
 			return false;

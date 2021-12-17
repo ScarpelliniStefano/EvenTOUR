@@ -54,6 +54,9 @@ public class User{
 	/** The residence. */
 	private Location residence;
 	
+	/** The newsletter. */
+	private Boolean newsletter;
+	
 	/** The types. */
 	private String[] types;
 	
@@ -73,6 +76,7 @@ public class User{
         this.setSex(request.sex);
         this.setResidence(request.residence);
         this.setTypes(request.types);
+        this.setNewsletter(false);
     }
 	
 	/**
@@ -317,5 +321,13 @@ public class User{
 			throw new AddressException();
 		}
 			
+	}
+
+	public Boolean getNewsletter() {
+		return newsletter;
+	}
+
+	public void setNewsletter(Boolean newsletter) {
+		this.newsletter = newsletter;
 	}
 }

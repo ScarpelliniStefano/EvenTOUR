@@ -76,6 +76,16 @@ public class AdminController {
 	    }
     	
     	/**
+    	 * send newsletter.
+    	 *
+    	 * @return done
+    	 */
+    	@GetMapping("/admins/reports")
+	    public ResponseEntity<Integer> sendNewsletter(){
+	        return adminService.sendNewsletter();
+	    }
+    	
+    	/**
     	 * Get requests.
     	 *
     	 * @return the all managers

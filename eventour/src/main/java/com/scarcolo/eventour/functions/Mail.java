@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -115,27 +118,25 @@ public class Mail {
 		}
 	}
 	
-	public static boolean sendBookingEventMsg(String destination, Event[] events) throws IOException{
+	public static boolean sendNewsletterMsg(String destination, List<Event> events) throws IOException{
 		String msg = "Ciao,<br><br> ecco degli eventi che ti proponiamo questo mese:<br><br>";
-		for(Event event : events) {
-			String hh=("0"+event.getDataOra().getHour());
-			String mm=("0"+event.getDataOra().getMinute());
-		
-				  msg+="<ul><li><b>Nome evento: </b> "+event.getTitle()+"</li>"+
-				  "<li><b>Data: </b> "+event.getDataOra().getYear()+"</li>"+
-				  "<li><b>Codice prenotazione: </b> "+book.getId()+"</li></ul>"+
-				  "<center><img src=\"https://api.qrserver.com/v1/create-qr-code/?size=400x400&data="+book.getId()+"\" width=\"400px\" height=\"400px\"></center>"+
-				  "<br>Se hai effettuato un pagamento, nei prossimi giorni troverai nella tua casella mail la ricevuta d'acquisto.<br><br>";
+		for(Event event : events)
+				 msg+="<ul><li><b>Nome evento: </b> "+event.getTitle()+"</li>"+
+				  "<li><b>Data: </b> "+event.getDataOra().format(DateTimeFormatter.ofPattern("d MMM yyyy"))+"</li>"+
+				  "<li><b>Ora: </b> "+event.getDataOra().format(DateTimeFormatter.ofPattern("hh:mm"))+"</li>"+
+				  "<center><img src=\""+event.getUrlImage()+"\" width=\"400px\" height=\"400px\"></center>"+
+				  "<li><b>Prezzo: </b> "+(event.getPrice()*100.0)/100.0+"</li></ul><br><br>";
+		msg+="<br><br>Ti aspettiamo sul nostro sito per il tuo prossimo evento!<br><br>";
 				 
 				  msg+="Buona giornata<br><br> <p style=\"text-align:right\"><b>Il team evenTour</b></p>";
 
 		try{
-			sendMail(destination,"Prenotazione evento "+event.getTitle(),"Gentile cliente","PRENOTAZIONE EFFETTUATA!",msg);
+			sendMail(destination,"Newsletter EvenTour","Gentile cliente","TI PROPONIAMO...",msg);
 			return true;
 		} catch (MessagingException e) {
 			return false;
 		}
-	}
+	
 	}
 	
 }

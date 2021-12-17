@@ -3,6 +3,9 @@ package com.scarcolo.eventour.service.user;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
@@ -10,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.functions.Mail;
 import com.scarcolo.eventour.model.AccountResponse;
 import com.scarcolo.eventour.model.admin.Admin;
 import com.scarcolo.eventour.model.admin.AdminResponse;
@@ -406,6 +410,28 @@ public class UserService {
 			}
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
+	public Integer sendNews() {
+		try {
+			List<User> users = new ArrayList<>();
+			userRepository.findAll().forEach(users::add);
+			if(users.isEmpty()) {
+				return null;
+			}
+			int inviate=0;
+			for(User user: users) {
+				if(user.getNewsletter()) {
+					Page<Event> pageEvents = eventRepository.findByTypesAndLocation_RegioneLike(user.getTypes(), user.getResidence().getRegione(), PageRequest.of(0, 5,Sort.by("dataOra").ascending()));
+					Mail.sendNewsletterMsg(user.getEmail(),pageEvents.getContent());
+					inviate++;
+				}
+			}
+			return inviate;
+		}catch(Exception e) {
+			return null;
 		}
 	}
 	

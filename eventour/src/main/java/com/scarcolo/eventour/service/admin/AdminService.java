@@ -30,6 +30,7 @@ import com.scarcolo.eventour.repository.admin.AdminRepository;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 import com.scarcolo.eventour.service.manager.RequestService;
+import com.scarcolo.eventour.service.user.UserService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -187,6 +188,18 @@ public class AdminService {
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+	
+	@Autowired
+	private UserService userService;
+
+	public ResponseEntity<Integer> sendNewsletter() {
+			Integer newsGood=userService.sendNews();
+			if(newsGood!=null) {
+				return new ResponseEntity<>(newsGood, HttpStatus.OK);
+			}
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		
 	}
 
 

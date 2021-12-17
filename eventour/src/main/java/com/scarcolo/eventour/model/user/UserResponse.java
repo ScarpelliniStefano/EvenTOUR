@@ -39,6 +39,10 @@ public class UserResponse{
 	@JsonProperty("dateOfBirth")
 	private LocalDate dateOfBirth;
 	
+	/** The newsletter. */
+	@JsonProperty("newsletter")
+	private Boolean newsletter;
+	
 	/** The residence. */
 	@JsonProperty("residence")
 	private Location residence;
@@ -75,6 +79,7 @@ public class UserResponse{
 		this.setDateOfBirth(user.getDateOfBirth());
 		this.setResidence(user.getResidence());
 		this.setTypes(user.getTypes());
+		this.setNewsletter(user.getNewsletter());
 	}
 
 	/**
@@ -255,6 +260,14 @@ public class UserResponse{
 	 */
 	public void setPassword(String password) {
 		this.password = Functionalities.getMd5(password);
+	}
+
+	public Boolean getNewsletter() {
+		return newsletter;
+	}
+
+	public void setNewsletter(Boolean newsletter) {
+		this.newsletter = newsletter;
 	}
 
 	

@@ -18,7 +18,7 @@ import com.scarcolo.eventour.functions.Functionalities;
  *
  * @author stefa
  */
-@Document(collection = "managers")
+@Document(collection = "admins")
 public class Admin{
 	
 	/** The id. */

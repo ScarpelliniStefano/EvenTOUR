@@ -193,7 +193,7 @@ public class UserService {
 							return new ResponseEntity<>(new AccountResponse("TicketInsp",objResp),HttpStatus.OK);
 						}
 					}
-					return new ResponseEntity<>(new AccountResponse("TicketInsp","ERROR. invalid password"),HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+					return new ResponseEntity<>(new AccountResponse("NONE","ERROR. invalid password"),HttpStatus.NON_AUTHORITATIVE_INFORMATION);
 				}
 			}else {
 				List<User> users = userRepository.findByMail(user);
@@ -207,7 +207,7 @@ public class UserService {
 							objResp=new AdminResponse(admin.get(0));
 							return new ResponseEntity<>(new AccountResponse("Admin",objResp),HttpStatus.OK);
 						}else {
-							return new ResponseEntity<>(new AccountResponse("Admin","ERROR. invalid password"),HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+							return new ResponseEntity<>(new AccountResponse("NONE","ERROR. invalid password"),HttpStatus.NON_AUTHORITATIVE_INFORMATION);
 						}
 				}else {
 					if(!users.isEmpty()) {
@@ -215,7 +215,7 @@ public class UserService {
 							objResp=new UserResponse(users.get(0));
 							return new ResponseEntity<>(new AccountResponse("User",objResp),HttpStatus.OK);
 						}else {
-							return new ResponseEntity<>(new AccountResponse("User","ERROR. invalid password"),HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+							return new ResponseEntity<>(new AccountResponse("NONE","ERROR. invalid password"),HttpStatus.NON_AUTHORITATIVE_INFORMATION);
 						}
 					}else {
 						if(Functionalities.getMd5(managers.get(0).getPassword()).equals(psw)) {
@@ -232,7 +232,7 @@ public class UserService {
 							}
 							
 						}else {
-							return new ResponseEntity<>(new AccountResponse("Manager","ERROR. invalid password"),HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+							return new ResponseEntity<>(new AccountResponse("NONE","ERROR. invalid password"),HttpStatus.NON_AUTHORITATIVE_INFORMATION);
 						}
 					}
 				}

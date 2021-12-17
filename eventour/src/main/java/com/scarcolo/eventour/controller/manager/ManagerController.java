@@ -128,7 +128,7 @@ public class ManagerController {
 	    }
     	
     	@PostMapping("/managers/payment")
-    	public ResponseEntity<String> doPayment(@PathVariable("type") String type,@RequestBody PaymentRequest request){
+    	public ResponseEntity<String> doPayment(@RequestBody PaymentRequest request){
     	      return bookingService.checkerPayment("MANAGER",request);
     	}
 

@@ -81,8 +81,28 @@ public class AdminController {
     	 * @return the all managers
     	 */
     	@GetMapping("/admins/requests")
-	    public ResponseEntity<List<ManagerPlusResponse>> getRequests(@RequestParam(defaultValue = "1") int active, @RequestParam(defaultValue = "0") int scadute){
+	    public ResponseEntity<List<ManagerPlusResponse>> getRequests(@RequestParam(defaultValue = "0") int active, @RequestParam(defaultValue = "0") int scadute){
     		return adminService.getRequest(active>0?true:false,scadute>0?true : false);
+	    }
+    	
+    	/**
+    	 * Get requests.
+    	 *
+    	 * @return the all managers
+    	 */
+    	@GetMapping("/admins/accept={id}")
+	    public ResponseEntity<Boolean> setRequestActive(@PathVariable("id") String id){
+    		return adminService.setRequestActive(id);
+	    }
+    	
+    	/**
+    	 * Get requests.
+    	 *
+    	 * @return the all managers
+    	 */
+    	@GetMapping("/admins/malus={id}")
+	    public ResponseEntity<Boolean> setRequestMalus(@PathVariable("id") String id){
+    		return adminService.setRequestDate(id);
 	    }
 
 	   

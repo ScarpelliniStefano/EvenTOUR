@@ -4,12 +4,9 @@
 package com.scarcolo.eventour.model.manager;
 
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.scarcolo.eventour.functions.Functionalities;
-import com.scarcolo.eventour.model.Location;
 import com.scarcolo.eventour.model.request.Request;
 
 

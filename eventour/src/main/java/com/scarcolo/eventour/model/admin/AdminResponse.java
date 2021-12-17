@@ -10,7 +10,7 @@ import com.scarcolo.eventour.functions.Functionalities;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ManagerResponse.
+ * The Class AdminResponse.
  *
  * @author stefa
  */

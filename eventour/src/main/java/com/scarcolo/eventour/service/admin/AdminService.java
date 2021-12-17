@@ -1,7 +1,9 @@
 package com.scarcolo.eventour.service.admin;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -154,6 +156,34 @@ public class AdminService {
 		try {
 			List<ManagerPlusResponse> reqManager=requestService.getAll(active,scadute);
 			return new ResponseEntity<>(reqManager, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	public ResponseEntity<Boolean> setRequestActive(String id) {
+		try {
+			Request reqManager=requestService.getById(id);
+			if(reqManager!=null) {
+				reqManager.setActive(!reqManager.isActive());
+				requestService.update(reqManager);
+				return new ResponseEntity<>(true, HttpStatus.OK);
+			}
+			return new ResponseEntity<>(false, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	public ResponseEntity<Boolean> setRequestDate(String id) {
+		try {
+			Request reqManager=requestService.getById(id);
+			if(reqManager!=null) {
+				reqManager.setDateRenewal(Functionalities.convertToDate(LocalDate.now().minusYears(-1)));
+				requestService.update(reqManager);
+				return new ResponseEntity<>(true, HttpStatus.OK);
+			}
+			return new ResponseEntity<>(false, HttpStatus.OK);
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}

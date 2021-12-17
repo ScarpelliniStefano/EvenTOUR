@@ -6,7 +6,6 @@ package com.scarcolo.eventour.model.ticketinsp;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.scarcolo.eventour.functions.Functionalities;
 
 
 

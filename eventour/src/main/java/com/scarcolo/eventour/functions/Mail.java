@@ -1,16 +1,11 @@
 package com.scarcolo.eventour.functions;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.Properties;
-import java.util.Scanner;
-
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -118,6 +113,29 @@ public class Mail {
 		} catch (MessagingException e) {
 			return false;
 		}
+	}
+	
+	public static boolean sendBookingEventMsg(String destination, Event[] events) throws IOException{
+		String msg = "Ciao,<br><br> ecco degli eventi che ti proponiamo questo mese:<br><br>";
+		for(Event event : events) {
+			String hh=("0"+event.getDataOra().getHour());
+			String mm=("0"+event.getDataOra().getMinute());
+		
+				  msg+="<ul><li><b>Nome evento: </b> "+event.getTitle()+"</li>"+
+				  "<li><b>Data: </b> "+event.getDataOra().getYear()+"</li>"+
+				  "<li><b>Codice prenotazione: </b> "+book.getId()+"</li></ul>"+
+				  "<center><img src=\"https://api.qrserver.com/v1/create-qr-code/?size=400x400&data="+book.getId()+"\" width=\"400px\" height=\"400px\"></center>"+
+				  "<br>Se hai effettuato un pagamento, nei prossimi giorni troverai nella tua casella mail la ricevuta d'acquisto.<br><br>";
+				 
+				  msg+="Buona giornata<br><br> <p style=\"text-align:right\"><b>Il team evenTour</b></p>";
+
+		try{
+			sendMail(destination,"Prenotazione evento "+event.getTitle(),"Gentile cliente","PRENOTAZIONE EFFETTUATA!",msg);
+			return true;
+		} catch (MessagingException e) {
+			return false;
+		}
+	}
 	}
 	
 }

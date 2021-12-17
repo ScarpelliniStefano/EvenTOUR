@@ -22,9 +22,7 @@ import com.scarcolo.eventour.model.event.EventManResponse;
 import com.scarcolo.eventour.model.manager.AddManagerRequest;
 import com.scarcolo.eventour.model.manager.EditManagerRequest;
 import com.scarcolo.eventour.model.manager.ManagerReportResponse;
-import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
-import com.scarcolo.eventour.model.manager.ReportManResponse;
 import com.scarcolo.eventour.service.booking.BookingService;
 import com.scarcolo.eventour.service.manager.ManagerService;
 

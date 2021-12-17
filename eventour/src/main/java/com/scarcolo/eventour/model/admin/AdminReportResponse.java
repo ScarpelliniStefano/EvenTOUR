@@ -1,7 +1,6 @@
 package com.scarcolo.eventour.model.admin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.manager.ManagerPlusResponse;
 
 public class AdminReportResponse {

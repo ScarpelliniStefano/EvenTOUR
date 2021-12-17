@@ -182,6 +182,11 @@ public class RequestService {
 		return man;
 	}
 
+	public List<Request> getByIdManager(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 
 }

@@ -4,7 +4,6 @@
 package com.scarcolo.eventour.model.request;
 
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import org.bson.types.ObjectId;

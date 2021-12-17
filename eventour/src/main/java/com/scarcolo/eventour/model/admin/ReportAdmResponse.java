@@ -1,20 +1,15 @@
 package com.scarcolo.eventour.model.admin;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.Location;
-import com.scarcolo.eventour.model.booking.Booking;
-import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventPlus;
 import com.scarcolo.eventour.model.request.Request;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TicketManResponse.
+ * The Class ReportAdmResponse.
  */
 public class ReportAdmResponse {
 	

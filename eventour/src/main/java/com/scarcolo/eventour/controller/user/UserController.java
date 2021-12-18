@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.scarcolo.eventour.model.AccountRequest;
 import com.scarcolo.eventour.model.AccountResponse;
 import com.scarcolo.eventour.model.event.EventResponse;
+import com.scarcolo.eventour.model.event.EventResponseTour;
+import com.scarcolo.eventour.model.event.EventResponseTourComplete;
 import com.scarcolo.eventour.model.user.AddUserRequest;
 import com.scarcolo.eventour.model.user.EditUserRequest;
 import com.scarcolo.eventour.model.user.UserResponse;
@@ -90,8 +93,8 @@ public class UserController {
     	 * @return the even tour
     	 */
     	@GetMapping("/users/{id}/eventour/{num}")
-	    public ResponseEntity<List<EventResponse>> getEvenTour(@PathVariable("id") String id,@PathVariable("num") int num){
-	        return userService.getEvenTour(id, num);
+	    public ResponseEntity<EventResponseTourComplete> getEvenTour(@PathVariable("id") String id,@PathVariable("num") int num, @RequestParam(defaultValue = "1") int numPersone){
+	        return userService.getEvenTour(id, num, numPersone);
 	    }
 	    
 	    /**

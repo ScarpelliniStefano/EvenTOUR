@@ -20,6 +20,8 @@ import com.scarcolo.eventour.model.admin.AdminResponse;
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
 import com.scarcolo.eventour.model.event.EventResponse;
+import com.scarcolo.eventour.model.event.EventResponseTour;
+import com.scarcolo.eventour.model.event.EventResponseTourComplete;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerPlusResponse;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
@@ -269,7 +271,7 @@ public class UserService {
 	 * @param n the number of events wanted
 	 * @return the even tour
 	 */
-	public ResponseEntity<List<EventResponse>> getEvenTour(String userId,Integer n) {
+	public ResponseEntity<EventResponseTourComplete> getEvenTour(String userId,Integer n, Integer numPers) {
 		Optional<User> userData = userRepository.findById(userId);
 		User u=null;
 	  	if (userData.isPresent()) {
@@ -278,16 +280,10 @@ public class UserService {
 	  	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	  	}
 	  	List<EventBookedResponse> bookingData = this.getByIdUser(userId);
-		//1.filtra per regione
 		//2.ordinamento dataOra
-		List<Event> eventR=eventRepository.findByLocation_RegioneLikeAndFreeSeatGreaterThanZero(u.getResidence().getRegione() ,Sort.by("dataOra").ascending());
+		List<Event> eventR=eventRepository.findByfreeSeatGreaterThanNumPersone(numPers,Sort.by("dataOra").ascending());
 		//3.ciclo 
 		List<Event> s=new ArrayList<>();
-		List<Event> sSub=new ArrayList<>();
-		Integer c=0;
-		Integer cSub=0;
-		Boolean sel=false;
-		Boolean selSub=false;
 		if(bookingData!=null) {
 			for(int j=0;j<bookingData.size();j++) {
 				eventR.remove(bookingData.get(j).getEvent()[0]);
@@ -295,81 +291,95 @@ public class UserService {
 				eventR.removeIf(e -> dateE.isEqual(e.getDataOra().toLocalDate()));
 			}
 		}
-		for(int i=0;i<eventR.size();i++) {
-			if(c==n) {
-				List<EventResponse> eventResponse=new ArrayList<>();
-				for(Event e : s) {
-					eventResponse.add(new EventResponse(e));
-				}
-				return new ResponseEntity<>(eventResponse,HttpStatus.OK);
-			}
-			sel=false;
-			selSub=false;
-			for(int j=0;!sel && j<eventR.get(i).getTypes().length;j++) {
+		
+		final Double latU=u.getResidence().getLat();
+		final Double lngU=u.getResidence().getLng();
+		
+		List<Event> eventCopy=eventR;
+		eventCopy.removeIf(event -> (event.getLocation().getLat()==null || event.getLocation().getLng()==null || Functionalities.distance(latU, lngU, event.getLocation().getLat(), event.getLocation().getLng())>50));
+		
+		Event eventChoice=null;
+		Double peso=Double.MAX_VALUE;
+		for(int i=0;i<eventCopy.size();i++) {
+
+			for(int j=0;j<eventCopy.get(i).getTypes().length;j++) {
 				for(String k: u.getTypes()) {
-						if(!sel && (s.isEmpty() || !s.get(s.size()-1).getDataOra().toLocalDate().isEqual(eventR.get(i).getDataOra().toLocalDate()))) {
+						if((s.isEmpty() || !s.get(s.size()-1).getDataOra().toLocalDate().isEqual(eventCopy.get(i).getDataOra().toLocalDate()))) {
 							//controllo data
-							if(eventR.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {
-								if(!sSub.isEmpty() && sSub.get(sSub.size()-1).getId().equalsIgnoreCase(eventR.get(i).getId()))
-									sSub.remove(sSub.size()-1);
-								s.add(eventR.get(i));
-								sel=true;
-								c++;
-							}else if(!selSub && cSub<n && Functionalities.similType(eventR.get(i).getTypes()[j],k)){
-								sSub.add(eventR.get(i));
-								selSub=true;
-								cSub++;
-							}
-						}
-				}
-			}
-			
-		}
-		
-		for(int h=0;h<(n-s.size());h++) {
-			s.add(sSub.get(h));
-		}
-		
-		s=Functionalities.orderByData(s);
-		
-		List<EventResponse> eventResponse=new ArrayList<>();
-		for(Event e : s) {
-			eventResponse.add(new EventResponse(e));
-		}
-		return new ResponseEntity<>(eventResponse,HttpStatus.OK);
-	/*
-		for(int i=0;i<eventR.size();i++) {
-			if(c==n) {
-				List<EventResponse> eventResponse=new ArrayList<>();
-				for(Event e : s) {
-					eventResponse.add(new EventResponse(e));
-				}
-				return new ResponseEntity<>(eventResponse,HttpStatus.OK);
-			}
-			if(!s.contains(eventR.get(i))) {
-				sel=false;
-				for(int j=0;!sel && j<eventR.get(i).getTypes().length;j++) {
-					for(String k: u.getTypes()) {
-						if(!sel) {
-							//controllo data 
-							if(s.isEmpty() || !s.get(s.size()-1).getDataOra().toLocalDate().isEqual(eventR.get(i).getDataOra().toLocalDate())) {
-								if(Functionalities.similType(eventR.get(i).getTypes()[j],k)) {
-									s.add(eventR.get(i));
-									sel=true;
-									c++;
+							
+							if(eventCopy.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {
+								if(peso>(1*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(latU, lngU, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng())))) {
+									eventChoice=eventCopy.get(i);
+									peso=0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(latU, lngU, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng());
+								}
+							}else if(Functionalities.similType(eventCopy.get(i).getTypes()[j],k)){
+								if(peso>(2*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(latU, lngU, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng())))) {
+									eventChoice=eventCopy.get(i);
+									peso=2*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(latU, lngU, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng()));
 								}
 							}
 						}
-					}
 				}
 			}
 		}
-		List<EventResponse> eventResponse=new ArrayList<>();
-		for(Event e : s) {
-			eventResponse.add(new EventResponse(e));
+		if(eventChoice==null) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
-		return new ResponseEntity<>(eventResponse,HttpStatus.OK);
-		*/
+		s.add(eventChoice);
+		boolean choiceNull=false;
+		while(s.size()<=n && !choiceNull) {
+			final Double lanRef=s.get(s.size()-1).getLocation().getLat();
+			final Double lngRef=s.get(s.size()-1).getLocation().getLng();
+			eventR.removeIf(event -> (event.getLocation().getLat()==null || event.getLocation().getLng()==null || 
+											Functionalities.distance(lanRef, lngRef, event.getLocation().getLat(), event.getLocation().getLng())>50 ||
+											event.getDataOra().isBefore(s.get(s.size()-1).getDataOra()) || event.getDataOra().isAfter(s.get(s.size()-1).getDataOra())));
+			eventChoice=null;
+			peso=Double.MAX_VALUE;
+			for(int i=0;i<eventR.size();i++) {
+				for(int j=0;j<eventR.get(i).getTypes().length;j++) {
+					for(String k: u.getTypes()) {
+							if((s.isEmpty() || !s.get(s.size()-1).getDataOra().toLocalDate().isEqual(eventR.get(i).getDataOra().toLocalDate()))) {
+								//controllo data
+								if(eventR.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {
+									if(peso>(1*(0.5*eventR.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventR.get(i).getLocation().getLat(), eventR.get(i).getLocation().getLng())))) {
+										eventChoice=eventR.get(i);
+										peso=0.5*eventR.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventR.get(i).getLocation().getLat(), eventR.get(i).getLocation().getLng());
+									}
+								}else if(Functionalities.similType(eventR.get(i).getTypes()[j],k)){
+									if(peso>(2*(0.5*eventR.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventR.get(i).getLocation().getLat(), eventR.get(i).getLocation().getLng())))) {
+										eventChoice=eventR.get(i);
+										peso=2*(0.5*eventR.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventR.get(i).getLocation().getLat(), eventR.get(i).getLocation().getLng()));
+									}
+								}
+							}
+					}
+				}
+			}
+			if(eventChoice!=null)
+				s.add(eventChoice);
+			else
+				choiceNull=true;
+			
+		}
+		
+		List<EventResponseTour> eventResponse=new ArrayList<>();
+		Double distTot=0.0d;
+		Double priceTot=0.0d;
+		for(int i=0;i<s.size();i++) {
+			EventResponseTour et=new EventResponseTour(s.get(i));
+			if(i==0)
+				distTot+=Functionalities.distance(latU, lngU, s.get(i).getLocation().getLat(), s.get(i).getLocation().getLng());
+			else
+				distTot+=Functionalities.distance(s.get(i-1).getLocation().getLat(), s.get(i-1).getLocation().getLng(), s.get(i).getLocation().getLat(), s.get(i).getLocation().getLng());
+			et.setDistance(distTot);
+			et.setPriceTot(et.getPrice()*numPers);
+			priceTot+=et.getPriceTot();
+			eventResponse.add(et);
+		}
+		distTot=distTot+Functionalities.distance(s.get(s.size()-1).getLocation().getLat(), s.get(s.size()-1).getLocation().getLng(), latU, lngU);
+		EventResponseTourComplete etc=new EventResponseTourComplete(eventResponse,new UserResponse(u), n, eventResponse.size(), priceTot, distTot );
+		return new ResponseEntity<>(etc,HttpStatus.OK);
+	
 		
 		
 	}

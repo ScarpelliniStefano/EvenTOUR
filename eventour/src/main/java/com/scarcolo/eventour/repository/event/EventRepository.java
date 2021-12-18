@@ -189,4 +189,14 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	@Query("{ '_id' : new ObjectId('?0') }")
 	Optional<EventPlus> findEventPlusById(ObjectId id);
 
+	
+	/**
+	 * Find by free seat greater than numPersone.
+	 *
+	 * @param sort the sort
+	 * @return the list
+	 */
+	@Query("{freeSeat: {$gt: ?0} }")
+	List<Event> findByfreeSeatGreaterThanNumPersone(Integer numPers, Sort ascending);
+
 }

@@ -29,6 +29,9 @@ import com.scarcolo.eventour.model.event.EventPlus;
  *
  * @author stefa
  */
+
+
+
 public class Functionalities {
 
 	/**
@@ -209,5 +212,9 @@ public class Functionalities {
 			if(e.getDataOra().isAfter(LocalDateTime.now())) i++;
 		}
 		return i;
+	}
+	
+	public static Double distance(Double lat1, Double lng1, Double lat2, Double lng2) {
+		return 6372.795477598 * Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng1-lng2));
 	}
 }

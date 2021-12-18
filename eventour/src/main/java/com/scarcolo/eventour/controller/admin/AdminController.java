@@ -100,7 +100,7 @@ public class AdminController {
     	 *
     	 * @return the all managers
     	 */
-    	@GetMapping("/admins/accept={id}")
+    	@GetMapping("/admins/accept/{id}")
 	    public ResponseEntity<Boolean> setRequestActive(@PathVariable("id") String id){
     		return adminService.setRequestActive(id);
 	    }
@@ -110,9 +110,19 @@ public class AdminController {
     	 *
     	 * @return the all managers
     	 */
+    	@DeleteMapping("/admins/remove/{id}")
+	    public ResponseEntity<Boolean> removeRequest(@PathVariable("id") String id){
+    		return adminService.removeRequest(id);
+	    }
+    	
+    	/**
+    	 * Get requests.
+    	 *
+    	 * @return the all managers
+    	 */
     	@GetMapping("/admins/malus={id}")
 	    public ResponseEntity<Boolean> setRequestMalus(@PathVariable("id") String id){
-    		return adminService.setRequestDate(id);
+    		return adminService.setRequestDateMalus(id);
 	    }
 
 	   

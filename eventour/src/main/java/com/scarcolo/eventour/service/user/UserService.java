@@ -326,29 +326,31 @@ public class UserService {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		s.add(eventChoice);
+		eventCopy=eventR;
 		boolean choiceNull=false;
 		while(s.size()<=n && !choiceNull) {
+			eventCopy=eventR;
 			final Double lanRef=s.get(s.size()-1).getLocation().getLat();
 			final Double lngRef=s.get(s.size()-1).getLocation().getLng();
-			eventR.removeIf(event -> (event.getLocation().getLat()==null || event.getLocation().getLng()==null || 
+			eventCopy.removeIf(event -> (event.getLocation().getLat()==null || event.getLocation().getLng()==null || 
 											Functionalities.distance(lanRef, lngRef, event.getLocation().getLat(), event.getLocation().getLng())>50 ||
 											event.getDataOra().isBefore(s.get(s.size()-1).getDataOra()) || event.getDataOra().isAfter(s.get(s.size()-1).getDataOra())));
 			eventChoice=null;
 			peso=Double.MAX_VALUE;
-			for(int i=0;i<eventR.size();i++) {
-				for(int j=0;j<eventR.get(i).getTypes().length;j++) {
+			for(int i=0;i<eventCopy.size();i++) {
+				for(int j=0;j<eventCopy.get(i).getTypes().length;j++) {
 					for(String k: u.getTypes()) {
-							if((s.isEmpty() || !s.get(s.size()-1).getDataOra().toLocalDate().isEqual(eventR.get(i).getDataOra().toLocalDate()))) {
+							if((s.isEmpty() || !s.get(s.size()-1).getDataOra().toLocalDate().isEqual(eventCopy.get(i).getDataOra().toLocalDate()))) {
 								//controllo data
-								if(eventR.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {
-									if(peso>(1*(0.5*eventR.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventR.get(i).getLocation().getLat(), eventR.get(i).getLocation().getLng())))) {
-										eventChoice=eventR.get(i);
-										peso=0.5*eventR.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventR.get(i).getLocation().getLat(), eventR.get(i).getLocation().getLng());
+								if(eventCopy.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {
+									if(peso>(1*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng())))) {
+										eventChoice=eventCopy.get(i);
+										peso=0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng());
 									}
-								}else if(Functionalities.similType(eventR.get(i).getTypes()[j],k)){
-									if(peso>(2*(0.5*eventR.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventR.get(i).getLocation().getLat(), eventR.get(i).getLocation().getLng())))) {
-										eventChoice=eventR.get(i);
-										peso=2*(0.5*eventR.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventR.get(i).getLocation().getLat(), eventR.get(i).getLocation().getLng()));
+								}else if(Functionalities.similType(eventCopy.get(i).getTypes()[j],k)){
+									if(peso>(2*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng())))) {
+										eventChoice=eventCopy.get(i);
+										peso=2*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng()));
 									}
 								}
 							}

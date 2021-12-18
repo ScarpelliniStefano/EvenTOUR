@@ -196,7 +196,7 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	 * @param sort the sort
 	 * @return the list
 	 */
-	@Query("{freeSeat: {$gt: ?0} }")
+	@Query("{freeSeat: {$gte: ?0} }")
 	List<Event> findByfreeSeatGreaterThanNumPersone(Integer numPers, Sort ascending);
 
 }

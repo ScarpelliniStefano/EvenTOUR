@@ -40,11 +40,11 @@ public class EventResponseTourComplete{
 	public Double totalDistance;
 	
 	/** The total air distance. */
-	@JsonProperty("User")
+	@JsonProperty("user")
 	public UserResponse user;
 	
 	/** The number of event requested. */
-	@JsonProperty("Events")
+	@JsonProperty("events")
 	public List<EventResponseTour> events;
 	
 	/**

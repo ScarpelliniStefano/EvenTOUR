@@ -1,0 +1,5 @@
+package com.scarcolo.eventour.functions;
+
+public enum RoleE {
+
+}

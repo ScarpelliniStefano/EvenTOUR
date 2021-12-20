@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;eventour/src/main/java/com.scarcolo.eventour.functions.mailModel&apos;&#x0D;&#x0A;- Original project: &apos;eventour&apos;&#x0D;&#x0A;- Destination element: &apos;eventour/src/main/java/com.scarcolo.eventour.functions.mailModel&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     logo_img.png&#x0D;&#x0A;     textDelete.txt" description="Copy files" destination="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.scarcolo.eventour.functions.mailModel" element1="src/main/resources/logo_img.png" element2="src/main/resources/textDelete.txt" files="2" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1639332140977" units="0" version="1.0"/>
+</session>

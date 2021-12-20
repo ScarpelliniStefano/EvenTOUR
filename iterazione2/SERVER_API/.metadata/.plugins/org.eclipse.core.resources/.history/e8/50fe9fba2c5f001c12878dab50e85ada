@@ -1,0 +1,29 @@
+package com.scarcolo.eventour.repository.event;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import org.bson.types.ObjectId;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.data.mongodb.repository.Aggregation;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+
+import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventManResponse;
+import com.scarcolo.eventour.model.event.EventPlus;
+import com.scarcolo.eventour.model.manager.ReportManResponse;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface EventRepository.
+ */
+public interface EventPlusRepository extends MongoRepository<EventPlus, String> {
+	
+	
+
+}

@@ -1,0 +1,12 @@
+package com.scarcolo.eventour.functions;
+
+public enum RoleE {
+	/** The man. */
+	MAN,
+	
+	/** The woman. */
+	WOMAN,
+	
+	/** The other. */
+	OTHER
+}

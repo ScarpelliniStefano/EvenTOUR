@@ -18770,3 +18770,4 @@ java.io.FileNotFoundException: C:\Users\stefa\.m2\repository\org\apache\maven\re
 2021-12-19 17:19:48,174 [Worker-32: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2021-12-19 17:19:48,174 [Worker-32: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
 2021-12-19 17:19:48,175 [Worker-32: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\evenTour\eventour\eventour\src\test\resources
+2021-12-20 09:39:18,358 [Worker-0: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.

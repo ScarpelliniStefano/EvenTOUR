@@ -1,0 +1,32 @@
+package com.scarcolo.eventour.repository.manager;
+
+
+import java.util.List;
+
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+
+import com.scarcolo.eventour.model.request.Request;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface RequestRepository.
+ */
+public interface RequestRepository extends MongoRepository<Request, String>{
+
+	
+	List<Request> findByManagerId(String id);
+
+	@Query("{active : true, dateRenewal: { $lte : new Date(ISODate().getTime() - 1000 * 86400 * 365)}}")
+	List<Request> findAllActivePassed(Sort sort);
+
+	@Query("{active : true, dateRenewal: { $gt : new Date(ISODate().getTime() - 1000 * 86400 * 365)}}")
+	List<Request> findAllActiveNotPassed(Sort sort);
+
+	@Query("{active : false}")
+	List<Request> findAllNotActive(Sort sort);
+
+	
+	
+}

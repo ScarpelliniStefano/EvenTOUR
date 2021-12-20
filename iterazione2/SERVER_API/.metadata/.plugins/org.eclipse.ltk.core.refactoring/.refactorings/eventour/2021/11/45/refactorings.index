@@ -1,0 +1,105 @@
+1636455825005	Move compilation unit
+1636455829721	Delete element
+1636456200493	Move compilation unit
+1636456294009	Move compilation unit
+1636456308681	Move compilation unit
+1636456320735	Move compilation unit
+1636456335236	Move compilation unit
+1636456346918	Move compilation unit
+1636458192032	Move compilation unit
+1636458242291	Rename package 'repositorysponsorship'
+1636458300277	Rename package 'controllermanager'
+1636458385626	Copy compilation unit
+1636458539530	Copy compilation unit
+1636458541421	Copy compilation unit
+1636458544867	Copy compilation unit
+1636458547159	Copy compilation unit
+1636458611017	Rename type 'BookingRepository'
+1636458665687	Rename type 'TicketIsp'
+1636458711465	Copy compilation unit
+1636458713875	Copy compilation unit
+1636458715695	Copy compilation unit
+1636458717414	Copy compilation unit
+1636458719455	Copy compilation unit
+1636458743183	Rename type 'EventController'
+1636458992059	Rename type 'EventController'
+1636459162505	Delete element
+1636459165446	Copy compilation unit
+1636459178899	Rename type 'ManagerController'
+1636465110360	Rename type 'EventController'
+1636465298483	Rename type 'EventController'
+1636478604601	Copy compilation unit
+1636536871617	Delete element
+1636536878587	Delete element
+1636536881945	Delete element
+1636537925140	Delete element
+1636537933466	Delete element
+1636538924882	Rename type 'AddUserRequest'
+1636538941063	Rename type 'EditUserRequest'
+1636538954600	Rename type 'UserResponse'
+1636654823161	Move compilation unit
+1636654898055	Rename package 'servicemanager'
+1636655191253	Delete element
+1636656088971	Delete element
+1636656092344	Delete element
+1636656095117	Delete element
+1636656097942	Delete element
+1636656101021	Delete element
+1636656107238	Delete element
+1636656110771	Delete element
+1636656113692	Delete element
+1636656116577	Delete element
+1636656119464	Delete element
+1636656122727	Delete element
+1636656126019	Delete element
+1636656128662	Delete element
+1636656131656	Delete element
+1636656134250	Delete element
+1636656380815	Rename package 'configuration'
+1636656399415	Rename package 'controller'
+1636656415538	Rename package 'functions'
+1636656423526	Rename package 'model'
+1636656432608	Rename package 'fcom.scarcolo.eventour.functions'
+1636656440071	Rename package 'repository'
+1636656448034	Rename package 'service'
+1636707750814	Encapsulate field 'dataOra'
+1636708214350	Copy compilation unit
+1636709592869	Copy compilation unit
+1636709640609	Rename type 'EventController'
+1636709915922	Copy compilation unit
+1636709944523	Rename type 'EventService'
+1636710165027	Copy compilation unit
+1636710180945	Rename type 'EventRepository'
+1636710754275	Rename package 'com.scarcolo.eventour.model.ticketisp'
+1636710770207	Copy compilation units
+1636710777449	Rename type 'AddEventRequest'
+1636710795419	Rename type 'AddRequest'
+1636710806414	Rename type 'EditEventRequest'
+1636710901225	Copy compilation unit
+1636710914403	Rename type 'BookingController'
+1636711104809	Copy compilation unit
+1636711128586	Rename type 'BookingService'
+1636711157378	Rename type 'TicketInspsService'
+1636711473040	Copy compilation unit
+1636711489885	Rename type 'BookingRepository'
+1636712350975	Encapsulate field 'sex'
+1636712507200	Copy compilation units
+1636712526610	Rename type 'AddTicketInspRequest'
+1636712553889	Rename type 'EditTicketInspRequest'
+1636712727833	Copy compilation unit
+1636712738172	Rename type 'TicketInspController'
+1636712881680	Copy compilation unit
+1636712893171	Rename type 'TicketInspService'
+1636713118638	Copy compilation unit
+1636713131892	Rename type 'TicketInspRepository'
+1636713447778	Delete element
+1636713534550	Delete element
+1636713540701	Delete element
+1636713547369	Delete element
+1636717030584	Copy compilation unit
+1636717568707	Copy compilation unit
+1636717584002	Rename type 'EventResponse'
+1636717605207	Delete element
+1636717613098	Copy compilation unit
+1636718444914	Copy compilation unit
+1636718462318	Rename type 'ManagerResponse'

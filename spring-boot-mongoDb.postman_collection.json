@@ -784,6 +784,52 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUser\": \"61a0a933bce0e98fbb2d999d\",\r\n    \"cardNr\":\"4000003800000008\", \r\n    \"authNr\":\"222\", \r\n    \"date\":\"02/22\",\r\n    \"amount\":10.00\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/managers/payment",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"managers",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/managers/{id}/reports",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"managers",
+								"{id}",
+								"reports"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -796,13 +842,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{prefix}}/bookings/61a0b071bce0e98fbb2dad72/all",
+							"raw": "{{prefix}}/bookings/61a8c480648e0931525c22a3/all",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
 								"bookings",
-								"61a0b071bce0e98fbb2dad72",
+								"61a8c480648e0931525c22a3",
 								"all"
 							]
 						}
@@ -955,7 +1001,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{prefix}}/users/61a0a933bce0e98fbb2da05a/eventour/100",
+							"raw": "{{prefix}}/users/61a0a933bce0e98fbb2da05a/eventour/5?numPersone=4",
 							"host": [
 								"{{prefix}}"
 							],
@@ -963,7 +1009,13 @@
 								"users",
 								"61a0a933bce0e98fbb2da05a",
 								"eventour",
-								"100"
+								"5"
+							],
+							"query": [
+								{
+									"key": "numPersone",
+									"value": "4"
+								}
 							]
 						}
 					},
@@ -1002,16 +1054,83 @@
 							}
 						},
 						"url": {
-							"raw": "{{prefix}}/bookings/user/payment",
+							"raw": "{{prefix}}/bookings/payment",
 							"host": [
 								"{{prefix}}"
 							],
 							"path": [
 								"bookings",
-								"user",
 								"payment"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookingNr\":\"61a0b071bce0e98fbb2dad71\",\r\n    \"review\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/bookings/review",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings",
+								"review"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/admins/requests",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"admins",
+								"requests"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "newsletter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
 					},
 					"response": []
 				}

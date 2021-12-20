@@ -1,0 +1,26 @@
+package com.scarcolo.eventour.repository.event;
+
+import java.util.Optional;
+
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
+
+import com.scarcolo.eventour.model.event.EventPlus;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface EventPlusRepository.
+ */
+public interface EventPlusRepository extends MongoRepository<EventPlus, String> {
+	/**
+	 * Find event plus by id.
+	 *
+	 * @param id the id
+	 * @return the optional
+	 */
+	@Query("{ '_id' : new ObjectId('?0') }")
+	Optional<EventPlus> findEventPlusById(ObjectId id);
+	
+
+}

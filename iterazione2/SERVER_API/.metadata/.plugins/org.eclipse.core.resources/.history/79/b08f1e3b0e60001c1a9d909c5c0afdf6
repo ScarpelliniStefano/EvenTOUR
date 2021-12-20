@@ -1,0 +1,66 @@
+/**
+ * 
+ */
+package com.scarcolo.eventour.model.event;
+
+
+
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+
+
+
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventResponse.
+ *
+ * @author stefa
+ */
+
+public class EventResponseTourComplete{
+	
+	/** The number of event requested. */
+	@JsonProperty("numberRequested")
+	public Integer numberRequested;
+	
+	/** The number of event finded. */
+	@JsonProperty("numberFinded")
+	public Integer numberFinded;
+	
+	/** The price at person. */
+	@JsonProperty("totalPrice")
+	public Double totalPrice;
+	
+	/** The total air distance. */
+	@JsonProperty("totalAirDistance")
+	public Double totalDistance;
+	
+	/** The number of event requested. */
+	@JsonProperty("Events")
+	public List<EventResponseTour> events;
+	
+	/**
+	 * Instantiates a new event response.
+	 *
+	 * @param event the event
+	 */
+	public EventResponseTourComplete(List<EventResponseTour> event, int req, int finded, double price, double distance){
+		this.events=event;
+		this.numberFinded=finded;
+		this.numberRequested=req;
+		this.totalDistance=(distance*100.0)/100.0;
+    }
+	
+	 /**
+ 	 * Instantiates a new event response.
+ 	 */
+ 	public EventResponseTourComplete() {
+	    }
+
+	
+	
+	
+}

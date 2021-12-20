@@ -5,9 +5,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,10 +17,10 @@ import com.scarcolo.eventour.model.admin.Admin;
 import com.scarcolo.eventour.model.admin.AdminResponse;
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
-import com.scarcolo.eventour.model.event.EventResponse;
+import com.scarcolo.eventour.model.event.EventResponseTour;
+import com.scarcolo.eventour.model.event.EventResponseTourComplete;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerPlusResponse;
-import com.scarcolo.eventour.model.manager.ManagerResponse;
 import com.scarcolo.eventour.model.request.Request;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
 import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
@@ -40,7 +38,6 @@ import com.scarcolo.eventour.repository.user.UserRepository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,32 +57,41 @@ public class UserService {
 	@Autowired
 	private ManagerRepository managerRepository;
 	
-	/** The manager repository. */
+	/** The admin repository. */
 	@Autowired
 	private AdminRepository adminRepository;
 	
-	/** The manager repository. */
+	/** The request repository. */
 	@Autowired
 	private RequestRepository requestRepository;
 	
-	/** The ticket insp repository. */
+	/** The ticket inspectors repository. */
 	@Autowired
 	private TicketInspRepository ticketInspRepository;
 	
 	/** The event repository. */
 	@Autowired
 	private EventRepository eventRepository;
+	
+	/** The booking repository. */
+	@Autowired
+	private BookingRepository bookingRepository;
 
    
     /**
      * Add a user.
      *
-     * @param request the request
-     * @return the response entity
-     * @throws Exception the exception
+     * @param request the request of new user
+     * @return the response entity with user created
      */
-    public ResponseEntity<UserResponse> add(AddUserRequest request) throws Exception{
-    	User user = userRepository.save(new User(request));
+    public ResponseEntity<UserResponse> add(AddUserRequest request){
+    	User user;
+		try {
+			user = userRepository.save(new User(request));
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
         return new ResponseEntity<>(new UserResponse(user), HttpStatus.OK);
     }
 
@@ -95,15 +101,31 @@ public class UserService {
      *
      * @param request the request
      * @return the response entity
-     * @throws Exception the exception
      */
-    public ResponseEntity<UserResponse> update(EditUserRequest request) throws Exception {
+    public ResponseEntity<UserResponse> update(EditUserRequest request){
     	System.out.println(request.residence.getCity());
         Optional<User> optionalUser = userRepository.findById(request.id);
         if (optionalUser.isEmpty()) {
             return null;
         }
         User u=optionalUser.get();
+        if(request.dateOfBirth!=null) {
+        	try {
+				u.setDateOfBirth(Functionalities.convertToDate(request.dateOfBirth));
+			} catch (Exception e) {
+				System.out.println(e);
+				return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+			}
+        }
+        if(request.sex!=null) {
+        	u.setSex(request.sex);
+        }
+        if(request.surname!=null) {
+        	u.setSurname(request.surname);
+        }
+        if(request.name!=null) {
+        	u.setName(request.name);
+        }
         if(request.residence!=null) {
         	u.setResidence(request.residence);
         }
@@ -118,7 +140,7 @@ public class UserService {
     /**
      * Gets the user by id.
      *
-     * @param id the id
+     * @param id the id of user
      * @return the user by id
      */
     public ResponseEntity<UserResponse> getById(String id){
@@ -168,7 +190,7 @@ public class UserService {
 	}
 	
 	/**
-	 * Gets the account of a given mail/code and password.
+	 * Gets the account of a given mail/code/username and password.
 	 *
 	 * @param user the user
 	 * @param psw the psw
@@ -181,7 +203,7 @@ public class UserService {
 		}
 		Object objResp;
 		try {
-			if(!user.contains("@")) {
+			if(user.startsWith("TI-") && user.split("-").length==3) {
 				List<TicketInsp> tickets = ticketInspRepository.findByCode(user);
 				if(tickets.size()==0) {
 					return new ResponseEntity<>(new AccountResponse("NONE","ERROR. unregistered ticket inspector"),HttpStatus.OK);
@@ -197,6 +219,9 @@ public class UserService {
 				}
 			}else {
 				List<User> users = userRepository.findByMail(user);
+				if(users.isEmpty()) {
+					users=userRepository.findbyUsername(user);
+				}
 				List<Manager> managers = managerRepository.findByMail(user);
 				if(users.isEmpty()&&managers.isEmpty()) {
 					List<Admin> admin=adminRepository.findByMail(user);
@@ -243,12 +268,12 @@ public class UserService {
 		
 	}
 	
-	@Autowired
-	private BookingRepository bookingRepository;
+	
 	
 	
 	/**
-	 * Gets all booking by id user
+	 * Gets all booking by id user.
+	 *
 	 * @param id the id user
 	 * @return bookings by id user
 	 */
@@ -267,9 +292,10 @@ public class UserService {
 	 *
 	 * @param userId the user id
 	 * @param n the number of events wanted
+	 * @param numPers the number at least of freeSeat to find 
 	 * @return the even tour
 	 */
-	public ResponseEntity<List<EventResponse>> getEvenTour(String userId,Integer n) {
+	public ResponseEntity<EventResponseTourComplete> getEvenTour(String userId,Integer n, Integer numPers) {
 		Optional<User> userData = userRepository.findById(userId);
 		User u=null;
 	  	if (userData.isPresent()) {
@@ -278,12 +304,10 @@ public class UserService {
 	  	    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	  	}
 	  	List<EventBookedResponse> bookingData = this.getByIdUser(userId);
-		//1.filtra per regione
 		//2.ordinamento dataOra
-		List<Event> eventR=eventRepository.findByfreeSeatGreaterThanZero(Sort.by("dataOra").ascending());
+		List<Event> eventR=eventRepository.findByfreeSeatGreaterThanNumPersone(numPers,Sort.by("dataOra").ascending());
 		//3.ciclo 
 		List<Event> s=new ArrayList<>();
-		List<Event> sSub=new ArrayList<>();
 		if(bookingData!=null) {
 			for(int j=0;j<bookingData.size();j++) {
 				eventR.remove(bookingData.get(j).getEvent()[0]);
@@ -292,92 +316,120 @@ public class UserService {
 			}
 		}
 		
-		final Double lanU=u.getResidence().getLat();
+		final Double latU=u.getResidence().getLat();
 		final Double lngU=u.getResidence().getLng();
 		
 		List<Event> eventCopy=eventR;
-		eventCopy.removeIf(event -> (event.getLocation().getLat()==null || event.getLocation().getLng()==null || Functionalities.distance(lanU, lngU, event.getLocation().getLat(), event.getLocation().getLng())>50));
+		eventCopy.removeIf(event -> (event.getLocation().getLat()==null || event.getLocation().getLng()==null || Functionalities.distance(latU, lngU, event.getLocation().getLat(), event.getLocation().getLng())>50));
 		
 		Event eventChoice=null;
 		Double peso=Double.MAX_VALUE;
 		for(int i=0;i<eventCopy.size();i++) {
+
 			for(int j=0;j<eventCopy.get(i).getTypes().length;j++) {
 				for(String k: u.getTypes()) {
 						if((s.isEmpty() || !s.get(s.size()-1).getDataOra().toLocalDate().isEqual(eventCopy.get(i).getDataOra().toLocalDate()))) {
 							//controllo data
+							
 							if(eventCopy.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {
-								if(peso>(1*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(lanU, lngU, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng())))) {
-									System.out.println(eventCopy.get(i));
+								if(peso>(1*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(latU, lngU, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng())))) {
 									eventChoice=eventCopy.get(i);
-									peso=0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(lanU, lngU, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng());
+									peso=0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(latU, lngU, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng());
 								}
 							}else if(Functionalities.similType(eventCopy.get(i).getTypes()[j],k)){
-								if(peso>(2*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(lanU, lngU, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng())))) {
-									System.out.println(eventCopy.get(i));
+								if(peso>(2*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(latU, lngU, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng())))) {
 									eventChoice=eventCopy.get(i);
-									peso=2*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(lanU, lngU, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng()));
+									peso=2*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(latU, lngU, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng()));
 								}
 							}
 						}
 				}
 			}
 		}
-		
+		if(eventChoice==null) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
 		s.add(eventChoice);
-		for(int c=0;c<n-1;c++) {
-			System.out.println(s.get(s.size()-1));
+		eventCopy=eventR;
+		boolean choiceNull=false;
+		while(s.size()<=n && !choiceNull) {
+			eventCopy=eventR;
 			final Double lanRef=s.get(s.size()-1).getLocation().getLat();
 			final Double lngRef=s.get(s.size()-1).getLocation().getLng();
-			eventR.removeIf(event -> (event.getLocation().getLat()==null || event.getLocation().getLng()==null || 
+			eventCopy.removeIf(event -> (event.getLocation().getLat()==null || event.getLocation().getLng()==null || 
 											Functionalities.distance(lanRef, lngRef, event.getLocation().getLat(), event.getLocation().getLng())>50 ||
 											event.getDataOra().isBefore(s.get(s.size()-1).getDataOra()) || event.getDataOra().isAfter(s.get(s.size()-1).getDataOra())));
 			eventChoice=null;
 			peso=Double.MAX_VALUE;
-			for(int i=0;i<eventR.size();i++) {
-				for(int j=0;j<eventR.get(i).getTypes().length;j++) {
+			for(int i=0;i<eventCopy.size();i++) {
+				for(int j=0;j<eventCopy.get(i).getTypes().length;j++) {
 					for(String k: u.getTypes()) {
-							if((s.isEmpty() || !s.get(s.size()-1).getDataOra().toLocalDate().isEqual(eventR.get(i).getDataOra().toLocalDate()))) {
+							if((s.isEmpty() || !s.get(s.size()-1).getDataOra().toLocalDate().isEqual(eventCopy.get(i).getDataOra().toLocalDate()))) {
 								//controllo data
-								if(eventR.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {
-									if(peso>(1*(0.5*eventR.get(i).getPrice()+0.5*Functionalities.distance(lanU, lngU, eventR.get(i).getLocation().getLat(), eventR.get(i).getLocation().getLng())))) {
-										eventChoice=eventR.get(i);
-										peso=0.5*eventR.get(i).getPrice()+0.5*Functionalities.distance(lanU, lngU, eventR.get(i).getLocation().getLat(), eventR.get(i).getLocation().getLng());
+								if(eventCopy.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {
+									if(peso>(1*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng())))) {
+										eventChoice=eventCopy.get(i);
+										peso=0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng());
 									}
-								}else if(Functionalities.similType(eventR.get(i).getTypes()[j],k)){
-									if(peso>(2*(0.5*eventR.get(i).getPrice()+0.5*Functionalities.distance(lanU, lngU, eventR.get(i).getLocation().getLat(), eventR.get(i).getLocation().getLng())))) {
-										eventChoice=eventR.get(i);
-										peso=2*(0.5*eventR.get(i).getPrice()+0.5*Functionalities.distance(lanU, lngU, eventR.get(i).getLocation().getLat(), eventR.get(i).getLocation().getLng()));
+								}else if(Functionalities.similType(eventCopy.get(i).getTypes()[j],k)){
+									if(peso>(2*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng())))) {
+										eventChoice=eventCopy.get(i);
+										peso=2*(0.5*eventCopy.get(i).getPrice()+0.5*Functionalities.distance(lanRef, lngRef, eventCopy.get(i).getLocation().getLat(), eventCopy.get(i).getLocation().getLng()));
 									}
 								}
 							}
 					}
 				}
 			}
+			if(eventChoice!=null)
+				s.add(eventChoice);
+			else
+				choiceNull=true;
+			
 		}
 		
-		List<EventResponse> eventResponse=new ArrayList<>();
-		for(Event e : s) {
-			eventResponse.add(new EventResponse(e));
+		List<EventResponseTour> eventResponse=new ArrayList<>();
+		Double distTot=0.0d;
+		Double priceTot=0.0d;
+		for(int i=0;i<s.size();i++) {
+			EventResponseTour et=new EventResponseTour(s.get(i));
+			if(i==0)
+				distTot+=Functionalities.distance(latU, lngU, s.get(i).getLocation().getLat(), s.get(i).getLocation().getLng());
+			else
+				distTot+=Functionalities.distance(s.get(i-1).getLocation().getLat(), s.get(i-1).getLocation().getLng(), s.get(i).getLocation().getLat(), s.get(i).getLocation().getLng());
+			et.setDistance(distTot);
+			et.setPriceTot(et.getPrice()*numPers);
+			priceTot+=et.getPriceTot();
+			eventResponse.add(et);
 		}
-		return new ResponseEntity<>(eventResponse,HttpStatus.OK);
+		distTot=distTot+Functionalities.distance(s.get(s.size()-1).getLocation().getLat(), s.get(s.size()-1).getLocation().getLng(), latU, lngU);
+		EventResponseTourComplete etc=new EventResponseTourComplete(eventResponse,new UserResponse(u), n, eventResponse.size(), priceTot, distTot );
+		return new ResponseEntity<>(etc,HttpStatus.OK);
 	
 		
 		
 	}
 
 
+	/**
+	 * Sets the account psw.
+	 *
+	 * @param user the user
+	 * @param psw the psw to change
+	 * @return the response entity with account
+	 */
 	public ResponseEntity<AccountResponse> setAccountPsw(String user, String psw) {
 		if(user.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		Object objResp;
 		try {
-			if(user.contains("@")) {
-				List<Manager> managers = managerRepository.findByMail(user);
+			if(Functionalities.isValidEmailAddress(user)) {
+			List<Manager> managers = managerRepository.findByMail(user);
 				if(managers.isEmpty()) {
 						List<User> users = userRepository.findByMail(user);
-						if(user.isEmpty()) 
-							return new ResponseEntity<>(new AccountResponse("NONE","ERROR. invalid mail"),HttpStatus.OK);
+						if(user.isEmpty())
+							return new ResponseEntity<>(new AccountResponse("NONE","ERROR. invalid mail"),HttpStatus.NOT_ACCEPTABLE);
 						users.get(0).setPassword(psw);
 						userRepository.save(users.get(0));
 						return new ResponseEntity<>(new AccountResponse("User",users.get(0)),HttpStatus.OK);
@@ -397,7 +449,7 @@ public class UserService {
 						}		
 				}
 			}else {
-				return new ResponseEntity<>(new AccountResponse("NONE","ERROR. invalid mail"),HttpStatus.OK);
+				return new ResponseEntity<>(new AccountResponse("NONE","ERROR. invalid mail"),HttpStatus.NOT_ACCEPTABLE);
 			}
 		}catch(Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -405,6 +457,11 @@ public class UserService {
 	}
 
 
+	/**
+	 * Send newsletter.
+	 *
+	 * @return the number of users to whom the newsletter has been sent
+	 */
 	public Integer sendNews() {
 		try {
 			List<User> users = new ArrayList<>();

@@ -436,17 +436,12 @@ public class UserService {
 				}else {
 						Request req= requestRepository.findByManagerId(managers.get(0).getId()).get(0);
 						if(!req.isActive()) {
-							return new ResponseEntity<>(new AccountResponse("Manager","ERROR. no active manager"),HttpStatus.OK);
+							return new ResponseEntity<>(new AccountResponse("NONE","ERROR. no active manager"),HttpStatus.OK);
 						}
-						LocalDate dateCheck=Functionalities.convertToLocalDate(req.getDateRenewal()).plusYears(1);
-						if(dateCheck.isAfter(LocalDate.now())) {
-							managers.get(0).setPassword(psw);
-							managerRepository.save(managers.get(0));
-							objResp=new ManagerPlusResponse(managers.get(0),req);
-							return new ResponseEntity<>(new AccountResponse("Manager",objResp),HttpStatus.OK);
-						}else {
-							return new ResponseEntity<>(new AccountResponse("Manager","ERROR. renewal date is passed"),HttpStatus.OK);
-						}		
+					    managers.get(0).setPassword(psw);
+					    managerRepository.save(managers.get(0));
+						objResp=new ManagerPlusResponse(managers.get(0),req);
+						return new ResponseEntity<>(new AccountResponse("Manager",objResp),HttpStatus.OK);	
 				}
 			}else {
 				return new ResponseEntity<>(new AccountResponse("NONE","ERROR. invalid mail"),HttpStatus.NOT_ACCEPTABLE);

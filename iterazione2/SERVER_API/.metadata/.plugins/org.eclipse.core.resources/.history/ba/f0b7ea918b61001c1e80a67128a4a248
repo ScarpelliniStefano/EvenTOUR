@@ -23,7 +23,7 @@ public interface TicketInspRepository extends MongoRepository<TicketInsp, String
 	 * @param eventId the event id
 	 * @return the list
 	 */
-	@Query("{eventId:new ObjectId('?0')}")
+	@Query("{eventId:new ObjectId(?0)}")
 	List<TicketInsp> findByEventId(String eventId);
 
 	/**

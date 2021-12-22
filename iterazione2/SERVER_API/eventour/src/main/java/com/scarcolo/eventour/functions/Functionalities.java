@@ -247,6 +247,10 @@ public class Functionalities {
 	 * @return the air distance
 	 */
 	public static Double distance(Double lat1, Double lng1, Double lat2, Double lng2) {
+		lat1=lat1*Math.PI/180;
+		lat2=lat2*Math.PI/180;
+		lng1=lng1*Math.PI/180;
+		lng2=lng2*Math.PI/180;
 		return 6372.795477598 * Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng1-lng2));
 	}
 }

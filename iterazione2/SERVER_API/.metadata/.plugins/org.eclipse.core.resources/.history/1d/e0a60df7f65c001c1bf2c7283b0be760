@@ -1,5 +1,0 @@
-package com.scarcolo.eventour.model.admin;
-
-public class AddAdminRequest {
-
-}

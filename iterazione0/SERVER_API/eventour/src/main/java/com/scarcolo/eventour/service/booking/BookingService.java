@@ -12,8 +12,10 @@ import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
+import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
 import com.scarcolo.eventour.repository.event.EventRepository;
+import com.scarcolo.eventour.repository.user.UserRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +35,10 @@ public class BookingService {
     /** The event repository. */
     @Autowired
     private EventRepository eventRepository;
+    
+    /** The event repository. */
+    @Autowired
+    private UserRepository userRepository;
 
    
     /**
@@ -44,17 +50,21 @@ public class BookingService {
     public ResponseEntity<Object> add(AddBookingRequest request) {
         Booking booking = bookingRepository.save(new Booking(request));
         Optional<Event> optionalEvent = eventRepository.findById(booking.getEventId());
-        if (!optionalEvent.isEmpty()) {
+        Optional<User> optionalUser = userRepository.findById(booking.getUserId());
+        if (!optionalUser.isEmpty() && !optionalEvent.isEmpty()) {
             Event eventM=optionalEvent.get();
             if(eventM.getFreeSeat()-booking.getPrenotedSeat()>=0) {
             	eventM.setFreeSeat(eventM.getFreeSeat()-booking.getPrenotedSeat());
             	eventRepository.save(eventM);
             } else {
             	bookingRepository.delete(booking);
-            	return new ResponseEntity<>(new String("ERROR. no enough seats available."), HttpStatus.OK);
+            	return new ResponseEntity<>("ERROR. no enough seats available.", HttpStatus.OK);
             }
             	
             
+    	}else {
+    		bookingRepository.delete(booking);
+    		return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     	}
         return new ResponseEntity<>(booking, HttpStatus.OK);
         
@@ -106,11 +116,30 @@ public class BookingService {
 	 */
 	public ResponseEntity<List<EventBookedResponse>> getByIdUser(String id) {
 		try {
+			Optional<User> userOpt=userRepository.findById(id);
+			if(userOpt.isEmpty()) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			AggregationResults<EventBookedResponse> eventsA=bookingRepository.findByUserId(new ObjectId(id));
 			List<EventBookedResponse> eventR=eventsA.getMappedResults();
 			return new ResponseEntity<>(eventR, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	/**
+	 * Gets all booking by id user and id event.
+	 *
+	 * @param id the id user
+	 * @return bookings by id user
+	 */
+	public ResponseEntity<List<EventBookedResponse>> getByIdUserEvent(String id,String idE) {
+		try {
+			AggregationResults<EventBookedResponse> eventsA=bookingRepository.findByUserIdAndEventId(id,idE);
+			List<EventBookedResponse> eventR=eventsA.getMappedResults();
+			if(eventR.isEmpty()) return new ResponseEntity<>(HttpStatus.METHOD_NOT_ALLOWED);
+			return new ResponseEntity<>(eventR, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -123,9 +152,6 @@ public class BookingService {
 	 */
 	public ResponseEntity<String> getCheck(String idBooking,String idEvent) {
     	Optional<Booking> bookingData = bookingRepository.findById(idBooking);
-    	System.out.println(bookingData);
-    	System.out.println(idBooking);
-    	System.out.println(idEvent);
   	  	if (bookingData.isPresent()) {
   	  		if(bookingData.get().getEventId().equalsIgnoreCase(idEvent)) {
   	  			modify(idBooking);

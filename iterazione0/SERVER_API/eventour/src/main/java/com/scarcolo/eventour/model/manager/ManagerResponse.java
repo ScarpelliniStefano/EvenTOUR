@@ -6,6 +6,7 @@ package com.scarcolo.eventour.model.manager;
 
 import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.Location;
 
 
@@ -59,17 +60,18 @@ public class ManagerResponse{
 	 * Instantiates a new manager response.
 	 *
 	 * @param manager the manager
+	 * @throws Exception 
 	 */
-	public ManagerResponse(Manager manager){
-		this.setId(manager.getId());
-		this.setMail(manager.getMail());
-		this.setPassword(manager.getPassword());
-		this.setName(manager.getName());
-		this.setSurname(manager.getSurname());
-		this.setCodicePIVA(manager.getCodicePIVA());
-		this.setDateOfBirth(manager.getDateOfBirthLocal());
-		this.setResidence(manager.getResidence());
-		this.setRagioneSociale(manager.getRagioneSociale());
+	public ManagerResponse(Manager manager) throws Exception{
+		this.id=manager.getId();
+		this.mail=manager.getMail();
+		this.password=manager.getPassword();
+		this.name=manager.getName();
+		this.surname=manager.getSurname();
+		this.dateOfBirth=Functionalities.convertToLocalDate(manager.getDateOfBirth());
+		this.residence=manager.getResidence();
+		this.codicePIVA = manager.getCodicePIVA();
+		this.ragioneSociale=manager.getRagioneSociale();
 	}
 
 	/**

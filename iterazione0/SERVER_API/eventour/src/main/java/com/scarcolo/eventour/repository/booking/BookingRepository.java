@@ -34,6 +34,28 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "        }\n"
 			+ "    }"})
 	AggregationResults<EventBookedResponse> findByUserId(ObjectId id);
+
+	/**
+	 * Find by user id and event id.
+	 *
+	 * @param id the id
+	 * @param idE the id event
+	 * @return the aggregation results
+	 */
+	@Aggregation(pipeline = {"{\n"
+			+ "        '$match': {\n"
+			+ "            'userId': ObjectId('?0')\n"
+			+ "            'eventId': ObjectId('?1')\n"
+			+ "        }\n"
+			+ "    }"," {\n"
+			+ "        '$lookup': {\n"
+			+ "            'from': 'events', \n"
+			+ "            'localField': 'eventId', \n"
+			+ "            'foreignField': '_id', \n"
+			+ "            'as': 'event'\n"
+			+ "        }\n"
+			+ "    }"})
+	AggregationResults<EventBookedResponse> findByUserIdAndEventId(String id, String idE);
 	
 	
 	

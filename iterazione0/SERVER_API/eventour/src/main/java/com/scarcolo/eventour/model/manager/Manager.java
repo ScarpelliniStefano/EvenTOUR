@@ -4,6 +4,7 @@
 package com.scarcolo.eventour.model.manager;
 
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -61,14 +62,22 @@ public class Manager{
 	 * @throws Exception the exception
 	 */
 	public Manager(AddManagerRequest request) throws Exception{
-		this.setMail(request.mail);
-		this.setPassword(request.password);
-		this.setName(request.name);
-		this.setSurname(request.surname);
-		this.setDateOfBirth(Functionalities.convertToDate(request.dateOfBirth));
-		this.setResidence(request.residence);
-		this.setCodicePIVA(request.codicePIVA);
-		this.setRagioneSociale(request.ragioneSociale);
+		if(!Functionalities.isValidEmailAddress(request.mail)) throw new AddressException();
+		this.mail=(Functionalities.isValidEmailAddress(request.mail)) ? request.mail : null;
+		this.password=request.password;
+		this.name=request.name;
+		this.surname=request.surname;
+		this.dateOfBirth=Functionalities.convertToDate(request.dateOfBirth);
+		if(!dateOfBirth.before(new Date())) {
+			throw new DateTimeException("Errore data futura");
+		}
+		this.residence=request.residence;
+		String res=PartitaIVAFunctions.validate(request.codicePIVA);
+		if(res=="ok")
+			this.codicePIVA = request.codicePIVA;
+		else
+			throw new IllegalArgumentException(res);
+		this.ragioneSociale=request.ragioneSociale;
 	}
 	
 	/**
@@ -204,7 +213,7 @@ public class Manager{
 		if(dateOfBirth.before(new Date())) {
 			this.dateOfBirth = dateOfBirth;
 		}else {
-			throw new Exception("Errore data futura");
+			throw new DateTimeException("Errore data futura");
 		}
 		
 	}
@@ -257,7 +266,7 @@ public class Manager{
 		if(res=="ok")
 			this.codicePIVA = codicePIVA;
 		else
-			throw new Exception(res);
+			throw new IllegalArgumentException(res);
 	}
 	
 	/**

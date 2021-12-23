@@ -64,7 +64,7 @@ public class TicketInspService {
 			for(TicketInsp ticket: ticketInsps) ticketR.add(new TicketInspResponse(ticket));
 			return new ResponseEntity<>(ticketR, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

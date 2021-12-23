@@ -64,16 +64,16 @@ public class UserResponse{
 	 * @param user the user
 	 */
 	public UserResponse(User user){
-		this.setId(user.getId());
-		this.setUsername(user.getUsername());
-		this.setMail(user.getEmail());
-		this.setPassword(user.getPassword());
-		this.setName(user.getName());
-		this.setSurname(user.getSurname());
-		this.setSex(user.getSex());
-		this.setDateOfBirth(user.getDateOfBirth());
-		this.setResidence(user.getResidence());
-		this.setTypes(user.getTypes());
+		this.id=user.getId();
+		this.username=user.getUsername();
+		this.mail=user.getEmail();
+		this.password=user.getPassword();
+		this.name=user.getName();
+		this.surname=user.getSurname();
+		this.sex=user.getSex();
+		this.dateOfBirth=user.getDateOfBirth();
+		this.residence=user.getResidence();
+		this.types=user.getTypes();
 	}
 
 	/**

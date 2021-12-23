@@ -102,7 +102,6 @@ public class Functionalities {
 	 * @return true, if successful
 	 */
 	public static boolean similType(String evTyp, String usTyp) {
-		System.out.println(evTyp+ " " +usTyp);
 		String[] splittedE=evTyp.split("\\.");
 		String[] splittedU=usTyp.split("\\.");
 		if(!splittedE[0].equalsIgnoreCase(splittedU[0]))

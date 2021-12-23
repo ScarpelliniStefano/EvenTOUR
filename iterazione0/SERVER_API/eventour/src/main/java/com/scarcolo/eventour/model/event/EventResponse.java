@@ -73,16 +73,16 @@ public class EventResponse {
 	 */
 	public EventResponse(Event event){
 		this.id=event.getId();
-		this.setTitle(event.getTitle());
-        this.setDescription(event.getDescription());
-        this.setLocation(event.getLocation());
-        this.setTypes(event.getTypes());
-        this.setDataOra(event.getDataOra());
-        this.setManagerId(event.getManagerId());
-        this.setUrlImage(event.getUrlImage());
-        this.setTotSeat(event.getTotSeat());
-        this.setFreeSeat(event.getFreeSeat());
-        this.setPrice(event.getPrice());
+		this.title=event.getTitle();
+        this.description=event.getDescription();
+        this.location=event.getLocation();
+        this.types=event.getTypes();
+        this.dataOra=event.getDataOra();
+        this.managerId=event.getManagerId();
+        this.urlImage=event.getUrlImage();
+        this.totSeat=event.getTotSeat();
+        this.freeSeat=event.getFreeSeat();
+        this.price=event.getPrice();
     }
 	
 	 /**

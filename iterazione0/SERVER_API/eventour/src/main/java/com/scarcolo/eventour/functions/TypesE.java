@@ -99,7 +99,7 @@ public enum TypesE {
     TypesE(String code, String name) {
         this.code=code;
         this.name=name;
-        BootstrapSingleton.lookup.put(code, this);
+        BootstrapSingleton.LOOKUP.put(code, this);
     }
     
     /**
@@ -123,6 +123,6 @@ public enum TypesE {
      * @return the types E
      */
     public static TypesE findCode(String codeFind) {
-    	 return BootstrapSingleton.lookup.get(codeFind);
+    	 return BootstrapSingleton.LOOKUP.get(codeFind);
     }
 }

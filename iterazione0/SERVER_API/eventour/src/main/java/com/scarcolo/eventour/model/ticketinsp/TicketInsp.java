@@ -41,10 +41,11 @@ public class TicketInsp{
 	 * @throws Exception the exception of wrong code
 	 */
 	public TicketInsp(AddTicketInspRequest request) throws Exception {
-        this.setPassword(request.password);
-        this.setCode(request.code);
-        this.setEventId(request.eventId);
-        this.setFullName(request.fullName);
+        this.password=request.password;
+        if(!Functionalities.isValidCode(request.code)) throw new IllegalArgumentException();
+        this.code=request.code;
+        this.eventId=new ObjectId(request.eventId);
+        this.fullName=request.fullName;
     }
 	
 	/**
@@ -148,7 +149,7 @@ public class TicketInsp{
 		if(res) {
 			this.code=code;
 		}else {
-			throw new Exception();
+			throw new IllegalArgumentException();
 		}
 			
 	}

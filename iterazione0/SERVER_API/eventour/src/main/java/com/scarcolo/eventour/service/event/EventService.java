@@ -15,7 +15,6 @@ import com.scarcolo.eventour.model.event.AddEventRequest;
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.repository.event.EventRepository;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,8 +41,13 @@ public class EventService {
      * @return the response entity
      * @throws Exception the exception
      */
-    public ResponseEntity<EventResponse> add(AddEventRequest request) throws Exception {
-        Event event = eventRepository.save(new Event(request));
+    public ResponseEntity<EventResponse> add(AddEventRequest request){
+        Event event;
+		try {
+			event = eventRepository.save(new Event(request));
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
         return new ResponseEntity<>(new EventResponse(event), HttpStatus.OK);
     }
 
@@ -122,7 +126,7 @@ public class EventService {
 			
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -155,8 +159,18 @@ public class EventService {
 			response.put("totalPages", pageEvents.getTotalPages());
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+
+	public boolean delete(String id) {
+		Optional<Event> optionalEvent = eventRepository.findById(id);
+        if (optionalEvent.isEmpty()) {
+            return false;
+        }
+        eventRepository.deleteById(optionalEvent.get().getId());
+        return true;
 	}
 
 }

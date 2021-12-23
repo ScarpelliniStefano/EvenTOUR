@@ -45,7 +45,7 @@ public class Booking {
 	public Booking(AddBookingRequest request) {
         this.setUserId(new ObjectId(request.userId));
         this.setEventId(new ObjectId(request.eventId));
-        this.setPrenotedSeat(request.prenotedSeat);
+        this.prenotedSeat=(request.prenotedSeat>0) ? request.prenotedSeat : 0;
         this.setCome(false);
     }
 	

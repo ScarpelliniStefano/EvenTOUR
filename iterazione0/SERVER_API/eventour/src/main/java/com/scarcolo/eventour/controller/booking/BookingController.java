@@ -52,6 +52,17 @@ public class BookingController {
    	 */
    	@GetMapping("/bookings/user/{id}/event/{idEv}")
 	    public ResponseEntity<List<EventBookedResponse>> getBookingByUserAndEvent(@PathVariable("id") String id, @PathVariable("idEv") String idE){
+	        return bookingService.getByIdUserEvent(id,idE);
+	    }
+   	
+    /**
+   	 * Gets the booking by user.
+   	 *
+   	 * @param id the id
+   	 * @return the booking by user
+   	 */
+   	@GetMapping("/bookings/user/{id}")
+	    public ResponseEntity<List<EventBookedResponse>> getBookingByUserAndEvent(@PathVariable("id") String id){
 	        return bookingService.getByIdUser(id);
 	    }
 

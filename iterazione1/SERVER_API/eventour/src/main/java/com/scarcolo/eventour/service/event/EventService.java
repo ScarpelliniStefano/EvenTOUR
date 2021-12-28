@@ -66,9 +66,13 @@ public class EventService {
      * @throws Exception the exception for no event created
      */
     public ResponseEntity<EventResponse> add(AddEventRequest request) throws Exception {
-        Event event = eventRepository.save(new Event(request));
-        System.out.println(event.getLocation().getSigla());
-        return new ResponseEntity<>(new EventResponse(event), HttpStatus.OK);
+    	try {
+    		Event event = eventRepository.save(new Event(request));
+    		return new ResponseEntity<>(new EventResponse(event), HttpStatus.OK);
+    	}catch(Exception ex) {
+    		return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    	}
+        
     }
 
   
@@ -238,7 +242,6 @@ public class EventService {
 			    c.setTime(dataF); 
 			    c.add(Calendar.DATE, 1);
 			    dataF = c.getTime();
-				System.out.println(dataI+" "+dataF);
 			}else {
 				Date data=new SimpleDateFormat("yyyy-MM-dd").parse(dataS) ;
 				DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");

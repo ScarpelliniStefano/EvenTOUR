@@ -75,7 +75,6 @@ public class Event {
         this.setLocation(request.location);
         this.setTypes(request.types);
         this.setDataOra(Functionalities.convertToDate(request.dataOra));
-        System.out.println(request.managerId);
         this.setManagerId(request.managerId);
         this.setUrlImage(request.urlImage);
         this.setTotSeat(request.totSeat);

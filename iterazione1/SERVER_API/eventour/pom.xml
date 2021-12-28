@@ -83,7 +83,7 @@
              <plugin>
         <groupId>com.github.spotbugs</groupId>
         <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>4.2.2</version>
+        <version>4.2.2</version><!--$NO-MVN-MAN-VER$-->
       </plugin>
         </plugins>
     </build>

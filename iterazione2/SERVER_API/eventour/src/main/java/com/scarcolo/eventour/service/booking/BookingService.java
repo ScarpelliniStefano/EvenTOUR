@@ -146,20 +146,6 @@ public class BookingService {
             bookingRepository.save(book);
     	}
     }
-    
-    /**
-     * Update a booking.
-     *
-     * @param request the request with details to change
-     * @return the response entity with updated booking
-     */
-    public ResponseEntity<Booking> update(EditBookingRequest request) {
-        Optional<Booking> optionalBooking = bookingRepository.findById(request.id);
-        if (optionalBooking.isEmpty()) {
-            return null;
-        }
-        return new ResponseEntity<>(optionalBooking.get(), HttpStatus.OK);
-    }
 
    
     /**

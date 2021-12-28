@@ -178,13 +178,10 @@ public class BookingService {
 	 */
 	public ResponseEntity<List<EventBookedResponse>> getByIdUser(int page, int size, String id) {
 		try {
-			System.out.println(page+" "+size+" "+id);
 			AggregationResults<EventBookedResponse> eventsA=bookingRepository.findByUserId(new ObjectId(id),page*size,size);
 			List<EventBookedResponse> eventR=eventsA.getMappedResults();
-			
 			return new ResponseEntity<>(eventR, HttpStatus.OK);
 		}catch(Exception e) {
-			
 			System.out.println(e);
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -217,13 +214,10 @@ public class BookingService {
 	 * @return the check
 	 */
 	public ResponseEntity<String> getCheck(String idBooking,String idEvent) {
-		System.out.println(idBooking);
-    	System.out.println(idEvent);
     	Optional<Booking> bookingData = bookingRepository.findById(idBooking);
     	
     	
   	  	if (bookingData.isPresent()) {
-  	  		System.out.println(bookingData.get().getId());
   	  		if(bookingData.get().getEventId().equalsIgnoreCase(idEvent)) {
   	  			modify(idBooking);
   	  			return new ResponseEntity<>("ACCESS GRANTED", HttpStatus.OK);
@@ -262,7 +256,6 @@ public class BookingService {
      * @return the response entity with string confirmation of error
      */
 	public ResponseEntity<String> checkerPayment(String type, PaymentRequest request) {
-		System.out.println(request.dateScad);
 		LocalDate dt=LocalDate.of(Integer.parseInt("20"+request.dateScad.split("/")[1]), Integer.parseInt(request.dateScad.split("/")[0]),01);
 		request.cardNr=request.cardNr.replaceAll(" ", "");
 		request.cardNr=request.cardNr.replaceAll("-", "");

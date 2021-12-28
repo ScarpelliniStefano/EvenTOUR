@@ -50,18 +50,6 @@ public class BookingController {
 	      return bookingService.add(request);
 	}
 
-	   
-    /**
-	 * Update booking.
-	 *
-	 * @param request the request of booking to update
-	 * @return the response entity with booking updated
-	 */
-	@PutMapping("/bookings")
-    public ResponseEntity<Booking> updateBooking(@RequestBody EditBookingRequest request){
-        return bookingService.update(request);
-    }
-
     
    
     /**

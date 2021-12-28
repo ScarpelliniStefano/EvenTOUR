@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.scarcolo.eventour.functions.Mail;
 import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
-import com.scarcolo.eventour.model.booking.EditBookingRequest;
 import com.scarcolo.eventour.model.booking.PaymentRequest;
 import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
 import com.scarcolo.eventour.model.event.Event;

@@ -93,7 +93,7 @@ public class EventService {
         	e.setTitle(request.title);
         }
         if(request.description!=null) {
-        	e.setTitle(request.description);
+        	e.setDescription(request.description);
         }
         if(request.dataOra!=null) {
         	e.setDataOra(Functionalities.convertToDate(request.dataOra));
@@ -150,11 +150,13 @@ public class EventService {
         }
         boolean resp=bookingService.deleteAllBookingFromEvent(optionalEvent.get());
         if(resp==false) {
-        	System.out.println("error in deleting bookings");
+        	throw new IllegalArgumentException();
+        	//System.out.println("error in deleting bookings");
         }
         resp=ticketService.deleteAllTicketsFromEvent(optionalEvent.get().getId());
         if(resp==false) {
-        	System.out.println("error in deleting tickets");
+        	throw new IllegalArgumentException();
+        	//System.out.println("error in deleting tickets");
         }
         eventRepository.deleteById(optionalEvent.get().getId());
         return true;
@@ -217,7 +219,7 @@ public class EventService {
 			
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -268,7 +270,7 @@ public class EventService {
 		  return new ResponseEntity<>(response, HttpStatus.OK);
 	  	  
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -311,7 +313,7 @@ public class EventService {
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		  	  
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -353,7 +355,7 @@ public class EventService {
 		try {
 			Pageable paging = PageRequest.of(page, size,Sort.by("dataOra").ascending());
 			Page<Event> pageEvents;
-			pageEvents = eventRepository.findByTypesAndLocation_RegioneLike(types,region,paging);
+			pageEvents = eventRepository.findByTypesAndLocationRegioneLike(types,region,paging);
 			List<Event> events=pageEvents.getContent();
 		  	  if (events.isEmpty()) {
 		  	    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -368,7 +370,7 @@ public class EventService {
 			  return new ResponseEntity<>(response, HttpStatus.OK);
 			  
 			}catch(Exception e) {
-				return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 	}
 
@@ -402,7 +404,7 @@ public class EventService {
 			  return new ResponseEntity<>(response, HttpStatus.OK);
 			  
 			}catch(Exception e) {
-				return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 	}
 
@@ -435,7 +437,7 @@ public class EventService {
 			response.put("totalPages", pageEvents.getTotalPages());
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

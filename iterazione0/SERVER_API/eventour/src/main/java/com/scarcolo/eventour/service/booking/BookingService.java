@@ -98,10 +98,12 @@ public class BookingService {
         }
         
         Optional<Event> optionalEvent = eventRepository.findById(optionalBooking.get().getEventId());
-        if (!optionalEvent.isEmpty()) {
+        if (optionalEvent.isPresent()) {
             Event eventM=optionalEvent.get();
             eventM.setFreeSeat(eventM.getFreeSeat()+optionalBooking.get().getPrenotedSeat());
-            eventRepository.save(eventM);
+            Event served=eventRepository.save(eventM);
+    	}else {
+    		return false;
     	}
         bookingRepository.deleteById(optionalBooking.get().getId());
         return true;
@@ -162,5 +164,20 @@ public class BookingService {
   	  		return new ResponseEntity<>("INVALID BOOKING CODE",HttpStatus.OK);
   	  	}
     }
+
+	/**
+	 * Gets if exist a booking with this id.
+	 *
+	 * @param idBooking the id booking
+	 * @return the check
+	 */
+	public ResponseEntity<Booking> getById(String id) {
+		Optional<Booking> bookingData = bookingRepository.findById(id);
+  	  	if (bookingData.isPresent()) 
+  	  			return new ResponseEntity<>(bookingData.get(),HttpStatus.OK);
+  	  		else
+  	  			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+  	 }
+	
 
 }

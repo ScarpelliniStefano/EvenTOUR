@@ -21,7 +21,9 @@ public class MongoDBConfiguration {
 
 	/** The database name. */
 	//database Name
-    private String databaseName = "evenTour";
+	//private String databaseName = "evenTour";
+    //FOR TEST USE:
+	private String databaseName = "evenTour_test";
 
     /** The user. */
     //host

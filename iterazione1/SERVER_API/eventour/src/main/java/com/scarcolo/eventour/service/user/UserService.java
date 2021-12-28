@@ -66,10 +66,14 @@ public class UserService {
      *
      * @param request the request of new user
      * @return the response entity with data of created user
-     * @throws Exception the exception
      */
-    public ResponseEntity<UserResponse> add(AddUserRequest request) throws Exception{
-    	User user = userRepository.save(new User(request));
+    public ResponseEntity<UserResponse> add(AddUserRequest request){
+    	User user;
+		try {
+			user = userRepository.save(new User(request));
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
         return new ResponseEntity<>(new UserResponse(user), HttpStatus.OK);
     }
 
@@ -121,13 +125,13 @@ public class UserService {
      * @param id the id of user
      * @return true, if successful
      */
-    public boolean delete(String id) {
+    public ResponseEntity<Boolean> delete(String id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()) {
-            return false;
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         userRepository.deleteById(optionalUser.get().getId());
-        return true;
+        return new ResponseEntity<>(true,HttpStatus.OK);
     }
 
 	/**
@@ -146,7 +150,7 @@ public class UserService {
 			for(User user: users) userR.add(new UserResponse(user));
 			return new ResponseEntity<>(userR, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -202,7 +206,7 @@ public class UserService {
 				}
 			}
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 	}
@@ -217,7 +221,7 @@ public class UserService {
 	 */
 	private List<EventBookedResponse> getByIdUser(String id) {
 		try {
-			List<EventBookedResponse> eventR=bookingRepository.findByUserId(new ObjectId(id));
+			List<EventBookedResponse> eventR=bookingRepository.findByUserId(id);
 			return eventR;
 		}catch(Exception e) {
 			//System.out.println(e);
@@ -243,7 +247,7 @@ public class UserService {
 	  	List<EventBookedResponse> bookingData = this.getByIdUser(userId);
 		//1.filtra per regione
 		//2.ordinamento dataOra
-		List<Event> eventR=eventRepository.findByLocation_RegioneLikeAndFreeSeatGreaterThanZero(u.getResidence().getRegione() ,Sort.by("dataOra").ascending());
+		List<Event> eventR=eventRepository.findByLocationRegioneLikeAndFreeSeatGreaterThanZero(u.getResidence().getRegione() ,Sort.by("dataOra").ascending());
 		//3.ciclo 
 		List<Event> s=new ArrayList<>();
 		List<Event> sSub=new ArrayList<>();
@@ -259,7 +263,7 @@ public class UserService {
 			}
 		}
 		for(int i=0;i<eventR.size();i++) {
-			if(c==n) {
+			if(c.compareTo(n)==0) {
 				List<EventResponse> eventResponse=new ArrayList<>();
 				for(Event e : s) {
 					eventResponse.add(new EventResponse(e));

@@ -53,6 +53,18 @@ class EventourApplication_EventTests {
 	}
 	
 	@Test
+	public void getEventsDescNotOrdered() throws Exception {
+		String request=this.restTemplate.getForObject("http://localhost:" + port + "/api/events?ordered=desc&param=loc",
+				String.class);
+		
+		JSONObject obj = new JSONObject(request);
+		int pageActual = obj.getInt("currentPage");
+		assertEquals(pageActual,0);
+		JSONArray events = obj.getJSONArray("events");
+		assertEquals(events.length(),20);
+	}
+	
+	@Test
 	public void getEventsPageError() throws Exception {
 		ResponseEntity<String> request=this.restTemplate.getForEntity("http://localhost:" + port + "/api/events?size=2000&page=1000",
 				String.class);

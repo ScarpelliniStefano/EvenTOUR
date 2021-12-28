@@ -8,10 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
 import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
+import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.ticketisp.TicketInspRepository;
 
 
@@ -30,6 +32,10 @@ public class TicketInspService {
     /** The ticket insp repository. */
     @Autowired
     private TicketInspRepository ticketInspRepository;
+    
+    /** The ticket insp repository. */
+    @Autowired
+    private EventRepository eventRepository;
 
    
     /**
@@ -41,6 +47,8 @@ public class TicketInspService {
      */
     public ResponseEntity<TicketInspResponse> add(AddTicketInspRequest request) throws Exception {
     	TicketInsp tick=new TicketInsp(request);
+    	Optional<Event> optEv=eventRepository.findById(request.eventId);
+    	if(optEv.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     	Integer numRand=(int) (Math.random()*9999);
     	tick.setCode("TI-"+request.eventId.substring(request.eventId.length()-5)+"-"+numRand);
     	tick.setPassword(Functionalities.generatePassayPassword(8));
@@ -58,8 +66,12 @@ public class TicketInspService {
     public ResponseEntity<TicketInspResponse> update(EditTicketInspRequest request) {
         Optional<TicketInsp> optionalTicketInsp = ticketInspRepository.findById(request.id);
         if (optionalTicketInsp.isEmpty()) {
-            return null;
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        if(request.fullName!=null) {
+        	optionalTicketInsp.get().setFullName(request.fullName);
+        }
+        ticketInspRepository.save(optionalTicketInsp.get());
         return new ResponseEntity<>(new TicketInspResponse(optionalTicketInsp.get()), HttpStatus.OK);
     }
 
@@ -87,13 +99,13 @@ public class TicketInspService {
      * @param id the id of ticket inspector
      * @return true, if successful
      */
-    public boolean delete(String id) {
+    public ResponseEntity<Boolean> delete(String id) {
         Optional<TicketInsp> optionalTicketInsp = ticketInspRepository.findById(id);
         if (optionalTicketInsp.isEmpty()) {
-            return false;
+        	return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         ticketInspRepository.deleteById(optionalTicketInsp.get().getId());
-        return true;
+        return new ResponseEntity<>(true,HttpStatus.OK);
     }
 
 	/**
@@ -112,7 +124,7 @@ public class TicketInspService {
 			for(TicketInsp ticket: ticketInsps) ticketR.add(new TicketInspResponse(ticket));
 			return new ResponseEntity<>(ticketR, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -135,7 +147,7 @@ public class TicketInspService {
 			for(TicketInsp ticket: ticketInsps) ticketR.add(new TicketInspResponse(ticket));
 			return new ResponseEntity<>(ticketR, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

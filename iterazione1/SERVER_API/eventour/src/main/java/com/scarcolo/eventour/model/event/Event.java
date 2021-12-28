@@ -6,6 +6,7 @@ package com.scarcolo.eventour.model.event;
 
 
 import java.util.Date;
+import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
@@ -70,16 +71,20 @@ public class Event {
 	 * @throws Exception the exception of conversion of dates
 	 */
 	public Event(AddEventRequest request) throws Exception {
-        this.setTitle(request.title);
-        this.setDescription(request.description);
-        this.setLocation(request.location);
-        this.setTypes(request.types);
-        this.setDataOra(Functionalities.convertToDate(request.dataOra));
-        this.setManagerId(request.managerId);
-        this.setUrlImage(request.urlImage);
-        this.setTotSeat(request.totSeat);
-        this.setFreeSeat(request.totSeat);
-        this.setPrice(request.price);
+		this.title=request.title;
+        this.description=request.description;
+        this.location=request.location;
+        this.types=request.types;
+        if(Functionalities.convertToDate(request.dataOra).after(new Date())) {
+			this.dataOra = Functionalities.convertToDate(request.dataOra);
+		}else {
+			throw new DateTimeException("Errore data passata");
+		}
+        this.managerId=new ObjectId(request.managerId);
+        this.urlImage=request.urlImage;
+        this.totSeat=request.totSeat;
+        this.freeSeat=request.totSeat;
+        this.price=request.price;
     }
 	
 	 /**
@@ -113,7 +118,7 @@ public class Event {
         this.location=location;
         this.types=types;
         this.dataOra=Functionalities.convertToDate(dataOra);
-        this.setManagerId(managerId);
+        this.managerId=new ObjectId(managerId);
         this.urlImage=urlImage;
         this.totSeat=totSeat;
         this.freeSeat=freeSeat;
@@ -241,11 +246,11 @@ public class Event {
 	 * @param dataOra the new date check
 	 * @throws Exception the exception
 	 */
-	private void setDateCheck(Date dataOra) throws Exception {
+	private void setDateCheck(Date dataOra) throws DateTimeException {
 		if(dataOra.after(new Date())) {
 			this.dataOra = dataOra;
 		}else {
-			throw new Exception("Errore data passata");
+			throw new DateTimeException("Errore data passata");
 		}
 		
 	}

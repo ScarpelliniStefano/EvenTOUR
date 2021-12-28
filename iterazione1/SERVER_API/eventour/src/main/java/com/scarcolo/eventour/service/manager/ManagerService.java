@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.internet.AddressException;
+
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
@@ -20,6 +22,7 @@ import com.scarcolo.eventour.model.manager.EventReportResponse;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
 import com.scarcolo.eventour.model.manager.ReportManResponse;
+import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 
@@ -43,11 +46,15 @@ public class ManagerService {
 	 *
 	 * @param request the request of new manager
 	 * @return the response entity with new manager data
-	 * @throws Exception the exception if no manager is added
 	 */
-	public ResponseEntity<ManagerResponse> add(AddManagerRequest request) throws Exception{
-		Manager Manager = managerRepository.save(new Manager(request));
-		return new ResponseEntity<>(new ManagerResponse(Manager), HttpStatus.OK);
+	public ResponseEntity<ManagerResponse> add(AddManagerRequest request){
+		Manager manager;
+		try {
+			manager = managerRepository.save(new Manager(request));
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
+		return new ResponseEntity<>(new ManagerResponse(manager), HttpStatus.OK);
 	}
 	
 	/**
@@ -59,8 +66,20 @@ public class ManagerService {
 	public ResponseEntity<ManagerResponse> update(EditManagerRequest request) {
         Optional<Manager> optionalManager = managerRepository.findById(request.id);
         if (optionalManager.isEmpty()) {
-            return null;
+        	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+        Manager m=optionalManager.get();
+        if(request.residence!=null) {
+        	m.setResidence(request.residence);
+        }
+        if(request.mail!=null) {
+        	try {
+				m.setMail(request.mail);
+			} catch (AddressException e) {
+				return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+			}
+        }
+        managerRepository.save(m);
         return new ResponseEntity<>(new ManagerResponse(optionalManager.get()), HttpStatus.OK);
     }
 
@@ -87,13 +106,13 @@ public class ManagerService {
      * @param id the id of manager
      * @return true, if successful
      */
-     public boolean delete(String id) {
+     public ResponseEntity<Boolean> delete(String id) {
         Optional<Manager> optionalManager = managerRepository.findById(id);
         if (optionalManager.isEmpty()) {
-            return false;
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        managerRepository.deleteById(optionalManager.get().getId().toString());
-        return true;
+        managerRepository.deleteById(optionalManager.get().getId());
+        return new ResponseEntity<>(true,HttpStatus.OK);
     }
 
 	/**
@@ -112,7 +131,7 @@ public class ManagerService {
 			for(Manager manager: managers) managerR.add(new ManagerResponse(manager));
 			return new ResponseEntity<>(managerR, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -128,7 +147,11 @@ public class ManagerService {
 	 */
 	public ResponseEntity<List<EventReportResponse>> getManagerReport(String id) {
 		try {
-			AggregationResults<ReportManResponse> reportA=eventRepository.findReports(new ObjectId(id));
+			Optional<Manager> manOpt=managerRepository.findById(id);
+			if(manOpt.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+			AggregationResults<ReportManResponse> reportA=eventRepository.findReports(id);
 			List<ReportManResponse> reportMongo=reportA.getMappedResults();
 			List<EventReportResponse> reportR=new ArrayList<>();
 			Integer occuped=0;
@@ -152,8 +175,9 @@ public class ManagerService {
 			
 			return new ResponseEntity<>(reportR, HttpStatus.OK);
 		}catch(Exception e) {
-			System.out.println(e);
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			//System.out.println(e);
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

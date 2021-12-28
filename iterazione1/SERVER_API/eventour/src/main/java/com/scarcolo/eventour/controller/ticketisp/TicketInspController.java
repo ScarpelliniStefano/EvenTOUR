@@ -98,7 +98,7 @@ public class TicketInspController {
     	 * @return true, if successful
     	 */
     	@DeleteMapping("/ticketInsps/{id}")
-	    public boolean deleteTicketInspById(@PathVariable("id") String id){
+	    public ResponseEntity<Boolean> deleteTicketInspById(@PathVariable("id") String id){
 	        return ticketInspService.delete(id);
 	    }
 

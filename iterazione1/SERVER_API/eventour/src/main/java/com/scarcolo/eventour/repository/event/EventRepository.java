@@ -61,7 +61,7 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	 * @return the page
 	 */
 	@Query("{types : {$in : ?0}, 'location.regione' : { '$regex' : ?1 , $options: 'i'}, dataOra: {$gt: new Date()}}")
-	Page<Event> findByTypesAndLocation_RegioneLike(String[] type,String regione, Pageable paging);
+	Page<Event> findByTypesAndLocationRegioneLike(String[] type,String regione, Pageable paging);
 	
 	/**
 	 * Find by manager id.
@@ -110,7 +110,7 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	 * @return the list
 	 */
 	@Query("{ 'location.regione' : { '$regex' : ?0 , $options: 'i'}, 'freeSeat': {$gt: 0},  'dataOra': {$gt: new Date()} }")
-	List<Event> findByLocation_RegioneLikeAndFreeSeatGreaterThanZero(String regione,Sort sorted);
+	List<Event> findByLocationRegioneLikeAndFreeSeatGreaterThanZero(String regione,Sort sorted);
 
 	/**
 	 * Find manager of a event.
@@ -130,13 +130,13 @@ public interface EventRepository extends MongoRepository<Event, String> {
 			+ "            'as': 'manager'\n"
 			+ "        }\n"
 			+ "    }"})
-	AggregationResults<EventManResponse> findManagerById(ObjectId manId);
+	AggregationResults<EventManResponse> findManagerById(String manId);
 
 	
 	/**
 	 * Find reports.
 	 *
-	 * @param Id the id
+	 * @param id the id
 	 * @return the aggregation results
 	 */
 	@Aggregation(pipeline = {"{\n"
@@ -156,6 +156,6 @@ public interface EventRepository extends MongoRepository<Event, String> {
 			+ "            'dataOra': 1\n"
 			+ "        }\n"
 			+ "    }"})
-	AggregationResults<ReportManResponse> findReports(ObjectId Id);
+	AggregationResults<ReportManResponse> findReports(String id);
 
 }

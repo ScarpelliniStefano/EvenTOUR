@@ -9,27 +9,17 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.scarcolo.eventour.model.AccountRequest;
-import com.scarcolo.eventour.model.AccountResponse;
-import com.scarcolo.eventour.model.Location;
-import com.scarcolo.eventour.model.booking.AddBookingRequest;
-import com.scarcolo.eventour.model.event.AddEventRequest;
-import com.scarcolo.eventour.model.event.EventResponse;
+import com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest;
+import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
-import com.scarcolo.eventour.model.user.AddUserRequest;
-import com.scarcolo.eventour.model.user.User;
-import com.scarcolo.eventour.model.user.UserResponse;
-
 import static org.junit.Assert.assertEquals;
-import java.time.LocalDateTime;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class EventourApplication_TicketTests {
@@ -77,5 +67,79 @@ class EventourApplication_TicketTests {
 		
 	}
 	
+	@Test
+	public void newTicket() throws Exception {
+		AddTicketInspRequest request=new AddTicketInspRequest();
+		request.eventId="61a0a85ebce0e98fbb2d862b";
+		request.fullName="Utente Prova";
+		TicketInspResponse ticketCreated = restTemplate.postForObject("http://localhost:" + port + "/api/ticketInsps", request, TicketInspResponse.class);
+		assertEquals(ticketCreated.getEventId(), "61a0a85ebce0e98fbb2d862b");
+		String reqDel="http://localhost:" + port + "/api/ticketInsps/"+ticketCreated.getId();
+		restTemplate.delete(reqDel);
+		
+
+	}
+	
+	@Test
+	public void updateTicket() throws Exception {
+		AddTicketInspRequest request=new AddTicketInspRequest();
+		request.eventId="61a0a85ebce0e98fbb2d862b";
+		request.fullName="Utente Prova";
+		TicketInspResponse ticketCreated = restTemplate.postForObject("http://localhost:" + port + "/api/ticketInsps", request, TicketInspResponse.class);
+		
+		EditTicketInspRequest reqUpd=new EditTicketInspRequest();
+		reqUpd.id=ticketCreated.getId();
+		reqUpd.fullName="Utente Aggiornato";
+		ResponseEntity<TicketInspResponse> resp=restTemplate.exchange("http://localhost:" + port + "/api/ticketInsps", HttpMethod.PUT, new HttpEntity<EditTicketInspRequest>(reqUpd), TicketInspResponse.class);
+		assertEquals(resp.getStatusCodeValue(),200);
+		assertEquals(resp.getBody().getCode(),ticketCreated.getCode());
+		assertEquals(resp.getBody().getEventId(),"61a0a85ebce0e98fbb2d862b");
+		assertEquals(resp.getBody().getFullName(),"Utente Aggiornato");
+		assertEquals(resp.getBody().getPassword(),ticketCreated.getPassword());
+		String reqDel="http://localhost:" + port + "/api/ticketInsps/"+ticketCreated.getId();
+		restTemplate.delete(reqDel);
+		
+		reqUpd.id="61a89029facdaf0af830be5a";
+		resp=restTemplate.exchange("http://localhost:" + port + "/api/ticketInsps", HttpMethod.PUT, new HttpEntity<EditTicketInspRequest>(reqUpd), TicketInspResponse.class);
+		assertEquals(resp.getStatusCodeValue(),404);
+		
+		
+	}
+	
+	@Test
+	public void newTicketError() throws Exception {
+		AddTicketInspRequest request=new AddTicketInspRequest();
+		request.eventId="61a0a85ebce0e98fbb2d860a";
+		request.fullName="Utente Prova";
+		ResponseEntity<TicketInspResponse> ticketCreated = restTemplate.postForEntity("http://localhost:" + port + "/api/ticketInsps", request, TicketInspResponse.class);
+		assertEquals(ticketCreated.getStatusCode(), HttpStatus.NOT_ACCEPTABLE);
+		
+		
+	}
+	
+	@Test
+	public void deleteTicket() throws Exception {
+		AddTicketInspRequest request=new AddTicketInspRequest();
+		request.eventId="61a0a85ebce0e98fbb2d862b";
+		request.fullName="Utente Prova";
+		TicketInspResponse ticketCreated = restTemplate.postForObject("http://localhost:" + port + "/api/ticketInsps", request, TicketInspResponse.class);
+		String reqDel="http://localhost:" + port + "/api/ticketInsps/"+ticketCreated.getId();
+		ResponseEntity<Boolean> resp=restTemplate.exchange(reqDel, HttpMethod.DELETE, null, Boolean.class);
+		assertEquals(resp.getBody(),true);
+		
+	}
+	
+	@Test
+	public void deleteTicketNonCorrect() throws Exception {
+		ResponseEntity<Boolean> resp=restTemplate.exchange("http://localhost:" + port + "/api/ticketInsps/61a89029facdaf0af830be5a", HttpMethod.DELETE, null, Boolean.class);
+		assertEquals(resp.getStatusCode(),HttpStatus.BAD_REQUEST);
+	}
+	
+	@Test
+	public void getTicketAll() throws Exception {
+		ResponseEntity<String> request=this.restTemplate.getForEntity("http://localhost:" + port + "/api/ticketInsps/",
+				String.class);
+		assertEquals(request.getStatusCode(),HttpStatus.OK);
+	}
 
 }

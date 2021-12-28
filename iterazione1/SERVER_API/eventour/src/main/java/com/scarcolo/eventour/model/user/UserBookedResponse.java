@@ -50,7 +50,7 @@ public class UserBookedResponse {
 		this.eventId = eventId;
 		this.prenotedSeat = prenotedSeat;
 		this.come = come;
-		this.setUser(user);
+		this.user=user;
 	}
 	
 	/**

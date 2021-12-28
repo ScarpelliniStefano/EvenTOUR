@@ -103,7 +103,7 @@ public class ManagerController {
     	 * @return true, if successful
     	 */
     	@DeleteMapping("/managers/{id}")
-	    public boolean deleteById(@RequestParam String id){
+	    public ResponseEntity<Boolean> deleteById(@PathVariable("id") String id){
 	        return managerService.delete(id);
 	    }
 

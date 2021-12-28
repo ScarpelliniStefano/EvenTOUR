@@ -149,8 +149,9 @@ public class Functionalities {
 	 *
 	 * @param input the input string to hash
 	 * @return the md5 hashing of the string
+	 * @throws NoSuchAlgorithmException 
 	 */
-	public static String getMd5(String input)
+	public static String getMd5(String input) throws NoSuchAlgorithmException
     {
         try {
   
@@ -174,7 +175,7 @@ public class Functionalities {
   
         // For specifying wrong message digest algorithms
         catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw e;
         }
     }
 	

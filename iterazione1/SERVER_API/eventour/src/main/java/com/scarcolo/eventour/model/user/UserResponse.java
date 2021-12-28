@@ -4,6 +4,7 @@
 package com.scarcolo.eventour.model.user;
 
 
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.scarcolo.eventour.functions.Functionalities;
@@ -65,18 +66,26 @@ public class UserResponse{
 	 * @param user the user
 	 */
 	public UserResponse(User user){
-		this.setId(user.getId());
-		this.setUsername(user.getUsername());
-		this.setMail(user.getEmail());
-		this.setPassword(user.getPassword());
-		this.setName(user.getName());
-		this.setSurname(user.getSurname());
-		this.setSex(user.getSex());
-		this.setDateOfBirth(user.getDateOfBirth());
-		this.setResidence(user.getResidence());
-		this.setTypes(user.getTypes());
+		this.id=user.getId();
+		this.username=user.getUsername();
+		this.mail=user.getEmail();
+		this.password=user.getPassword();
+		this.name=user.getName();
+		this.surname=user.getSurname();
+		this.sex=user.getSex();
+		this.dateOfBirth=user.getDateOfBirth();
+		this.residence=user.getResidence();
+		this.types=user.getTypes();
 	}
 
+	/**
+	 * Instantiates a new user response.
+	 */
+	public UserResponse() {
+		super();
+	}
+	
+	
 	/**
 	 * Gets the id.
 	 *
@@ -252,8 +261,9 @@ public class UserResponse{
 	 * Sets the password.
 	 *
 	 * @param password the new password
+	 * @throws NoSuchAlgorithmException 
 	 */
-	public void setPassword(String password) {
+	public void setPassword(String password) throws NoSuchAlgorithmException {
 		this.password = Functionalities.getMd5(password);
 	}
 

@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import javax.mail.internet.AddressException;
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
@@ -55,20 +54,18 @@ public class ManagerService {
 	 * @return the response entity with new manager
 	 */
 	public ResponseEntity<ManagerResponse> add(AddManagerRequest request){
-		Manager Manager = null;
+		Manager manager = null;
 		try {
-			Manager = managerRepository.save(new Manager(request));
+			manager = managerRepository.save(new Manager(request));
 		} catch (Exception e) {
-			System.out.println(e);
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
 		try {
-			requestRepository.save(new Request(Manager.getId()));
+			requestRepository.save(new Request(manager.getId()));
 		} catch (Exception e) {
-			System.out.println(e);
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<>(new ManagerResponse(Manager), HttpStatus.OK);
+		return new ResponseEntity<>(new ManagerResponse(manager), HttpStatus.OK);
 	}
 	
 	/**
@@ -90,7 +87,6 @@ public class ManagerService {
         	try {
 				m.setMail(request.mail);
 			} catch (AddressException e) {
-				System.out.println(e);
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
         }
@@ -124,15 +120,15 @@ public class ManagerService {
      * @param id the id manager
      * @return true, if successful
      */
-    public boolean delete(String id) {
-        Optional<Manager> optionalManager = managerRepository.findById(id);
-        if (optionalManager.isEmpty()) {
-            return false;
-        }
-        managerRepository.deleteById(optionalManager.get().getId().toString());
-        Request r=requestRepository.findByManagerId(optionalManager.get().getId().toString()).get(0);
-        requestRepository.deleteById(r.getId());
-        return true;
+    public ResponseEntity<Boolean> delete(String id) {
+    	 Optional<Manager> optionalManager = managerRepository.findById(id);
+         if (optionalManager.isEmpty()) {
+             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+         }
+         managerRepository.deleteById(optionalManager.get().getId());
+         Request r=requestRepository.findByManagerId(optionalManager.get().getId()).get(0);
+         requestRepository.deleteById(r.getId());
+         return new ResponseEntity<>(true,HttpStatus.OK);
     }
 
 	/**
@@ -151,7 +147,7 @@ public class ManagerService {
 			for(Manager manager: managers) managerR.add(new ManagerResponse(manager));
 			return new ResponseEntity<>(managerR, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -165,12 +161,14 @@ public class ManagerService {
 	 */
 	public ResponseEntity<EventManResponse> getManagerFromEvent(String id) {
 		try {
-			AggregationResults<EventManResponse> userEventA=eventRepository.findManagerById(new ObjectId(id));
+			AggregationResults<EventManResponse> userEventA=eventRepository.findManagerById(id);
 			List<EventManResponse> eventR=userEventA.getMappedResults();
+			if(eventR.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
 			return new ResponseEntity<>(eventR.get(0), HttpStatus.OK);
 		}catch(Exception e) {
-			System.out.println(e);
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -182,7 +180,11 @@ public class ManagerService {
 	 */
 	public ResponseEntity<List<ManagerReportResponse>> getManagerReport(String id) {
 		try {
-			AggregationResults<ReportManResponse> reportA=eventRepository.findReports(new ObjectId(id));
+			Optional<Manager> manOpt=managerRepository.findById(id);
+			if(manOpt.isEmpty()) {
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			}
+			AggregationResults<ReportManResponse> reportA=eventRepository.findReports(id);
 			List<ReportManResponse> reportMongo=reportA.getMappedResults();
 			List<ManagerReportResponse> reportR=new ArrayList<>();
 			Integer occuped=0;
@@ -199,7 +201,8 @@ public class ManagerService {
 						comedPeople+=(book.getCome()==true ? book.getPrenotedSeat() : 0);
 						review+=book.getReview()>0 ? book.getReview() : 0;
 					}
-					review=review/(resp.getBooking().length);
+					if(resp.getBooking() != null)
+						review=review/(resp.getBooking().length);
 					saldo=comedPeople*resp.getPrice();
 					perdita=resp.getFreeSeat()*resp.getPrice();
 					eventDetails=new Event(resp.getId(), resp.getTitle(), resp.getDescription(), resp.getLocation(), resp.getTypes(),
@@ -211,8 +214,7 @@ public class ManagerService {
 			
 			return new ResponseEntity<>(reportR, HttpStatus.OK);
 		}catch(Exception e) {
-			System.out.println(e);
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

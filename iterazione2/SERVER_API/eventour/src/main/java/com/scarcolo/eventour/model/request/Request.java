@@ -42,12 +42,11 @@ public class Request{
 	 * Instantiates a new manager.
 	 *
 	 * @param idMan the id man
-	 * @throws Exception the exception
 	 */
-	public Request(String idMan) throws Exception{
-		this.setManagerId(new ObjectId(idMan));
-		this.setActive(false);
-		this.setDateRenewal(null);
+	public Request(String idMan){
+		this.managerId=new ObjectId(idMan);
+		this.active=false;
+		this.dateRenewal=null;
 	}
 	
 	/**

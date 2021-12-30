@@ -69,6 +69,7 @@ public class ManagerResponse{
 	 * @param manager the manager
 	 */
 	public ManagerResponse(Manager manager){
+		this.id=manager.getId();
 		this.mail=manager.getMail();
 		this.password=manager.getPassword();
 		this.name=manager.getName();

@@ -72,37 +72,36 @@ public class BookingService {
      *
      * @param request the request of new booking
      * @return the response entity
+     * @throws IOException exception from inputstream file template
      */
-    public ResponseEntity<Object> add(AddBookingRequest request) {
+    public ResponseEntity<Object> add(AddBookingRequest request) throws IOException {
         Booking booking = new Booking(request);
         Optional<Event> optionalEvent = eventRepository.findById(booking.getEventId());
-        if (!optionalEvent.isEmpty()) {
+        Optional<User> optionalUser = userRepository.findById(booking.getUserId());
+        if (!optionalUser.isEmpty() && !optionalEvent.isEmpty()) {
             Event eventM=optionalEvent.get();
             if(eventM.getFreeSeat()-booking.getPrenotedSeat()>=0) {
             	eventM.setFreeSeat(eventM.getFreeSeat()-booking.getPrenotedSeat());
             	eventRepository.save(eventM);
-            	
-            	Optional<User> optionalUser= userRepository.findById(booking.getUserId());
-            	if(optionalUser.isPresent()) {
-            		boolean result=false;
-            		Booking book=bookingRepository.save(booking);
-            		try {
-            			result = Mail.sendBookingEventMsg(optionalUser.get().getEmail(),eventM,book);
-            		} catch (IOException e) {
-            			System.out.println(e);
-            		}
-            		if(!result) {
-            			System.out.println("error in sending mail");
-            		}else {
-            			return new ResponseEntity<>(book, HttpStatus.OK);
-            		}
+            	boolean result=false;
+            	Booking book=bookingRepository.save(booking);
+            	try {
+            		result = Mail.sendBookingEventMsg(optionalUser.get().getEmail(),eventM,book);
+            	} catch (IOException e) {
+            		throw e;
             	}
-            } else {
-            	return new ResponseEntity<>(new String("ERROR. no enough seats available."), HttpStatus.NO_CONTENT);
+            	if(!result) {
+            		//System.out.println("error in sending mail");
+            	}else {
+            		return new ResponseEntity<>(book, HttpStatus.OK);
+            	}
+            }else{
+            	return new ResponseEntity<>("ERROR. no enough seats available.", HttpStatus.NO_CONTENT);
             }
+         } else {
+     		 return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+         }
             	
-            
-    	}
         return new ResponseEntity<>(booking, HttpStatus.OK);
         
     }
@@ -201,7 +200,7 @@ public class BookingService {
 			}
 			return new ResponseEntity<>(bookings, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -217,6 +216,8 @@ public class BookingService {
 	 */
 	public ResponseEntity<List<EventBookedResponse>> getByIdUser(int page, int size, String id, char pastFuture) {
 		try {
+			Optional<User> userOpt=userRepository.findById(id);
+			if(userOpt.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			AggregationResults<EventBookedResponse> eventsA=null;
 			if(pastFuture=='f' || pastFuture=='F')
 				eventsA=bookingRepository.findByUserIdFuture(new ObjectId(id),page*size,size);
@@ -225,11 +226,9 @@ public class BookingService {
 			else
 				eventsA=bookingRepository.findByUserId(new ObjectId(id),page*size,size);
 			List<EventBookedResponse> eventR=eventsA.getMappedResults();
-			
 			return new ResponseEntity<>(eventR, HttpStatus.OK);
 		}catch(Exception e) {
-			System.out.println(e);
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -244,11 +243,12 @@ public class BookingService {
 	 */
 	public ResponseEntity<List<EventBookedResponse>> getByUserAndEvent(String id, String idEv) {
 		try {
-			AggregationResults<EventBookedResponse> eventsA=bookingRepository.findByUserAndEvent(new ObjectId(id), new ObjectId(idEv));
+			AggregationResults<EventBookedResponse> eventsA=bookingRepository.findByUserAndEvent(id, idEv);
 			List<EventBookedResponse> eventR=eventsA.getMappedResults();
+			if(eventR.isEmpty()) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 			return new ResponseEntity<>(eventR, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -261,10 +261,7 @@ public class BookingService {
 	 */
 	public ResponseEntity<String> getCheck(String idBooking,String idEvent) {
     	Optional<Booking> bookingData = bookingRepository.findById(idBooking);
-    	
-    	
-  	  	if (bookingData.isPresent()) {
-  	  		System.out.println(bookingData.get().getId());
+    	if (bookingData.isPresent()) {
   	  		if(bookingData.get().getEventId().equalsIgnoreCase(idEvent)) {
   	  			modifyComed(idBooking);
   	  			return new ResponseEntity<>("ACCESS GRANTED", HttpStatus.OK);
@@ -287,7 +284,7 @@ public class BookingService {
 			List<UserBookedResponse> eventR=userA.getMappedResults();
 			return new ResponseEntity<>(eventR, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -306,10 +303,10 @@ public class BookingService {
 			if(!eventR.isEmpty())
 				return new ResponseEntity<>(eventR.get(0), HttpStatus.OK);
 			else
-				return new ResponseEntity<>(null, HttpStatus.ALREADY_REPORTED);
+				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}catch(Exception e) {
-			System.out.println(e);
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			//System.out.println(e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -337,13 +334,13 @@ public class BookingService {
         	return new ResponseEntity<>("CARD NUMBER OR CVV INVALID",HttpStatus.OK);
         }else {
         	Manager man=null;
-        	if(type.toUpperCase()=="USER") {
+        	if(type.toUpperCase().contentEquals("USER")) {
         		Optional<User> optionalUser = userRepository.findById(request.idUser);
         		if (optionalUser.isEmpty()) {
         			return null;
         		}
         		//User user=optionalUser.get(); //in real payment will serve
-        	}else if(type.toUpperCase()=="MANAGER"){
+        	}else if(type.toUpperCase().contentEquals("MANAGER")){
         		if(!request.idUser.matches("0000")) {
         			Optional<Manager> optionalMan = managerRepository.findById(request.idUser);
         			if (optionalMan.isEmpty()) {
@@ -390,8 +387,9 @@ public class BookingService {
 	 *
 	 * @param event the event to delete
 	 * @return true, if successful
+	 * @throws IOException exception from inputstream file template
 	 */
-	public boolean deleteAllBookingFromEvent(Event event) {
+	public boolean deleteAllBookingFromEvent(Event event) throws IOException {
 		ResponseEntity<List<UserBookedResponse>> bookings=this.getByIdEvent(event.getId());
 		if(bookings.getStatusCode().is2xxSuccessful()) {
 			for(UserBookedResponse book : bookings.getBody()) {
@@ -399,10 +397,10 @@ public class BookingService {
 				try {
 					result = Mail.sendDeleteEventMsg(book.getUser()[0].getEmail(),event);
 				} catch (IOException e) {
-					System.out.println(e);
+					throw e;
 				}
 				if(!result) {
-					System.out.println("error in sending mail");
+					//System.out.println("error in sending mail");
 				}
 				this.delete(book.getId());
 			}
@@ -422,13 +420,16 @@ public class BookingService {
 	public ResponseEntity<String> setReview(String idBooking, Integer review) {
 		Optional<Booking> bookingData = bookingRepository.findById(idBooking);
   	  	if (bookingData.isPresent()) {
+  	  		if(!bookingData.get().getCome()) {
+  	  			return new ResponseEntity<>("INVALID CODE BOOKING", HttpStatus.OK);
+  	  		}
   	  		if(review>0 && review<6) {
   	  			modifyReview(idBooking,review);
   	  			return new ResponseEntity<>("MODIFIED", HttpStatus.OK);
   	  		}else
   	  			return new ResponseEntity<>("INVALID REVIEW", HttpStatus.OK);
   	  	} else {
-  	  		return new ResponseEntity<>("INVALID BOOKING CODE",HttpStatus.OK);
+  	  		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   	  	}
 	}
 }

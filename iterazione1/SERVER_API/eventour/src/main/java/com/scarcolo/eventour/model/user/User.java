@@ -196,7 +196,7 @@ public class User{
 	 * Sets the date of birth check.
 	 *
 	 * @param dateOfBirth the new date of birth check
-	 * @throws Exception the exception
+	 * @throws DateTimeException the exception for date incorrect
 	 */
 	private void setDateOfBirthCheck(Date dateOfBirth) throws DateTimeException {
 		if(dateOfBirth.before(new Date())) {

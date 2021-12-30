@@ -41,7 +41,7 @@ public class Booking {
 	public Booking(AddBookingRequest request) {
         this.setUserId(new ObjectId(request.userId));
         this.setEventId(new ObjectId(request.eventId));
-        if(request.prenotedSeat>0) {
+        if(request.prenotedSeat<0) {
         	throw new IllegalArgumentException();
         }
         this.prenotedSeat=request.prenotedSeat;

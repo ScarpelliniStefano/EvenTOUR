@@ -124,7 +124,7 @@ public class UserController {
 	 * @return true, if successful
 	 */
 	@DeleteMapping("/users/{id}")
-    public boolean deleteUserById(@PathVariable("id") String id){
+    public ResponseEntity<Boolean> deleteUserById(@PathVariable("id") String id){
         return userService.delete(id);
     }
 

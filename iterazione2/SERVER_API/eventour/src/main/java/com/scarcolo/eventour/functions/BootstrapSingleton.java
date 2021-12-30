@@ -11,5 +11,5 @@ public final class BootstrapSingleton {
 
     /** The Constant lookup. */
     // Reverse-lookup map for getting a type from an abbreviation
-    public static final Map<String, TypesE> lookup = new HashMap<String, TypesE>();
+    public static final Map<String, TypesE> LOOKUP = new HashMap<String, TypesE>();
 }

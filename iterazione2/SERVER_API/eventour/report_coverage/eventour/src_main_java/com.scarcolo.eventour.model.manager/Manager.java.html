@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Manager.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.manager</a> &gt; <span class="el_source">Manager.java</span></div><h1>Manager.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package com.scarcolo.eventour.model.manager;
+
+
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.util.Date;
+
+import javax.mail.internet.AddressException;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.functions.PartitaIVAFunctions;
+import com.scarcolo.eventour.model.Location;
+
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Manager.
+ *
+ * @author stefa
+ */
+@Document(collection = &quot;managers&quot;)
+public class Manager{
+	
+	/** The id. */
+	@Id
+	private String id;
+	
+	/** The mail. */
+	private String mail;
+	
+	/** The password. */
+	private String password;
+	
+	/** The name. */
+	private String name;
+	
+	/** The surname. */
+	private String surname;
+	
+	/** The date of birth. */
+	private Date dateOfBirth;
+	
+	/** The residence. */
+	private Location residence;
+	
+	/** The codice PIVA. */
+	private String codicePIVA;
+	
+	/** The ragione sociale. */
+	private String ragioneSociale;
+
+	/**
+	 * Instantiates a new manager.
+	 *
+	 * @param request the request
+	 * @throws Exception the exception
+	 */
+<span class="fc" id="L64">	public Manager(AddManagerRequest request) throws Exception{</span>
+<span class="fc" id="L65">		boolean res=Functionalities.isValidEmailAddress(request.mail);</span>
+<span class="pc bpc" id="L66" title="1 of 2 branches missed.">		if(res) {</span>
+<span class="fc" id="L67">			this.mail=request.mail;</span>
+<span class="fc" id="L68">		}else {</span>
+<span class="nc" id="L69">			throw new AddressException();</span>
+		}
+		
+<span class="fc" id="L72">		this.password=request.password;</span>
+<span class="fc" id="L73">		this.name=request.name;</span>
+<span class="fc" id="L74">		this.surname=request.surname;</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">		if(request.dateOfBirth.isBefore(LocalDate.now())) {</span>
+<span class="fc" id="L76">			this.dateOfBirth=Functionalities.convertToDate(request.dateOfBirth);</span>
+<span class="fc" id="L77">		}else {</span>
+<span class="fc" id="L78">			throw new DateTimeException(&quot;Errore data futura&quot;);</span>
+		}
+		
+<span class="fc" id="L81">		this.residence=request.residence;</span>
+<span class="fc" id="L82">		String risorsa=PartitaIVAFunctions.validate(request.codicePIVA);</span>
+<span class="pc bpc" id="L83" title="1 of 2 branches missed.">		if(risorsa==&quot;ok&quot;)</span>
+<span class="fc" id="L84">			this.codicePIVA=request.codicePIVA;</span>
+		else
+<span class="nc" id="L86">			throw new IllegalArgumentException();</span>
+<span class="fc" id="L87">		this.ragioneSociale=request.ragioneSociale;</span>
+<span class="fc" id="L88">	}</span>
+	
+	/**
+	 * Instantiates a new manager.
+	 */
+	public Manager() {
+<span class="fc" id="L94">		super();</span>
+<span class="fc" id="L95">	}</span>
+	
+	/**
+	 * Instantiates a new manager.
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param surname the surname
+	 * @param mail the mail
+	 * @param codicePIVA the codice PIVA
+	 * @param dateOfBirth the date of birth
+	 * @param psw the psw
+	 * @param ragioneSociale the ragione sociale
+	 * @param residence the residence
+	 * @throws Exception the exception
+	 */
+<span class="fc" id="L111">	public Manager(String id, String name, String surname, String mail, String codicePIVA, Date dateOfBirth,</span>
+			String psw, String ragioneSociale, Location residence) throws Exception {
+<span class="fc" id="L113">		this.id=id;</span>
+<span class="fc" id="L114">		boolean res=Functionalities.isValidEmailAddress(mail);</span>
+<span class="pc bpc" id="L115" title="1 of 2 branches missed.">		if(res) {</span>
+<span class="fc" id="L116">			this.mail=mail;</span>
+<span class="fc" id="L117">		}else {</span>
+<span class="nc" id="L118">			throw new AddressException();</span>
+		}
+		
+<span class="fc" id="L121">		this.password=psw;</span>
+<span class="fc" id="L122">		this.name=name;</span>
+<span class="fc" id="L123">		this.surname=surname;</span>
+<span class="pc bpc" id="L124" title="1 of 2 branches missed.">		if(dateOfBirth.before(new Date())) {</span>
+<span class="fc" id="L125">			this.dateOfBirth=dateOfBirth;</span>
+<span class="fc" id="L126">		}else {</span>
+<span class="nc" id="L127">			throw new DateTimeException(&quot;Errore data futura&quot;);</span>
+		}
+		
+<span class="fc" id="L130">		this.residence=residence;</span>
+<span class="fc" id="L131">		String risorsa=PartitaIVAFunctions.validate(codicePIVA);</span>
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">		if(risorsa==&quot;ok&quot;)</span>
+<span class="fc" id="L133">			this.codicePIVA=codicePIVA;</span>
+		else
+<span class="nc" id="L135">			throw new IllegalArgumentException();</span>
+<span class="fc" id="L136">		this.ragioneSociale=ragioneSociale;</span>
+<span class="fc" id="L137">	}</span>
+
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public String getId() {
+<span class="fc" id="L145">		return id;</span>
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	public void setId(String id) {
+<span class="fc" id="L154">		this.id = id;</span>
+<span class="fc" id="L155">	}</span>
+
+	/**
+	 * Gets the mail.
+	 *
+	 * @return the mail
+	 */
+	public String getMail() {
+<span class="fc" id="L163">		return mail;</span>
+	}
+
+	/**
+	 * Sets the mail.
+	 *
+	 * @param mail the new mail
+	 * @throws AddressException the address exception
+	 */
+	public void setMail(String mail) throws AddressException {
+<span class="fc" id="L173">		boolean res=Functionalities.isValidEmailAddress(mail);</span>
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">		if(res) {</span>
+<span class="fc" id="L175">			this.mail=mail;</span>
+<span class="fc" id="L176">		}else {</span>
+<span class="nc" id="L177">			throw new AddressException();</span>
+		}
+<span class="fc" id="L179">	}</span>
+
+	/**
+	 * Gets the password.
+	 *
+	 * @return the password
+	 */
+	public String getPassword() {
+<span class="fc" id="L187">		return password;</span>
+	}
+
+	/**
+	 * Sets the password.
+	 *
+	 * @param password the new password
+	 */
+	public void setPassword(String password) {
+<span class="fc" id="L196">		this.password = password;</span>
+<span class="fc" id="L197">	}</span>
+
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
+	public String getName() {
+<span class="fc" id="L205">		return name;</span>
+	}
+	
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+<span class="fc" id="L214">		this.name = name;</span>
+<span class="fc" id="L215">	}</span>
+	
+	/**
+	 * Gets the surname.
+	 *
+	 * @return the surname
+	 */
+	public String getSurname() {
+<span class="fc" id="L223">		return surname;</span>
+	}
+	
+	/**
+	 * Sets the surname.
+	 *
+	 * @param surname the surname to set
+	 */
+	public void setSurname(String surname) {
+<span class="fc" id="L232">		this.surname = surname;</span>
+<span class="fc" id="L233">	}</span>
+
+	/**
+	 * Gets the date of birth.
+	 *
+	 * @return the date of birth
+	 */
+	public Date getDateOfBirth() {
+<span class="fc" id="L241">		return dateOfBirth;</span>
+	}
+	
+	
+	/**
+	 * Gets the date of birth local.
+	 *
+	 * @return the date of birth local
+	 */
+	public LocalDate getDateOfBirthLocal() {
+<span class="fc" id="L251">		return Functionalities.convertToLocalDate(this.dateOfBirth);</span>
+	}
+	
+	
+	/**
+	 * Sets the date of birth check.
+	 *
+	 * @param dateOfBirth the new date of birth check
+	 * @throws Exception the exception
+	 */
+	private void setDateOfBirthCheck(Date dateOfBirth) throws Exception {
+<span class="pc bpc" id="L262" title="1 of 2 branches missed.">		if(dateOfBirth.before(new Date())) {</span>
+<span class="fc" id="L263">			this.dateOfBirth = dateOfBirth;</span>
+<span class="fc" id="L264">		}else {</span>
+<span class="nc" id="L265">			throw new DateTimeException(&quot;Errore data futura&quot;);</span>
+		}
+		
+<span class="fc" id="L268">	}</span>
+	
+	/**
+	 * Sets the date of birth.
+	 *
+	 * @param dateOfBirth the new date of birth
+	 * @throws Exception the exception
+	 */
+	public void setDateOfBirth(Date dateOfBirth) throws Exception {
+<span class="fc" id="L277">		setDateOfBirthCheck(dateOfBirth);</span>
+<span class="fc" id="L278">	}</span>
+	
+	/**
+	 * Gets the residence.
+	 *
+	 * @return the residence
+	 */
+	public Location getResidence() {
+<span class="fc" id="L286">		return residence;</span>
+	}
+	
+	/**
+	 * Sets the residence.
+	 *
+	 * @param residence the residence to set
+	 */
+	public void setResidence(Location residence) {
+<span class="fc" id="L295">		this.residence = residence;</span>
+<span class="fc" id="L296">	}</span>
+	
+	/**
+	 * Gets the codice PIVA.
+	 *
+	 * @return the codicePIVA
+	 */
+	public String getCodicePIVA() {
+<span class="fc" id="L304">		return codicePIVA;</span>
+	}
+	
+	/**
+	 * Sets the codice PIVA.
+	 *
+	 * @param codicePIVA the codicePIVA to set
+	 * @throws Exception the exception
+	 */
+	public void setCodicePIVA(String codicePIVA) throws Exception {
+<span class="fc" id="L314">		String res=PartitaIVAFunctions.validate(codicePIVA);</span>
+<span class="pc bpc" id="L315" title="1 of 2 branches missed.">		if(res==&quot;ok&quot;)</span>
+<span class="fc" id="L316">			this.codicePIVA = codicePIVA;</span>
+		else
+<span class="nc" id="L318">			throw new IllegalArgumentException(res);</span>
+<span class="fc" id="L319">	}</span>
+	
+	/**
+	 * Gets the ragione sociale.
+	 *
+	 * @return the ragioneSociale
+	 */
+	public String getRagioneSociale() {
+<span class="fc" id="L327">		return ragioneSociale;</span>
+	}
+	
+	/**
+	 * Sets the ragione sociale.
+	 *
+	 * @param ragioneSociale the ragioneSociale to set
+	 */
+	public void setRagioneSociale(String ragioneSociale) {
+<span class="fc" id="L336">		this.ragioneSociale = ragioneSociale;</span>
+<span class="fc" id="L337">	}</span>
+
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>

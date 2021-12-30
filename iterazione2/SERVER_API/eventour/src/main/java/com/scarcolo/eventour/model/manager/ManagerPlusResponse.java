@@ -36,8 +36,8 @@ public class ManagerPlusResponse extends ManagerResponse{
 	 */
 	public ManagerPlusResponse(Manager manager, Request req){
 		super(manager);
-		this.setActive(req.isActive());
-		this.setDateRenewal(req.getDateRenewal());
+		this.active=req.isActive();
+		this.dateRenewal=req.getDateRenewal();
 	}
 
 

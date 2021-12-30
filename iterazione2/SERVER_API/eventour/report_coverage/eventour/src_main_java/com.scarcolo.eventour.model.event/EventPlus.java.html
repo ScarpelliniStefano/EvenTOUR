@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventPlus.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.event</a> &gt; <span class="el_source">EventPlus.java</span></div><h1>EventPlus.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package com.scarcolo.eventour.model.event;
+
+
+
+import java.util.Date;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+
+import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.model.Location;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Event.
+ *
+ * @author stefa
+ */
+@Document(collection=&quot;events&quot;)
+public class EventPlus {
+	
+	/** The id. */
+	@Id
+	private String id;
+	
+	/** The title. */
+	private String title;
+	
+	/** The description. */
+	private String description;
+	
+	/** The location. */
+	private Location location;
+	
+	/** The types. */
+	private String[] types;
+	
+	/** The data ora. */
+	private Date dataOra;
+	
+	/** The manager id. */
+	private ObjectId managerId;
+	
+	/** The url image. */
+	private String urlImage;
+	
+	/** The free seat. */
+	private Integer freeSeat;
+	
+	/** The tot seat. */
+	private Integer totSeat;
+	
+	/** The review sum. */
+	private Integer reviewSum;
+	
+	/** The review number. */
+	private Integer reviewTot;
+	
+	/** The price. */
+	private Double price;
+	
+	/**
+	 * Instantiates a new event.
+	 *
+	 * @param request the request of addEventRequest
+	 * @throws Exception the exception of conversion of dates
+	 */
+<span class="nc" id="L75">	public EventPlus(AddEventRequest request) throws Exception {</span>
+<span class="nc" id="L76">        this.title=request.title;</span>
+<span class="nc" id="L77">        this.description=request.description;</span>
+<span class="nc" id="L78">        this.location=request.location;</span>
+<span class="nc" id="L79">        this.types=request.types;</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">        if(Functionalities.convertToDate(request.dataOra).after(new Date())) {</span>
+<span class="nc" id="L81">			this.dataOra = Functionalities.convertToDate(request.dataOra);</span>
+<span class="nc" id="L82">		}else {</span>
+<span class="nc" id="L83">			throw new DateTimeException(&quot;Errore data passata&quot;);</span>
+		}
+<span class="nc" id="L85">        this.managerId=new ObjectId(request.managerId);</span>
+<span class="nc" id="L86">        this.urlImage=request.urlImage;</span>
+<span class="nc" id="L87">        this.totSeat=request.totSeat;</span>
+<span class="nc" id="L88">        this.freeSeat=request.totSeat;</span>
+<span class="nc" id="L89">        this.price=request.price;</span>
+<span class="nc" id="L90">    }</span>
+	
+	 /**
+ 	 * Instantiates a new event.
+ 	 */
+<span class="fc" id="L95"> 	public EventPlus() {</span>
+<span class="fc" id="L96">	    }</span>
+	
+	/**
+	 * Instantiates a new event plus.
+	 *
+	 * @param id the id
+	 * @param title the title
+	 * @param description the description
+	 * @param location the location
+	 * @param types the types
+	 * @param dataOra the data ora
+	 * @param managerId the manager id
+	 * @param urlImage the url image
+	 * @param totSeat the tot seat
+	 * @param freeSeat the free seat
+	 * @param price the price
+	 * @param reviewSum the review sum
+	 * @param reviewTot the review tot
+	 * @throws Exception the exception
+	 */
+<span class="nc" id="L116">	public EventPlus(String id, String title, String description, Location location, String[] types,</span>
+			LocalDateTime dataOra, String managerId, String urlImage, Integer totSeat, Integer freeSeat,
+			Double price, Integer reviewSum, Integer reviewTot) throws Exception {
+<span class="nc" id="L119">		this.id=id;</span>
+<span class="nc" id="L120">		this.title=title;</span>
+<span class="nc" id="L121">        this.description=description;</span>
+<span class="nc" id="L122">        this.location=location;</span>
+<span class="nc" id="L123">        this.types=types;</span>
+<span class="nc" id="L124">        this.dataOra=Functionalities.convertToDate(dataOra);</span>
+<span class="nc" id="L125">        this.managerId=new ObjectId(managerId);</span>
+<span class="nc" id="L126">        this.urlImage=urlImage;</span>
+<span class="nc" id="L127">        this.totSeat=totSeat;</span>
+<span class="nc" id="L128">        this.freeSeat=freeSeat;</span>
+<span class="nc" id="L129">        this.price=price;</span>
+<span class="nc" id="L130">        this.reviewSum=reviewSum;</span>
+<span class="nc" id="L131">        this.reviewTot=reviewTot;</span>
+<span class="nc" id="L132">	}</span>
+
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public String getId() {
+<span class="nc" id="L140">		return id;</span>
+	}
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+<span class="nc" id="L149">		this.id = id;</span>
+<span class="nc" id="L150">	}</span>
+	
+	/**
+	 * Gets the title.
+	 *
+	 * @return the title
+	 */
+	public String getTitle() {
+<span class="nc" id="L158">		return title;</span>
+	}
+	
+	/**
+	 * Sets the title.
+	 *
+	 * @param title the title to set
+	 */
+	public void setTitle(String title) {
+<span class="nc" id="L167">		this.title = title;</span>
+<span class="nc" id="L168">	}</span>
+	
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
+	public String getDescription() {
+<span class="nc" id="L176">		return description;</span>
+	}
+	
+	/**
+	 * Sets the description.
+	 *
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+<span class="nc" id="L185">		this.description = description;</span>
+<span class="nc" id="L186">	}</span>
+	
+	/**
+	 * Gets the location.
+	 *
+	 * @return the location
+	 */
+	public Location getLocation() {
+<span class="nc" id="L194">		return location;</span>
+	}
+	
+	/**
+	 * Sets the location.
+	 *
+	 * @param location the location to set
+	 */
+	public void setLocation(Location location) {
+<span class="nc" id="L203">		this.location = location;</span>
+<span class="nc" id="L204">	}</span>
+	
+	/**
+	 * Gets the types.
+	 *
+	 * @return the types
+	 */
+	public String[] getTypes() {
+<span class="nc" id="L212">		return types;</span>
+	}
+
+	/**
+	 * Sets the types.
+	 *
+	 * @param types the new types
+	 */
+	public void setTypes(String[] types) {
+<span class="nc" id="L221">		this.types = types;</span>
+<span class="nc" id="L222">	}</span>
+	
+	/**
+	 * Adds the type.
+	 *
+	 * @param type the type
+	 */
+	public void addType(String type) {
+<span class="nc" id="L230">		String[] newArr=Arrays.copyOf(this.types, this.types.length+1);</span>
+<span class="nc" id="L231">		newArr[this.types.length+1]=type;</span>
+<span class="nc" id="L232">		this.types=newArr;</span>
+		
+<span class="nc" id="L234">	}</span>
+
+	
+	/**
+	 * Gets the data ora.
+	 *
+	 * @return the data ora
+	 */
+	public LocalDateTime getDataOra() {
+<span class="fc" id="L243">		return Functionalities.convertToLocalDateTime(this.dataOra);</span>
+	}
+	
+	
+	
+	
+	/**
+	 * Sets the date check.
+	 *
+	 * @param dataOra the new date check
+	 * @throws Exception the exception
+	 */
+	private void setDateCheck(Date dataOra) throws Exception {
+<span class="nc bnc" id="L256" title="All 2 branches missed.">		if(dataOra.after(new Date())) {</span>
+<span class="nc" id="L257">			this.dataOra = dataOra;</span>
+<span class="nc" id="L258">		}else {</span>
+<span class="nc" id="L259">			throw new DateTimeException(&quot;Errore data passata&quot;);</span>
+		}
+		
+<span class="nc" id="L262">	}</span>
+	
+	/**
+	 * Sets the data ora.
+	 *
+	 * @param dataOra the new data ora
+	 * @throws Exception the exception
+	 */
+	public void setDataOra(Date dataOra) throws Exception {
+		
+<span class="nc" id="L272">		setDateCheck(dataOra);</span>
+<span class="nc" id="L273">	}</span>
+
+	/**
+	 * Gets the manager id.
+	 *
+	 * @return the manager id
+	 */
+	public String getManagerId() {
+<span class="nc" id="L281">		return managerId.toHexString();</span>
+	}
+
+	/**
+	 * Sets the manager id.
+	 *
+	 * @param managerId the new manager id
+	 */
+	public void setManagerId(String managerId) {
+<span class="nc" id="L290">		this.managerId = new ObjectId(managerId);</span>
+<span class="nc" id="L291">	}</span>
+
+	/**
+	 * Gets the url image.
+	 *
+	 * @return the url image
+	 */
+	public String getUrlImage() {
+<span class="nc" id="L299">		return urlImage;</span>
+	}
+
+	/**
+	 * Sets the url image.
+	 *
+	 * @param urlImage the new url image
+	 */
+	public void setUrlImage(String urlImage) {
+<span class="nc" id="L308">		this.urlImage = urlImage;</span>
+<span class="nc" id="L309">	}</span>
+
+	/**
+	 * Gets the free seat.
+	 *
+	 * @return the free seat
+	 */
+	public Integer getFreeSeat() {
+<span class="fc" id="L317">		return freeSeat;</span>
+	}
+
+	/**
+	 * Sets the free seat.
+	 *
+	 * @param freeSeat the new free seat
+	 */
+	public void setFreeSeat(Integer freeSeat) {
+<span class="nc" id="L326">		this.freeSeat = freeSeat;</span>
+<span class="nc" id="L327">	}</span>
+
+	/**
+	 * Gets the tot seat.
+	 *
+	 * @return the tot seat
+	 */
+	public Integer getTotSeat() {
+<span class="fc" id="L335">		return totSeat;</span>
+	}
+
+	/**
+	 * Sets the tot seat.
+	 *
+	 * @param totSeat the new tot seat
+	 */
+	public void setTotSeat(Integer totSeat) {
+<span class="nc" id="L344">		this.totSeat = totSeat;</span>
+<span class="nc" id="L345">	}</span>
+
+	/**
+	 * Gets the price.
+	 *
+	 * @return the price
+	 */
+	public Double getPrice() {
+<span class="nc" id="L353">		return price;</span>
+	}
+
+	/**
+	 * Sets the price.
+	 *
+	 * @param price the new price
+	 */
+	public void setPrice(Double price) {
+<span class="nc" id="L362">		this.price = price;</span>
+<span class="nc" id="L363">	}</span>
+
+	/**
+	 * Gets the review sum.
+	 *
+	 * @return the review sum
+	 */
+	public Integer getReviewSum() {
+<span class="fc" id="L371">		return reviewSum;</span>
+	}
+
+	/**
+	 * Sets the review sum.
+	 *
+	 * @param reviewSum the new review sum
+	 */
+	public void setReviewSum(Integer reviewSum) {
+<span class="fc" id="L380">		this.reviewSum = reviewSum;</span>
+<span class="fc" id="L381">	}</span>
+
+	/**
+	 * Gets the review tot.
+	 *
+	 * @return the review tot
+	 */
+	public Integer getReviewTot() {
+<span class="fc" id="L389">		return reviewTot;</span>
+	}
+
+	/**
+	 * Sets the review tot.
+	 *
+	 * @param reviewTot the new review tot
+	 */
+	public void setReviewTot(Integer reviewTot) {
+<span class="fc" id="L398">		this.reviewTot = reviewTot;</span>
+<span class="fc" id="L399">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>

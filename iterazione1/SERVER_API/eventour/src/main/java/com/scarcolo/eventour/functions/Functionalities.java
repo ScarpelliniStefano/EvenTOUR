@@ -149,7 +149,7 @@ public class Functionalities {
 	 *
 	 * @param input the input string to hash
 	 * @return the md5 hashing of the string
-	 * @throws NoSuchAlgorithmException 
+	 * @throws NoSuchAlgorithmException algorithm md5 not implemented
 	 */
 	public static String getMd5(String input) throws NoSuchAlgorithmException
     {

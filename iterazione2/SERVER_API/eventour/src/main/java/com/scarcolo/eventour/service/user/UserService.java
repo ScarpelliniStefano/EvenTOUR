@@ -1,7 +1,6 @@
 package com.scarcolo.eventour.service.user;
 
 
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -89,8 +88,7 @@ public class UserService {
 		try {
 			user = userRepository.save(new User(request));
 		} catch (Exception e) {
-			System.out.println(e);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
         return new ResponseEntity<>(new UserResponse(user), HttpStatus.OK);
     }
@@ -103,7 +101,6 @@ public class UserService {
      * @return the response entity
      */
     public ResponseEntity<UserResponse> update(EditUserRequest request){
-    	System.out.println(request.residence.getCity());
         Optional<User> optionalUser = userRepository.findById(request.id);
         if (optionalUser.isEmpty()) {
             return null;
@@ -113,7 +110,6 @@ public class UserService {
         	try {
 				u.setDateOfBirth(Functionalities.convertToDate(request.dateOfBirth));
 			} catch (Exception e) {
-				System.out.println(e);
 				return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 			}
         }
@@ -160,13 +156,18 @@ public class UserService {
      * @param id the id
      * @return true, if successful
      */
-    public boolean delete(String id) {
-        Optional<User> optionalUser = userRepository.findById(id);
+    public ResponseEntity<Boolean> delete(String id) {
+    	Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()) {
-            return false;
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        List<EventBookedResponse> bookByUser=bookingRepository.findByUserId(optionalUser.get().getId());
+        for(EventBookedResponse book : bookByUser){
+        	bookingRepository.deleteById(book.getId());
         }
         userRepository.deleteById(optionalUser.get().getId());
-        return true;
+        
+        return new ResponseEntity<>(true,HttpStatus.OK);
     }
 
 	/**
@@ -185,7 +186,7 @@ public class UserService {
 			for(User user: users) userR.add(new UserResponse(user));
 			return new ResponseEntity<>(userR, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -263,7 +264,7 @@ public class UserService {
 				}
 			}
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 	}
@@ -279,10 +280,10 @@ public class UserService {
 	 */
 	private List<EventBookedResponse> getByIdUser(String id) {
 		try {
-			List<EventBookedResponse> eventR=bookingRepository.findByUserId(new ObjectId(id));
+			List<EventBookedResponse> eventR=bookingRepository.findByUserId(id);
 			return eventR;
 		}catch(Exception e) {
-			System.out.println(e);
+			//System.out.println(e);
 			return null;
 		}
 	}
@@ -315,13 +316,14 @@ public class UserService {
 				eventR.removeIf(e -> dateE.isEqual(e.getDataOra().toLocalDate()));
 			}
 		}
-		System.out.println("numElem: "+eventR.size());
 		final Double latU=u.getResidence().getLat();
 		final Double lngU=u.getResidence().getLng();
 		
 		List<Event> eventCopy=new ArrayList<>(eventR);
 		eventCopy.removeIf(event -> (event.getLocation().getLat()==null || event.getLocation().getLng()==null || Functionalities.distance(latU, lngU, event.getLocation().getLat(), event.getLocation().getLng())>50));
-		System.out.println("numElem: "+eventR.size());
+		if(eventCopy.size()==0) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
 		Event eventChoice=eventCopy.get(0);
 		Double distSel=0d;
 		Double peso=Double.MAX_VALUE;
@@ -336,14 +338,14 @@ public class UserService {
 								if(peso>(1*(0.5*(eventCopy.get(i).getPrice()-eventChoice.getPrice())+0.5*(distEv)))) {
 									eventChoice=eventCopy.get(i);
 									distSel=distEv;
-									System.out.println("nomeSel:"+eventCopy.get(i).getTitle()+" tipUs:"+k.toString()+" tipSel:"+eventCopy.get(i).getTypes()[j].toString()+" dist:"+distSel+" price:"+eventCopy.get(i).getPrice());
+									//System.out.println("nomeSel:"+eventCopy.get(i).getTitle()+" tipUs:"+k.toString()+" tipSel:"+eventCopy.get(i).getTypes()[j].toString()+" dist:"+distSel+" price:"+eventCopy.get(i).getPrice());
 									peso=0.5*(eventCopy.get(i).getPrice()-eventChoice.getPrice())+0.5*distEv;
 								}
 							}else if(Functionalities.similType(eventCopy.get(i).getTypes()[j],k)){
 								if(peso>(1.25*(0.5*(eventCopy.get(i).getPrice()-eventChoice.getPrice())+0.5*distEv))) {
 									eventChoice=eventCopy.get(i);
 									distSel=distEv;
-									System.out.println("nomeSel:"+eventCopy.get(i).getTitle()+" tipUs:"+k.toString()+" tipSel:"+eventCopy.get(i).getTypes()[j].toString()+" dist:"+distSel+" price:"+eventCopy.get(i).getPrice());
+									//System.out.println("nomeSel:"+eventCopy.get(i).getTitle()+" tipUs:"+k.toString()+" tipSel:"+eventCopy.get(i).getTypes()[j].toString()+" dist:"+distSel+" price:"+eventCopy.get(i).getPrice());
 									peso=1.5*(0.5*(eventCopy.get(i).getPrice()-eventChoice.getPrice())+0.5*distEv);
 								}
 							}
@@ -355,18 +357,15 @@ public class UserService {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		s.add(eventChoice);
-		System.out.println("numElem: "+eventR.size());
 		boolean choiceNull=false;
 		while(s.size()<n && !choiceNull) {
 			eventR.remove(eventChoice);
 			eventCopy=new ArrayList<>(eventR);
 			final Double latRef=s.get(s.size()-1).getLocation().getLat();
 			final Double lngRef=s.get(s.size()-1).getLocation().getLng();
-			System.out.println(eventCopy.size());
 			eventCopy.removeIf(event -> (event.getLocation().getLat()==null || event.getLocation().getLng()==null || 
 											Functionalities.distance(latRef, lngRef, event.getLocation().getLat(), event.getLocation().getLng())>50 ||
 											event.getDataOra().isBefore(s.get(s.size()-1).getDataOra()) || event.getDataOra().isAfter(s.get(s.size()-1).getDataOra().plusWeeks(4))));
-			System.out.println(eventCopy.size());
 			if(eventCopy.size()==0) {
 				choiceNull=true;
 			}else {
@@ -382,14 +381,14 @@ public class UserService {
 										if(peso>(1*(0.5*(eventCopy.get(i).getPrice()-eventChoice.getPrice())+0.5*(distEv)))) {
 											eventChoice=eventCopy.get(i);
 											distSel=distEv;
-											System.out.println("nomeSel:"+eventCopy.get(i).getTitle()+" tipUs:"+k.toString()+" tipSel:"+eventCopy.get(i).getTypes()[j].toString()+" dist:"+distSel+" price:"+eventCopy.get(i).getPrice());
+											//System.out.println("nomeSel:"+eventCopy.get(i).getTitle()+" tipUs:"+k.toString()+" tipSel:"+eventCopy.get(i).getTypes()[j].toString()+" dist:"+distSel+" price:"+eventCopy.get(i).getPrice());
 											peso=0.5*(eventCopy.get(i).getPrice()-eventChoice.getPrice())+0.5*distEv;
 										}
 									}else if(Functionalities.similType(eventCopy.get(i).getTypes()[j],k)){
 										if(peso>(1.5*(0.5*(eventCopy.get(i).getPrice()-eventChoice.getPrice())+0.5*distEv))) {
 											eventChoice=eventCopy.get(i);
 											distSel=distEv;
-											System.out.println("nomeSel:"+eventCopy.get(i).getTitle()+" tipUs:"+k.toString()+" tipSel:"+eventCopy.get(i).getTypes()[j].toString()+" dist:"+distSel+" price:"+eventCopy.get(i).getPrice());
+											//System.out.println("nomeSel:"+eventCopy.get(i).getTitle()+" tipUs:"+k.toString()+" tipSel:"+eventCopy.get(i).getTypes()[j].toString()+" dist:"+distSel+" price:"+eventCopy.get(i).getPrice());
 											peso=1.5*(0.5*(eventCopy.get(i).getPrice()-eventChoice.getPrice())+0.5*distEv);
 										}
 									}
@@ -449,7 +448,7 @@ public class UserService {
 							return new ResponseEntity<>(new AccountResponse("NONE","ERROR. invalid mail"),HttpStatus.NOT_ACCEPTABLE);
 						users.get(0).setPassword(psw);
 						userRepository.save(users.get(0));
-						return new ResponseEntity<>(new AccountResponse("User",users.get(0)),HttpStatus.OK);
+						return new ResponseEntity<>(new AccountResponse("User",new UserResponse(users.get(0))),HttpStatus.OK);
 				}else {
 						Request req= requestRepository.findByManagerId(managers.get(0).getId()).get(0);
 						if(!req.isActive()) {
@@ -464,7 +463,7 @@ public class UserService {
 				return new ResponseEntity<>(new AccountResponse("NONE","ERROR. invalid mail"),HttpStatus.NOT_ACCEPTABLE);
 			}
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -483,8 +482,12 @@ public class UserService {
 			}
 			int inviate=0;
 			for(User user: users) {
+				if(user.getNewsletter()==null) {
+					user.setNewsletter(false);
+					userRepository.save(user);
+				}
 				if(user.getNewsletter()) {
-					Page<Event> pageEvents = eventRepository.findByTypesAndLocation_RegioneLike(user.getTypes(), user.getResidence().getRegione(), PageRequest.of(0, 5,Sort.by("dataOra").ascending()));
+					Page<Event> pageEvents = eventRepository.findByTypesAndLocationRegioneLike(user.getTypes(), user.getResidence().getRegione(), PageRequest.of(0, 5,Sort.by("dataOra").ascending()));
 					Mail.sendNewsletterMsg(user.getEmail(),pageEvents.getContent());
 					inviate++;
 				}

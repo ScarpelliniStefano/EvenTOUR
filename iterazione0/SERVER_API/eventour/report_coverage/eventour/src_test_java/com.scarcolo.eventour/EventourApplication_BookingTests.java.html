@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventourApplication_BookingTests.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (1) (30 dic 2021 11:07:32)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour</a> &gt; <span class="el_source">EventourApplication_BookingTests.java</span></div><h1>EventourApplication_BookingTests.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour;
+
+
+
+import org.junit.jupiter.api.Test;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.scarcolo.eventour.model.booking.AddBookingRequest;
+import com.scarcolo.eventour.model.booking.Booking;
+import com.scarcolo.eventour.model.booking.CheckBookingRequest;
+
+import static org.junit.Assert.assertEquals;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+<span class="fc" id="L26">class EventourApplication_BookingTests {</span>
+	@LocalServerPort
+	private int port;
+
+	@Autowired
+	private TestRestTemplate restTemplate;
+	
+	@Test
+	public void getBookingByIdUserEventCorrect() throws Exception {
+<span class="fc" id="L35">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/bookings/user/61a0a933bce0e98fbb2da2a7/event/61a88e8efacdaf0af830bd2c&quot;,</span>
+<span class="fc" id="L36">				String.class);</span>
+<span class="fc" id="L37">		JSONArray obj = new JSONArray(request);</span>
+<span class="fc" id="L38">		String stringId = obj.getJSONObject(0).getString(&quot;id&quot;);</span>
+<span class="fc" id="L39">		assertEquals(stringId,&quot;61a8c480648e0931525c2697&quot;);</span>
+<span class="fc" id="L40">	}</span>
+	
+	@Test
+	public void getBookingByIdUserEventError() throws Exception {
+<span class="fc" id="L44">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/bookings/user/61a0a933bce0e98fbb2da2a7/event/61a88e8efacdaf0af830bd2b&quot;,</span>
+<span class="fc" id="L45">				String.class);</span>
+<span class="fc" id="L46">		int statusCode=request.getStatusCodeValue();</span>
+<span class="fc" id="L47">		assertEquals(statusCode,405);</span>
+<span class="fc" id="L48">	}</span>
+	
+	@Test
+	public void getBookingByIdUserCorrect() throws Exception {
+<span class="fc" id="L52">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/bookings/user/61a0a933bce0e98fbb2da2a7&quot;,</span>
+<span class="fc" id="L53">				String.class);</span>
+		
+<span class="fc" id="L55">		JSONArray obj = new JSONArray(request);</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">		for(int i=0;i&lt;obj.length();i++) {</span>
+<span class="fc" id="L57">			assertEquals(obj.getJSONObject(i).getString(&quot;userId&quot;),&quot;61a0a933bce0e98fbb2da2a7&quot;);</span>
+		}
+<span class="fc" id="L59">	}</span>
+	
+	@Test
+	public void getBookingByIdUserError() throws Exception {
+<span class="fc" id="L63">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/bookings/user/61a0a933bce0e98fbb2d999c&quot;,</span>
+<span class="fc" id="L64">				String.class);</span>
+<span class="fc" id="L65">		int statusCode=request.getStatusCodeValue();</span>
+<span class="fc" id="L66">		assertEquals(statusCode,400);</span>
+		
+<span class="fc" id="L68">	}</span>
+	
+	@Test
+	public void newBooking() throws Exception {
+<span class="fc" id="L72">		AddBookingRequest request=new AddBookingRequest();</span>
+<span class="fc" id="L73">		request.eventId=&quot;61a0a85ebce0e98fbb2d860f&quot;;</span>
+<span class="fc" id="L74">		request.userId=&quot;61a0a933bce0e98fbb2d999d&quot;;</span>
+<span class="fc" id="L75">		request.prenotedSeat=3;</span>
+<span class="fc" id="L76">		String bookingCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/bookings&quot;, request, String.class);</span>
+<span class="fc" id="L77">		JSONObject obj = new JSONObject(bookingCreated);</span>
+<span class="fc" id="L78">		assertEquals(obj.getString(&quot;userId&quot;), &quot;61a0a933bce0e98fbb2d999d&quot;);</span>
+<span class="fc" id="L79">		assertEquals(obj.getString(&quot;eventId&quot;), &quot;61a0a85ebce0e98fbb2d860f&quot;);</span>
+<span class="fc" id="L80">		restTemplate.delete(&quot;http://localhost:&quot; + port + &quot;/api/bookings/&quot;+obj.getString(&quot;id&quot;));</span>
+		
+<span class="fc" id="L82">	}</span>
+	
+	@Test
+	public void newBookingError() throws Exception {
+<span class="fc" id="L86">		AddBookingRequest request=new AddBookingRequest();</span>
+<span class="fc" id="L87">		request.eventId=&quot;61a0a85ebce0e98fbb2d860e&quot;;</span>
+<span class="fc" id="L88">		request.userId=&quot;61a0a933bce0e98fbb2d999d&quot;;</span>
+<span class="fc" id="L89">		request.prenotedSeat=3;</span>
+<span class="fc" id="L90">		ResponseEntity&lt;String&gt; bookingCreated = restTemplate.postForEntity(&quot;http://localhost:&quot; + port + &quot;/api/bookings&quot;, request, String.class);</span>
+<span class="fc" id="L91">		assertEquals(bookingCreated.getStatusCode(), HttpStatus.NOT_ACCEPTABLE);</span>
+		
+		
+<span class="fc" id="L94">	}</span>
+	
+	
+	@Test
+	public void deleteBooking() throws Exception {
+<span class="fc" id="L99">		AddBookingRequest request=new AddBookingRequest();</span>
+<span class="fc" id="L100">		request.eventId=&quot;61a0a85ebce0e98fbb2d860f&quot;;</span>
+<span class="fc" id="L101">		request.userId=&quot;61a0a933bce0e98fbb2d999d&quot;;</span>
+<span class="fc" id="L102">		request.prenotedSeat=3;</span>
+<span class="fc" id="L103">		String bookingCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/bookings&quot;, request, String.class);</span>
+<span class="fc" id="L104">		JSONObject obj = new JSONObject(bookingCreated);</span>
+<span class="fc" id="L105">		String delBook=&quot;http://localhost:&quot; + port + &quot;/api/bookings/&quot;+obj.getString(&quot;id&quot;);</span>
+<span class="fc" id="L106">		ResponseEntity&lt;Boolean&gt; resp=restTemplate.exchange(delBook, HttpMethod.DELETE, null, Boolean.class);</span>
+<span class="fc" id="L107">		assertEquals(resp.getBody(),true);</span>
+<span class="fc" id="L108">		ResponseEntity&lt;Booking&gt; requestControl=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/bookings/&quot;+obj.getString(&quot;id&quot;),</span>
+<span class="fc" id="L109">				Booking.class);</span>
+<span class="fc" id="L110">		int statusCode=requestControl.getStatusCodeValue();</span>
+<span class="fc" id="L111">		assertEquals(statusCode,204);</span>
+		
+<span class="fc" id="L113">	}</span>
+	
+	@Test
+	public void deleteBookingNonCorrect() throws Exception {
+<span class="fc" id="L117">		ResponseEntity&lt;Boolean&gt; resp=restTemplate.exchange(&quot;http://localhost:&quot; + port + &quot;/api/bookings/61a8c480648e0931525c22a1&quot;, HttpMethod.DELETE, null, Boolean.class);</span>
+<span class="fc" id="L118">		assertEquals(resp.getBody(),false);</span>
+<span class="fc" id="L119">	}</span>
+	
+	@Test
+	public void getByIdBookingCorrect() throws Exception {
+<span class="fc" id="L123">		ResponseEntity&lt;Booking&gt; requestControl=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/bookings/61a8c480648e0931525c2697&quot;,</span>
+<span class="fc" id="L124">				Booking.class);</span>
+<span class="fc" id="L125">		int statusCode=requestControl.getStatusCodeValue();</span>
+<span class="fc" id="L126">		assertEquals(statusCode,200);</span>
+<span class="fc" id="L127">		assertEquals(requestControl.getBody().getId(),&quot;61a8c480648e0931525c2697&quot;);</span>
+		
+<span class="fc" id="L129">	}</span>
+	
+	@Test
+	public void checkBookingCorrect() throws Exception {
+<span class="fc" id="L133">		CheckBookingRequest request=new CheckBookingRequest();</span>
+<span class="fc" id="L134">		request.bookingNr=&quot;61a8c480648e0931525c2697&quot;;</span>
+<span class="fc" id="L135">		request.eventId=&quot;61a88e8efacdaf0af830bd2c&quot;;</span>
+<span class="fc" id="L136">		ResponseEntity&lt;String&gt; bookingCreated = restTemplate.postForEntity(&quot;http://localhost:&quot; + port + &quot;/api/bookings/check&quot;, request, String.class);</span>
+<span class="fc" id="L137">		assertEquals(bookingCreated.getStatusCode(), HttpStatus.OK);</span>
+<span class="fc" id="L138">		assertEquals(bookingCreated.getBody(), &quot;ACCESS GRANTED&quot;);</span>
+		
+		
+<span class="fc" id="L141">	}</span>
+	
+	@Test
+	public void checkBookingRefused() throws Exception {
+<span class="fc" id="L145">		CheckBookingRequest request=new CheckBookingRequest();</span>
+<span class="fc" id="L146">		request.bookingNr=&quot;61a8c480648e0931525c2697&quot;;</span>
+<span class="fc" id="L147">		request.eventId=&quot;61a88e8efacdaf0af830bd2b&quot;;</span>
+<span class="fc" id="L148">		ResponseEntity&lt;String&gt; bookingCreated = restTemplate.postForEntity(&quot;http://localhost:&quot; + port + &quot;/api/bookings/check&quot;, request, String.class);</span>
+<span class="fc" id="L149">		assertEquals(bookingCreated.getStatusCode(), HttpStatus.OK);</span>
+<span class="fc" id="L150">		assertEquals(bookingCreated.getBody(), &quot;ACCESS REFUSED&quot;);</span>
+		
+		
+<span class="fc" id="L153">	}</span>
+	
+	@Test
+	public void checkBookingInvalid() throws Exception {
+<span class="fc" id="L157">		CheckBookingRequest request=new CheckBookingRequest();</span>
+<span class="fc" id="L158">		request.bookingNr=&quot;61a8c480648e0931525c22a1&quot;;</span>
+<span class="fc" id="L159">		request.eventId=&quot;61a88e8efacdaf0af830bd2b&quot;;</span>
+<span class="fc" id="L160">		ResponseEntity&lt;String&gt; bookingCreated = restTemplate.postForEntity(&quot;http://localhost:&quot; + port + &quot;/api/bookings/check&quot;, request, String.class);</span>
+<span class="fc" id="L161">		assertEquals(bookingCreated.getStatusCode(), HttpStatus.OK);</span>
+<span class="fc" id="L162">		assertEquals(bookingCreated.getBody(), &quot;INVALID BOOKING CODE&quot;);</span>
+		
+		
+<span class="fc" id="L165">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (1) (30 dic 2021 11:07:32)</div></body></html>

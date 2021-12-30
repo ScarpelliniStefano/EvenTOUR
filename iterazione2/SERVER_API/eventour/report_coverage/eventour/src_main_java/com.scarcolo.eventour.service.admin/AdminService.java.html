@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>AdminService.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.service.admin</a> &gt; <span class="el_source">AdminService.java</span></div><h1>AdminService.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.service.admin;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.model.admin.AddAdminRequest;
+import com.scarcolo.eventour.model.admin.Admin;
+import com.scarcolo.eventour.model.admin.AdminResponse;
+import com.scarcolo.eventour.model.admin.EditAdminRequest;
+import com.scarcolo.eventour.model.admin.AdminReportResponse;
+import com.scarcolo.eventour.model.admin.ReportAdmResponse;
+import com.scarcolo.eventour.model.event.EventPlus;
+import com.scarcolo.eventour.model.manager.Manager;
+import com.scarcolo.eventour.model.manager.ManagerPlusResponse;
+import com.scarcolo.eventour.model.request.Request;
+import com.scarcolo.eventour.repository.admin.AdminRepository;
+import com.scarcolo.eventour.repository.manager.ManagerRepository;
+import com.scarcolo.eventour.service.manager.ManagerService;
+import com.scarcolo.eventour.service.manager.RequestService;
+import com.scarcolo.eventour.service.user.UserService;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdminService.
+ */
+@Service
+<span class="fc" id="L37">public class AdminService {</span>
+	
+	/** The admin repository. */
+	@Autowired
+	private AdminRepository adminRepository;
+	
+	/** The manager repository. */
+	@Autowired
+	private ManagerRepository managerRepository;
+	
+	/** The manager service. */
+	@Autowired
+	private ManagerService managerService;
+	
+	/** The user service. */
+	@Autowired
+	private UserService userService;
+	
+	/** The request service. */
+	@Autowired
+	private RequestService requestService;
+	
+	
+	/**
+	 * Add a admin.
+	 *
+	 * @param request the request
+	 * @return the response entity
+	 */
+	public ResponseEntity&lt;AdminResponse&gt; add(AddAdminRequest request){
+<span class="fc" id="L67">		Admin admin=null;</span>
+		try {
+<span class="fc" id="L69">			admin = adminRepository.save(new Admin(request));</span>
+<span class="pc" id="L70">		} catch (Exception e) {</span>
+<span class="nc" id="L71">			return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+		}
+<span class="fc" id="L73">	     return new ResponseEntity&lt;&gt;(new AdminResponse(admin), HttpStatus.OK);</span>
+	}
+
+	/**
+	 * Update a admin.
+	 *
+	 * @param request the request
+	 * @return the response entity
+	 */
+	public ResponseEntity&lt;AdminResponse&gt; update(EditAdminRequest request) {
+<span class="fc" id="L83">		Optional&lt;Admin&gt; optionalAdmin = adminRepository.findById(request.id);</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        if (optionalAdmin.isEmpty()) {</span>
+<span class="nc" id="L85">        	return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+        }
+<span class="fc" id="L87">        Admin a=optionalAdmin.get();</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if(request.name!=null) {</span>
+<span class="nc" id="L89">        	a.setName(request.name);</span>
+        }
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">        if(request.surname!=null) {</span>
+<span class="nc" id="L92">        	a.setSurname(request.surname);</span>
+        }
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if(request.password!=null) {</span>
+<span class="nc" id="L95">        	a.setPassword(request.password);</span>
+        }
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">        if(request.role!=null) {</span>
+<span class="fc" id="L98">        	a.setRole(request.role);</span>
+        }
+        
+<span class="fc" id="L101">        adminRepository.save(a);</span>
+<span class="fc" id="L102">        return new ResponseEntity&lt;&gt;(new AdminResponse(a), HttpStatus.OK);</span>
+	}
+   
+	 /**
+ 	 * Gets the admin by id.
+ 	 *
+ 	 * @param id the id
+ 	 * @return the admin by id
+ 	 */
+ 	public ResponseEntity&lt;AdminResponse&gt; getById(String id){
+<span class="fc" id="L112">	    	Optional&lt;Admin&gt; adminData = adminRepository.findById(id);</span>
+
+<span class="fc bfc" id="L114" title="All 2 branches covered.">	  	  if (adminData.isPresent()) {</span>
+<span class="fc" id="L115">	  	    return new ResponseEntity&lt;&gt;(new AdminResponse(adminData.get()), HttpStatus.OK);</span>
+	  	  } else {
+<span class="fc" id="L117">	  	    return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+	  	  }
+	 }
+  
+    /**
+     * Delete a admin.
+     *
+     * @param id the id
+     * @return true, if successful
+     */
+    public ResponseEntity&lt;Boolean&gt; delete(String id) {
+<span class="fc" id="L128">        Optional&lt;Admin&gt; optionalAdmin = adminRepository.findById(id);</span>
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        if (optionalAdmin.isEmpty()) {</span>
+<span class="fc" id="L130">            return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+        }
+<span class="fc" id="L132">        adminRepository.deleteById(optionalAdmin.get().getId().toString());</span>
+<span class="fc" id="L133">        return new ResponseEntity&lt;&gt;(true,HttpStatus.OK);</span>
+    }
+
+	/**
+	 * Gets all admins.
+	 *
+	 * @return all admins
+	 */
+	public ResponseEntity&lt;List&lt;AdminResponse&gt;&gt; getAll() {
+		try {
+<span class="fc" id="L143">			List&lt;Admin&gt; admins = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L144">			adminRepository.findAll().forEach(admins::add);</span>
+<span class="pc bpc" id="L145" title="1 of 2 branches missed.">			if(admins.isEmpty()) {</span>
+<span class="nc" id="L146">				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+			}
+<span class="fc" id="L148">			List&lt;AdminResponse&gt; adminR= new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L149" title="All 2 branches covered.">			for(Admin admin: admins) adminR.add(new AdminResponse(admin));</span>
+<span class="fc" id="L150">			return new ResponseEntity&lt;&gt;(adminR, HttpStatus.OK);</span>
+<span class="nc" id="L151">		}catch(Exception e) {</span>
+<span class="nc" id="L152">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+	}
+	
+	
+	/**
+	 * Gets the admin report.
+	 *
+	 * @return the admin report
+	 */
+	public ResponseEntity&lt;List&lt;AdminReportResponse&gt;&gt; getAdminReport() {
+		try {
+<span class="fc" id="L164">			AggregationResults&lt;ReportAdmResponse&gt; reportA=managerRepository.findReports();</span>
+<span class="fc" id="L165">			List&lt;ReportAdmResponse&gt; reportMongo=reportA.getMappedResults();</span>
+<span class="fc" id="L166">			List&lt;AdminReportResponse&gt; reportR=new ArrayList&lt;&gt;();</span>
+			
+<span class="fc" id="L168">			Integer numEventi=0;</span>
+<span class="fc" id="L169">			Integer numFuturi=0;</span>
+<span class="fc" id="L170">			Double mediaComes=0d;</span>
+<span class="fc" id="L171">			Double rating=0d;</span>
+			
+<span class="fc bfc" id="L173" title="All 2 branches covered.">			for(ReportAdmResponse resp : reportMongo) {</span>
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">				if(resp.getRequest().length&gt;0) {</span>
+<span class="fc bfc" id="L175" title="All 2 branches covered.">					if(resp.getRequest()[0].isActive()) {</span>
+<span class="pc bpc" id="L176" title="2 of 4 branches missed.">						if(resp.getEvent()!=null &amp;&amp; resp.getEvent().length&gt;0) {</span>
+<span class="fc" id="L177">							numEventi=resp.getEvent().length;</span>
+<span class="fc" id="L178">							numFuturi=Functionalities.dataFutura(resp.getEvent());</span>
+<span class="fc" id="L179">							mediaComes=0d;</span>
+<span class="fc" id="L180">							rating=0d;</span>
+<span class="fc bfc" id="L181" title="All 2 branches covered.">							for(EventPlus event: resp.getEvent()) {</span>
+<span class="fc bfc" id="L182" title="All 2 branches covered.">								if(event.getDataOra().isBefore(LocalDateTime.now())) {</span>
+<span class="fc" id="L183">									mediaComes+=(event.getTotSeat()-event.getFreeSeat())*1.0d/event.getTotSeat();</span>
+<span class="fc" id="L184">									rating+=(event.getReviewSum()*1.0d)/event.getReviewTot();</span>
+								}
+								
+							}
+<span class="fc" id="L188">							rating=rating/(numEventi-numFuturi);</span>
+<span class="fc" id="L189">							mediaComes=100*mediaComes/(numEventi-numFuturi);</span>
+						}
+<span class="fc" id="L191">						Manager manager=new Manager(resp.getId(),resp.getName(), resp.getSurname(), resp.getMail(),resp.getCodicePIVA(),resp.getDateOfBirth(),</span>
+<span class="fc" id="L192">								&quot;&quot;, resp.getRagioneSociale(), resp.getResidence());</span>
+<span class="fc" id="L193">						reportR.add(new AdminReportResponse(resp.getId(), resp.getCodicePIVA(), new ManagerPlusResponse(manager,resp.getRequest()[0]), numEventi, numFuturi, mediaComes, rating));</span>
+					
+					}
+				}
+			}
+<span class="fc" id="L198">			return new ResponseEntity&lt;&gt;(reportR, HttpStatus.OK);</span>
+<span class="nc" id="L199">		}catch(Exception e) {</span>
+<span class="nc" id="L200">			e.printStackTrace();</span>
+<span class="nc" id="L201">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+	}
+
+	/**
+	 * Gets the admin from mail.
+	 *
+	 * @param mail the mail
+	 * @return the admin from mail
+	 */
+	public ResponseEntity&lt;AdminResponse&gt; getAdminFromMail(String mail) {
+<span class="fc bfc" id="L212" title="All 2 branches covered.">		if(!Functionalities.isValidEmailAddress(mail)) return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+<span class="fc" id="L213">		List&lt;Admin&gt; adminData = adminRepository.findByMail(mail);</span>
+
+<span class="fc bfc" id="L215" title="All 2 branches covered.">	  	  if (!adminData.isEmpty()) {</span>
+<span class="fc" id="L216">	  	    return new ResponseEntity&lt;&gt;(new AdminResponse(adminData.get(0)), HttpStatus.OK);</span>
+	  	  } else {
+<span class="fc" id="L218">	  	    return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+	  	  }
+	}
+	
+
+
+	/**
+	 * Get managers by their request.
+	 *
+	 * @param active the active or not (the manager is active of not)
+	 * @param scadute if the manager has to renew his activation
+	 * @return all managers that has the selected request
+	 */
+	public ResponseEntity&lt;List&lt;ManagerPlusResponse&gt;&gt; getRequest(boolean active,boolean scadute) {
+		try {
+<span class="fc" id="L233">			List&lt;ManagerPlusResponse&gt; reqManager=requestService.getAll(active,scadute);</span>
+<span class="fc" id="L234">			return new ResponseEntity&lt;&gt;(reqManager, HttpStatus.OK);</span>
+<span class="nc" id="L235">		}catch(Exception e) {</span>
+<span class="nc" id="L236">			e.printStackTrace();</span>
+<span class="nc" id="L237">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+	}
+
+	/**
+	 * Sets the request active.
+	 *
+	 * @param id the id of manager to activate
+	 * @return the response entity with done or not
+	 */
+	public ResponseEntity&lt;Boolean&gt; setRequestActive(String id) {
+		try {
+<span class="fc" id="L249">			Request reqManager=requestService.getById(id);</span>
+<span class="pc bpc" id="L250" title="1 of 2 branches missed.">			if(reqManager!=null) {</span>
+<span class="pc bpc" id="L251" title="1 of 2 branches missed.">				reqManager.setActive(!reqManager.isActive());</span>
+<span class="fc" id="L252">				this.setRequestDate(reqManager);</span>
+<span class="fc" id="L253">				requestService.update(reqManager);</span>
+<span class="fc" id="L254">				return new ResponseEntity&lt;&gt;(true, HttpStatus.OK);</span>
+			}
+<span class="nc" id="L256">			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+<span class="nc" id="L257">		}catch(Exception e) {</span>
+<span class="nc" id="L258">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+	}
+	
+	/**
+	 * Sets the request date renewal to today.
+	 *
+	 * @param reqManager the request of manager to which change date renewal
+	 * @return the boolean of done or not
+	 */
+	private Boolean setRequestDate(Request reqManager) {
+<span class="pc bpc" id="L269" title="1 of 2 branches missed.">		if(reqManager!=null) {</span>
+<span class="fc" id="L270">			reqManager.setDateRenewal(Functionalities.convertToDate(LocalDate.now()));</span>
+<span class="fc" id="L271">			requestService.update(reqManager);</span>
+<span class="fc" id="L272">			return true;</span>
+		}
+<span class="nc" id="L274">		return false;</span>
+	}
+	
+	/**
+	 * Sets the request date renewal applying a malus.
+	 *
+	 * @param id the id of manager to which apply the malus
+	 * @return the response entity of done or not
+	 */
+	public ResponseEntity&lt;Boolean&gt; setRequestDateMalus(String id) {
+		try {
+<span class="fc" id="L285">			Request reqManager=requestService.getById(id);</span>
+<span class="pc bpc" id="L286" title="1 of 2 branches missed.">			if(reqManager!=null) {</span>
+<span class="fc" id="L287">				reqManager.setDateRenewal(Functionalities.convertToDate(LocalDate.now().minusYears(1).atStartOfDay()));</span>
+<span class="fc" id="L288">				requestService.update(reqManager);</span>
+<span class="fc" id="L289">				return new ResponseEntity&lt;&gt;(true, HttpStatus.OK);</span>
+			}
+<span class="nc" id="L291">			return new ResponseEntity&lt;&gt;(false, HttpStatus.OK);</span>
+<span class="nc" id="L292">		}catch(Exception e) {</span>
+<span class="nc" id="L293">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+	}
+	
+
+
+	/**
+	 * Send newsletter.
+	 *
+	 * @return the response entity with how many newsletter mail are sended
+	 */
+	public ResponseEntity&lt;Integer&gt; sendNewsletter() {
+<span class="fc" id="L305">			Integer newsGood=userService.sendNews();</span>
+<span class="pc bpc" id="L306" title="1 of 2 branches missed.">			if(newsGood!=null) {</span>
+<span class="fc" id="L307">				return new ResponseEntity&lt;&gt;(newsGood, HttpStatus.OK);</span>
+			}
+<span class="nc" id="L309">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		
+	}
+	
+	
+
+	/**
+	 * Remove the request and the associated manager.
+	 *
+	 * @param id the id of manager
+	 * @return the response entity of done or not
+	 */
+	public ResponseEntity&lt;Boolean&gt; removeRequest(String id) {
+		try {
+<span class="fc" id="L323">			Request reqManager=requestService.getById(id);</span>
+<span class="fc bfc" id="L324" title="All 2 branches covered.">			if(reqManager!=null) {</span>
+<span class="fc" id="L325">				managerService.delete(id);</span>
+<span class="fc" id="L326">				requestService.delete(id);</span>
+<span class="fc" id="L327">				return new ResponseEntity&lt;&gt;(true, HttpStatus.OK);</span>
+			}
+<span class="fc" id="L329">			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+<span class="nc" id="L330">		}catch(Exception e) {</span>
+<span class="nc" id="L331">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+	}
+
+	
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>

@@ -3,6 +3,7 @@
  */
 package com.scarcolo.eventour.model.user;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
@@ -67,16 +68,24 @@ public class User{
 	 * @throws Exception the exception
 	 */
 	public User(AddUserRequest request) throws Exception {
-		this.setUsername(request.username);
-        this.setEmail(request.mail);
-        this.setPassword(request.password);
-        this.setName(request.name);
-        this.setSurname(request.surname);
-        this.setDateOfBirth(Functionalities.convertToDate(request.dateOfBirth));
-        this.setSex(request.sex);
-        this.setResidence(request.residence);
-        this.setTypes(request.types);
-        this.setNewsletter(false);
+		this.username=request.username;
+		boolean res=Functionalities.isValidEmailAddress(request.mail);
+		if(res) {
+			this.mail=request.mail;
+		}else {
+			throw new AddressException();
+		}
+        this.password=request.password;
+        this.name=request.name;
+        this.surname=request.surname;
+        if(request.dateOfBirth.isBefore(LocalDate.now())) {
+			this.dateOfBirth=Functionalities.convertToDate(request.dateOfBirth);
+		}else {
+			throw new DateTimeException("Errore data futura");
+		}
+        this.sex=(request.sex.toUpperCase().contentEquals("M") || request.sex.toUpperCase().contentEquals("F"))? request.sex.toUpperCase() : "N";
+        this.residence=request.residence;
+        this.types=request.types;
     }
 	
 	/**
@@ -196,7 +205,7 @@ public class User{
 		if(dateOfBirth.before(new Date())) {
 			this.dateOfBirth = dateOfBirth;
 		}else {
-			throw new Exception("Errore data futura");
+			throw new DateTimeException("Errore data futura");
 		}
 		
 	}
@@ -226,7 +235,7 @@ public class User{
 	 * @param sex the new sex
 	 */
 	public void setSex(String sex) {
-		this.sex = (sex=="M") ? "M" : "F";
+		this.sex = (sex.equalsIgnoreCase("M")) ? "M" : "F";
 	}
 
 	/**

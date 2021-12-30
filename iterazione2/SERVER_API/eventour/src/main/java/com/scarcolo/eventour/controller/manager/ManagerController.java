@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.scarcolo.eventour.model.booking.PaymentRequest;
@@ -119,7 +118,7 @@ public class ManagerController {
 	 * @return true, if successful
 	 */
 	@DeleteMapping("/managers/{id}")
-    public boolean deleteById(@RequestParam String id){
+    public ResponseEntity<Boolean> deleteById(@PathVariable("id") String id){
         return managerService.delete(id);
     }
 	

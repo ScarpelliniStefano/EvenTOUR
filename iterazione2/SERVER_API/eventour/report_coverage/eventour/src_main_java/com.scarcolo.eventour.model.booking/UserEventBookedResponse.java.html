@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>UserEventBookedResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.booking</a> &gt; <span class="el_source">UserEventBookedResponse.java</span></div><h1>UserEventBookedResponse.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.model.booking;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.user.User;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserEventBookedResponse.
+ */
+public class UserEventBookedResponse {
+	
+	/** The id. */
+	@JsonProperty(&quot;id&quot;)
+	private String id;
+	
+	/** The user id. */
+	@JsonProperty(&quot;userId&quot;)
+	private String userId;
+	
+	/** The event id. */
+	@JsonProperty(&quot;eventId&quot;)
+	private String eventId;
+	
+	/** The prenoted seat. */
+	@JsonProperty(&quot;prenotedSeat&quot;)
+	private Integer prenotedSeat;
+	
+	/** The come. */
+	@JsonProperty(&quot;come&quot;)
+	private Boolean come;
+	
+	/** The review. */
+	@JsonProperty(&quot;review&quot;)
+	private Integer review;
+	
+	/** The user. */
+	@JsonProperty(&quot;user&quot;)
+	private User[] user;
+	
+	/** The event. */
+	@JsonProperty(&quot;event&quot;)
+	private Event[] event;
+	
+	/**
+	 * Instantiates a new user event booked response.
+	 *
+	 * @param id the id
+	 * @param userId the user id
+	 * @param eventId the event id
+	 * @param prenotedSeat the prenoted seat
+	 * @param come the come
+	 * @param review the review
+	 * @param user the user
+	 * @param event the event
+	 */
+	public UserEventBookedResponse(String id, String userId, String eventId, Integer prenotedSeat,Boolean come, int review, User[] user,Event[] event ) {
+<span class="fc" id="L58">		super();</span>
+<span class="fc" id="L59">		this.id = id;</span>
+<span class="fc" id="L60">		this.userId = userId;</span>
+<span class="fc" id="L61">		this.eventId = eventId;</span>
+<span class="fc" id="L62">		this.prenotedSeat = prenotedSeat;</span>
+<span class="fc" id="L63">		this.come = come;</span>
+<span class="fc" id="L64">		this.review = review;</span>
+<span class="fc" id="L65">		this.user = user;</span>
+<span class="fc" id="L66">		this.event = event;</span>
+<span class="fc" id="L67">	}</span>
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public String getId() {
+<span class="fc" id="L75">		return id;</span>
+	}
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	public void setId(String id) {
+<span class="nc" id="L84">		this.id = id;</span>
+<span class="nc" id="L85">	}</span>
+	
+	/**
+	 * Gets the user id.
+	 *
+	 * @return the user id
+	 */
+	public String getUserId() {
+<span class="fc" id="L93">		return userId;</span>
+	}
+	
+	/**
+	 * Sets the user id.
+	 *
+	 * @param userId the new user id
+	 */
+	public void setUserId(String userId) {
+<span class="nc" id="L102">		this.userId = userId;</span>
+<span class="nc" id="L103">	}</span>
+	
+	/**
+	 * Gets the event id.
+	 *
+	 * @return the event id
+	 */
+	public String getEventId() {
+<span class="fc" id="L111">		return eventId;</span>
+	}
+	
+	/**
+	 * Sets the event id.
+	 *
+	 * @param eventId the new event id
+	 */
+	public void setEventId(String eventId) {
+<span class="nc" id="L120">		this.eventId = eventId;</span>
+<span class="nc" id="L121">	}</span>
+	
+	/**
+	 * Gets the prenoted seat.
+	 *
+	 * @return the prenoted seat
+	 */
+	public Integer getPrenotedSeat() {
+<span class="fc" id="L129">		return prenotedSeat;</span>
+	}
+	
+	/**
+	 * Sets the prenoted seat.
+	 *
+	 * @param prenotedSeat the new prenoted seat
+	 */
+	public void setPrenotedSeat(Integer prenotedSeat) {
+<span class="nc" id="L138">		this.prenotedSeat = prenotedSeat;</span>
+<span class="nc" id="L139">	}</span>
+	
+	/**
+	 * Gets the come.
+	 *
+	 * @return the come
+	 */
+	public Boolean getCome() {
+<span class="fc" id="L147">		return come;</span>
+	}
+	
+	/**
+	 * Sets the come.
+	 *
+	 * @param come the new come
+	 */
+	public void setCome(Boolean come) {
+<span class="nc" id="L156">		this.come = come;</span>
+<span class="nc" id="L157">	}</span>
+	
+	/**
+	 * Gets the review.
+	 *
+	 * @return the review
+	 */
+	public int getReview() {
+<span class="fc" id="L165">		return review;</span>
+	}
+
+	/**
+	 * Sets the review.
+	 *
+	 * @param review the new review
+	 */
+	public void setReview(int review) {
+<span class="nc bnc" id="L174" title="All 4 branches missed.">		this.review = (review&gt;0&amp;&amp;review&lt;6) ? review : -1;</span>
+<span class="nc" id="L175">	}</span>
+	
+	/**
+	 * Gets the event.
+	 *
+	 * @return the event
+	 */
+	public Event[] getEvent() {
+<span class="fc" id="L183">		return event;</span>
+	}
+	
+	/**
+	 * Sets the event.
+	 *
+	 * @param event the new event
+	 */
+	public void setEvent(Event[] event) {
+<span class="nc" id="L192">		this.event = event;</span>
+<span class="nc" id="L193">	}</span>
+	
+	/**
+	 * Gets the user.
+	 *
+	 * @return the user
+	 */
+	public User[] getUser() {
+<span class="fc" id="L201">		return user;</span>
+	}
+	
+	/**
+	 * Sets the user.
+	 *
+	 * @param user the new user
+	 */
+	public void setUser(User[] user) {
+<span class="nc" id="L210">		this.user = user;</span>
+<span class="nc" id="L211">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>

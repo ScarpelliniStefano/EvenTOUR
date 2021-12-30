@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>UserService.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.service.user</a> &gt; <span class="el_source">UserService.java</span></div><h1>UserService.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.service.user;
+
+
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.model.AccountResponse;
+import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventBookedResponse;
+import com.scarcolo.eventour.model.event.EventResponse;
+import com.scarcolo.eventour.model.manager.Manager;
+import com.scarcolo.eventour.model.manager.ManagerResponse;
+import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
+import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
+import com.scarcolo.eventour.model.user.AddUserRequest;
+import com.scarcolo.eventour.model.user.EditUserRequest;
+import com.scarcolo.eventour.model.user.User;
+import com.scarcolo.eventour.model.user.UserResponse;
+import com.scarcolo.eventour.repository.booking.BookingRepository;
+import com.scarcolo.eventour.repository.event.EventRepository;
+import com.scarcolo.eventour.repository.manager.ManagerRepository;
+import com.scarcolo.eventour.repository.ticketisp.TicketInspRepository;
+import com.scarcolo.eventour.repository.user.UserRepository;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserService.
+ */
+@Service
+<span class="fc" id="L41">public class UserService {</span>
+
+	/** The user repository. */
+    @Autowired
+    private UserRepository userRepository;
+	
+	/** The manager repository. */
+	@Autowired
+	private ManagerRepository managerRepository;
+	
+	/** The ticket insp repository. */
+	@Autowired
+	private TicketInspRepository ticketInspRepository;
+	
+	/** The event repository. */
+	@Autowired
+	private EventRepository eventRepository;
+	
+	/** The booking repository. */
+	@Autowired
+	private BookingRepository bookingRepository;
+
+   
+    /**
+     * Add a user.
+     *
+     * @param request the request of new user
+     * @return the response entity with data of created user
+     */
+    public ResponseEntity&lt;UserResponse&gt; add(AddUserRequest request){
+    	User user;
+		try {
+<span class="fc" id="L73">			user = userRepository.save(new User(request));</span>
+<span class="fc" id="L74">		} catch (Exception e) {</span>
+<span class="fc" id="L75">			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_ACCEPTABLE);</span>
+		}
+<span class="fc" id="L77">        return new ResponseEntity&lt;&gt;(new UserResponse(user), HttpStatus.OK);</span>
+    }
+
+  
+    /**
+     * Update a user.
+     *
+     * @param request the request of data to modify
+     * @return the response entity with data modified
+     * @throws Exception the exception
+     */
+    public ResponseEntity&lt;UserResponse&gt; update(EditUserRequest request) throws Exception {
+<span class="fc" id="L89">        Optional&lt;User&gt; optionalUser = userRepository.findById(request.id);</span>
+<span class="pc bpc" id="L90" title="1 of 2 branches missed.">        if (optionalUser.isEmpty()) {</span>
+<span class="nc" id="L91">            return null;</span>
+        }
+<span class="fc" id="L93">        User u=optionalUser.get();</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if(request.residence!=null) {</span>
+<span class="fc" id="L95">        	u.setResidence(request.residence);</span>
+        }
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">        if(request.types!=null) {</span>
+<span class="nc" id="L98">        	u.setTypes(request.types);</span>
+        }
+<span class="fc" id="L100">        userRepository.save(u);</span>
+<span class="fc" id="L101">        return new ResponseEntity&lt;&gt;(new UserResponse(u), HttpStatus.OK);</span>
+    }
+
+   
+    /**
+     * Gets the user by id.
+     *
+     * @param id the id of user
+     * @return the user by id
+     */
+    public ResponseEntity&lt;UserResponse&gt; getById(String id){
+<span class="fc" id="L112">    	Optional&lt;User&gt; userData = userRepository.findById(id);</span>
+
+<span class="pc bpc" id="L114" title="1 of 2 branches missed.">  	  if (userData.isPresent()) {</span>
+<span class="fc" id="L115">  	    return new ResponseEntity&lt;&gt;(new UserResponse(userData.get()), HttpStatus.OK);</span>
+  	  } else {
+<span class="nc" id="L117">  	    return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+  	  }
+    }
+
+  
+    /**
+     * Delete a user.
+     *
+     * @param id the id of user
+     * @return true, if successful
+     */
+    public ResponseEntity&lt;Boolean&gt; delete(String id) {
+<span class="fc" id="L129">        Optional&lt;User&gt; optionalUser = userRepository.findById(id);</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">        if (optionalUser.isEmpty()) {</span>
+<span class="fc" id="L131">            return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+        }
+<span class="fc" id="L133">        userRepository.deleteById(optionalUser.get().getId());</span>
+<span class="fc" id="L134">        return new ResponseEntity&lt;&gt;(true,HttpStatus.OK);</span>
+    }
+
+	/**
+	 * Gets all users.
+	 *
+	 * @return all users
+	 */
+	public ResponseEntity&lt;List&lt;UserResponse&gt;&gt; getAll() {
+		try {
+<span class="fc" id="L144">			List&lt;User&gt; users = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L145">			userRepository.findAll().forEach(users::add);</span>
+<span class="pc bpc" id="L146" title="1 of 2 branches missed.">			if(users.isEmpty()) {</span>
+<span class="nc" id="L147">				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+			}
+<span class="fc" id="L149">			List&lt;UserResponse&gt; userR= new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L150" title="All 2 branches covered.">			for(User user: users) userR.add(new UserResponse(user));</span>
+<span class="fc" id="L151">			return new ResponseEntity&lt;&gt;(userR, HttpStatus.OK);</span>
+<span class="nc" id="L152">		}catch(Exception e) {</span>
+<span class="nc" id="L153">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+	}
+	
+	/**
+	 * Gets the account of a given mail/code and password.
+	 *
+	 * @param user the user
+	 * @param psw the psw
+	 * @return the account
+	 */
+	public ResponseEntity&lt;AccountResponse&gt; getAccount(String user, String psw) {
+		
+<span class="fc bfc" id="L166" title="All 2 branches covered.">		if(user.isEmpty()) {</span>
+<span class="fc" id="L167">			return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+		}
+		Object objResp;
+		try {
+<span class="fc bfc" id="L171" title="All 2 branches covered.">			if(!user.contains(&quot;@&quot;)) {</span>
+<span class="fc" id="L172">				List&lt;TicketInsp&gt; tickets = ticketInspRepository.findByCode(user);</span>
+<span class="fc bfc" id="L173" title="All 2 branches covered.">				if(tickets.size()==0) {</span>
+<span class="fc" id="L174">					return new ResponseEntity&lt;&gt;(new AccountResponse(&quot;NONE&quot;,&quot;ERROR. unregistered ticket inspector&quot;),HttpStatus.OK);</span>
+				}else {
+<span class="fc bfc" id="L176" title="All 2 branches covered.">					for(TicketInsp ticket : tickets) {</span>
+						
+<span class="fc bfc" id="L178" title="All 2 branches covered.">						if(Functionalities.getMd5(ticket.getPassword()).equals(psw)) {</span>
+<span class="fc" id="L179">							objResp=new TicketInspResponse(ticket);</span>
+<span class="fc" id="L180">							return new ResponseEntity&lt;&gt;(new AccountResponse(&quot;TicketInsp&quot;,objResp),HttpStatus.OK);</span>
+						}
+					}
+<span class="fc" id="L183">					return new ResponseEntity&lt;&gt;(new AccountResponse(&quot;TicketInsp&quot;,&quot;ERROR. invalid password&quot;),HttpStatus.OK);</span>
+				}
+			}else {
+<span class="fc" id="L186">				List&lt;User&gt; users = userRepository.findByMail(user);</span>
+<span class="fc" id="L187">				List&lt;Manager&gt; managers = managerRepository.findByMail(user);</span>
+<span class="fc bfc" id="L188" title="All 4 branches covered.">				if(users.isEmpty()&amp;&amp;managers.isEmpty()) {</span>
+<span class="fc" id="L189">					return new ResponseEntity&lt;&gt;(new AccountResponse(&quot;NONE&quot;,&quot;ERROR. unregistered user&quot;),HttpStatus.OK);</span>
+				}else {
+<span class="fc bfc" id="L191" title="All 2 branches covered.">					if(!users.isEmpty()) {</span>
+<span class="fc bfc" id="L192" title="All 2 branches covered.">						if(Functionalities.getMd5(users.get(0).getPassword()).equals(psw)) {</span>
+<span class="fc" id="L193">							objResp=new UserResponse(users.get(0));</span>
+<span class="fc" id="L194">							return new ResponseEntity&lt;&gt;(new AccountResponse(&quot;User&quot;,objResp),HttpStatus.OK);</span>
+						}else {
+<span class="fc" id="L196">							return new ResponseEntity&lt;&gt;(new AccountResponse(&quot;User&quot;,&quot;ERROR. invalid password&quot;),HttpStatus.OK);</span>
+						}
+					}else {
+<span class="fc bfc" id="L199" title="All 2 branches covered.">						if(Functionalities.getMd5(managers.get(0).getPassword()).equals(psw)) {</span>
+<span class="fc" id="L200">							objResp=new ManagerResponse(managers.get(0));</span>
+<span class="fc" id="L201">							return new ResponseEntity&lt;&gt;(new AccountResponse(&quot;Manager&quot;,objResp),HttpStatus.OK);</span>
+						}else {
+<span class="fc" id="L203">							return new ResponseEntity&lt;&gt;(new AccountResponse(&quot;Manager&quot;,&quot;ERROR. invalid password&quot;),HttpStatus.OK);</span>
+						}
+					}
+				}
+			}
+<span class="nc" id="L208">		}catch(Exception e) {</span>
+<span class="nc" id="L209">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+		
+	}
+
+	
+	
+	/**
+	 * Gets all booking by id user.
+	 *
+	 * @param id the id user
+	 * @return bookings by id user
+	 */
+	private List&lt;EventBookedResponse&gt; getByIdUser(String id) {
+		try {
+<span class="fc" id="L224">			List&lt;EventBookedResponse&gt; eventR=bookingRepository.findByUserId(id);</span>
+<span class="fc" id="L225">			return eventR;</span>
+<span class="nc" id="L226">		}catch(Exception e) {</span>
+			//System.out.println(e);
+<span class="nc" id="L228">			return null;</span>
+		}
+	}
+	
+	/**
+	 * Gets the even tour.
+	 *
+	 * @param userId the user id
+	 * @param n the number of events wanted
+	 * @return the even tour
+	 */
+	public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getEvenTour(String userId,Integer n) {
+<span class="fc" id="L240">		Optional&lt;User&gt; userData = userRepository.findById(userId);</span>
+<span class="fc" id="L241">		User u=null;</span>
+<span class="pc bpc" id="L242" title="1 of 2 branches missed.">	  	if (userData.isPresent()) {</span>
+<span class="fc" id="L243">	  	    u=userData.get();</span>
+<span class="fc" id="L244">	  	} else {</span>
+<span class="nc" id="L245">	  	    return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+	  	}
+<span class="fc" id="L247">	  	List&lt;EventBookedResponse&gt; bookingData = this.getByIdUser(userId);</span>
+		//1.filtra per regione
+		//2.ordinamento dataOra
+<span class="fc" id="L250">		List&lt;Event&gt; eventR=eventRepository.findByLocationRegioneLikeAndFreeSeatGreaterThanZero(u.getResidence().getRegione() ,Sort.by(&quot;dataOra&quot;).ascending());</span>
+		//3.ciclo 
+<span class="fc" id="L252">		List&lt;Event&gt; s=new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L253">		List&lt;Event&gt; sSub=new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L254">		Integer c=0;</span>
+<span class="fc" id="L255">		Integer cSub=0;</span>
+<span class="fc" id="L256">		Boolean sel=false;</span>
+<span class="fc" id="L257">		Boolean selSub=false;</span>
+<span class="pc bpc" id="L258" title="1 of 2 branches missed.">		if(bookingData!=null) {</span>
+<span class="fc bfc" id="L259" title="All 2 branches covered.">			for(int j=0;j&lt;bookingData.size();j++) {</span>
+<span class="fc" id="L260">				eventR.remove(bookingData.get(j).getEvent()[0]);</span>
+<span class="fc" id="L261">				LocalDate dateE=bookingData.get(j).getEvent()[0].getDataOra().toLocalDate();</span>
+<span class="fc" id="L262">				eventR.removeIf(e -&gt; dateE.isEqual(e.getDataOra().toLocalDate()));</span>
+			}
+		}
+<span class="pc bpc" id="L265" title="1 of 2 branches missed.">		for(int i=0;i&lt;eventR.size();i++) {</span>
+<span class="fc bfc" id="L266" title="All 2 branches covered.">			if(c.compareTo(n)==0) {</span>
+<span class="fc" id="L267">				List&lt;EventResponse&gt; eventResponse=new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L268" title="All 2 branches covered.">				for(Event e : s) {</span>
+<span class="fc" id="L269">					eventResponse.add(new EventResponse(e));</span>
+				}
+<span class="fc" id="L271">				return new ResponseEntity&lt;&gt;(eventResponse,HttpStatus.OK);</span>
+			}
+<span class="fc" id="L273">			sel=false;</span>
+<span class="fc" id="L274">			selSub=false;</span>
+<span class="fc bfc" id="L275" title="All 4 branches covered.">			for(int j=0;!sel &amp;&amp; j&lt;eventR.get(i).getTypes().length;j++) {</span>
+<span class="fc bfc" id="L276" title="All 2 branches covered.">				for(String k: u.getTypes()) {</span>
+<span class="fc bfc" id="L277" title="All 6 branches covered.">						if(!sel &amp;&amp; (s.isEmpty() || !s.get(s.size()-1).getDataOra().toLocalDate().isEqual(eventR.get(i).getDataOra().toLocalDate()))) {</span>
+							//controllo data
+<span class="fc bfc" id="L279" title="All 2 branches covered.">							if(eventR.get(i).getTypes()[j].toString().equalsIgnoreCase(k.toString())) {</span>
+<span class="pc bpc" id="L280" title="1 of 4 branches missed.">								if(!sSub.isEmpty() &amp;&amp; sSub.get(sSub.size()-1).getId().equalsIgnoreCase(eventR.get(i).getId()))</span>
+<span class="fc" id="L281">									sSub.remove(sSub.size()-1);</span>
+<span class="fc" id="L282">								s.add(eventR.get(i));</span>
+<span class="fc" id="L283">								sel=true;</span>
+<span class="fc" id="L284">								c++;</span>
+<span class="fc bfc" id="L285" title="All 6 branches covered.">							}else if(!selSub &amp;&amp; cSub&lt;n &amp;&amp; Functionalities.similType(eventR.get(i).getTypes()[j],k)){</span>
+<span class="fc" id="L286">								sSub.add(eventR.get(i));</span>
+<span class="fc" id="L287">								selSub=true;</span>
+<span class="fc" id="L288">								cSub++;</span>
+							}
+						}
+				}
+			}
+			
+		}
+		
+<span class="nc bnc" id="L296" title="All 2 branches missed.">		for(int h=0;h&lt;(n-s.size());h++) {</span>
+<span class="nc" id="L297">			s.add(sSub.get(h));</span>
+		}
+		
+<span class="nc" id="L300">		s=Functionalities.orderByData(s);</span>
+		
+<span class="nc" id="L302">		List&lt;EventResponse&gt; eventResponse=new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L303" title="All 2 branches missed.">		for(Event e : s) {</span>
+<span class="nc" id="L304">			eventResponse.add(new EventResponse(e));</span>
+		}
+<span class="nc" id="L306">		return new ResponseEntity&lt;&gt;(eventResponse,HttpStatus.OK);</span>
+		
+		
+	}
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

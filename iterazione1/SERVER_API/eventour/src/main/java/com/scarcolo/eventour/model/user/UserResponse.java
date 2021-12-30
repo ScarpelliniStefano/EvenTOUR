@@ -261,7 +261,7 @@ public class UserResponse{
 	 * Sets the password.
 	 *
 	 * @param password the new password
-	 * @throws NoSuchAlgorithmException 
+	 * @throws NoSuchAlgorithmException exception for md5 not present
 	 */
 	public void setPassword(String password) throws NoSuchAlgorithmException {
 		this.password = Functionalities.getMd5(password);

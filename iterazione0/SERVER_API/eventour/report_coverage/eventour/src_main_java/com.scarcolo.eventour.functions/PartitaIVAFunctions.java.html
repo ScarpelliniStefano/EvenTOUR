@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>PartitaIVAFunctions.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (1) (30 dic 2021 11:07:32)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.functions</a> &gt; <span class="el_source">PartitaIVAFunctions.java</span></div><h1>PartitaIVAFunctions.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.functions;
+
+// TODO: Auto-generated Javadoc
+/**
+ * Italian Partita IVA normalization, formatting and validation routines.
+ * A Partita IVA (PI) is composed of 11 digits; the last digit is the control
+ * code. Example: 12345678903.
+ * @author Umberto Salsi (salsi@icosaedro.it)
+ * @version 2020-01-24
+ */
+<span class="nc" id="L11">public class PartitaIVAFunctions {</span>
+	
+	/**
+	 * Normalizes a PI by removing white spaces.
+	 * Useful to clean-up user's input and to save the result in the DB.
+	 * @param pi Raw PI, possibly with spaces.
+	 * @return Normalized PI.
+	 */
+	public static String normalize(String pi)
+	{
+<span class="nc" id="L21">		return pi.replaceAll(&quot;[ \t\r\n]&quot;, &quot;&quot;);</span>
+	}
+	
+	/**
+	 * Returns the formatted PI. Currently does nothing but normalization.
+	 * @param pi Raw PI, possibly with spaces.
+	 * @return Formatted PI.
+	 */
+	public static String format(String pi)
+	{
+<span class="nc" id="L31">		return normalize(pi);</span>
+	}
+	
+	/**
+	 * Verifies the basic syntax, length and control code of the given PI.
+	 * @param pi Raw PI, possibly with spaces.
+	 * @return Null if valid, or string describing why this PI must be
+	 * rejected.
+	 */
+	public static String validate(String pi)
+	{
+		/*pi = normalize(pi);
+		if( pi.length() == 0 )
+			return &quot;Empty.&quot;;
+		else if( pi.length() != 11 )
+			return &quot;Invalid length.&quot;;
+		if( ! pi.matches(&quot;^[0-9]{11}$&quot;) )
+			return &quot;Invalid characters.&quot;;
+		int s = 0;
+		for(int i = 0; i &lt; 11; i++){
+			int n = pi.charAt(i) - '0';
+			if( (i &amp; 1) == 1 ){
+				n *= 2;
+				if( n &gt; 9 )
+					n -= 9;
+			}
+			s += n;
+		}
+		if( s % 10 != 0 )
+			return &quot;Invalid checksum.&quot;;
+		return &quot;ok&quot;;*/
+<span class="nc" id="L62">		return &quot;ok&quot;;</span>
+	}
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (1) (30 dic 2021 11:07:32)</div></body></html>

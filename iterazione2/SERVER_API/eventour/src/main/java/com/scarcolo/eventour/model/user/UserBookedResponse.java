@@ -56,7 +56,7 @@ public class UserBookedResponse {
 		this.prenotedSeat = prenotedSeat;
 		this.come = come;
 		this.review = review;
-		this.setUser(user);
+		this.user=user;
 	}
 	
 	/**

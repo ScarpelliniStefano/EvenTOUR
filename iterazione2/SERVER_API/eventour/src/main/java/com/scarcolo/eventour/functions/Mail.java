@@ -1,10 +1,11 @@
 package com.scarcolo.eventour.functions;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Properties;
@@ -36,7 +37,7 @@ public class Mail {
 	/**
 	 * Send mail method.
 	 *
-	 * @param NameTemplate the name template to apply
+	 * @param nameTemplate the name template to apply
 	 * @param destination the destination email
 	 * @param obj the object of mail
 	 * @param title1 the first title
@@ -45,7 +46,7 @@ public class Mail {
 	 * @throws MessagingException the messaging exception
 	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
-	private static void sendMail(String NameTemplate, String destination, String obj, String title1, String title2, String msg) throws MessagingException, IOException
+	private static void sendMail(String nameTemplate, String destination, String obj, String title1, String title2, String msg) throws MessagingException, IOException
 	{
 		prop = new Properties();
 		prop.put("mail.smtp.auth", true);
@@ -66,7 +67,8 @@ public class Mail {
 		  Message.RecipientType.TO, InternetAddress.parse(destination));
 		message.setSubject(obj);
 		
-		InputStream inputStream = new FileInputStream("./src/main/java/com/scarcolo/eventour/functions/mailModel/"+NameTemplate+".txt");
+		
+		InputStream inputStream = Files.newInputStream(Paths.get("./src/main/java/com/scarcolo/eventour/functions/mailModel/"+nameTemplate+".txt"));
 		StringBuilder resultStringBuilder = new StringBuilder();
 	    try (BufferedReader br
 	      = new BufferedReader(new InputStreamReader(inputStream))) {
@@ -162,7 +164,6 @@ public class Mail {
 	public static boolean sendBookingEventMsg(String destination, Event event, Booking book) throws IOException{
 		String hh=("0"+event.getDataOra().getHour());
 		String mm=("0"+event.getDataOra().getMinute());
-		System.out.println(book.getId());
 		String msg = "Ciao,<br><br> ti confermiamo la prenotazione all'evento \""+
 				  event.getTitle()+
 				  "\" che si svolge in data " +

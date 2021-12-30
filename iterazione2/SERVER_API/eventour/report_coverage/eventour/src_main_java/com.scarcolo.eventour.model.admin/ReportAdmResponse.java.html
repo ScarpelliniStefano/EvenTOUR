@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ReportAdmResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.admin</a> &gt; <span class="el_source">ReportAdmResponse.java</span></div><h1>ReportAdmResponse.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.model.admin;
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scarcolo.eventour.model.Location;
+import com.scarcolo.eventour.model.event.EventPlus;
+import com.scarcolo.eventour.model.request.Request;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ReportAdmResponse.
+ */
+public class ReportAdmResponse {
+	
+	/** The id. */
+	@JsonProperty(&quot;id&quot;)
+	private String id;
+	
+	/** The name. */
+	@JsonProperty(&quot;name&quot;)
+	private String name;
+	
+	/** The surname. */
+	@JsonProperty(&quot;surname&quot;)
+	private String surname;
+	
+	/** The date of birth. */
+	@JsonProperty(&quot;dateOfBirth&quot;)
+	private Date dateOfBirth;
+	
+	/** The residence. */
+	@JsonProperty(&quot;residence&quot;)
+	private Location residence;
+	
+	/** The codice PIVA. */
+	@JsonProperty(&quot;codicePIVA&quot;)
+	private String codicePIVA;
+	
+	/** The ragione sociale. */
+	@JsonProperty(&quot;ragioneSociale&quot;)
+	private String ragioneSociale;
+	
+	/** The mail. */
+	@JsonProperty(&quot;mail&quot;)
+	private String mail;
+	
+	/** The events. */
+	@JsonProperty(&quot;events&quot;)
+	private EventPlus[] events;
+	
+	/** The request data. */
+	@JsonProperty(&quot;request&quot;)
+	private Request[] request;
+
+	/**
+	 * Instantiates a new report admin response.
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param surname the surname
+	 * @param dateOfBirth the date of birth
+	 * @param residence the residence
+	 * @param codicePIVA the codice PIVA
+	 * @param ragioneSociale the ragione sociale
+	 * @param mail the mail
+	 * @param events the events
+	 * @param request the request
+	 */
+	public ReportAdmResponse(String id, String name, String surname, Date dateOfBirth, Location residence,
+			String codicePIVA, String ragioneSociale, String mail, EventPlus[] events, Request[] request) {
+<span class="fc" id="L72">		super();</span>
+<span class="fc" id="L73">		this.id = id;</span>
+<span class="fc" id="L74">		this.name = name;</span>
+<span class="fc" id="L75">		this.surname = surname;</span>
+<span class="fc" id="L76">		this.dateOfBirth = dateOfBirth;</span>
+<span class="fc" id="L77">		this.residence = residence;</span>
+<span class="fc" id="L78">		this.codicePIVA = codicePIVA;</span>
+<span class="fc" id="L79">		this.ragioneSociale = ragioneSociale;</span>
+<span class="fc" id="L80">		this.mail = mail;</span>
+<span class="fc" id="L81">		this.events = events;</span>
+<span class="fc" id="L82">		this.request = request;</span>
+<span class="fc" id="L83">	}</span>
+
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public String getId() {
+<span class="fc" id="L91">		return id;</span>
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	public void setId(String id) {
+<span class="nc" id="L100">		this.id = id;</span>
+<span class="nc" id="L101">	}</span>
+
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
+	public String getName() {
+<span class="fc" id="L109">		return name;</span>
+	}
+
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
+	public void setName(String name) {
+<span class="nc" id="L118">		this.name = name;</span>
+<span class="nc" id="L119">	}</span>
+
+	/**
+	 * Gets the surname.
+	 *
+	 * @return the surname
+	 */
+	public String getSurname() {
+<span class="fc" id="L127">		return surname;</span>
+	}
+
+	/**
+	 * Sets the surname.
+	 *
+	 * @param surname the new surname
+	 */
+	public void setSurname(String surname) {
+<span class="nc" id="L136">		this.surname = surname;</span>
+<span class="nc" id="L137">	}</span>
+
+	/**
+	 * Gets the date of birth.
+	 *
+	 * @return the date of birth
+	 */
+	public Date getDateOfBirth() {
+<span class="fc" id="L145">		return dateOfBirth;</span>
+	}
+
+	/**
+	 * Sets the date of birth.
+	 *
+	 * @param dateOfBirth the new date of birth
+	 */
+	public void setDateOfBirth(Date dateOfBirth) {
+<span class="nc" id="L154">		this.dateOfBirth = dateOfBirth;</span>
+<span class="nc" id="L155">	}</span>
+
+	/**
+	 * Gets the residence.
+	 *
+	 * @return the residence
+	 */
+	public Location getResidence() {
+<span class="fc" id="L163">		return residence;</span>
+	}
+
+	/**
+	 * Sets the residence.
+	 *
+	 * @param residence the new residence
+	 */
+	public void setResidence(Location residence) {
+<span class="nc" id="L172">		this.residence = residence;</span>
+<span class="nc" id="L173">	}</span>
+
+	/**
+	 * Gets the codice PIVA.
+	 *
+	 * @return the codice PIVA
+	 */
+	public String getCodicePIVA() {
+<span class="fc" id="L181">		return codicePIVA;</span>
+	}
+
+	/**
+	 * Sets the codice PIVA.
+	 *
+	 * @param codicePIVA the new codice PIVA
+	 */
+	public void setCodicePIVA(String codicePIVA) {
+<span class="nc" id="L190">		this.codicePIVA = codicePIVA;</span>
+<span class="nc" id="L191">	}</span>
+
+	/**
+	 * Gets the ragione sociale.
+	 *
+	 * @return the ragione sociale
+	 */
+	public String getRagioneSociale() {
+<span class="fc" id="L199">		return ragioneSociale;</span>
+	}
+
+	/**
+	 * Sets the ragione sociale.
+	 *
+	 * @param ragioneSociale the new ragione sociale
+	 */
+	public void setRagioneSociale(String ragioneSociale) {
+<span class="nc" id="L208">		this.ragioneSociale = ragioneSociale;</span>
+<span class="nc" id="L209">	}</span>
+
+	/**
+	 * Gets the mail.
+	 *
+	 * @return the mail
+	 */
+	public String getMail() {
+<span class="fc" id="L217">		return mail;</span>
+	}
+
+	/**
+	 * Sets the mail.
+	 *
+	 * @param mail the new mail
+	 */
+	public void setMail(String mail) {
+<span class="nc" id="L226">		this.mail = mail;</span>
+<span class="nc" id="L227">	}</span>
+
+	/**
+	 * Gets the event.
+	 *
+	 * @return the event
+	 */
+	public EventPlus[] getEvent() {
+<span class="fc" id="L235">		return events;</span>
+	}
+
+	/**
+	 * Sets the event.
+	 *
+	 * @param event the new event
+	 */
+	public void setEvent(EventPlus[] event) {
+<span class="nc" id="L244">		this.events = event;</span>
+<span class="nc" id="L245">	}</span>
+
+	/**
+	 * Gets the request.
+	 *
+	 * @return the request
+	 */
+	public Request[] getRequest() {
+<span class="fc" id="L253">		return request;</span>
+	}
+
+	/**
+	 * Sets the request.
+	 *
+	 * @param request the new request
+	 */
+	public void setRequest(Request[] request) {
+<span class="nc" id="L262">		this.request = request;</span>
+<span class="nc" id="L263">	}</span>
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>

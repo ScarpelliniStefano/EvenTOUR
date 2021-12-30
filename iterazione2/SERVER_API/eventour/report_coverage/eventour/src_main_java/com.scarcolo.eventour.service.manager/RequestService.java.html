@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>RequestService.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.service.manager</a> &gt; <span class="el_source">RequestService.java</span></div><h1>RequestService.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.service.manager;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+
+import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.model.manager.ManagerPlusResponse;
+import com.scarcolo.eventour.model.request.Request;
+import com.scarcolo.eventour.repository.manager.ManagerRepository;
+import com.scarcolo.eventour.repository.manager.RequestRepository;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RequestService.
+ */
+@Service
+<span class="fc" id="L24">public class RequestService {</span>
+	
+	/** The request repository. */
+	@Autowired
+	private RequestRepository requestRepository;
+	
+	/** The manager repository. */
+	@Autowired
+	private ManagerRepository managerRepository;
+	
+	/**
+	 * Adds a request.
+	 *
+	 * @param request the request to insert
+	 * @return the request inserted
+	 */
+	public Request add(Request request){
+<span class="nc" id="L41">		return requestRepository.save(request);</span>
+	}
+	
+	/**
+	 * Update a request.
+	 *
+	 * @param request the request to be updated
+	 * @return the rupdated request
+	 */
+	public Request update(Request request) {
+<span class="fc" id="L51">        Optional&lt;Request&gt; optionalRequest = requestRepository.findById(request.getId());</span>
+<span class="pc bpc" id="L52" title="1 of 2 branches missed.">        if (optionalRequest.isEmpty()) {</span>
+<span class="nc" id="L53">            return null;</span>
+        }else {
+<span class="fc" id="L55">        	Request r=optionalRequest.get();</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        	if(r.getDateRenewal()!=request.getDateRenewal()) {</span>
+<span class="fc" id="L57">        		r.setDateRenewal(request.getDateRenewal());</span>
+        	}
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        	if(r.isActive()!=request.isActive()) {</span>
+<span class="fc" id="L60">        		r.setActive(request.isActive());</span>
+        	}
+<span class="fc" id="L62">        	requestRepository.save(r);</span>
+<span class="fc" id="L63">        	return r;</span>
+        }
+    }
+	
+	/**
+	 * Update a manager activation.
+	 *
+	 * @param id the id of manager
+	 * @return the request updated
+	 */
+	public Request updateActivation(String id) {
+<span class="nc" id="L74">        List&lt;Request&gt; optionalRequest = requestRepository.findByManagerId(id);</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">        if (optionalRequest.isEmpty()) {</span>
+<span class="nc" id="L76">            return null;</span>
+        }else {
+<span class="nc" id="L78">        	Request r=optionalRequest.get(0);</span>
+<span class="nc bnc" id="L79" title="All 2 branches missed.">        	r.setActive(!r.isActive());</span>
+<span class="nc" id="L80">        	requestRepository.save(r);</span>
+<span class="nc" id="L81">        	return r;</span>
+        }
+    }
+	
+	/**
+	 * Update a manager date of renewal.
+	 *
+	 * @param id to witch update renewal
+	 * @return the request updated
+	 */
+	public Request updateRenewal(String id) {
+<span class="fc" id="L92">        List&lt;Request&gt; optionalRequest = requestRepository.findByManagerId(id);</span>
+<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        if (optionalRequest.isEmpty()) {</span>
+<span class="nc" id="L94">            return null;</span>
+        }else {
+<span class="fc" id="L96">        	Request r=optionalRequest.get(0);</span>
+<span class="fc" id="L97">        	r.setDateRenewal(Functionalities.convertToDate(LocalDate.now()));</span>
+<span class="fc" id="L98">        	requestRepository.save(r);</span>
+<span class="fc" id="L99">        	return r;</span>
+        }
+    }
+
+   
+	 /**
+ 	 * Gets the request by id manager.
+ 	 *
+ 	 * @param id the id manager
+ 	 * @return the request by id
+ 	 */
+ 	public Request getById(String id){
+<span class="fc" id="L111"> 			List&lt;Request&gt; requestData = requestRepository.findByManagerId(id);</span>
+
+<span class="fc bfc" id="L113" title="All 2 branches covered.">	  	  if (!requestData.isEmpty()) {</span>
+<span class="fc" id="L114">	  	    return requestData.get(0);</span>
+	  	  } else {
+<span class="fc" id="L116">	  	    return null;</span>
+	  	  }
+	 }
+  
+    /**
+     * Delete a manager.
+     *
+     * @param id the id manager
+     * @return true, if successful
+     */
+    public boolean delete(String id) {
+<span class="fc" id="L127">        List&lt;Request&gt; optionalRequest = requestRepository.findByManagerId(id);</span>
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        if (optionalRequest.isEmpty()) {</span>
+<span class="fc" id="L129">            return false;</span>
+        }
+<span class="nc" id="L131">        requestRepository.deleteById(optionalRequest.get(0).getId().toString());</span>
+<span class="nc" id="L132">        return true;</span>
+    }
+
+	/**
+	 * Gets all managers with request associated, based on parames.
+	 *
+	 * @param active true if you want manager active
+	 * @param scaduto true if you want manager with no renewal done until now (only if active is true)
+	 * @return all managers finded
+	 */
+	public List&lt;ManagerPlusResponse&gt; getAll(boolean active, boolean scaduto) {
+<span class="fc" id="L143">		List&lt;ManagerPlusResponse&gt; man=null;</span>
+<span class="fc" id="L144">		List&lt;Request&gt; reqs=new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">		if(active) {</span>
+<span class="fc" id="L146">			Date dt=Functionalities.convertToDate(LocalDate.now().minusYears(1));</span>
+			//System.out.println(dt);
+<span class="fc" id="L148">			reqs=requestRepository.findAllActive(Sort.by(&quot;dateRenewal&quot;).ascending());</span>
+<span class="pc bpc" id="L149" title="1 of 2 branches missed.">			if(scaduto) {</span>
+				//System.out.println(&quot;active scad&quot;);
+<span class="nc" id="L151">				reqs.removeIf(e -&gt; e.getDateRenewal().after(dt));</span>
+<span class="nc" id="L152">			}else {</span>
+				//System.out.println(&quot;active not scad&quot;);
+<span class="fc" id="L154">				reqs.removeIf(e -&gt; e.getDateRenewal().before(dt));</span>
+			}
+<span class="fc" id="L156">		}</span>
+		else
+<span class="fc" id="L158">			reqs=requestRepository.findAllNotActive(Sort.by(&quot;dateRenewal&quot;).ascending());</span>
+<span class="pc bpc" id="L159" title="1 of 2 branches missed.">		if(!reqs.isEmpty()) {</span>
+<span class="fc" id="L160">			man=new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">			for(Request req:reqs) {</span>
+<span class="fc" id="L162">				man.add(new ManagerPlusResponse(managerRepository.findById(req.getManagerId().toString()).get(),req));</span>
+			}
+		}
+<span class="fc" id="L165">		return man;</span>
+	}
+
+
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>AdminReportResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.admin</a> &gt; <span class="el_source">AdminReportResponse.java</span></div><h1>AdminReportResponse.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.model.admin;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scarcolo.eventour.model.manager.ManagerPlusResponse;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdminReportResponse.
+ */
+public class AdminReportResponse {
+
+	/** The id. */
+	@JsonProperty(&quot;id&quot;)
+	private String  id;
+	
+	/** The codice PIVA. */
+	@JsonProperty(&quot;codicePIVA&quot;)
+	private String codicePIVA;
+	
+	/** The managers details. */
+	@JsonProperty(&quot;managerDetails&quot;)
+	private ManagerPlusResponse manager;
+	
+	/** The number of events. */
+	@JsonProperty(&quot;numEventi&quot;)
+	private Integer numEventi;
+	
+	/** The number of events future. */
+	@JsonProperty(&quot;numFuturi&quot;)
+	private Integer numFuturi;
+	
+	/** The media of person comes to past event. */
+	@JsonProperty(&quot;comesMean&quot;)
+	private Double comesMean;
+	
+	/** The rating. */
+	@JsonProperty(&quot;rating&quot;)
+	private Double rating;
+	
+	
+	/**
+	 * Instantiates a new admin report response.
+	 *
+	 * @param id the id
+	 * @param codicePIVA the codice PIVA
+	 * @param managerPlusResponse the manager plus response
+	 * @param numEventi the num eventi
+	 * @param numFuturi the num futuri
+	 * @param mediaComes the media comes
+	 * @param rating the rating
+	 */
+<span class="fc" id="L52">	public AdminReportResponse(String id, String codicePIVA, ManagerPlusResponse managerPlusResponse,</span>
+			Integer numEventi, Integer numFuturi, Double mediaComes, Double rating) {
+<span class="fc" id="L54">		this.id=id;</span>
+<span class="fc" id="L55">		this.codicePIVA=codicePIVA;</span>
+<span class="fc" id="L56">		this.manager=managerPlusResponse;</span>
+<span class="fc" id="L57">		this.numEventi=numEventi;</span>
+<span class="fc" id="L58">		this.comesMean = Math.round(mediaComes*100.0)/100.0;</span>
+<span class="fc" id="L59">		this.numFuturi=numFuturi;</span>
+<span class="fc" id="L60">		this.rating = Math.round(rating*100.0)/100.0;</span>
+<span class="fc" id="L61">	}</span>
+
+
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public String getId() {
+<span class="fc" id="L70">		return id;</span>
+	}
+
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	public void setId(String id) {
+<span class="nc" id="L80">		this.id = id;</span>
+<span class="nc" id="L81">	}</span>
+
+
+	/**
+	 * Gets the codice PIVA.
+	 *
+	 * @return the codice PIVA
+	 */
+	public String getCodicePIVA() {
+<span class="fc" id="L90">		return codicePIVA;</span>
+	}
+
+
+	/**
+	 * Sets the codice PIVA.
+	 *
+	 * @param codicePIVA the new codice PIVA
+	 */
+	public void setCodicePIVA(String codicePIVA) {
+<span class="nc" id="L100">		this.codicePIVA = codicePIVA;</span>
+<span class="nc" id="L101">	}</span>
+
+
+	/**
+	 * Gets the manager.
+	 *
+	 * @return the manager
+	 */
+	public ManagerPlusResponse getManager() {
+<span class="fc" id="L110">		return manager;</span>
+	}
+
+
+	/**
+	 * Sets the manager.
+	 *
+	 * @param manager the new manager
+	 */
+	public void setManager(ManagerPlusResponse manager) {
+<span class="nc" id="L120">		this.manager = manager;</span>
+<span class="nc" id="L121">	}</span>
+
+
+	/**
+	 * Gets the num eventi.
+	 *
+	 * @return the num eventi
+	 */
+	public Integer getNumEventi() {
+<span class="fc" id="L130">		return numEventi;</span>
+	}
+
+
+	/**
+	 * Sets the num eventi.
+	 *
+	 * @param numEventi the new num eventi
+	 */
+	public void setNumEventi(Integer numEventi) {
+<span class="nc" id="L140">		this.numEventi = numEventi;</span>
+<span class="nc" id="L141">	}</span>
+
+
+	/**
+	 * Gets the num futuri.
+	 *
+	 * @return the num futuri
+	 */
+	public Integer getNumFuturi() {
+<span class="fc" id="L150">		return numFuturi;</span>
+	}
+
+
+	/**
+	 * Sets the num futuri.
+	 *
+	 * @param numFuturi the new num futuri
+	 */
+	public void setNumFuturi(Integer numFuturi) {
+<span class="nc" id="L160">		this.numFuturi = numFuturi;</span>
+<span class="nc" id="L161">	}</span>
+
+
+	/**
+	 * Gets the comes mean.
+	 *
+	 * @return the comes mean
+	 */
+	public Double getComesMean() {
+<span class="fc" id="L170">		return comesMean;</span>
+	}
+
+
+	/**
+	 * Sets the comes mean.
+	 *
+	 * @param comesMean the new comes mean
+	 */
+	public void setComesMean(Double comesMean) {
+<span class="nc" id="L180">		this.comesMean = Math.round(comesMean*100.0)/100.0;</span>
+<span class="nc" id="L181">	}</span>
+
+
+	/**
+	 * Gets the rating.
+	 *
+	 * @return the rating
+	 */
+	public Double getRating() {
+<span class="fc" id="L190">		return rating;</span>
+	}
+
+
+	/**
+	 * Sets the rating.
+	 *
+	 * @param rating the new rating
+	 */
+	public void setRating(Double rating) {
+<span class="nc" id="L200">		this.rating = Math.round(rating*100.0)/100.0;</span>
+<span class="nc" id="L201">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>

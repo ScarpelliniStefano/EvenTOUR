@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ManagerResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (1) (30 dic 2021 11:07:32)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.manager</a> &gt; <span class="el_source">ManagerResponse.java</span></div><h1>ManagerResponse.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package com.scarcolo.eventour.model.manager;
+
+
+import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.model.Location;
+
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ManagerResponse.
+ *
+ * @author stefa
+ */
+
+public class ManagerResponse{
+	
+	/** The id. */
+	@JsonProperty(&quot;id&quot;)
+	private String id;
+	
+	/** The name. */
+	@JsonProperty(&quot;name&quot;)
+	private String name;
+	
+	/** The surname. */
+	@JsonProperty(&quot;surname&quot;)
+	private String surname;
+	
+	/** The date of birth. */
+	@JsonProperty(&quot;dateOfBirth&quot;)
+	private LocalDate dateOfBirth;
+	
+	/** The residence. */
+	@JsonProperty(&quot;residence&quot;)
+	private Location residence;
+	
+	/** The codice PIVA. */
+	@JsonProperty(&quot;codicePIVA&quot;)
+	private String codicePIVA;
+	
+	/** The ragione sociale. */
+	@JsonProperty(&quot;ragioneSociale&quot;)
+	private String ragioneSociale;
+	
+	/** The mail. */
+	@JsonProperty(&quot;mail&quot;)
+	private String mail;
+	
+	/** The password. */
+	@JsonProperty(&quot;password&quot;)
+	private String password;
+	
+
+	/**
+	 * Instantiates a new manager response.
+	 *
+	 * @param manager the manager
+	 * @throws Exception 
+	 */
+<span class="fc" id="L65">	public ManagerResponse(Manager manager) throws Exception{</span>
+<span class="fc" id="L66">		this.id=manager.getId();</span>
+<span class="fc" id="L67">		this.mail=manager.getMail();</span>
+<span class="fc" id="L68">		this.password=manager.getPassword();</span>
+<span class="fc" id="L69">		this.name=manager.getName();</span>
+<span class="fc" id="L70">		this.surname=manager.getSurname();</span>
+<span class="fc" id="L71">		this.dateOfBirth=Functionalities.convertToLocalDate(manager.getDateOfBirth());</span>
+<span class="fc" id="L72">		this.residence=manager.getResidence();</span>
+<span class="fc" id="L73">		this.codicePIVA = manager.getCodicePIVA();</span>
+<span class="fc" id="L74">		this.ragioneSociale=manager.getRagioneSociale();</span>
+<span class="fc" id="L75">	}</span>
+
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public String getId() {
+<span class="fc" id="L83">		return id;</span>
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	public void setId(String id) {
+<span class="nc" id="L92">		this.id = id;</span>
+<span class="nc" id="L93">	}</span>
+
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
+	public String getName() {
+<span class="fc" id="L101">		return name;</span>
+	}
+
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
+	public void setName(String name) {
+<span class="nc" id="L110">		this.name = name;</span>
+<span class="nc" id="L111">	}</span>
+
+	/**
+	 * Gets the surname.
+	 *
+	 * @return the surname
+	 */
+	public String getSurname() {
+<span class="fc" id="L119">		return surname;</span>
+	}
+
+	/**
+	 * Sets the surname.
+	 *
+	 * @param surname the new surname
+	 */
+	public void setSurname(String surname) {
+<span class="nc" id="L128">		this.surname = surname;</span>
+<span class="nc" id="L129">	}</span>
+
+	/**
+	 * Gets the date of birth.
+	 *
+	 * @return the date of birth
+	 */
+	public LocalDate getDateOfBirth() {
+<span class="fc" id="L137">		return dateOfBirth;</span>
+	}
+
+	/**
+	 * Sets the date of birth.
+	 *
+	 * @param dateOfBirth the new date of birth
+	 */
+	public void setDateOfBirth(LocalDate dateOfBirth) {
+<span class="nc" id="L146">		this.dateOfBirth = dateOfBirth;</span>
+<span class="nc" id="L147">	}</span>
+
+	/**
+	 * Gets the residence.
+	 *
+	 * @return the residence
+	 */
+	public Location getResidence() {
+<span class="fc" id="L155">		return residence;</span>
+	}
+
+	/**
+	 * Sets the residence.
+	 *
+	 * @param residence the new residence
+	 */
+	public void setResidence(Location residence) {
+<span class="nc" id="L164">		this.residence = residence;</span>
+<span class="nc" id="L165">	}</span>
+
+	/**
+	 * Gets the codice PIVA.
+	 *
+	 * @return the codice PIVA
+	 */
+	public String getCodicePIVA() {
+<span class="fc" id="L173">		return codicePIVA;</span>
+	}
+
+	/**
+	 * Sets the codice PIVA.
+	 *
+	 * @param codicePIVA the new codice PIVA
+	 */
+	public void setCodicePIVA(String codicePIVA) {
+<span class="nc" id="L182">		this.codicePIVA = codicePIVA;</span>
+<span class="nc" id="L183">	}</span>
+
+	/**
+	 * Gets the ragione sociale.
+	 *
+	 * @return the ragione sociale
+	 */
+	public String getRagioneSociale() {
+<span class="fc" id="L191">		return ragioneSociale;</span>
+	}
+
+	/**
+	 * Sets the ragione sociale.
+	 *
+	 * @param ragioneSociale the new ragione sociale
+	 */
+	public void setRagioneSociale(String ragioneSociale) {
+<span class="nc" id="L200">		this.ragioneSociale = ragioneSociale;</span>
+<span class="nc" id="L201">	}</span>
+
+	/**
+	 * Gets the mail.
+	 *
+	 * @return the mail
+	 */
+	public String getMail() {
+<span class="fc" id="L209">		return mail;</span>
+	}
+
+	/**
+	 * Sets the mail.
+	 *
+	 * @param mail the new mail
+	 */
+	public void setMail(String mail) {
+<span class="nc" id="L218">		this.mail = mail;</span>
+<span class="nc" id="L219">	}</span>
+
+	/**
+	 * Gets the password.
+	 *
+	 * @return the password
+	 */
+	public String getPassword() {
+<span class="fc" id="L227">		return password;</span>
+	}
+
+	/**
+	 * Sets the password.
+	 *
+	 * @param password the new password
+	 */
+	public void setPassword(String password) {
+<span class="nc" id="L236">		this.password = password;</span>
+<span class="nc" id="L237">	}</span>
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (1) (30 dic 2021 11:07:32)</div></body></html>

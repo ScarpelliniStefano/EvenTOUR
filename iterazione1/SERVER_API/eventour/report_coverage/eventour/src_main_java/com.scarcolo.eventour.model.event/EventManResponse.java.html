@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventManResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.event</a> &gt; <span class="el_source">EventManResponse.java</span></div><h1>EventManResponse.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.model.event;
+
+import java.time.LocalDateTime;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scarcolo.eventour.model.Location;
+import com.scarcolo.eventour.model.manager.Manager;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventManResponse.
+ */
+public class EventManResponse {
+	
+	/** The id. */
+	@JsonProperty(&quot;id&quot;)
+	private String  id;
+	
+	/** The title. */
+	@JsonProperty(&quot;title&quot;)
+	private String title;
+	
+	/** The description. */
+	@JsonProperty(&quot;description&quot;)
+	private String description;
+	
+	/** The location. */
+	@JsonProperty(&quot;location&quot;)
+	private Location location;
+	
+	/** The types. */
+	@JsonProperty(&quot;types&quot;)
+	private String[] types;
+	
+	/** The data ora. */
+	@JsonProperty(&quot;dataOra&quot;)
+	private LocalDateTime dataOra;
+	
+	/** The manager id. */
+	@JsonProperty(&quot;managerId&quot;)
+	private String managerId;
+	
+	/** The url image. */
+	@JsonProperty(&quot;urlImage&quot;)
+	private String urlImage;
+	
+	/** The tot seat. */
+	@JsonProperty(&quot;totSeat&quot;)
+	private Integer totSeat;
+	
+	/** The free seat. */
+	@JsonProperty(&quot;freeSeat&quot;)
+	private Integer freeSeat;
+	
+	/** The price. */
+	@JsonProperty(&quot;price&quot;)
+	private Double price;
+	
+	/** The manager. */
+	@JsonProperty(&quot;manager&quot;)
+	private Manager[] manager;
+	
+	
+	
+	/**
+	 * Instantiates a new event man response.
+	 *
+	 * @param id the id
+	 * @param title the title
+	 * @param description the description
+	 * @param location the location
+	 * @param types the types
+	 * @param dataOra the data ora
+	 * @param managerId the manager id
+	 * @param urlImage the url image
+	 * @param totSeat the tot seat
+	 * @param freeSeat the free seat
+	 * @param price the price
+	 * @param manager the manager
+	 */
+	public EventManResponse(String id, String title, String description, Location location, String[] types,
+			LocalDateTime dataOra, String managerId, String urlImage, Integer totSeat, Integer freeSeat, Double price,
+			Manager[] manager) {
+<span class="nc" id="L84">		super();</span>
+<span class="nc" id="L85">		this.id = id;</span>
+<span class="nc" id="L86">		this.title = title;</span>
+<span class="nc" id="L87">		this.description = description;</span>
+<span class="nc" id="L88">		this.location = location;</span>
+<span class="nc" id="L89">		this.types = types;</span>
+<span class="nc" id="L90">		this.dataOra = dataOra;</span>
+<span class="nc" id="L91">		this.managerId = managerId;</span>
+<span class="nc" id="L92">		this.urlImage = urlImage;</span>
+<span class="nc" id="L93">		this.totSeat = totSeat;</span>
+<span class="nc" id="L94">		this.freeSeat = freeSeat;</span>
+<span class="nc" id="L95">		this.price = price;</span>
+<span class="nc" id="L96">		this.manager = manager;</span>
+<span class="nc" id="L97">	}</span>
+	
+	/**
+	 * Instantiates a new event man response.
+	 */
+<span class="nc" id="L102">	public EventManResponse() {</span>
+		
+<span class="nc" id="L104">	}</span>
+	
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public String getId() {
+<span class="nc" id="L112">		return id;</span>
+	}
+	
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	public void setId(String id) {
+<span class="nc" id="L121">		this.id = id;</span>
+<span class="nc" id="L122">	}</span>
+	
+	/**
+	 * Gets the title.
+	 *
+	 * @return the title
+	 */
+	public String getTitle() {
+<span class="nc" id="L130">		return title;</span>
+	}
+	
+	/**
+	 * Sets the title.
+	 *
+	 * @param title the new title
+	 */
+	public void setTitle(String title) {
+<span class="nc" id="L139">		this.title = title;</span>
+<span class="nc" id="L140">	}</span>
+	
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
+	public String getDescription() {
+<span class="nc" id="L148">		return description;</span>
+	}
+	
+	/**
+	 * Sets the description.
+	 *
+	 * @param description the new description
+	 */
+	public void setDescription(String description) {
+<span class="nc" id="L157">		this.description = description;</span>
+<span class="nc" id="L158">	}</span>
+	
+	/**
+	 * Gets the location.
+	 *
+	 * @return the location
+	 */
+	public Location getLocation() {
+<span class="nc" id="L166">		return location;</span>
+	}
+	
+	/**
+	 * Sets the location.
+	 *
+	 * @param location the new location
+	 */
+	public void setLocation(Location location) {
+<span class="nc" id="L175">		this.location = location;</span>
+<span class="nc" id="L176">	}</span>
+	
+	/**
+	 * Gets the types.
+	 *
+	 * @return the types
+	 */
+	public String[] getTypes() {
+<span class="nc" id="L184">		return types;</span>
+	}
+	
+	/**
+	 * Sets the types.
+	 *
+	 * @param types the new types
+	 */
+	public void setTypes(String[] types) {
+<span class="nc" id="L193">		this.types = types;</span>
+<span class="nc" id="L194">	}</span>
+	
+	/**
+	 * Gets the data ora.
+	 *
+	 * @return the data ora
+	 */
+	public LocalDateTime getDataOra() {
+<span class="nc" id="L202">		return dataOra;</span>
+	}
+	
+	/**
+	 * Sets the data ora.
+	 *
+	 * @param dataOra the new data ora
+	 */
+	public void setDataOra(LocalDateTime dataOra) {
+<span class="nc" id="L211">		this.dataOra = dataOra;</span>
+<span class="nc" id="L212">	}</span>
+	
+	/**
+	 * Gets the manager id.
+	 *
+	 * @return the manager id
+	 */
+	public String getManagerId() {
+<span class="nc" id="L220">		return managerId;</span>
+	}
+	
+	/**
+	 * Sets the manager id.
+	 *
+	 * @param managerId the new manager id
+	 */
+	public void setManagerId(String managerId) {
+<span class="nc" id="L229">		this.managerId = managerId;</span>
+<span class="nc" id="L230">	}</span>
+	
+	/**
+	 * Gets the url image.
+	 *
+	 * @return the url image
+	 */
+	public String getUrlImage() {
+<span class="nc" id="L238">		return urlImage;</span>
+	}
+	
+	/**
+	 * Sets the url image.
+	 *
+	 * @param urlImage the new url image
+	 */
+	public void setUrlImage(String urlImage) {
+<span class="nc" id="L247">		this.urlImage = urlImage;</span>
+<span class="nc" id="L248">	}</span>
+	
+	/**
+	 * Gets the tot seat.
+	 *
+	 * @return the tot seat
+	 */
+	public Integer getTotSeat() {
+<span class="nc" id="L256">		return totSeat;</span>
+	}
+	
+	/**
+	 * Sets the tot seat.
+	 *
+	 * @param totSeat the new tot seat
+	 */
+	public void setTotSeat(Integer totSeat) {
+<span class="nc" id="L265">		this.totSeat = totSeat;</span>
+<span class="nc" id="L266">	}</span>
+	
+	/**
+	 * Gets the free seat.
+	 *
+	 * @return the free seat
+	 */
+	public Integer getFreeSeat() {
+<span class="nc" id="L274">		return freeSeat;</span>
+	}
+	
+	/**
+	 * Sets the free seat.
+	 *
+	 * @param freeSeat the new free seat
+	 */
+	public void setFreeSeat(Integer freeSeat) {
+<span class="nc" id="L283">		this.freeSeat = freeSeat;</span>
+<span class="nc" id="L284">	}</span>
+	
+	/**
+	 * Gets the price.
+	 *
+	 * @return the price
+	 */
+	public Double getPrice() {
+<span class="nc" id="L292">		return price;</span>
+	}
+	
+	/**
+	 * Sets the price.
+	 *
+	 * @param price the new price
+	 */
+	public void setPrice(Double price) {
+<span class="nc" id="L301">		this.price = price;</span>
+<span class="nc" id="L302">	}</span>
+	
+	/**
+	 * Gets the manager.
+	 *
+	 * @return the manager
+	 */
+	public Manager[] getManager() {
+<span class="nc" id="L310">		return manager;</span>
+	}
+	
+	/**
+	 * Sets the manager.
+	 *
+	 * @param manager the new manager
+	 */
+	public void setManager(Manager[] manager) {
+<span class="nc" id="L319">		this.manager = manager;</span>
+<span class="nc" id="L320">	}</span>
+	
+	
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

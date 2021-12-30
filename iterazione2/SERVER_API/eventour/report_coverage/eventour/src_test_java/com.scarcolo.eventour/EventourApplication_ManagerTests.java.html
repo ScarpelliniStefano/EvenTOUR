@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventourApplication_ManagerTests.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour</a> &gt; <span class="el_source">EventourApplication_ManagerTests.java</span></div><h1>EventourApplication_ManagerTests.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour;
+
+
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.junit.jupiter.api.Test;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.scarcolo.eventour.model.Location;
+import com.scarcolo.eventour.model.booking.PaymentRequest;
+import com.scarcolo.eventour.model.event.EventManResponse;
+import com.scarcolo.eventour.model.manager.AddManagerRequest;
+import com.scarcolo.eventour.model.manager.EditManagerRequest;
+import com.scarcolo.eventour.model.manager.ManagerResponse;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.time.LocalDate;
+
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+<span class="fc" id="L32">class EventourApplication_ManagerTests {</span>
+	@LocalServerPort
+	private int port;
+
+	@Autowired
+	private TestRestTemplate restTemplate;
+	
+	@Test
+	public void newManager() throws Exception {
+<span class="fc" id="L41">		AddManagerRequest request=new AddManagerRequest();</span>
+<span class="fc" id="L42">		request.name=&quot;utenteNomeProva&quot;;</span>
+<span class="fc" id="L43">		request.surname=&quot;utenteCognomeProva&quot;;</span>
+<span class="fc" id="L44">		request.mail=&quot;prova@gmail.com&quot;;</span>
+<span class="fc" id="L45">		request.password=&quot;provaUser&quot;;</span>
+<span class="fc" id="L46">		request.dateOfBirth=LocalDate.now().minusYears(30);</span>
+<span class="fc" id="L47">		request.residence=new Location();</span>
+<span class="fc" id="L48">				request.residence.setLocality(&quot;prova via&quot;);</span>
+<span class="fc" id="L49">				request.residence.setCap(&quot;24042&quot;);</span>
+<span class="fc" id="L50">				request.residence.setRegione(&quot;Lombardia&quot;);</span>
+<span class="fc" id="L51">				request.residence.setProvincia(&quot;Bergamo&quot;);</span>
+<span class="fc" id="L52">				request.residence.setCity(&quot;Albino&quot;);</span>
+<span class="fc" id="L53">				request.residence.setLat(44d);</span>
+<span class="fc" id="L54">				request.residence.setLng(9d);</span>
+<span class="fc" id="L55">				request.residence.setSigla(&quot;BG&quot;);</span>
+<span class="fc" id="L56">		request.codicePIVA=&quot;77914680192&quot;;</span>
+<span class="fc" id="L57">		request.ragioneSociale=&quot;prova s.r.l.&quot;;</span>
+<span class="fc" id="L58">		ManagerResponse managerCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/managers&quot;, request, ManagerResponse.class);</span>
+<span class="fc" id="L59">		assertEquals(managerCreated.getCodicePIVA(), &quot;77914680192&quot;);</span>
+		
+<span class="fc" id="L61">		String reqDel=&quot;http://localhost:&quot; + port + &quot;/api/managers/&quot;+managerCreated.getId();</span>
+<span class="fc" id="L62">		restTemplate.delete(reqDel);</span>
+		
+
+<span class="fc" id="L65">	}</span>
+	
+	@Test
+	public void updateManager() throws Exception {
+<span class="fc" id="L69">		AddManagerRequest request=new AddManagerRequest();</span>
+<span class="fc" id="L70">		request.name=&quot;utenteNomeProva&quot;;</span>
+<span class="fc" id="L71">		request.surname=&quot;utenteCognomeProva&quot;;</span>
+<span class="fc" id="L72">		request.mail=&quot;prova@gmail.com&quot;;</span>
+<span class="fc" id="L73">		request.password=&quot;provaUser&quot;;</span>
+<span class="fc" id="L74">		request.dateOfBirth=LocalDate.now().minusYears(30);</span>
+<span class="fc" id="L75">		request.residence=new Location();</span>
+<span class="fc" id="L76">				request.residence.setLocality(&quot;prova via&quot;);</span>
+<span class="fc" id="L77">				request.residence.setCap(&quot;24042&quot;);</span>
+<span class="fc" id="L78">				request.residence.setRegione(&quot;Lombardia&quot;);</span>
+<span class="fc" id="L79">				request.residence.setProvincia(&quot;Bergamo&quot;);</span>
+<span class="fc" id="L80">				request.residence.setCity(&quot;Albino&quot;);</span>
+<span class="fc" id="L81">				request.residence.setLat(44d);</span>
+<span class="fc" id="L82">				request.residence.setLng(9d);</span>
+<span class="fc" id="L83">				request.residence.setSigla(&quot;BG&quot;);</span>
+<span class="fc" id="L84">		request.codicePIVA=&quot;77914680192&quot;;</span>
+<span class="fc" id="L85">		request.ragioneSociale=&quot;prova s.r.l.&quot;;</span>
+<span class="fc" id="L86">		ManagerResponse managerCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/managers&quot;, request, ManagerResponse.class);</span>
+<span class="fc" id="L87">		EditManagerRequest reqUpd=new EditManagerRequest();</span>
+<span class="fc" id="L88">		reqUpd.id=managerCreated.getId();</span>
+<span class="fc" id="L89">		reqUpd.residence=managerCreated.getResidence();</span>
+<span class="fc" id="L90">		reqUpd.residence.setCap(&quot;24021&quot;);</span>
+<span class="fc" id="L91">		reqUpd.mail=&quot;provaUpd@gmail.com&quot;;</span>
+<span class="fc" id="L92">		ResponseEntity&lt;ManagerResponse&gt; resp=restTemplate.exchange(&quot;http://localhost:&quot; + port + &quot;/api/managers&quot;, HttpMethod.PUT, new HttpEntity&lt;EditManagerRequest&gt;(reqUpd), ManagerResponse.class);</span>
+<span class="fc" id="L93">		assertEquals(resp.getStatusCodeValue(),200);</span>
+<span class="fc" id="L94">		assertEquals(resp.getBody().getMail(),&quot;provaUpd@gmail.com&quot;);</span>
+<span class="fc" id="L95">		assertEquals(resp.getBody().getResidence().getCap(),&quot;24021&quot;);</span>
+<span class="fc" id="L96">		String reqDel=&quot;http://localhost:&quot; + port + &quot;/api/managers/&quot;+managerCreated.getId();</span>
+<span class="fc" id="L97">		restTemplate.delete(reqDel);</span>
+		
+<span class="fc" id="L99">	}</span>
+	
+	@Test
+	public void newManagerError() throws Exception {
+<span class="fc" id="L103">		AddManagerRequest request=new AddManagerRequest();</span>
+<span class="fc" id="L104">		request.name=&quot;utenteNomeProva&quot;;</span>
+<span class="fc" id="L105">		request.surname=&quot;utenteCognomeProva&quot;;</span>
+<span class="fc" id="L106">		request.mail=&quot;prova@gmail.com&quot;;</span>
+<span class="fc" id="L107">		request.password=&quot;provaUser&quot;;</span>
+<span class="fc" id="L108">		request.dateOfBirth=LocalDate.now().plusYears(5);</span>
+<span class="fc" id="L109">		request.residence=new Location();</span>
+<span class="fc" id="L110">				request.residence.setLocality(&quot;prova via&quot;);</span>
+<span class="fc" id="L111">				request.residence.setCap(&quot;24042&quot;);</span>
+<span class="fc" id="L112">				request.residence.setRegione(&quot;Lombardia&quot;);</span>
+<span class="fc" id="L113">				request.residence.setProvincia(&quot;Bergamo&quot;);</span>
+<span class="fc" id="L114">				request.residence.setCity(&quot;Albino&quot;);</span>
+<span class="fc" id="L115">				request.residence.setLat(44d);</span>
+<span class="fc" id="L116">				request.residence.setLng(9d);</span>
+<span class="fc" id="L117">				request.residence.setSigla(&quot;BG&quot;);</span>
+<span class="fc" id="L118">		request.codicePIVA=&quot;77914680192&quot;;</span>
+<span class="fc" id="L119">		request.ragioneSociale=&quot;prova s.r.l.&quot;;</span>
+<span class="fc" id="L120">		ResponseEntity&lt;ManagerResponse&gt; managerCreated = restTemplate.postForEntity(&quot;http://localhost:&quot; + port + &quot;/api/managers&quot;, request, ManagerResponse.class);</span>
+<span class="fc" id="L121">		assertEquals(managerCreated.getStatusCode(), HttpStatus.NOT_ACCEPTABLE);</span>
+		
+		
+<span class="fc" id="L124">	}</span>
+	
+	@Test
+	public void deleteManager() throws Exception {
+<span class="fc" id="L128">		AddManagerRequest request=new AddManagerRequest();</span>
+<span class="fc" id="L129">		request.name=&quot;utenteNomeProva&quot;;</span>
+<span class="fc" id="L130">		request.surname=&quot;utenteCognomeProva&quot;;</span>
+<span class="fc" id="L131">		request.mail=&quot;prova@gmail.com&quot;;</span>
+<span class="fc" id="L132">		request.password=&quot;provaUser&quot;;</span>
+<span class="fc" id="L133">		request.dateOfBirth=LocalDate.now().minusYears(30);</span>
+<span class="fc" id="L134">		request.residence=new Location();</span>
+<span class="fc" id="L135">				request.residence.setLocality(&quot;prova via&quot;);</span>
+<span class="fc" id="L136">				request.residence.setCap(&quot;24042&quot;);</span>
+<span class="fc" id="L137">				request.residence.setRegione(&quot;Lombardia&quot;);</span>
+<span class="fc" id="L138">				request.residence.setProvincia(&quot;Bergamo&quot;);</span>
+<span class="fc" id="L139">				request.residence.setCity(&quot;Albino&quot;);</span>
+<span class="fc" id="L140">				request.residence.setLat(44d);</span>
+<span class="fc" id="L141">				request.residence.setLng(9d);</span>
+<span class="fc" id="L142">				request.residence.setSigla(&quot;BG&quot;);</span>
+<span class="fc" id="L143">		request.codicePIVA=&quot;77914680192&quot;;</span>
+<span class="fc" id="L144">		request.ragioneSociale=&quot;prova s.r.l.&quot;;</span>
+<span class="fc" id="L145">		ManagerResponse managerCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/managers&quot;, request, ManagerResponse.class);</span>
+<span class="fc" id="L146">		String delMan=&quot;http://localhost:&quot; + port + &quot;/api/managers/&quot;+managerCreated.getId();</span>
+<span class="fc" id="L147">		ResponseEntity&lt;Boolean&gt; resp=restTemplate.exchange(delMan, HttpMethod.DELETE, null, Boolean.class);</span>
+<span class="fc" id="L148">		assertEquals(resp.getBody(),true);</span>
+		
+<span class="fc" id="L150">	}</span>
+	
+	@Test
+	public void deleteManagerNonCorrect() throws Exception {
+<span class="fc" id="L154">		ResponseEntity&lt;Boolean&gt; resp=restTemplate.exchange(&quot;http://localhost:&quot; + port + &quot;/api/managers/61a0a0eeb5f9b12d06e95236&quot;, HttpMethod.DELETE, null, Boolean.class);</span>
+<span class="fc" id="L155">		assertEquals(resp.getStatusCode(),HttpStatus.BAD_REQUEST);</span>
+<span class="fc" id="L156">	}</span>
+
+	@Test
+	public void getManagerById() throws Exception {
+<span class="fc" id="L160">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/managers/61a0a0eeb5f9b12d06e9523a&quot;,</span>
+<span class="fc" id="L161">				String.class);</span>
+<span class="fc" id="L162">		JSONObject obj = new JSONObject(request);</span>
+<span class="fc" id="L163">		String stringId = obj.getString(&quot;id&quot;);</span>
+<span class="fc" id="L164">		assertEquals(stringId,&quot;61a0a0eeb5f9b12d06e9523a&quot;);</span>
+<span class="fc" id="L165">		assertEquals(obj.getString(&quot;mail&quot;),&quot;Beniamina73@yahoo.it&quot;);</span>
+<span class="fc" id="L166">		assertEquals(obj.getString(&quot;codicePIVA&quot;),&quot;074859517&quot;);</span>
+<span class="fc" id="L167">	}</span>
+	
+	@Test
+	public void getManagerByIdError() throws Exception {
+<span class="fc" id="L171">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/managers/61a0a0eeb5f9b12d06e95236&quot;,</span>
+<span class="fc" id="L172">				String.class);</span>
+<span class="fc" id="L173">		int statusCode=request.getStatusCodeValue();</span>
+<span class="fc" id="L174">		assertEquals(statusCode,404);</span>
+		
+<span class="fc" id="L176">	}</span>
+	
+	@Test
+	public void getManagerReportById() throws Exception {
+<span class="fc" id="L180">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/managers/61a0a0eeb5f9b12d06e9523a/reports&quot;,</span>
+<span class="fc" id="L181">				String.class);</span>
+<span class="fc" id="L182">		JSONArray obj = new JSONArray(request);</span>
+<span class="fc bfc" id="L183" title="All 2 branches covered.">		for(int i=0;i&lt;obj.length();i++) {</span>
+<span class="fc" id="L184">			String stringId = obj.getJSONObject(i).getJSONObject(&quot;eventDetails&quot;).getString(&quot;managerId&quot;);</span>
+<span class="fc" id="L185">			assertEquals(stringId,&quot;61a0a0eeb5f9b12d06e9523a&quot;);</span>
+		}
+<span class="fc" id="L187">	}</span>
+	
+	@Test
+	public void PayManager() throws Exception {
+<span class="fc" id="L191">		AddManagerRequest request=new AddManagerRequest();</span>
+<span class="fc" id="L192">		request.name=&quot;utenteNomeProva&quot;;</span>
+<span class="fc" id="L193">		request.surname=&quot;utenteCognomeProva&quot;;</span>
+<span class="fc" id="L194">		request.mail=&quot;prova@gmail.com&quot;;</span>
+<span class="fc" id="L195">		request.password=&quot;provaUser&quot;;</span>
+<span class="fc" id="L196">		request.dateOfBirth=LocalDate.now().minusYears(30);</span>
+<span class="fc" id="L197">		request.residence=new Location();</span>
+<span class="fc" id="L198">				request.residence.setLocality(&quot;prova via&quot;);</span>
+<span class="fc" id="L199">				request.residence.setCap(&quot;24042&quot;);</span>
+<span class="fc" id="L200">				request.residence.setRegione(&quot;Lombardia&quot;);</span>
+<span class="fc" id="L201">				request.residence.setProvincia(&quot;Bergamo&quot;);</span>
+<span class="fc" id="L202">				request.residence.setCity(&quot;Albino&quot;);</span>
+<span class="fc" id="L203">				request.residence.setLat(44d);</span>
+<span class="fc" id="L204">				request.residence.setLng(9d);</span>
+<span class="fc" id="L205">				request.residence.setSigla(&quot;BG&quot;);</span>
+<span class="fc" id="L206">		request.codicePIVA=&quot;77914680192&quot;;</span>
+<span class="fc" id="L207">		request.ragioneSociale=&quot;prova s.r.l.&quot;;</span>
+<span class="fc" id="L208">		ManagerResponse managerCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/managers&quot;, request, ManagerResponse.class);</span>
+<span class="fc" id="L209">		PaymentRequest requestPay=new PaymentRequest();</span>
+<span class="fc" id="L210">		requestPay.idUser=managerCreated.getId();</span>
+<span class="fc" id="L211">		requestPay.cardName=&quot;ABCDEF HILM&quot;;</span>
+<span class="fc" id="L212">		requestPay.amount=20.00d;</span>
+<span class="fc" id="L213">		requestPay.authNr=&quot;232&quot;;</span>
+<span class="fc" id="L214">		requestPay.dateScad=&quot;08/24&quot;;</span>
+<span class="fc" id="L215">		requestPay.cardNr=&quot;4000003800000008&quot;;</span>
+<span class="fc" id="L216">		String bookingPay = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/managers/payment&quot;, requestPay, String.class);</span>
+<span class="fc" id="L217">		assertTrue(bookingPay.startsWith(&quot;OK. Transaction:&quot;));</span>
+<span class="fc" id="L218">		String reqDel=&quot;http://localhost:&quot; + port + &quot;/api/managers/&quot;+managerCreated.getId();</span>
+<span class="fc" id="L219">		restTemplate.delete(reqDel);</span>
+<span class="fc" id="L220">	}</span>
+	
+	@Test
+	public void PayManagerError() throws Exception {
+<span class="fc" id="L224">		PaymentRequest request=new PaymentRequest();</span>
+<span class="fc" id="L225">		request.idUser=&quot;61a0a0eeb5f9b12d06e95240&quot;;</span>
+<span class="fc" id="L226">		request.cardName=&quot;ABCDEF HILM&quot;;</span>
+<span class="fc" id="L227">		request.amount=20.00d;</span>
+<span class="fc" id="L228">		request.authNr=&quot;232&quot;;</span>
+<span class="fc" id="L229">		request.dateScad=&quot;08/24&quot;;</span>
+<span class="fc" id="L230">		request.cardNr=&quot;4000003700000008&quot;;</span>
+<span class="fc" id="L231">		String bookingPay = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/managers/payment&quot;, request, String.class);</span>
+<span class="fc" id="L232">		assertTrue(bookingPay.contains(&quot;ERROR with payment. Transaction: cb5e100e5a9a3e7f6d1fd97512215282&quot;));</span>
+		
+<span class="fc" id="L234">		request.dateScad=&quot;08/21&quot;;</span>
+<span class="fc" id="L235">		bookingPay = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/managers/payment&quot;, request, String.class);</span>
+<span class="fc" id="L236">		assertTrue(bookingPay.contains(&quot;INVALID DATE&quot;));</span>
+		
+		
+<span class="fc" id="L239">	}</span>
+	
+	@Test
+	public void getManagerReportByIdError() throws Exception {
+<span class="fc" id="L243">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/managers/61a0a0eeb5f9b12d06e95236/reports&quot;,</span>
+<span class="fc" id="L244">				String.class);</span>
+<span class="fc" id="L245">		assertEquals(request.getStatusCodeValue(),404);</span>
+		
+<span class="fc" id="L247">	}</span>
+	
+	@Test
+	public void getManagerAll() throws Exception {
+<span class="fc" id="L251">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/managers/&quot;,</span>
+<span class="fc" id="L252">				String.class);</span>
+<span class="fc" id="L253">		assertEquals(request.getStatusCode(),HttpStatus.OK);</span>
+<span class="fc" id="L254">	}</span>
+	
+	///managers/event/{id}
+	@Test
+	public void getManagerByIdEvent() throws Exception {
+<span class="fc" id="L259">		EventManResponse request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/managers/event/61a0a85ebce0e98fbb2d862b&quot;,</span>
+<span class="fc" id="L260">				EventManResponse.class);</span>
+		
+<span class="fc" id="L262">		assertEquals(request.getId(),&quot;61a0a85ebce0e98fbb2d862b&quot;);</span>
+<span class="fc" id="L263">		assertEquals(request.getManagerId(),&quot;61a0a0eeb5f9b12d06e9523b&quot;);</span>
+<span class="fc" id="L264">		assertEquals(request.getManager()[0].getCodicePIVA(),&quot;115080601&quot;);</span>
+<span class="fc" id="L265">	}</span>
+	
+	@Test
+	public void getManagerByIdEventError() throws Exception {
+<span class="fc" id="L269">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/managers/event/61a0a85ebce0e98fbb2d860a&quot;,</span>
+<span class="fc" id="L270">				String.class);</span>
+<span class="fc" id="L271">		int statusCode=request.getStatusCodeValue();</span>
+<span class="fc" id="L272">		assertEquals(statusCode,404);</span>
+		
+<span class="fc" id="L274">	}</span>
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>

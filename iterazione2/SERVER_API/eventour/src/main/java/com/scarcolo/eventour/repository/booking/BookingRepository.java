@@ -23,7 +23,7 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 	 * Find by user id.
 	 *
 	 * @param userId the id
-	 * @param page_size the page size
+	 * @param pageSize the page size
 	 * @param size the size
 	 * @return the aggregation results
 	 */
@@ -47,13 +47,13 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'event.dataOra': 1\n"
 			+ "        }\n"
 			+ "    }"})
-	AggregationResults<EventBookedResponse> findByUserId(ObjectId userId,int page_size, int size);
+	AggregationResults<EventBookedResponse> findByUserId(ObjectId userId,int pageSize, int size);
 	
 	/**
 	 * Find by user id future.
 	 *
 	 * @param userId the id
-	 * @param page_size the page size
+	 * @param pageSize the page size
 	 * @param size the size
 	 * @return the aggregation results
 	 */
@@ -81,13 +81,13 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'event.dataOra': 1\n"
 			+ "        }\n"
 			+ "    }"})
-	AggregationResults<EventBookedResponse> findByUserIdFuture(ObjectId userId,int page_size, int size);
+	AggregationResults<EventBookedResponse> findByUserIdFuture(ObjectId userId,int pageSize, int size);
 	
 	/**
 	 * Find by user id past
 	 *
 	 * @param userId the id
-	 * @param page_size the page size
+	 * @param pageSize the page size
 	 * @param size the size
 	 * @return the aggregation results
 	 */
@@ -115,12 +115,12 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'event.dataOra': 1\n"
 			+ "        }\n"
 			+ "    }"})
-	AggregationResults<EventBookedResponse> findByUserIdPast(ObjectId userId,int page_size, int size);
+	AggregationResults<EventBookedResponse> findByUserIdPast(ObjectId userId,int pageSize, int size);
 	
 	/**
 	 * Find by user id.
 	 *
-	 * @param userId the id of user
+	 * @param string the id of user
 	 * @return the aggregation results
 	 */
 	@Aggregation(pipeline = {"{\n"
@@ -139,7 +139,7 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'event.dataOra': 1\n"
 			+ "        }\n"
 			+ "    }"})
-	List<EventBookedResponse> findByUserId(ObjectId userId);
+	List<EventBookedResponse> findByUserId(String string);
 	
 	/**
 	 * Find by event id.
@@ -192,8 +192,8 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 	/**
 	 * Find by user and event.
 	 *
-	 * @param idUser the id of user
-	 * @param idEvent the id of event
+	 * @param id the id of user
+	 * @param idEv the id of event
 	 * @return the aggregation results
 	 */
 	@Aggregation(pipeline = {"{\n"
@@ -209,7 +209,7 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'as': 'event'\n"
 			+ "        }\n"
 			+ "    }"})
-	AggregationResults<EventBookedResponse> findByUserAndEvent(ObjectId idUser, ObjectId idEvent);
+	AggregationResults<EventBookedResponse> findByUserAndEvent(String id, String idEv);
 
 	
 

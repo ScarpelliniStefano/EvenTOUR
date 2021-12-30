@@ -1,10 +1,12 @@
 package com.scarcolo.eventour.controller.event;
 
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -173,8 +175,12 @@ public class EventController {
 	 * @return true, if successful
 	 */
 	@DeleteMapping("/events/{id}")
-    public boolean deleteEventById(@PathVariable("id") String id){
-        return eventService.delete(id);
+    public ResponseEntity<Boolean> deleteEventById(@PathVariable("id") String id){
+        try {
+			return eventService.delete(id);
+		} catch (IOException e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
     }
     
   /*

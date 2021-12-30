@@ -139,7 +139,7 @@ public class TicketInsp{
 	 * Sets the code.
 	 *
 	 * @param code the new code
-	 * @throws Exception the exception
+	 * @throws IllegalArgumentException the exception for invalid code
 	 */
 	public void setCode(String code) throws IllegalArgumentException {
 		boolean res=Functionalities.isValidCode(code);

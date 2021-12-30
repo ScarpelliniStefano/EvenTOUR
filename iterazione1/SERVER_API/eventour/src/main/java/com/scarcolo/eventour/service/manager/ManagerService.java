@@ -64,9 +64,9 @@ public class ManagerService {
 	 * @return the response entity with modified data
 	 */
 	public ResponseEntity<ManagerResponse> update(EditManagerRequest request) {
-        Optional<Manager> optionalManager = managerRepository.findById(request.id);
+		Optional<Manager> optionalManager = managerRepository.findById(request.id);
         if (optionalManager.isEmpty()) {
-        	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return null;
         }
         Manager m=optionalManager.get();
         if(request.residence!=null) {
@@ -76,11 +76,14 @@ public class ManagerService {
         	try {
 				m.setMail(request.mail);
 			} catch (AddressException e) {
-				return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
         }
-        managerRepository.save(m);
-        return new ResponseEntity<>(new ManagerResponse(optionalManager.get()), HttpStatus.OK);
+        if(request.password!=null) {
+        	m.setPassword(request.password);
+        }
+        Manager man=managerRepository.save(m);
+        return new ResponseEntity<>(new ManagerResponse(man), HttpStatus.OK);
     }
 
    

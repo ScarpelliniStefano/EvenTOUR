@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>AdminController.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.controller.admin</a> &gt; <span class="el_source">AdminController.java</span></div><h1>AdminController.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.controller.admin;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.scarcolo.eventour.model.admin.AdminResponse;
+import com.scarcolo.eventour.model.admin.EditAdminRequest;
+import com.scarcolo.eventour.model.manager.ManagerPlusResponse;
+import com.scarcolo.eventour.model.admin.AddAdminRequest;
+import com.scarcolo.eventour.model.admin.AdminReportResponse;
+import com.scarcolo.eventour.service.admin.AdminService;
+
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AdminController.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+<span class="fc" id="L33">public class AdminController {</span>
+	
+	/** The admin service. */
+	@Autowired
+	private AdminService adminService;
+	 
+	
+	 
+		/**
+		 * Add a admin.
+		 *
+		 * @param request the request
+		 * @return the response entity
+		 */
+		@PostMapping(&quot;/admins&quot;)
+		public ResponseEntity&lt;AdminResponse&gt; addBooking(@RequestBody AddAdminRequest request){
+<span class="fc" id="L49">		      return adminService.add(request);</span>
+		}
+
+		   
+		    /**
+	    	 * Update admin.
+	    	 *
+	    	 * @param request the request
+	    	 * @return the response entity
+	    	 */
+	    	@PutMapping(&quot;/admins&quot;)
+		    public ResponseEntity&lt;AdminResponse&gt; updateBooking(@RequestBody EditAdminRequest request){
+<span class="fc" id="L61">		        return adminService.update(request);</span>
+		    }
+	   
+	    /**
+    	 * Gets the admin by id.
+    	 *
+    	 * @param id the id
+    	 * @return the manager by id
+    	 */
+    	@GetMapping(&quot;/admins/id={id}&quot;)
+	    public ResponseEntity&lt;AdminResponse&gt; getAdminById(@PathVariable(&quot;id&quot;) String id){
+<span class="fc" id="L72">	        return adminService.getById(id);</span>
+	    }
+	    
+
+	    /**
+    	 * Get all admins.
+    	 *
+    	 * @return all managers
+    	 */
+    	@GetMapping(&quot;/admins&quot;)
+	    public ResponseEntity&lt;List&lt;AdminResponse&gt;&gt; getAllAdmins(){
+<span class="fc" id="L83">	        return adminService.getAll();</span>
+	    }
+	    
+	    /**
+    	 * Gets the admin from mail.
+    	 *
+    	 * @param mail the mail
+    	 * @return the admin with specified mail
+    	 */
+    	@GetMapping(&quot;/admins/{mail}&quot;)
+	    public ResponseEntity&lt;AdminResponse&gt; getAdminFromMail(@PathVariable(&quot;mail&quot;) String mail){
+<span class="fc" id="L94">	        return adminService.getAdminFromMail(mail);</span>
+	    }
+    	
+    	/**
+    	 * Gets the reports of admin.
+    	 *
+    	 * @return the reports
+    	 */
+    	@GetMapping(&quot;/admins/reports&quot;)
+	    public ResponseEntity&lt;List&lt;AdminReportResponse&gt;&gt; getAdminReport(){
+<span class="fc" id="L104">	        return adminService.getAdminReport();</span>
+	    }
+    	
+    	/**
+    	 * send newsletter.
+    	 *
+    	 * @return how many mail are sended
+    	 */
+    	@GetMapping(&quot;/admins/newsletter&quot;)
+	    public ResponseEntity&lt;Integer&gt; sendNewsletter(){
+<span class="fc" id="L114">	        return adminService.sendNewsletter();</span>
+	    }
+    	
+    	/**
+	     * Get managers by their request.
+	     *
+	     * @param active the active or not (the manager is active of not)
+	     * @param scadute if the manager has to renew his activation
+	     * @return all managers that has the selected request
+	     */
+    	@GetMapping(&quot;/admins/requests&quot;)
+	    public ResponseEntity&lt;List&lt;ManagerPlusResponse&gt;&gt; getRequests(@RequestParam(defaultValue = &quot;0&quot;) int active, @RequestParam(defaultValue = &quot;0&quot;) int scadute){
+<span class="pc bpc" id="L126" title="1 of 4 branches missed.">    		return adminService.getRequest(active&gt;0?true:false,scadute&gt;0?true : false);</span>
+	    }
+    	
+    	/**
+	     * Accept a request.
+	     *
+	     * @param id the id of manager to activate
+	     * @return done or not
+	     */
+    	@GetMapping(&quot;/admins/accept/{id}&quot;)
+	    public ResponseEntity&lt;Boolean&gt; setRequestActive(@PathVariable(&quot;id&quot;) String id){
+<span class="fc" id="L137">    		return adminService.setRequestActive(id);</span>
+	    }
+    	
+    	/**
+	     * Remove a request of a manager (and the manager ifself).
+	     *
+	     * @param id the id of manager to remove
+	     * @return done or not
+	     */
+    	@DeleteMapping(&quot;/admins/remove/{id}&quot;)
+	    public ResponseEntity&lt;Boolean&gt; removeRequest(@PathVariable(&quot;id&quot;) String id){
+<span class="fc" id="L148">    		return adminService.removeRequest(id);</span>
+	    }
+    	
+    	/**
+	     * Give a malus to the manager.
+	     *
+	     * @param id id of manager which should have the malus
+	     * @return done or not
+	     */
+    	@GetMapping(&quot;/admins/malus={id}&quot;)
+	    public ResponseEntity&lt;Boolean&gt; setRequestMalus(@PathVariable(&quot;id&quot;) String id){
+<span class="fc" id="L159">    		return adminService.setRequestDateMalus(id);</span>
+	    }
+
+	   
+	    /**
+    	 * Delete by id of admin.
+    	 *
+    	 * @param id the id of admin
+    	 * @return true, if successful
+    	 */
+    	@DeleteMapping(&quot;/admins/{id}&quot;)
+	    public ResponseEntity&lt;Boolean&gt; deleteById(@PathVariable(&quot;id&quot;) String id){
+<span class="fc" id="L171">	        return adminService.delete(id);</span>
+	    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>

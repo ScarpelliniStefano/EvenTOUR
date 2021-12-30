@@ -244,7 +244,7 @@ public class Event {
 	 * Sets the date check.
 	 *
 	 * @param dataOra the new date check
-	 * @throws Exception the exception
+	 * @throws DateTimeException the exception for date
 	 */
 	private void setDateCheck(Date dataOra) throws DateTimeException {
 		if(dataOra.after(new Date())) {

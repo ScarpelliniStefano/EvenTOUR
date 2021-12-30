@@ -41,8 +41,8 @@ public class TicketInsp{
 	 * @throws Exception the exception
 	 */
 	public TicketInsp(AddTicketInspRequest request) throws Exception {
-        this.setEventId(request.eventId);
-        this.setFullName(request.fullName);
+		this.eventId=new ObjectId(request.eventId);
+        this.fullName=request.fullName;
     }
 	
 	/**
@@ -146,7 +146,7 @@ public class TicketInsp{
 		if(res) {
 			this.code=code;
 		}else {
-			throw new Exception();
+			throw new IllegalArgumentException();
 		}
 			
 	}

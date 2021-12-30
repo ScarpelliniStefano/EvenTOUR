@@ -44,10 +44,10 @@ public class TicketInspResponse {
 	 */
 	public TicketInspResponse(TicketInsp ticket){
 		this.id=ticket.getId();
-		this.setCode(ticket.getCode());
-        this.setEventId(ticket.getEventId());
-        this.setFullName(ticket.getFullName());
-        this.setPassword(ticket.getPassword());
+		this.code=ticket.getCode();
+        this.eventId=ticket.getEventId();
+        this.fullName=ticket.getFullName();
+        this.password=ticket.getPassword();
     }
 	
 	 /**

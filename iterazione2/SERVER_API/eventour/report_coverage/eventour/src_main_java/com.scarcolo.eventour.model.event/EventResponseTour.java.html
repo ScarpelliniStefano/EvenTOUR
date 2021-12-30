@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventResponseTour.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.event</a> &gt; <span class="el_source">EventResponseTour.java</span></div><h1>EventResponseTour.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package com.scarcolo.eventour.model.event;
+
+
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventResponseTour.
+ *
+ * @author stefa
+ */
+
+public class EventResponseTour extends EventResponse{
+	
+	/** The distance from start. */
+	@JsonProperty(&quot;distanceFromStart&quot;)
+	private Double distance;
+	
+	/** The price tot for all people in the single event. */
+	@JsonProperty(&quot;priceTotPersone&quot;)
+	private Double priceTot;
+	
+	/**
+	 * Instantiates a new event response tour.
+	 *
+	 * @param event the event
+	 */
+<span class="fc" id="L32">	public EventResponseTour(Event event){</span>
+<span class="fc" id="L33">		this.setId(event.getId());</span>
+<span class="fc" id="L34">		this.setTitle(event.getTitle());</span>
+<span class="fc" id="L35">        this.setDescription(event.getDescription());</span>
+<span class="fc" id="L36">        this.setLocation(event.getLocation());</span>
+<span class="fc" id="L37">        this.setTypes(event.getTypes());</span>
+<span class="fc" id="L38">        this.setDataOra(event.getDataOra());</span>
+<span class="fc" id="L39">        this.setManagerId(event.getManagerId());</span>
+<span class="fc" id="L40">        this.setUrlImage(event.getUrlImage());</span>
+<span class="fc" id="L41">        this.setTotSeat(event.getTotSeat());</span>
+<span class="fc" id="L42">        this.setFreeSeat(event.getFreeSeat());</span>
+<span class="fc" id="L43">        this.setPrice(event.getPrice());</span>
+<span class="fc" id="L44">    }</span>
+	
+	 /**
+ 	 * Instantiates a new event response tour.
+ 	 */
+<span class="nc" id="L49"> 	public EventResponseTour() {</span>
+<span class="nc" id="L50">	    }</span>
+
+	/**
+	 * Gets the distance.
+	 *
+	 * @return the distance
+	 */
+	public Double getDistance() {
+<span class="fc" id="L58">		return distance;</span>
+	}
+
+	/**
+	 * Sets the distance.
+	 *
+	 * @param distance the new distance
+	 */
+	public void setDistance(Double distance) {
+<span class="fc" id="L67">		this.distance = distance;</span>
+<span class="fc" id="L68">	}</span>
+
+	/**
+	 * Gets the price tot.
+	 *
+	 * @return the price tot
+	 */
+	public Double getPriceTot() {
+<span class="fc" id="L76">		return priceTot;</span>
+	}
+
+	/**
+	 * Sets the price tot.
+	 *
+	 * @param priceTot the new price tot
+	 */
+	public void setPriceTot(Double priceTot) {
+<span class="fc" id="L85">		this.priceTot = Math.round(priceTot*100.0)/100.0;</span>
+<span class="fc" id="L86">	}</span>
+
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>

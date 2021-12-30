@@ -85,12 +85,6 @@ public class Manager{
 			this.codicePIVA=request.codicePIVA;
 		else
 			throw new IllegalArgumentException();
-		try {
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		this.ragioneSociale=request.ragioneSociale;
 	}
 	

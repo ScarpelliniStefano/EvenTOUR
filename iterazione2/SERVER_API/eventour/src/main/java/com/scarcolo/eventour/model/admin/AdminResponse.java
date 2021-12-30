@@ -4,6 +4,8 @@
 package com.scarcolo.eventour.model.admin;
 
 
+import java.security.NoSuchAlgorithmException;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.scarcolo.eventour.functions.Functionalities;
 
@@ -48,12 +50,23 @@ public class AdminResponse{
 	 * @param admin the admin
 	 */
 	public AdminResponse(Admin admin){
-		this.setId(admin.getId());
-		this.setMail(admin.getMail());
-		this.setPassword(admin.getPassword());
-		this.setName(admin.getName());
-		this.setSurname(admin.getSurname());
-		this.setRole(admin.getRole());
+		this.id=admin.getId();
+		this.mail=admin.getMail();
+		try {
+			this.password=Functionalities.getMd5(admin.getPassword());
+		} catch (NoSuchAlgorithmException e) {
+			this.password=admin.getPassword();
+		}
+		this.name=admin.getName();
+		this.surname=admin.getSurname();
+		this.role=admin.getRole();
+	}
+	
+	/**
+	 * Instantiates a new admin response.
+	 */
+	public AdminResponse() {
+		
 	}
 
 	/**
@@ -141,9 +154,14 @@ public class AdminResponse{
 	 * Sets the password.
 	 *
 	 * @param password the new password
+	 * @throws NoSuchAlgorithmException no md5 function working
 	 */
-	public void setPassword(String password) {
-		this.password = Functionalities.getMd5(password);
+	public void setPassword(String password) throws NoSuchAlgorithmException {
+		try {
+			this.password = Functionalities.getMd5(password);
+		} catch (NoSuchAlgorithmException e) {
+			throw e;
+		}
 	}
 
 	/**

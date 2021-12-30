@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>UserController.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.controller.user</a> &gt; <span class="el_source">UserController.java</span></div><h1>UserController.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.controller.user;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.scarcolo.eventour.model.AccountRequest;
+import com.scarcolo.eventour.model.AccountResponse;
+import com.scarcolo.eventour.model.event.EventResponse;
+import com.scarcolo.eventour.model.user.AddUserRequest;
+import com.scarcolo.eventour.model.user.EditUserRequest;
+import com.scarcolo.eventour.model.user.UserResponse;
+import com.scarcolo.eventour.service.user.UserService;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserController.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+<span class="fc" id="L32">public class UserController {</span>
+	
+		/** The user service. */
+		@Autowired
+		private UserService userService;
+		 
+		/**
+		 * Adds the user.
+		 *
+		 * @param request the request
+		 * @return the response entity
+		 * @throws Exception the exception
+		 */
+		@PostMapping(&quot;/users&quot;)
+		public ResponseEntity&lt;UserResponse&gt; addUser(@RequestBody AddUserRequest request) throws Exception{
+<span class="fc" id="L47">		      return userService.add(request);</span>
+		}
+
+	   
+	    /**
+    	 * Update user.
+    	 *
+    	 * @param request the request
+    	 * @return the response entity
+    	 * @throws Exception the exception
+    	 */
+    	@PutMapping(&quot;/users&quot;)
+	    public ResponseEntity&lt;UserResponse&gt; updateUser(@RequestBody EditUserRequest request) throws Exception{
+<span class="fc" id="L60">	        return userService.update(request);</span>
+	    }
+	   
+	    /**
+    	 * Gets the user by id.
+    	 *
+    	 * @param id the id
+    	 * @return the user by id
+    	 */
+    	@GetMapping(&quot;/users/{id}&quot;)
+	    public ResponseEntity&lt;UserResponse&gt; getUserById(@PathVariable(&quot;id&quot;) String id){
+<span class="fc" id="L71">	        return userService.getById(id);</span>
+	    }
+	    
+
+	    /**
+    	 * Gets the all users.
+    	 *
+    	 * @return all users
+    	 */
+    	@GetMapping(&quot;/users&quot;)
+	    public ResponseEntity&lt;List&lt;UserResponse&gt;&gt; getAllUsers(){
+<span class="fc" id="L82">	        return userService.getAll();</span>
+	    }
+	    
+	    /**
+    	 * Gets the even tour.
+    	 *
+    	 * @param id the id of user
+    	 * @param num the number of events
+    	 * @return the evenTour
+    	 */
+    	@GetMapping(&quot;/users/{id}/eventour/{num}&quot;)
+	    public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getEvenTour(@PathVariable(&quot;id&quot;) String id,@PathVariable(&quot;num&quot;) int num){
+<span class="fc" id="L94">	        return userService.getEvenTour(id, num);</span>
+	    }
+	    
+	    /**
+    	 * Gets the account.
+    	 *
+    	 * @param request the request
+    	 * @return the account
+    	 */
+    	@PostMapping(&quot;/account&quot;)
+	    public ResponseEntity&lt;AccountResponse&gt; getAccount(@RequestBody AccountRequest request){
+<span class="fc" id="L105">	        return userService.getAccount(request.username,request.password);</span>
+	    }
+
+	   
+	    /**
+    	 * Delete user by id.
+    	 *
+    	 * @param id the id
+    	 * @return true, if successful
+    	 */
+    	@DeleteMapping(&quot;/users/{id}&quot;)
+	    public ResponseEntity&lt;Boolean&gt; deleteUserById(@PathVariable(&quot;id&quot;) String id){
+<span class="fc" id="L117">	        return userService.delete(id);</span>
+	    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

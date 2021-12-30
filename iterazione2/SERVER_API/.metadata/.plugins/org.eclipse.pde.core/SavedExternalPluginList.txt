@@ -1,4 +1,4 @@
-# List of external plug-in models previously loaded. Timestamp: 1639387115625
+# List of external plug-in models previously loaded. Timestamp: 1640800885192
 file:/D:/Programmi/eclipse/plugins/antlr4ide.core_0.3.6.201611052310.jar
 file:/D:/Programmi/eclipse/plugins/antlr4ide.ui_0.3.6.201611052310.jar
 file:/D:/Programmi/eclipse/plugins/biz.aQute.bndlib_5.3.0.202102221516.jar
@@ -22,28 +22,6 @@ file:/D:/Programmi/eclipse/plugins/com.sun.jna.platform_5.8.0.v20210406-1004.jar
 file:/D:/Programmi/eclipse/plugins/com.sun.jna.platform_4.5.1.v20190425-1842.jar
 file:/D:/Programmi/eclipse/plugins/com.sun.xml.bind_2.3.3.v20201118-1818.jar
 file:/D:/Programmi/eclipse/plugins/com.sun.xml.bind_2.2.0.v20201118-1845.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.asm_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.base_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.dean_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.digraph_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.distance_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.explorer_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.graphics_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.graphics.svg_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.help_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.jdt_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.jfreechart_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.metrics_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.metrics.def_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.perspective_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.report_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.report.ant_2.2.1.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.tools.base_1.2.0.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.tools.dean_1.2.0.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.tools.dean.bundles_1.2.0.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.tools.dean.projects_1.2.0.201710091442.jar
-file:/D:/Programmi/eclipse/plugins/de.odysseus.stan.eclipse.violations_2.2.1.201710091442.jar
 file:/D:/Programmi/eclipse/plugins/io.github.classgraph_4.8.35.v20190528-1517.jar
 file:/D:/Programmi/eclipse/plugins/jakarta.el_4.0.0.v20210105-0527.jar
 file:/D:/Programmi/eclipse/plugins/jakarta.enterprise.cdi-api_2.0.2.jar
@@ -75,6 +53,7 @@ file:/D:/Programmi/eclipse/plugins/net.i2p.crypto.eddsa_0.3.0.v20181102-1323.jar
 file:/D:/Programmi/eclipse/plugins/net.sf.jautodoc_1.15.0.202007122220.jar
 file:/D:/Programmi/eclipse/plugins/net.sf.jautodoc.velocity_1.15.0.202007122220.jar
 file:/D:/Programmi/eclipse/plugins/net.sourceforge.lpg.lpgjavaruntime_1.1.0.v201004271650.jar
+file:/D:/Programmi/eclipse/plugins/net.sourceforge.pmd.eclipse.plugin_4.30.0.v20211127-1115-r.jar
 file:/D:/Programmi/eclipse/plugins/org.antlr.runtime_3.2.0.v201101311130.jar
 file:/D:/Programmi/eclipse/plugins/org.apache.ant_1.10.10.v20210426-1926/
 file:/D:/Programmi/eclipse/plugins/org.apache.axis_1.4.0.v201411182030/
@@ -127,6 +106,16 @@ file:/D:/Programmi/eclipse/plugins/org.apache.xmlrpc_3.0.0.v20100427-1100.jar
 file:/D:/Programmi/eclipse/plugins/org.apiguardian_1.1.0.v20190826-0900.jar
 file:/D:/Programmi/eclipse/plugins/org.bouncycastle.bcpg_1.65.0.v20200527-1955.jar
 file:/D:/Programmi/eclipse/plugins/org.bouncycastle.bcprov_1.65.1.v20200529-1514.jar
+file:/D:/Programmi/eclipse/plugins/org.codecover.eclipse_1.0.1.2.jar
+file:/D:/Programmi/eclipse/plugins/org.codecover.instrumentation_1.0.1.2.jar
+file:/D:/Programmi/eclipse/plugins/org.codecover.instrumentation.java_1.0.1.2.jar
+file:/D:/Programmi/eclipse/plugins/org.codecover.instrumentation.java.junit_1.0.1.2/
+file:/D:/Programmi/eclipse/plugins/org.codecover.instrumentation.java.measurement_1.0.1.2/
+file:/D:/Programmi/eclipse/plugins/org.codecover.metrics_1.0.1.2.jar
+file:/D:/Programmi/eclipse/plugins/org.codecover.model_1.0.1.2/
+file:/D:/Programmi/eclipse/plugins/org.codecover.report_1.0.1.2.jar
+file:/D:/Programmi/eclipse/plugins/org.codecover.report.csv_1.0.1.2/
+file:/D:/Programmi/eclipse/plugins/org.codecover.report.html_1.0.1.2/
 file:/D:/Programmi/eclipse/plugins/org.eclipse.ant.core_3.6.0.v20210415-1314.jar
 file:/D:/Programmi/eclipse/plugins/org.eclipse.ant.launching_1.3.0.v20210415-1314.jar
 file:/D:/Programmi/eclipse/plugins/org.eclipse.ant.ui_3.8.0.v20210415-1314.jar
@@ -331,11 +320,11 @@ file:/D:/Programmi/eclipse/plugins/org.eclipse.egit.ui_5.12.0.202106070339-r.jar
 file:/D:/Programmi/eclipse/plugins/org.eclipse.emf_2.8.0.v20180706-1146.jar
 file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.ant_2.11.0.v20200324-0723.jar
 file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.codegen_2.22.0.v20210420-0623.jar
-file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.codegen.ecore_2.27.0.v20210816-1137.jar
-file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.codegen.ecore.ui_2.27.0.v20210816-1137.jar
+file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.codegen.ecore_2.28.0.v20210925-0555.jar
+file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.codegen.ecore.ui_2.28.0.v20210925-0555.jar
 file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.codegen.ui_2.23.0.v20210412-0833.jar
-file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.common_2.23.0.v20210618-0700.jar
-file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.common.ui_2.18.0.v20190507-0402.jar
+file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.common_2.23.0.v20210924-1718.jar
+file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.common.ui_2.19.0.v20211110-0654.jar
 file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.converter_2.10.0.v20180706-1146.jar
 file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.databinding_1.5.0.v20180706-1146.jar
 file:/D:/Programmi/eclipse/plugins/org.eclipse.emf.databinding.edit_1.7.0.v20210113-0340.jar

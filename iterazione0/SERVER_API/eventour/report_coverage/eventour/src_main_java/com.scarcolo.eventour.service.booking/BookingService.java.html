@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>BookingService.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (1) (30 dic 2021 11:07:32)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.service.booking</a> &gt; <span class="el_source">BookingService.java</span></div><h1>BookingService.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.service.booking;
+
+
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.aggregation.AggregationResults;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.scarcolo.eventour.model.booking.AddBookingRequest;
+import com.scarcolo.eventour.model.booking.Booking;
+import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventBookedResponse;
+import com.scarcolo.eventour.model.user.User;
+import com.scarcolo.eventour.repository.booking.BookingRepository;
+import com.scarcolo.eventour.repository.event.EventRepository;
+import com.scarcolo.eventour.repository.user.UserRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BookingService.
+ */
+@Service
+<span class="fc" id="L29">public class BookingService {</span>
+
+    /** The booking repository. */
+    @Autowired
+    private BookingRepository bookingRepository;
+    
+    /** The event repository. */
+    @Autowired
+    private EventRepository eventRepository;
+    
+    /** The event repository. */
+    @Autowired
+    private UserRepository userRepository;
+
+   
+    /**
+     * Adds new booking.
+     *
+     * @param request the request of new booking
+     * @return the response entity
+     */
+    public ResponseEntity&lt;Object&gt; add(AddBookingRequest request) {
+<span class="fc" id="L51">        Booking booking = bookingRepository.save(new Booking(request));</span>
+<span class="fc" id="L52">        Optional&lt;Event&gt; optionalEvent = eventRepository.findById(booking.getEventId());</span>
+<span class="fc" id="L53">        Optional&lt;User&gt; optionalUser = userRepository.findById(booking.getUserId());</span>
+<span class="pc bpc" id="L54" title="1 of 4 branches missed.">        if (!optionalUser.isEmpty() &amp;&amp; !optionalEvent.isEmpty()) {</span>
+<span class="fc" id="L55">            Event eventM=optionalEvent.get();</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">            if(eventM.getFreeSeat()-booking.getPrenotedSeat()&gt;=0) {</span>
+<span class="fc" id="L57">            	eventM.setFreeSeat(eventM.getFreeSeat()-booking.getPrenotedSeat());</span>
+<span class="fc" id="L58">            	eventRepository.save(eventM);</span>
+<span class="fc" id="L59">            } else {</span>
+<span class="nc" id="L60">            	bookingRepository.delete(booking);</span>
+<span class="nc" id="L61">            	return new ResponseEntity&lt;&gt;(&quot;ERROR. no enough seats available.&quot;, HttpStatus.OK);</span>
+            }
+            	
+            
+    	}else {
+<span class="fc" id="L66">    		bookingRepository.delete(booking);</span>
+<span class="fc" id="L67">    		return new ResponseEntity&lt;&gt;(HttpStatus.NOT_ACCEPTABLE);</span>
+    	}
+<span class="fc" id="L69">        return new ResponseEntity&lt;&gt;(booking, HttpStatus.OK);</span>
+        
+    }
+
+    /**
+     * Modify.
+     *
+     * @param id the id
+     */
+    private void modify(String id) {
+<span class="fc" id="L79">    	Optional&lt;Booking&gt; optionalBooking = bookingRepository.findById(id);</span>
+<span class="pc bpc" id="L80" title="1 of 2 branches missed.">    	if (!optionalBooking.isEmpty()) {</span>
+<span class="fc" id="L81">            Booking book=optionalBooking.get();</span>
+<span class="fc" id="L82">            book.setCome(true);</span>
+<span class="fc" id="L83">            bookingRepository.save(book);</span>
+    	}
+<span class="fc" id="L85">    }</span>
+
+  
+    /**
+     * Delete one booking.
+     *
+     * @param id the id
+     * @return true, if successful
+     */
+    public boolean delete(String id) {
+<span class="fc" id="L95">        Optional&lt;Booking&gt; optionalBooking = bookingRepository.findById(id);</span>
+<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (optionalBooking.isEmpty()) {</span>
+<span class="fc" id="L97">            return false;</span>
+        }
+        
+<span class="fc" id="L100">        Optional&lt;Event&gt; optionalEvent = eventRepository.findById(optionalBooking.get().getEventId());</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (optionalEvent.isPresent()) {</span>
+<span class="fc" id="L102">            Event eventM=optionalEvent.get();</span>
+<span class="fc" id="L103">            eventM.setFreeSeat(eventM.getFreeSeat()+optionalBooking.get().getPrenotedSeat());</span>
+<span class="fc" id="L104">            Event served=eventRepository.save(eventM);</span>
+<span class="fc" id="L105">    	}else {</span>
+<span class="nc" id="L106">    		return false;</span>
+    	}
+<span class="fc" id="L108">        bookingRepository.deleteById(optionalBooking.get().getId());</span>
+<span class="fc" id="L109">        return true;</span>
+    }
+
+
+    /**
+	 * Gets all booking by id user.
+	 *
+	 * @param id the id user
+	 * @return bookings by id user
+	 */
+	public ResponseEntity&lt;List&lt;EventBookedResponse&gt;&gt; getByIdUser(String id) {
+		try {
+<span class="fc" id="L121">			Optional&lt;User&gt; userOpt=userRepository.findById(id);</span>
+<span class="fc bfc" id="L122" title="All 2 branches covered.">			if(userOpt.isEmpty()) return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+<span class="fc" id="L123">			AggregationResults&lt;EventBookedResponse&gt; eventsA=bookingRepository.findByUserId(new ObjectId(id));</span>
+<span class="fc" id="L124">			List&lt;EventBookedResponse&gt; eventR=eventsA.getMappedResults();</span>
+<span class="fc" id="L125">			return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);</span>
+<span class="nc" id="L126">		}catch(Exception e) {</span>
+<span class="nc" id="L127">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+	}
+	
+	/**
+	 * Gets all booking by id user and id event.
+	 *
+	 * @param id the id user
+	 * @return bookings by id user
+	 */
+	public ResponseEntity&lt;List&lt;EventBookedResponse&gt;&gt; getByIdUserEvent(String id,String idE) {
+		try {
+<span class="fc" id="L139">			AggregationResults&lt;EventBookedResponse&gt; eventsA=bookingRepository.findByUserIdAndEventId(id,idE);</span>
+<span class="fc" id="L140">			List&lt;EventBookedResponse&gt; eventR=eventsA.getMappedResults();</span>
+<span class="fc bfc" id="L141" title="All 2 branches covered.">			if(eventR.isEmpty()) return new ResponseEntity&lt;&gt;(HttpStatus.METHOD_NOT_ALLOWED);</span>
+<span class="fc" id="L142">			return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);</span>
+<span class="nc" id="L143">		}catch(Exception e) {</span>
+<span class="nc" id="L144">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+	}
+	
+	/**
+	 * Gets if user have a booking.
+	 *
+	 * @param idBooking the id booking
+	 * @param idEvent the id event
+	 * @return the check
+	 */
+	public ResponseEntity&lt;String&gt; getCheck(String idBooking,String idEvent) {
+<span class="fc" id="L156">    	Optional&lt;Booking&gt; bookingData = bookingRepository.findById(idBooking);</span>
+<span class="fc bfc" id="L157" title="All 2 branches covered.">  	  	if (bookingData.isPresent()) {</span>
+<span class="fc bfc" id="L158" title="All 2 branches covered.">  	  		if(bookingData.get().getEventId().equalsIgnoreCase(idEvent)) {</span>
+<span class="fc" id="L159">  	  			modify(idBooking);</span>
+<span class="fc" id="L160">  	  			return new ResponseEntity&lt;&gt;(&quot;ACCESS GRANTED&quot;, HttpStatus.OK);</span>
+  	  		}else
+<span class="fc" id="L162">  	  			return new ResponseEntity&lt;&gt;(&quot;ACCESS REFUSED&quot;, HttpStatus.OK);</span>
+  	  	} else {
+<span class="fc" id="L164">  	  		return new ResponseEntity&lt;&gt;(&quot;INVALID BOOKING CODE&quot;,HttpStatus.OK);</span>
+  	  	}
+    }
+
+	/**
+	 * Gets if exist a booking with this id.
+	 *
+	 * @param idBooking the id booking
+	 * @return the check
+	 */
+	public ResponseEntity&lt;Booking&gt; getById(String id) {
+<span class="fc" id="L175">		Optional&lt;Booking&gt; bookingData = bookingRepository.findById(id);</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">  	  	if (bookingData.isPresent()) </span>
+<span class="fc" id="L177">  	  			return new ResponseEntity&lt;&gt;(bookingData.get(),HttpStatus.OK);</span>
+  	  		else
+<span class="fc" id="L179">  	  			return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+  	 }
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (1) (30 dic 2021 11:07:32)</div></body></html>

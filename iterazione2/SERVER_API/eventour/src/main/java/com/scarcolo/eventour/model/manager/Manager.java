@@ -4,6 +4,7 @@
 package com.scarcolo.eventour.model.manager;
 
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -61,14 +62,29 @@ public class Manager{
 	 * @throws Exception the exception
 	 */
 	public Manager(AddManagerRequest request) throws Exception{
-		this.setMail(request.mail);
-		this.setPassword(request.password);
-		this.setName(request.name);
-		this.setSurname(request.surname);
-		this.setDateOfBirth(Functionalities.convertToDate(request.dateOfBirth));
-		this.setResidence(request.residence);
-		this.setCodicePIVA(request.codicePIVA);
-		this.setRagioneSociale(request.ragioneSociale);
+		boolean res=Functionalities.isValidEmailAddress(request.mail);
+		if(res) {
+			this.mail=request.mail;
+		}else {
+			throw new AddressException();
+		}
+		
+		this.password=request.password;
+		this.name=request.name;
+		this.surname=request.surname;
+		if(request.dateOfBirth.isBefore(LocalDate.now())) {
+			this.dateOfBirth=Functionalities.convertToDate(request.dateOfBirth);
+		}else {
+			throw new DateTimeException("Errore data futura");
+		}
+		
+		this.residence=request.residence;
+		String risorsa=PartitaIVAFunctions.validate(request.codicePIVA);
+		if(risorsa=="ok")
+			this.codicePIVA=request.codicePIVA;
+		else
+			throw new IllegalArgumentException();
+		this.ragioneSociale=request.ragioneSociale;
 	}
 	
 	/**
@@ -94,15 +110,30 @@ public class Manager{
 	 */
 	public Manager(String id, String name, String surname, String mail, String codicePIVA, Date dateOfBirth,
 			String psw, String ragioneSociale, Location residence) throws Exception {
-		this.setId(id);
-		this.setMail(mail);
-		this.setPassword(psw);
-		this.setName(name);
-		this.setSurname(surname);
-		this.setDateOfBirth(dateOfBirth);
-		this.setResidence(residence);
-		this.setCodicePIVA(codicePIVA);
-		this.setRagioneSociale(ragioneSociale);
+		this.id=id;
+		boolean res=Functionalities.isValidEmailAddress(mail);
+		if(res) {
+			this.mail=mail;
+		}else {
+			throw new AddressException();
+		}
+		
+		this.password=psw;
+		this.name=name;
+		this.surname=surname;
+		if(dateOfBirth.before(new Date())) {
+			this.dateOfBirth=dateOfBirth;
+		}else {
+			throw new DateTimeException("Errore data futura");
+		}
+		
+		this.residence=residence;
+		String risorsa=PartitaIVAFunctions.validate(codicePIVA);
+		if(risorsa=="ok")
+			this.codicePIVA=codicePIVA;
+		else
+			throw new IllegalArgumentException();
+		this.ragioneSociale=ragioneSociale;
 	}
 
 	/**
@@ -231,7 +262,7 @@ public class Manager{
 		if(dateOfBirth.before(new Date())) {
 			this.dateOfBirth = dateOfBirth;
 		}else {
-			throw new Exception("Errore data futura");
+			throw new DateTimeException("Errore data futura");
 		}
 		
 	}
@@ -284,7 +315,7 @@ public class Manager{
 		if(res=="ok")
 			this.codicePIVA = codicePIVA;
 		else
-			throw new Exception(res);
+			throw new IllegalArgumentException(res);
 	}
 	
 	/**

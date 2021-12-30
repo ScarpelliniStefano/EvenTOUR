@@ -144,20 +144,14 @@ public class RequestService {
 		List<Request> reqs=new ArrayList<>();
 		if(active) {
 			Date dt=Functionalities.convertToDate(LocalDate.now().minusYears(1));
-			System.out.println(dt);
+			//System.out.println(dt);
 			reqs=requestRepository.findAllActive(Sort.by("dateRenewal").ascending());
 			if(scaduto) {
-				System.out.println("active scad");
-				for(Request r : reqs) {
-					if(r.getDateRenewal().after(dt)) 
-						reqs.remove(r);
-				}
+				//System.out.println("active scad");
+				reqs.removeIf(e -> e.getDateRenewal().after(dt));
 			}else {
-				System.out.println("active not scad");
-				for(Request r : reqs) {
-					if(r.getDateRenewal().before(dt)) 
-						reqs.remove(r);
-				}
+				//System.out.println("active not scad");
+				reqs.removeIf(e -> e.getDateRenewal().before(dt));
 			}
 		}
 		else

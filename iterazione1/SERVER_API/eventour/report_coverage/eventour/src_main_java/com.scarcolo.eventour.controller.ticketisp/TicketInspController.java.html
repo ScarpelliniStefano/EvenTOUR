@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TicketInspController.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.controller.ticketisp</a> &gt; <span class="el_source">TicketInspController.java</span></div><h1>TicketInspController.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.controller.ticketisp;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest;
+import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
+import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
+import com.scarcolo.eventour.service.ticketisp.TicketInspService;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TicketInspController.
+ */
+@CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
+@RestController
+@RequestMapping(&quot;/api&quot;)
+<span class="fc" id="L29">public class TicketInspController {</span>
+	
+		/** The ticket insp service. */
+		@Autowired
+		private TicketInspService ticketInspService;
+		 
+		/**
+		 * Adds the ticket insp.
+		 *
+		 * @param request the request
+		 * @return the response entity
+		 * @throws Exception the exception
+		 */
+		@PostMapping(&quot;/ticketInsps&quot;)
+		public ResponseEntity&lt;TicketInspResponse&gt; addTicketInsp(@RequestBody AddTicketInspRequest request) throws Exception{
+<span class="fc" id="L44">		      return ticketInspService.add(request);</span>
+		}
+
+	   
+	    /**
+    	 * Update ticket insp.
+    	 *
+    	 * @param request the request
+    	 * @return the response entity
+    	 */
+    	@PutMapping(&quot;/ticketInsps&quot;)
+	    public ResponseEntity&lt;TicketInspResponse&gt; updateTicketInsp(@RequestBody EditTicketInspRequest request){
+<span class="fc" id="L56">	        return ticketInspService.update(request);</span>
+	    }
+	    
+	    /**
+    	 * Gets all ticket inspectors by event id.
+    	 *
+    	 * @param id the id
+    	 * @return the ticket insp by event id
+    	 */
+    	@GetMapping(&quot;/ticketInsps/event/{id}&quot;)
+	    public ResponseEntity&lt;List&lt;TicketInspResponse&gt;&gt; getTicketInspByEventId(@PathVariable(&quot;id&quot;) String id){
+<span class="fc" id="L67">	        return ticketInspService.getByEventId(id);</span>
+	    }
+	    
+	   
+	    /**
+    	 * Gets the ticket insp by id.
+    	 *
+    	 * @param id the id
+    	 * @return the ticket insp by id
+    	 */
+    	@GetMapping(&quot;/ticketInsps/{id}&quot;)
+	    public ResponseEntity&lt;TicketInspResponse&gt; getTicketInspById(@PathVariable(&quot;id&quot;) String id){
+<span class="fc" id="L79">	        return ticketInspService.getById(id);</span>
+	    }
+	    
+
+	    /**
+    	 * Get all ticket insps.
+    	 *
+    	 * @return the all ticket insps
+    	 */
+    	@GetMapping(&quot;/ticketInsps&quot;)
+	    public ResponseEntity&lt;List&lt;TicketInspResponse&gt;&gt; getAllTicketInsps(){
+<span class="fc" id="L90">	        return ticketInspService.getAll();</span>
+	    }
+	    
+	   
+	    /**
+    	 * Delete ticket insp by id.
+    	 *
+    	 * @param id the id
+    	 * @return true, if successful
+    	 */
+    	@DeleteMapping(&quot;/ticketInsps/{id}&quot;)
+	    public ResponseEntity&lt;Boolean&gt; deleteTicketInspById(@PathVariable(&quot;id&quot;) String id){
+<span class="fc" id="L102">	        return ticketInspService.delete(id);</span>
+	    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

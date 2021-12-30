@@ -71,7 +71,7 @@ public class PaymentServiceImpl implements PaymentService {
   public String chargeCreditCard(Order order,String cardNr,String month,String year,String cvv) throws NoSuchAlgorithmException {
 	  if(cardNr.startsWith("400000380000")&&cvv.contains("2")) {
 				MessageDigest md = MessageDigest.getInstance("MD5");
-				String stringa=""+cardNr+month+year+cvv+Math.floor(Math.random()*1000);
+				String stringa=cardNr+month+year+cvv+Math.floor(Math.random()*1000);
 				if(Charset.isSupported("CP1252"))
 					md.update(stringa.getBytes(Charset.forName("CP1252")));
 				else

@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventService.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.service.event</a> &gt; <span class="el_source">EventService.java</span></div><h1>EventService.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.service.event;
+
+
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.model.event.AddEventRequest;
+import com.scarcolo.eventour.model.event.EditEventRequest;
+import com.scarcolo.eventour.model.event.Event;
+import com.scarcolo.eventour.model.event.EventResponse;
+import com.scarcolo.eventour.model.user.User;
+import com.scarcolo.eventour.repository.event.EventRepository;
+import com.scarcolo.eventour.repository.user.UserRepository;
+import com.scarcolo.eventour.service.booking.BookingService;
+import com.scarcolo.eventour.service.ticketisp.TicketInspService;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventService.
+ */
+@Service
+<span class="fc" id="L42">public class EventService {</span>
+
+    /** The event repository. */
+    @Autowired
+    private EventRepository eventRepository;
+    
+    /** The user repository. */
+    @Autowired
+    private UserRepository userRepository;
+    
+    /** The booking service. */
+    @Autowired
+    BookingService bookingService;
+    
+    /** The ticket service. */
+    @Autowired
+    TicketInspService ticketService;
+
+   
+    /**
+     * Add a event.
+     *
+     * @param request the request of new event
+     * @return the response entity of event created
+     * @throws Exception the exception for no event created
+     */
+    public ResponseEntity&lt;EventResponse&gt; add(AddEventRequest request) throws Exception {
+    	try {
+<span class="fc" id="L70">    		Event event = eventRepository.save(new Event(request));</span>
+<span class="fc" id="L71">    		return new ResponseEntity&lt;&gt;(new EventResponse(event), HttpStatus.OK);</span>
+<span class="fc" id="L72">    	}catch(Exception ex) {</span>
+<span class="fc" id="L73">    		return new ResponseEntity&lt;&gt;(HttpStatus.NOT_ACCEPTABLE);</span>
+    	}
+        
+    }
+
+  
+    /**
+     * Update a event.
+     *
+     * @param request the request with data to change
+     * @return the response entity with modified event
+     * @throws Exception the exception
+     */
+    public ResponseEntity&lt;EventResponse&gt; update(EditEventRequest request) throws Exception {
+<span class="fc" id="L87">        Optional&lt;Event&gt; optionalEvent = eventRepository.findById(request.id);</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if (optionalEvent.isEmpty()) {</span>
+<span class="nc" id="L89">            return null;</span>
+        }
+<span class="fc" id="L91">        Event e=optionalEvent.get();</span>
+<span class="pc bpc" id="L92" title="1 of 2 branches missed.">        if(request.title!=null) {</span>
+<span class="nc" id="L93">        	e.setTitle(request.title);</span>
+        }
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">        if(request.description!=null) {</span>
+<span class="fc" id="L96">        	e.setDescription(request.description);</span>
+        }
+<span class="pc bpc" id="L98" title="1 of 2 branches missed.">        if(request.dataOra!=null) {</span>
+<span class="fc" id="L99">        	e.setDataOra(Functionalities.convertToDate(request.dataOra));</span>
+        }
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if(request.location!=null) {</span>
+<span class="nc" id="L102">        	e.setLocation(request.location);</span>
+        }
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">        if(request.price!=null) {</span>
+<span class="nc" id="L105">        	e.setPrice(request.price);</span>
+        }
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">        if(request.totSeat!=null) {</span>
+<span class="nc" id="L108">        	e.setTotSeat(request.totSeat);</span>
+        }
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">        if(request.urlImage!=null) {</span>
+<span class="nc" id="L111">        	e.setUrlImage(request.urlImage);</span>
+        }
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        if(request.types!=null) {</span>
+<span class="nc" id="L114">        	e.setTypes(request.types);</span>
+        }
+<span class="fc" id="L116">        eventRepository.save(e);</span>
+<span class="fc" id="L117">        return new ResponseEntity&lt;&gt;(new EventResponse(e), HttpStatus.OK);</span>
+    }
+
+   
+    /**
+     * Get a event by id.
+     *
+     * @param id the id of event
+     * @return the event by id
+     */
+    public ResponseEntity&lt;EventResponse&gt; getById(String id) {
+<span class="fc" id="L128">    	Optional&lt;Event&gt; eventData = eventRepository.findById(id);</span>
+
+<span class="fc bfc" id="L130" title="All 2 branches covered.">  	  if (eventData.isPresent()) {</span>
+<span class="fc" id="L131">  	    return new ResponseEntity&lt;&gt;(new EventResponse(eventData.get()), HttpStatus.OK);</span>
+  	  } else {
+<span class="fc" id="L133">  	    return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+  	  }
+    }
+
+  
+    
+    
+    /**
+     * Delete a event, its ticket inspector and all bookings to the event.
+     *
+     * @param id the id of event
+     * @return true, if successful
+     */
+    public boolean delete(String id) {
+<span class="fc" id="L147">    	Optional&lt;Event&gt; optionalEvent = eventRepository.findById(id);</span>
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">        if (optionalEvent.isEmpty()) {</span>
+<span class="nc" id="L149">            return false;</span>
+        }
+<span class="fc" id="L151">        boolean resp=bookingService.deleteAllBookingFromEvent(optionalEvent.get());</span>
+<span class="pc bpc" id="L152" title="1 of 2 branches missed.">        if(resp==false) {</span>
+<span class="nc" id="L153">        	throw new IllegalArgumentException();</span>
+        	//System.out.println(&quot;error in deleting bookings&quot;);
+        }
+<span class="fc" id="L156">        resp=ticketService.deleteAllTicketsFromEvent(optionalEvent.get().getId());</span>
+<span class="pc bpc" id="L157" title="1 of 2 branches missed.">        if(resp==false) {</span>
+<span class="nc" id="L158">        	throw new IllegalArgumentException();</span>
+        	//System.out.println(&quot;error in deleting tickets&quot;);
+        }
+<span class="fc" id="L161">        eventRepository.deleteById(optionalEvent.get().getId());</span>
+<span class="fc" id="L162">        return true;</span>
+    }
+
+    /**
+	 * Get all events.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param ordered the order
+	 * @param param the parameter to order on
+	 * @return all events ordered, if necessary, and divided by page of size
+	 */
+	public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; getAll(int page, int size, String ordered,String param) {
+		try {
+<span class="fc" id="L176">			List&lt;Event&gt; events = new ArrayList&lt;&gt;();</span>
+			
+<span class="fc" id="L178">			Pageable paging = PageRequest.of(page, size,Sort.by(&quot;dataOra&quot;).ascending());</span>
+			
+			Page&lt;Event&gt; pageEvents;
+<span class="fc bfc" id="L181" title="All 2 branches covered.">			if(param==null)</span>
+<span class="fc" id="L182">					pageEvents=eventRepository.findAllFuture(paging);</span>
+			else {
+<span class="pc bpc" id="L184" title="1 of 2 branches missed.">				if(ordered.equalsIgnoreCase(&quot;desc&quot;)) {</span>
+<span class="pc bpc" id="L185" title="1 of 2 branches missed.">					if(param.equals(&quot;dataOra&quot;)) {</span>
+<span class="nc" id="L186">						paging = PageRequest.of(page, size,Sort.by(&quot;dataOra&quot;).descending());</span>
+<span class="nc" id="L187">						pageEvents=eventRepository.findAllFuture(paging);</span>
+<span class="pc bpc" id="L188" title="1 of 2 branches missed.">					}else if(param.equals(&quot;loc&quot;)) {</span>
+<span class="fc" id="L189">						paging = PageRequest.of(page, size,Sort.by(&quot;location.regione&quot;,&quot;location.provincia&quot;,&quot;location.city&quot;).descending());</span>
+<span class="fc" id="L190">						pageEvents=eventRepository.findAllFuture(paging);</span>
+<span class="fc" id="L191">					}else { </span>
+<span class="nc" id="L192">						paging = PageRequest.of(page, size,Sort.by(&quot;dataOra&quot;).descending());</span>
+<span class="nc" id="L193">						pageEvents=eventRepository.findAllFuture(paging);</span>
+					}
+<span class="nc" id="L195">				}else {</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">					if(param.equalsIgnoreCase(&quot;dataOra&quot;)) {</span>
+<span class="nc" id="L197">						paging = PageRequest.of(page, size,Sort.by(&quot;dataOra&quot;).ascending());</span>
+<span class="nc" id="L198">						pageEvents=eventRepository.findAllFuture(paging);</span>
+<span class="nc bnc" id="L199" title="All 2 branches missed.">					}else if(param.equals(&quot;loc&quot;)) {</span>
+<span class="nc" id="L200">						paging = PageRequest.of(page, size,Sort.by(&quot;location.regione&quot;,&quot;location.provincia&quot;,&quot;location.city&quot;).ascending());</span>
+<span class="nc" id="L201">						pageEvents=eventRepository.findAllFuture(paging);</span>
+<span class="nc" id="L202">					}else {</span>
+<span class="nc" id="L203">						paging = PageRequest.of(page, size,Sort.by(&quot;dataOra&quot;).ascending());</span>
+<span class="nc" id="L204">						pageEvents=eventRepository.findAllFuture(paging);</span>
+					}
+				}
+			} 
+<span class="fc" id="L208">			events=pageEvents.getContent();	</span>
+<span class="fc bfc" id="L209" title="All 2 branches covered.">			if(events.isEmpty()) {</span>
+<span class="fc" id="L210">				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+			}
+<span class="fc" id="L212">			List&lt;EventResponse&gt; eventR= new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">			for(Event event: events) eventR.add(new EventResponse(event));</span>
+<span class="fc" id="L214">			Map&lt;String, Object&gt; response = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L215">			response.put(&quot;events&quot;, eventR);</span>
+<span class="fc" id="L216">		    response.put(&quot;currentPage&quot;, pageEvents.getNumber());</span>
+<span class="fc" id="L217">		    response.put(&quot;totalItems&quot;, pageEvents.getTotalElements());</span>
+<span class="fc" id="L218">		    response.put(&quot;totalPages&quot;, pageEvents.getTotalPages());</span>
+			
+<span class="fc" id="L220">			return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+<span class="nc" id="L221">		}catch(Exception e) {</span>
+<span class="nc" id="L222">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+	}
+
+	/**
+	 * Gets all events by data or interval of data.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param dataS the data string
+	 * @return the by data
+	 */
+	public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; getByData(int page, int size, String dataS) {
+		try {
+			Date dataI,dataF;
+<span class="fc" id="L237">			List&lt;Event&gt; events = new ArrayList&lt;&gt;(); </span>
+<span class="fc" id="L238">            Pageable paging = PageRequest.of(page, size,Sort.by(&quot;dataOra&quot;).ascending());</span>
+			Page&lt;Event&gt; pageEvents;
+<span class="fc bfc" id="L240" title="All 2 branches covered.">			if(dataS.contains(&quot;,&quot;)) {</span>
+<span class="fc" id="L241">				dataI=new SimpleDateFormat(&quot;yyyy-MM-dd&quot;).parse(dataS.split(&quot;,&quot;)[0]);</span>
+<span class="fc" id="L242">				dataF=new SimpleDateFormat(&quot;yyyy-MM-dd&quot;).parse(dataS.split(&quot;,&quot;)[1]);</span>
+<span class="fc" id="L243">				Calendar c = Calendar.getInstance(); </span>
+<span class="fc" id="L244">			    c.setTime(dataF); </span>
+<span class="fc" id="L245">			    c.add(Calendar.DATE, 1);</span>
+<span class="fc" id="L246">			    dataF = c.getTime();</span>
+<span class="fc" id="L247">			}else {</span>
+<span class="fc" id="L248">				Date data=new SimpleDateFormat(&quot;yyyy-MM-dd&quot;).parse(dataS) ;</span>
+<span class="fc" id="L249">				DateFormat formatter = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+<span class="fc" id="L250">			    dataI = formatter.parse(formatter.format(data));</span>
+<span class="fc" id="L251">			    Calendar c = Calendar.getInstance(); </span>
+<span class="fc" id="L252">			    c.setTime(dataI); </span>
+<span class="fc" id="L253">			    c.add(Calendar.DATE, 1);</span>
+<span class="fc" id="L254">			    dataF = c.getTime();</span>
+<span class="fc" id="L255">			    dataF = formatter.parse(formatter.format(dataF));</span>
+			}
+			
+<span class="fc" id="L258">			pageEvents=eventRepository.findByDataOraBetweenOrderByDataOraAsc(dataI, dataF,paging);</span>
+<span class="fc" id="L259">			events=pageEvents.getContent();</span>
+<span class="pc bpc" id="L260" title="1 of 2 branches missed.">	  	  if (events.isEmpty()) {</span>
+<span class="nc" id="L261">	  	    return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+	  	  } 
+<span class="fc" id="L263">	  	  List&lt;EventResponse&gt; eventR= new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L264" title="All 2 branches covered.">		  for(Event event: events) eventR.add(new EventResponse(event));</span>
+<span class="fc" id="L265">		  Map&lt;String, Object&gt; response = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L266">		  response.put(&quot;events&quot;, eventR);</span>
+<span class="fc" id="L267">		  response.put(&quot;currentPage&quot;, pageEvents.getNumber());</span>
+<span class="fc" id="L268">		  response.put(&quot;totalItems&quot;, pageEvents.getTotalElements());</span>
+<span class="fc" id="L269">		  response.put(&quot;totalPages&quot;, pageEvents.getTotalPages());</span>
+<span class="fc" id="L270">		  return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+	  	  
+<span class="nc" id="L272">		}catch(Exception e) {</span>
+<span class="nc" id="L273">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+	}
+
+
+	/**
+	 * Gets all events by location.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param loc the location name
+	 * @param type the type of location (regione, provincia, city)
+	 * @return the all events by location
+	 */
+	public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; getByLoc(int page, int size, String loc, String type) {
+		try {
+<span class="fc" id="L289">			List&lt;Event&gt; events = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L290">			Pageable paging = PageRequest.of(page, size,Sort.by(&quot;dataOra&quot;).ascending());</span>
+			
+			Page&lt;Event&gt; pageEvents;
+<span class="pc bpc" id="L293" title="1 of 2 branches missed.">			if(type.equalsIgnoreCase(&quot;regione&quot;)) {</span>
+<span class="nc" id="L294">				pageEvents = eventRepository.findByLocationLike(&quot;location.regione&quot;,loc,paging);</span>
+<span class="pc bpc" id="L295" title="1 of 2 branches missed.">			}else if(type.equalsIgnoreCase(&quot;provincia&quot;)) {</span>
+<span class="fc" id="L296">				pageEvents = eventRepository.findByLocationLike(&quot;location.provincia&quot;,loc,paging);</span>
+<span class="pc bnc" id="L297" title="All 2 branches missed.">			}else if(type.equalsIgnoreCase(&quot;city&quot;)) {</span>
+<span class="nc" id="L298">				pageEvents = eventRepository.findByLocationLike(&quot;location.city&quot;,loc,paging);</span>
+<span class="nc" id="L299">			}else {</span>
+<span class="nc" id="L300">				pageEvents=eventRepository.findAll(paging);</span>
+			}
+<span class="fc" id="L302">			events=pageEvents.getContent();</span>
+<span class="pc bpc" id="L303" title="1 of 2 branches missed.">		  	if (events.isEmpty()) {</span>
+<span class="nc" id="L304">		  	    return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+		  	} 
+<span class="fc" id="L306">		  	List&lt;EventResponse&gt; eventR= new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L307" title="All 2 branches covered.">			for(Event event: events) eventR.add(new EventResponse(event));</span>
+<span class="fc" id="L308">			Map&lt;String, Object&gt; response = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L309">			response.put(&quot;events&quot;, eventR);</span>
+<span class="fc" id="L310">			response.put(&quot;currentPage&quot;, pageEvents.getNumber());</span>
+<span class="fc" id="L311">			response.put(&quot;totalItems&quot;, pageEvents.getTotalElements());</span>
+<span class="fc" id="L312">			response.put(&quot;totalPages&quot;, pageEvents.getTotalPages());</span>
+<span class="fc" id="L313">			return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+		  	  
+<span class="nc" id="L315">		}catch(Exception e) {</span>
+<span class="nc" id="L316">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+	}
+
+
+	/**
+	 * Gets all events by preferences.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param idPref the id pref
+	 * @param locInclude the loc include
+	 * @return the by preferences
+	 */
+	public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; getByPreferences(int page, int size, String idPref, boolean locInclude) {
+<span class="fc" id="L331">		Optional&lt;User&gt; userData = userRepository.findById(idPref);</span>
+
+<span class="pc bpc" id="L333" title="1 of 2 branches missed.">	  	  if (userData.isPresent()) {</span>
+<span class="pc bpc" id="L334" title="1 of 2 branches missed.">	  		  if(!locInclude)</span>
+<span class="fc" id="L335">	  			  return this.getByTypes(page, size, Arrays.toString(userData.get().getTypes()).replace(&quot; &quot;, &quot;&quot;).replace(&quot;[&quot;, &quot;&quot;).replace(&quot;]&quot;, &quot;&quot;));</span>
+	  		  else
+<span class="nc" id="L337">	  			  return this.getByTypesWithLoc(page, size, userData.get().getTypes(),userData.get().getResidence().getRegione());</span>
+	  	  } else {
+<span class="nc" id="L339">	  	    return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+	  	  }
+		
+	}
+
+
+	/**
+	 * Gets the by types with location associated (equal region of user and event).
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param types the types of events
+	 * @param region the region in which search
+	 * @return the by types with location
+	 */
+	private ResponseEntity&lt;Map&lt;String, Object&gt;&gt; getByTypesWithLoc(int page, int size, String[] types, String region) {
+		try {
+<span class="nc" id="L356">			Pageable paging = PageRequest.of(page, size,Sort.by(&quot;dataOra&quot;).ascending());</span>
+			Page&lt;Event&gt; pageEvents;
+<span class="nc" id="L358">			pageEvents = eventRepository.findByTypesAndLocationRegioneLike(types,region,paging);</span>
+<span class="nc" id="L359">			List&lt;Event&gt; events=pageEvents.getContent();</span>
+<span class="nc bnc" id="L360" title="All 2 branches missed.">		  	  if (events.isEmpty()) {</span>
+<span class="nc" id="L361">		  	    return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+		  	  } 
+<span class="nc" id="L363">		  	  List&lt;EventResponse&gt; eventR= new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L364" title="All 2 branches missed.">			  for(Event event: events) eventR.add(new EventResponse(event));</span>
+<span class="nc" id="L365">			  Map&lt;String, Object&gt; response = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L366">			  response.put(&quot;events&quot;, eventR);</span>
+<span class="nc" id="L367">			  response.put(&quot;currentPage&quot;, pageEvents.getNumber());</span>
+<span class="nc" id="L368">			  response.put(&quot;totalItems&quot;, pageEvents.getTotalElements());</span>
+<span class="nc" id="L369">			  response.put(&quot;totalPages&quot;, pageEvents.getTotalPages());</span>
+<span class="nc" id="L370">			  return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+			  
+<span class="nc" id="L372">			}catch(Exception e) {</span>
+<span class="nc" id="L373">				return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+			}
+	}
+
+
+	/**
+	 * Gets all events by types.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param type the types array
+	 * @return all event of a given types
+	 */
+	public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; getByTypes(int page, int size, String type) {
+		try {
+<span class="fc" id="L388">			String[] types=type.split(&quot;,&quot;);</span>
+<span class="fc" id="L389">			Pageable paging = PageRequest.of(page, size,Sort.by(&quot;dataOra&quot;).ascending());</span>
+			
+			Page&lt;Event&gt; pageEvents;
+<span class="fc" id="L392">			pageEvents = eventRepository.findByTypes(types,paging);</span>
+<span class="fc" id="L393">			List&lt;Event&gt; events=pageEvents.getContent();</span>
+<span class="pc bpc" id="L394" title="1 of 2 branches missed.">		  	  if (events.isEmpty()) {</span>
+<span class="nc" id="L395">		  	    return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+		  	  } 
+<span class="fc" id="L397">		  	  List&lt;EventResponse&gt; eventR= new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L398" title="All 2 branches covered.">			  for(Event event: events) eventR.add(new EventResponse(event));</span>
+<span class="fc" id="L399">			  Map&lt;String, Object&gt; response = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L400">			  response.put(&quot;events&quot;, eventR);</span>
+<span class="fc" id="L401">			  response.put(&quot;currentPage&quot;, pageEvents.getNumber());</span>
+<span class="fc" id="L402">			  response.put(&quot;totalItems&quot;, pageEvents.getTotalElements());</span>
+<span class="fc" id="L403">			  response.put(&quot;totalPages&quot;, pageEvents.getTotalPages());</span>
+<span class="fc" id="L404">			  return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+			  
+<span class="nc" id="L406">			}catch(Exception e) {</span>
+<span class="nc" id="L407">				return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+			}
+	}
+
+
+	/**
+	 * Gets all events by id manager.
+	 *
+	 * @param page the page
+	 * @param size the size
+	 * @param id the id manager
+	 * @return page required of size with the events
+	 */
+	public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; getByIdMan(int page, int size, String id) {
+		try {
+<span class="fc" id="L422">			Pageable paging = PageRequest.of(page, size,Sort.by(&quot;dataOra&quot;).ascending());</span>
+			Page&lt;Event&gt; pageEvents;
+<span class="fc" id="L424">			pageEvents=eventRepository.findByManagerId(new ObjectId(id),paging);</span>
+<span class="fc" id="L425">			List&lt;Event&gt; events=pageEvents.getContent();</span>
+<span class="fc bfc" id="L426" title="All 2 branches covered.">			if(events.isEmpty()) {</span>
+<span class="fc" id="L427">				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+			}
+<span class="fc" id="L429">			List&lt;EventResponse&gt; eventR= new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L430" title="All 2 branches covered.">			for(Event event: events) {</span>
+<span class="fc" id="L431">				eventR.add(new EventResponse(event));</span>
+			}
+<span class="fc" id="L433">			Map&lt;String, Object&gt; response = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L434">			response.put(&quot;events&quot;, eventR);</span>
+<span class="fc" id="L435">			response.put(&quot;currentPage&quot;, pageEvents.getNumber());</span>
+<span class="fc" id="L436">			response.put(&quot;totalItems&quot;, pageEvents.getTotalElements());</span>
+<span class="fc" id="L437">			response.put(&quot;totalPages&quot;, pageEvents.getTotalPages());</span>
+<span class="fc" id="L438">			return new ResponseEntity&lt;&gt;(response, HttpStatus.OK);</span>
+<span class="nc" id="L439">		}catch(Exception e) {</span>
+<span class="nc" id="L440">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+		}
+	}
+
+
+
+
+	
+
+	  /*
+	   * API OF EVENTS WITHOUT PAGE AND SIZE, BUT WITH SAME SIGNATURE
+	   *
+	public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getAll(String ordered, String param) {
+		try {
+			List&lt;Event&gt; events = new ArrayList&lt;&gt;();
+
+			if(param==null)
+					eventRepository.findAll().forEach(events::add);
+			else {
+				if(ordered.equalsIgnoreCase(&quot;desc&quot;)) {
+					if(param.equals(&quot;dataOra&quot;)) {
+						eventRepository.findAll(Sort.by(&quot;dataOra&quot;).descending()).forEach(events::add);
+					}else if(param.equals(&quot;loc&quot;)) {
+						eventRepository.findAll(Sort.by(&quot;location.regione&quot;,&quot;location.provincia&quot;,&quot;location.city&quot;).descending()).forEach(events::add);
+					}else { 
+						eventRepository.findAll(Sort.by(&quot;dataOra&quot;).descending()).forEach(events::add);
+					}
+				}else {
+					if(param.equalsIgnoreCase(&quot;dataOra&quot;)) {
+						eventRepository.findAll(Sort.by(&quot;dataOra&quot;).ascending()).forEach(events::add);
+					}else if(param.equals(&quot;loc&quot;)) {
+						eventRepository.findAll(Sort.by(&quot;location.regione&quot;,&quot;location.provincia&quot;,&quot;location.city&quot;).ascending()).forEach(events::add);
+					}else {
+						eventRepository.findAll(Sort.by(&quot;dataOra&quot;).ascending()).forEach(events::add);
+					}
+				}
+			} 
+			if(events.isEmpty()) {
+				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
+			}
+			List&lt;EventResponse&gt; eventR= new ArrayList&lt;&gt;();
+			for(Event event: events) eventR.add(new EventResponse(event));
+			return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity&lt;&gt;(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
+	public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getByData(String dataS) {
+		try {
+			Date dataI,dataF;
+			List&lt;Event&gt; events = new ArrayList&lt;&gt;(); 
+
+			if(dataS.contains(&quot;,&quot;)) {
+				dataI=new SimpleDateFormat(&quot;yyyy-MM-dd&quot;).parse(dataS.split(&quot;,&quot;)[0]);
+				dataF=new SimpleDateFormat(&quot;yyyy-MM-dd&quot;).parse(dataS.split(&quot;,&quot;)[1]);
+			}else {
+				Date data=new SimpleDateFormat(&quot;yyyy-MM-dd&quot;).parse(dataS) ;
+				DateFormat formatter = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);
+			    dataI = formatter.parse(formatter.format(data));
+			    Calendar c = Calendar.getInstance(); 
+			    c.setTime(dataI); 
+			    c.add(Calendar.DATE, 1);
+			    dataF = c.getTime();
+			    dataF = formatter.parse(formatter.format(dataF));
+			}
+			
+			eventRepository.findByDataOraBetweenOrderByDataOraAsc(dataI, dataF).forEach(events::add);
+
+	  	  if (events.isEmpty()) {
+	  	    return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
+	  	  } 
+	  	  List&lt;EventResponse&gt; eventR= new ArrayList&lt;&gt;();
+		  for(Event event: events) eventR.add(new EventResponse(event));
+		  return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);
+	  	  
+		}catch(Exception e) {
+			return new ResponseEntity&lt;&gt;(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
+	public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getByLoc(String loc, String type) {
+		try {
+			List&lt;Event&gt; events = new ArrayList&lt;&gt;();
+			if(type.equalsIgnoreCase(&quot;regione&quot;)) {
+				events = eventRepository.findByLocationLike(&quot;location.regione&quot;,loc);
+			}else if(type.equalsIgnoreCase(&quot;provincia&quot;)) {
+				events = eventRepository.findByLocationLike(&quot;location.provincia&quot;,loc);
+			}else if(type.equalsIgnoreCase(&quot;city&quot;)) {
+				events = eventRepository.findByLocationLike(&quot;location.city&quot;,loc);
+			}else {
+				System.out.println(&quot;else&quot;);
+				eventRepository.findAll().forEach(events::add);
+			}
+		  	if (events.isEmpty()) {
+		  	    return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
+		  	} 
+		  	List&lt;EventResponse&gt; eventR= new ArrayList&lt;&gt;();
+			for(Event event: events) eventR.add(new EventResponse(event));
+			return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);
+		  	  
+		}catch(Exception e) {
+			return new ResponseEntity&lt;&gt;(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
+	public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getByTypes(String type) {
+		try {
+			String[] types=type.split(&quot;,&quot;);
+			List&lt;Event&gt; events = eventRepository.findByTypes(types);
+
+		  	  if (events.isEmpty()) {
+		  	    return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
+		  	  } 
+		  	  List&lt;EventResponse&gt; eventR= new ArrayList&lt;&gt;();
+			  for(Event event: events) eventR.add(new EventResponse(event));
+			  return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);
+		  	  
+			}catch(Exception e) {
+				return new ResponseEntity&lt;&gt;(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+	}
+
+
+	public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getByPreferences(String pref) {
+		return this.getByTypes(pref);
+	}
+
+
+	public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getByIdMan(String id) {
+		try {
+
+			List&lt;Event&gt; events=eventRepository.findByManagerId(id);
+
+			if(events.isEmpty()) {
+				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
+			}
+			List&lt;EventResponse&gt; eventR= new ArrayList&lt;&gt;();
+			for(Event event: events) {
+				eventR.add(new EventResponse(event));
+			}
+			return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);
+		}catch(Exception e) {
+			return new ResponseEntity&lt;&gt;(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+
+	public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getEventsDisp() {
+		try {
+			Sort sort = Sort.by(&quot;freeSeat&quot;).ascending().and(Sort.by(&quot;title&quot;).ascending());
+			List&lt;Event&gt; events = eventRepository.findByfreeSeatGreaterThanZero(sort);
+		  	  if (events.isEmpty()) {
+		  	    return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);
+		  	  } 
+		  	  List&lt;EventResponse&gt; eventR= new ArrayList&lt;&gt;();
+			  for(Event event: events) eventR.add(new EventResponse(event));
+			  return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);
+		  	  
+			}catch(Exception e) {
+				return new ResponseEntity&lt;&gt;(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+	}
+	
+	*/
+
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

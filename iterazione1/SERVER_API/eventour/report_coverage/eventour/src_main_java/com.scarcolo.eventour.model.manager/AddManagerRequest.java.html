@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>AddManagerRequest.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.manager</a> &gt; <span class="el_source">AddManagerRequest.java</span></div><h1>AddManagerRequest.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.model.manager;
+
+
+import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scarcolo.eventour.model.Location;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AddManagerRequest.
+ */
+<span class="fc" id="L13">public class AddManagerRequest {</span>
+	
+	/** The name. */
+	@JsonProperty(&quot;name&quot;)
+	public String name;
+	
+	/** The surname. */
+	@JsonProperty(&quot;surname&quot;)
+	public String surname;
+	
+	/** The date of birth. */
+	@JsonProperty(&quot;dateOfBirth&quot;)
+	public LocalDate dateOfBirth;
+	
+	/** The residence. */
+	@JsonProperty(&quot;residence&quot;)
+	public Location residence;
+	
+	/** The codice PIVA. */
+	@JsonProperty(&quot;codicePIVA&quot;)
+	public String codicePIVA;
+	
+	/** The ragione sociale. */
+	@JsonProperty(&quot;ragioneSociale&quot;)
+	public String ragioneSociale;
+	
+	/** The mail. */
+	@JsonProperty(&quot;mail&quot;)
+	public String mail;
+	
+	/** The password. */
+	@JsonProperty(&quot;password&quot;)
+	public String password;
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

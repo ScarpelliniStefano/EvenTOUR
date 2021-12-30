@@ -67,7 +67,7 @@ class EventourApplication_ManagerTests {
 	}
 	
 	@Test
-	public void updateEvent() throws Exception {
+	public void updateManager() throws Exception {
 		AddManagerRequest request=new AddManagerRequest();
 		request.name="utenteNomeProva";
 		request.surname="utenteCognomeProva";

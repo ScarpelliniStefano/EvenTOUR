@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>MongoDBConfiguration.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (1) (30 dic 2021 11:07:32)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.configuration</a> &gt; <span class="el_source">MongoDBConfiguration.java</span></div><h1>MongoDBConfiguration.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.configuration;
+
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.core.MongoTemplate;
+
+
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MongoDBConfiguration.
+ */
+@Configuration
+<span class="fc" id="L19">public class MongoDBConfiguration {</span>
+
+
+	/** The database name. */
+	//database Name
+	//private String databaseName = &quot;evenTour&quot;;
+    //FOR TEST USE:
+<span class="fc" id="L26">	private String databaseName = &quot;evenTour_test&quot;;</span>
+
+    /** The user. */
+    //host
+<span class="fc" id="L30">    private String user = &quot;user_web&quot;;</span>
+    
+    /** The pass. */
+<span class="fc" id="L33">    private String pass = &quot;admin&quot;;</span>
+
+   
+    /**
+     * Mongo client.
+     *
+     * @return the mongo client
+     */
+    @Bean
+    public MongoClient mongoClient() {
+<span class="fc" id="L43">        ConnectionString connectionString = new ConnectionString(&quot;mongodb+srv://&quot; + user + &quot;:&quot; + pass + &quot;@cluster0.0ef9u.mongodb.net/&quot; + databaseName + &quot;?retryWrites=true&amp;w=majority&quot;);</span>
+<span class="fc" id="L44">        MongoClientSettings mongoClientSettings = MongoClientSettings.builder()</span>
+<span class="fc" id="L45">                .applyConnectionString(connectionString)</span>
+<span class="fc" id="L46">                .build();</span>
+
+<span class="fc" id="L48">        return MongoClients.create(mongoClientSettings);</span>
+    }
+    
+    /**
+     * Mongo template.
+     *
+     * @return the mongo template
+     * @throws Exception the exception
+     */
+    @Bean
+    public MongoTemplate mongoTemplate() throws Exception {
+<span class="fc" id="L59">        return new MongoTemplate(mongoClient(), databaseName);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (1) (30 dic 2021 11:07:32)</div></body></html>

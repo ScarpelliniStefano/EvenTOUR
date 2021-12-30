@@ -48,15 +48,23 @@ public class Admin{
 	 * @throws Exception the exception
 	 */
 	public Admin(AddAdminRequest request) throws Exception{
-		this.setMail(request.mail);
-		this.setPassword(request.password);
-		this.setName(request.name);
-		this.setSurname(request.surname);
-		this.setRole(request.role);
+		boolean res=Functionalities.isValidEmailAddress(request.mail);
+		if(res) {
+			this.mail=request.mail;
+		}else {
+			throw new AddressException();
+		}
+		this.password=request.password;
+		this.name=request.name;
+		this.surname=request.surname;
+		if(request.role.equalsIgnoreCase("admin")|| request.role.equalsIgnoreCase("moderator"))
+			this.role = request.role.toUpperCase();
+		else
+			this.role="HELPER";
 	}
 	
 	/**
-	 * Instantiates a new manager.
+	 * Instantiates a new admin.
 	 */
 	public Admin() {
 		super();

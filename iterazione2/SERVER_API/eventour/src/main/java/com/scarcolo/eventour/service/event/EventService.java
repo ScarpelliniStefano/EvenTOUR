@@ -22,6 +22,7 @@ import com.scarcolo.eventour.repository.user.UserRepository;
 import com.scarcolo.eventour.service.booking.BookingService;
 import com.scarcolo.eventour.service.ticketisp.TicketInspService;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -65,13 +66,12 @@ public class EventService {
      * @return the response entity with event created
      */
     public ResponseEntity<EventResponse> add(AddEventRequest request){
-        Event event = null;
-		try {
-			event = eventRepository.save(new Event(request));
-		} catch (Exception e) {
-			 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}
-        return new ResponseEntity<>(new EventResponse(event), HttpStatus.OK);
+    	try {
+    		Event event = eventRepository.save(new Event(request));
+    		return new ResponseEntity<>(new EventResponse(event), HttpStatus.OK);
+    	}catch(Exception ex) {
+    		return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+    	}
     }
 
   
@@ -141,22 +141,23 @@ public class EventService {
      *
      * @param id the id of event
      * @return true, if successful
+     * @throws IOException exception from inputstream file template
      */
-    public boolean delete(String id) {
+    public ResponseEntity<Boolean> delete(String id) throws IOException {
     	Optional<Event> optionalEvent = eventRepository.findById(id);
         if (optionalEvent.isEmpty()) {
-            return false;
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        boolean resp=bookingService.deleteAllBookingFromEvent(optionalEvent.get());
+        Boolean resp=bookingService.deleteAllBookingFromEvent(optionalEvent.get());
         if(resp==false) {
-        	System.out.println("error in deleting bookings");
+        	//System.out.println("error in deleting bookings");
         }
         resp=ticketService.deleteAllTicketsFromEvent(optionalEvent.get().getId());
         if(resp==false) {
-        	System.out.println("error in deleting tickets");
+        	//System.out.println("error in deleting tickets");
         }
         eventRepository.deleteById(optionalEvent.get().getId());
-        return true;
+        return new ResponseEntity<>(true,HttpStatus.OK);
     }
 
     /**
@@ -216,7 +217,7 @@ public class EventService {
 			
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -241,7 +242,7 @@ public class EventService {
 			    c.setTime(dataF); 
 			    c.add(Calendar.DATE, 1);
 			    dataF = c.getTime();
-				System.out.println(dataI+" "+dataF);
+				//System.out.println(dataI+" "+dataF);
 			}else {
 				Date data=new SimpleDateFormat("yyyy-MM-dd").parse(dataS) ;
 				DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -268,7 +269,7 @@ public class EventService {
 		  return new ResponseEntity<>(response, HttpStatus.OK);
 	  	  
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -311,7 +312,7 @@ public class EventService {
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		  	  
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -353,7 +354,7 @@ public class EventService {
 		try {
 			Pageable paging = PageRequest.of(page, size,Sort.by("dataOra").ascending());
 			Page<Event> pageEvents;
-			pageEvents = eventRepository.findByTypesAndLocation_RegioneLike(types,region,paging);
+			pageEvents = eventRepository.findByTypesAndLocationRegioneLike(types,region,paging);
 			List<Event> events=pageEvents.getContent();
 		  	  if (events.isEmpty()) {
 		  	    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -368,7 +369,7 @@ public class EventService {
 			  return new ResponseEntity<>(response, HttpStatus.OK);
 			  
 			}catch(Exception e) {
-				return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 	}
 
@@ -402,7 +403,7 @@ public class EventService {
 			  return new ResponseEntity<>(response, HttpStatus.OK);
 			  
 			}catch(Exception e) {
-				return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 	}
 
@@ -435,7 +436,7 @@ public class EventService {
 			response.put("totalPages", pageEvents.getTotalPages());
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

@@ -152,8 +152,9 @@ public class Functionalities {
 	 *
 	 * @param input the input string
 	 * @return the md 5
+	 * @throws NoSuchAlgorithmException md5 library non present
 	 */
-	public static String getMd5(String input)
+	public static String getMd5(String input) throws NoSuchAlgorithmException
     {
         try {
   
@@ -177,7 +178,7 @@ public class Functionalities {
   
         // For specifying wrong message digest algorithms
         catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
+            throw e;
         }
     }
 	
@@ -247,10 +248,8 @@ public class Functionalities {
 	 * @return the air distance
 	 */
 	public static Double distance(Double lat1, Double lng1, Double lat2, Double lng2) {
-		lat1=lat1*Math.PI/180;
-		lat2=lat2*Math.PI/180;
-		lng1=lng1*Math.PI/180;
-		lng2=lng2*Math.PI/180;
-		return 6372.795477598 * Math.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lng1-lng2));
+		Double[] pointA= {lat1*Math.PI/180,lng1*Math.PI/180};
+		Double[] pointB= {lat2*Math.PI/180,lng2*Math.PI/180};
+		return 6372.795477598 * Math.acos(Math.sin(pointA[0]) * Math.sin(pointB[0]) + Math.cos(pointA[0]) * Math.cos(pointB[0]) * Math.cos(pointA[1]-pointB[1]));
 	}
 }

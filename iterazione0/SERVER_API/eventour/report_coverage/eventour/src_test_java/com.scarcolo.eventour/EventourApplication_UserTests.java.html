@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventourApplication_UserTests.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (1) (30 dic 2021 11:07:32)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour</a> &gt; <span class="el_source">EventourApplication_UserTests.java</span></div><h1>EventourApplication_UserTests.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour;
+
+
+
+import org.junit.jupiter.api.Test;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.scarcolo.eventour.model.AccountRequest;
+import com.scarcolo.eventour.model.AccountResponse;
+import static org.junit.Assert.assertEquals;
+import java.util.LinkedHashMap;
+
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+<span class="fc" id="L21">class EventourApplication_UserTests {</span>
+	@LocalServerPort
+	private int port;
+
+	@Autowired
+	private TestRestTemplate restTemplate;
+	
+	@Test
+	public void getAccountOfUser() throws Exception {
+<span class="fc" id="L30">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L31">		request.username=&quot;Colombano72@hotmail.com&quot;;</span>
+<span class="fc" id="L32">		request.password=&quot;yelukare&quot;;</span>
+<span class="fc" id="L33">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L34">				AccountResponse.class);</span>
+<span class="fc" id="L35">		assertEquals(response.getTypeUser(),&quot;User&quot;);</span>
+<span class="fc" id="L36">		LinkedHashMap&lt;String,String&gt; user = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L37">		user=LinkedHashMap.class.cast(response.getUser());</span>
+		//JSONObject jsonResp=new JSONObject(response.getUser().toString());
+		//UserResponse user=(UserResponse)response.getUser();
+<span class="fc" id="L40">		assertEquals(user.get(&quot;id&quot;), &quot;61a0a933bce0e98fbb2d999d&quot;);</span>
+<span class="fc" id="L41">	}</span>
+	
+	@Test
+	public void getAccountOfManager() throws Exception {
+<span class="fc" id="L45">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L46">		request.username=&quot;Vera_Nucci@libero.it&quot;;</span>
+<span class="fc" id="L47">		request.password=&quot;fanomuge&quot;;</span>
+<span class="fc" id="L48">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L49">				AccountResponse.class);</span>
+<span class="fc" id="L50">		assertEquals(response.getTypeUser(),&quot;Manager&quot;);</span>
+<span class="fc" id="L51">		LinkedHashMap&lt;String,String&gt; user = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L52">		user=LinkedHashMap.class.cast(response.getUser());</span>
+		//JSONObject jsonResp=new JSONObject(response.getUser().toString());
+		//UserResponse user=(UserResponse)response.getUser();
+<span class="fc" id="L55">		assertEquals(user.get(&quot;id&quot;), &quot;61a0a0eeb5f9b12d06e95240&quot;);</span>
+<span class="fc" id="L56">	}</span>
+	
+	@Test
+	public void getAccountOfTicket() throws Exception {
+<span class="fc" id="L60">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L61">		request.username=&quot;TI-379-7253&quot;;</span>
+<span class="fc" id="L62">		request.password=&quot;vosipowo&quot;;</span>
+<span class="fc" id="L63">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L64">				AccountResponse.class);</span>
+<span class="fc" id="L65">		assertEquals(response.getTypeUser(),&quot;TicketInsp&quot;);</span>
+<span class="fc" id="L66">		LinkedHashMap&lt;String,String&gt; user = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L67">		user=LinkedHashMap.class.cast(response.getUser());</span>
+		//JSONObject jsonResp=new JSONObject(response.getUser().toString());
+		//UserResponse user=(UserResponse)response.getUser();
+<span class="fc" id="L70">		assertEquals(user.get(&quot;id&quot;), &quot;61a0b05abce0e98fbb2dad3e&quot;);</span>
+<span class="fc" id="L71">	}</span>
+	
+	@Test
+	public void getAccountOfUserErr() throws Exception {
+<span class="fc" id="L75">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L76">		request.username=&quot;Colombano74@hotmail.com&quot;;</span>
+<span class="fc" id="L77">		request.password=&quot;yelukare&quot;;</span>
+<span class="fc" id="L78">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L79">				AccountResponse.class);</span>
+<span class="fc" id="L80">		assertEquals(response.getTypeUser(),&quot;NONE&quot;);</span>
+<span class="fc" id="L81">		String stringErr=String.class.cast(response.getUser());</span>
+<span class="fc" id="L82">		assertEquals(stringErr, &quot;ERROR. unregistered user&quot;);</span>
+		
+<span class="fc" id="L84">		request=new AccountRequest();</span>
+<span class="fc" id="L85">		request.username=&quot;Colombano72@hotmail.com&quot;;</span>
+<span class="fc" id="L86">		request.password=&quot;yelukare2&quot;;</span>
+<span class="fc" id="L87">		response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L88">				AccountResponse.class);</span>
+<span class="fc" id="L89">		assertEquals(response.getTypeUser(),&quot;User&quot;);</span>
+<span class="fc" id="L90">		stringErr=String.class.cast(response.getUser());</span>
+<span class="fc" id="L91">		assertEquals(stringErr, &quot;ERROR. invalid password&quot;);</span>
+<span class="fc" id="L92">	}</span>
+	
+	@Test
+	public void getAccountOfManagerErr() throws Exception {
+<span class="fc" id="L96">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L97">		request.username=&quot;Vera_Nucci2@libero.it&quot;;</span>
+<span class="fc" id="L98">		request.password=&quot;fanomuge&quot;;</span>
+<span class="fc" id="L99">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L100">				AccountResponse.class);</span>
+<span class="fc" id="L101">		assertEquals(response.getTypeUser(),&quot;NONE&quot;);</span>
+<span class="fc" id="L102">		String stringErr=String.class.cast(response.getUser());</span>
+<span class="fc" id="L103">		assertEquals(stringErr, &quot;ERROR. unregistered user&quot;);</span>
+		
+<span class="fc" id="L105">		request=new AccountRequest();</span>
+<span class="fc" id="L106">		request.username=&quot;Vera_Nucci@libero.it&quot;;</span>
+<span class="fc" id="L107">		request.password=&quot;fanomuge2&quot;;</span>
+<span class="fc" id="L108">		response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L109">				AccountResponse.class);</span>
+<span class="fc" id="L110">		assertEquals(response.getTypeUser(),&quot;Manager&quot;);</span>
+<span class="fc" id="L111">		stringErr=String.class.cast(response.getUser());</span>
+<span class="fc" id="L112">		assertEquals(stringErr, &quot;ERROR. invalid password&quot;);</span>
+<span class="fc" id="L113">	}</span>
+	
+	@Test
+	public void getAccountOfTicketErr() throws Exception {
+<span class="fc" id="L117">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L118">		request.username=&quot;TI-379-7252&quot;;</span>
+<span class="fc" id="L119">		request.password=&quot;vosipowo&quot;;</span>
+<span class="fc" id="L120">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L121">				AccountResponse.class);</span>
+<span class="fc" id="L122">		assertEquals(response.getTypeUser(),&quot;NONE&quot;);</span>
+<span class="fc" id="L123">		String stringErr=String.class.cast(response.getUser());</span>
+<span class="fc" id="L124">		assertEquals(stringErr, &quot;ERROR. unregistered ticket inspector&quot;);</span>
+		
+<span class="fc" id="L126">		request=new AccountRequest();</span>
+<span class="fc" id="L127">		request.username=&quot;TI-379-7253&quot;;</span>
+<span class="fc" id="L128">		request.password=&quot;vosipowo2&quot;;</span>
+<span class="fc" id="L129">		response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L130">				AccountResponse.class);</span>
+<span class="fc" id="L131">		assertEquals(response.getTypeUser(),&quot;TicketInsp&quot;);</span>
+<span class="fc" id="L132">		stringErr=String.class.cast(response.getUser());</span>
+<span class="fc" id="L133">		assertEquals(stringErr, &quot;ERROR. invalid password&quot;);</span>
+<span class="fc" id="L134">	}</span>
+	
+	@Test
+	public void getAccountNoCompileErr() throws Exception {
+<span class="fc" id="L138">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L139">		request.username=&quot;&quot;;</span>
+<span class="fc" id="L140">		request.password=&quot;vosipowo&quot;;</span>
+<span class="fc" id="L141">		ResponseEntity&lt;AccountResponse&gt; response=this.restTemplate.postForEntity(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L142">				AccountResponse.class);</span>
+<span class="fc" id="L143">		assertEquals(response.getStatusCode(),HttpStatus.NO_CONTENT);</span>
+<span class="fc" id="L144">	}</span>
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (1) (30 dic 2021 11:07:32)</div></body></html>

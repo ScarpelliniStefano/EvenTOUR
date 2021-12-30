@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ManagerPlusResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.manager</a> &gt; <span class="el_source">ManagerPlusResponse.java</span></div><h1>ManagerPlusResponse.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package com.scarcolo.eventour.model.manager;
+
+
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scarcolo.eventour.model.request.Request;
+
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ManagerPlusResponse.
+ *
+ * @author stefa
+ */
+
+public class ManagerPlusResponse extends ManagerResponse{
+	
+	/** The activation. */
+	@JsonProperty(&quot;active&quot;)
+	private boolean active;
+	
+	/** The date of renewal. */
+	@JsonProperty(&quot;dateRenewal&quot;)
+	private Date dateRenewal;
+	
+
+	/**
+	 * Instantiates a new request response.
+	 *
+	 * @param manager the manager
+	 * @param req the req
+	 */
+	public ManagerPlusResponse(Manager manager, Request req){
+<span class="fc" id="L38">		super(manager);</span>
+<span class="fc" id="L39">		this.active=req.isActive();</span>
+<span class="fc" id="L40">		this.dateRenewal=req.getDateRenewal();</span>
+<span class="fc" id="L41">	}</span>
+
+
+	/**
+	 * Checks if is active.
+	 *
+	 * @return true, if is active
+	 */
+	public boolean isActive() {
+<span class="fc" id="L50">		return active;</span>
+	}
+
+
+	/**
+	 * Sets the active.
+	 *
+	 * @param active the new active
+	 */
+	public void setActive(boolean active) {
+<span class="nc" id="L60">		this.active = active;</span>
+<span class="nc" id="L61">	}</span>
+
+
+	/**
+	 * Gets the date renewal.
+	 *
+	 * @return the date renewal
+	 */
+	public Date getDateRenewal() {
+<span class="fc" id="L70">		return dateRenewal;</span>
+	}
+
+
+	/**
+	 * Sets the date renewal.
+	 *
+	 * @param dateRenewal the new date renewal
+	 */
+	public void setDateRenewal(Date dateRenewal) {
+<span class="nc" id="L80">		this.dateRenewal = dateRenewal;</span>
+<span class="nc" id="L81">	}</span>
+
+	
+	
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>

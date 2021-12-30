@@ -124,13 +124,13 @@ public class AdminService {
      * @param id the id
      * @return true, if successful
      */
-    public boolean delete(String id) {
+    public ResponseEntity<Boolean> delete(String id) {
         Optional<Admin> optionalAdmin = adminRepository.findById(id);
         if (optionalAdmin.isEmpty()) {
-            return false;
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         adminRepository.deleteById(optionalAdmin.get().getId().toString());
-        return true;
+        return new ResponseEntity<>(true,HttpStatus.OK);
     }
 
 	/**
@@ -149,7 +149,7 @@ public class AdminService {
 			for(Admin admin: admins) adminR.add(new AdminResponse(admin));
 			return new ResponseEntity<>(adminR, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -171,32 +171,34 @@ public class AdminService {
 			Double rating=0d;
 			
 			for(ReportAdmResponse resp : reportMongo) {
-				if(resp.getRequest()[0].isActive()) {
-					if(resp.getEvent()!=null) {
-						numEventi=resp.getEvent().length;
-						numFuturi=Functionalities.dataFutura(resp.getEvent());
-						mediaComes=0d;
-						rating=0d;
-						for(EventPlus event: resp.getEvent()) {
-							if(event.getDataOra().isBefore(LocalDateTime.now())) {
-								mediaComes+=(event.getTotSeat()-event.getFreeSeat())*1.0d/event.getTotSeat();
-								rating=(event.getReviewSum()*1.0d)/event.getReviewTot();
+				if(resp.getRequest().length>0) {
+					if(resp.getRequest()[0].isActive()) {
+						if(resp.getEvent()!=null && resp.getEvent().length>0) {
+							numEventi=resp.getEvent().length;
+							numFuturi=Functionalities.dataFutura(resp.getEvent());
+							mediaComes=0d;
+							rating=0d;
+							for(EventPlus event: resp.getEvent()) {
+								if(event.getDataOra().isBefore(LocalDateTime.now())) {
+									mediaComes+=(event.getTotSeat()-event.getFreeSeat())*1.0d/event.getTotSeat();
+									rating+=(event.getReviewSum()*1.0d)/event.getReviewTot();
+								}
+								
 							}
-							
+							rating=rating/(numEventi-numFuturi);
+							mediaComes=100*mediaComes/(numEventi-numFuturi);
 						}
-						rating=rating/(numEventi-numFuturi);
-						mediaComes=100*mediaComes/(numEventi-numFuturi);
+						Manager manager=new Manager(resp.getId(),resp.getName(), resp.getSurname(), resp.getMail(),resp.getCodicePIVA(),resp.getDateOfBirth(),
+								"", resp.getRagioneSociale(), resp.getResidence());
+						reportR.add(new AdminReportResponse(resp.getId(), resp.getCodicePIVA(), new ManagerPlusResponse(manager,resp.getRequest()[0]), numEventi, numFuturi, mediaComes, rating));
+					
 					}
-					Manager manager=new Manager(resp.getId(),resp.getName(), resp.getSurname(), resp.getMail(),resp.getCodicePIVA(),resp.getDateOfBirth(),
-							"", resp.getRagioneSociale(), resp.getResidence());
-					reportR.add(new AdminReportResponse(resp.getId(), resp.getCodicePIVA(), new ManagerPlusResponse(manager,resp.getRequest()[0]), numEventi, numFuturi, mediaComes, rating));
-				
 				}
 			}
 			return new ResponseEntity<>(reportR, HttpStatus.OK);
 		}catch(Exception e) {
-			System.out.println(e);
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -207,6 +209,7 @@ public class AdminService {
 	 * @return the admin from mail
 	 */
 	public ResponseEntity<AdminResponse> getAdminFromMail(String mail) {
+		if(!Functionalities.isValidEmailAddress(mail)) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		List<Admin> adminData = adminRepository.findByMail(mail);
 
 	  	  if (!adminData.isEmpty()) {
@@ -230,7 +233,8 @@ public class AdminService {
 			List<ManagerPlusResponse> reqManager=requestService.getAll(active,scadute);
 			return new ResponseEntity<>(reqManager, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 
@@ -249,9 +253,9 @@ public class AdminService {
 				requestService.update(reqManager);
 				return new ResponseEntity<>(true, HttpStatus.OK);
 			}
-			return new ResponseEntity<>(false, HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -286,7 +290,7 @@ public class AdminService {
 			}
 			return new ResponseEntity<>(false, HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
@@ -302,7 +306,7 @@ public class AdminService {
 			if(newsGood!=null) {
 				return new ResponseEntity<>(newsGood, HttpStatus.OK);
 			}
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		
 	}
 	
@@ -322,9 +326,9 @@ public class AdminService {
 				requestService.delete(id);
 				return new ResponseEntity<>(true, HttpStatus.OK);
 			}
-			return new ResponseEntity<>(false, HttpStatus.OK);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}catch(Exception e) {
-			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 

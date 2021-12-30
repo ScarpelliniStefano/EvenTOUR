@@ -167,7 +167,7 @@ public class AdminController {
     	 * @return true, if successful
     	 */
     	@DeleteMapping("/admins/{id}")
-	    public boolean deleteById(@RequestParam String id){
+	    public ResponseEntity<Boolean> deleteById(@PathVariable("id") String id){
 	        return adminService.delete(id);
 	    }
 

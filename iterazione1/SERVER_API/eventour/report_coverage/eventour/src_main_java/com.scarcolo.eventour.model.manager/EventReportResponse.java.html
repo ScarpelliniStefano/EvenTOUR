@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventReportResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.manager</a> &gt; <span class="el_source">EventReportResponse.java</span></div><h1>EventReportResponse.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.model.manager;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.scarcolo.eventour.model.event.EventResponse;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventReportResponse.
+ */
+public class EventReportResponse {
+	
+	/** The id. */
+	@JsonProperty(&quot;id&quot;)
+	private String  id;
+	
+	/** The title. */
+	@JsonProperty(&quot;title&quot;)
+	private String title;
+	
+	/** The details of event. */
+	@JsonProperty(&quot;eventDetails&quot;)
+	private EventResponse event;
+	
+	/** The occuped seat. */
+	@JsonProperty(&quot;occupedSeat&quot;)
+	private Integer occupedSeat;
+	
+	/** The comed people. */
+	@JsonProperty(&quot;comedPeople&quot;)
+	private Integer comedPeople;
+	
+	/** The estimate entrance. */
+	@JsonProperty(&quot;balance&quot;)
+	private Double saldo;
+	
+	/** The estimate loss. */
+	@JsonProperty(&quot;lost&quot;)
+	private Double perdita;
+
+	/**
+	 * Instantiates a new event report response.
+	 *
+	 * @param id the id
+	 * @param title the title
+	 * @param event the event
+	 * @param occupedSeat the occuped seat
+	 * @param comedPeople the comed people
+	 * @param saldo the saldo
+	 * @param perdita the perdita
+	 */
+	public EventReportResponse(String id, String title, EventResponse event, Integer occupedSeat, Integer comedPeople,
+			Double saldo, Double perdita) {
+<span class="fc" id="L53">		super();</span>
+<span class="fc" id="L54">		this.id = id;</span>
+<span class="fc" id="L55">		this.title = title;</span>
+<span class="fc" id="L56">		this.event = event;</span>
+<span class="fc" id="L57">		this.occupedSeat = occupedSeat;</span>
+<span class="fc" id="L58">		this.comedPeople = comedPeople;</span>
+<span class="fc" id="L59">		this.saldo = Math.round(saldo*100.0)/100.0;</span>
+<span class="fc" id="L60">		this.perdita = Math.round(perdita*100.0)/100.0;</span>
+<span class="fc" id="L61">	}</span>
+
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public String getId() {
+<span class="fc" id="L69">		return id;</span>
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	public void setId(String id) {
+<span class="nc" id="L78">		this.id = id;</span>
+<span class="nc" id="L79">	}</span>
+
+	/**
+	 * Gets the title.
+	 *
+	 * @return the title
+	 */
+	public String getTitle() {
+<span class="fc" id="L87">		return title;</span>
+	}
+
+	/**
+	 * Sets the title.
+	 *
+	 * @param title the new title
+	 */
+	public void setTitle(String title) {
+<span class="nc" id="L96">		this.title = title;</span>
+<span class="nc" id="L97">	}</span>
+
+	/**
+	 * Gets the event.
+	 *
+	 * @return the event
+	 */
+	public EventResponse getEvent() {
+<span class="fc" id="L105">		return event;</span>
+	}
+
+	/**
+	 * Sets the event.
+	 *
+	 * @param event the new event
+	 */
+	public void setEvent(EventResponse event) {
+<span class="nc" id="L114">		this.event = event;</span>
+<span class="nc" id="L115">	}</span>
+
+	/**
+	 * Gets the occuped seat.
+	 *
+	 * @return the occuped seat
+	 */
+	public Integer getOccupedSeat() {
+<span class="fc" id="L123">		return occupedSeat;</span>
+	}
+
+	/**
+	 * Sets the occuped seat.
+	 *
+	 * @param occupedSeat the new occuped seat
+	 */
+	public void setOccupedSeat(Integer occupedSeat) {
+<span class="nc" id="L132">		this.occupedSeat = occupedSeat;</span>
+<span class="nc" id="L133">	}</span>
+
+	/**
+	 * Gets the comed people.
+	 *
+	 * @return the comed people
+	 */
+	public Integer getComedPeople() {
+<span class="fc" id="L141">		return comedPeople;</span>
+	}
+
+	/**
+	 * Sets the comed people.
+	 *
+	 * @param comedPeople the new comed people
+	 */
+	public void setComedPeople(Integer comedPeople) {
+<span class="nc" id="L150">		this.comedPeople = comedPeople;</span>
+<span class="nc" id="L151">	}</span>
+
+	/**
+	 * Gets the saldo.
+	 *
+	 * @return the saldo
+	 */
+	public Double getSaldo() {
+<span class="fc" id="L159">		return saldo;</span>
+	}
+
+	/**
+	 * Sets the saldo.
+	 *
+	 * @param saldo the new saldo
+	 */
+	public void setSaldo(Double saldo) {
+<span class="nc" id="L168">		this.saldo = saldo;</span>
+<span class="nc" id="L169">	}</span>
+
+	/**
+	 * Gets the perdita.
+	 *
+	 * @return the perdita
+	 */
+	public Double getPerdita() {
+<span class="fc" id="L177">		return perdita;</span>
+	}
+
+	/**
+	 * Sets the perdita.
+	 *
+	 * @param perdita the new perdita
+	 */
+	public void setPerdita(Double perdita) {
+<span class="nc" id="L186">		this.perdita = perdita;</span>
+<span class="nc" id="L187">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

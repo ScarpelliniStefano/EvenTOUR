@@ -51,13 +51,13 @@ public class AdminReportResponse {
 	 */
 	public AdminReportResponse(String id, String codicePIVA, ManagerPlusResponse managerPlusResponse,
 			Integer numEventi, Integer numFuturi, Double mediaComes, Double rating) {
-		this.setId(id);
-		this.setCodicePIVA(codicePIVA);
-		this.setManager(managerPlusResponse);
-		this.setNumEventi(numEventi);
-		this.setComesMean(mediaComes);
-		this.setNumFuturi(numFuturi);
-		this.setRating(rating);
+		this.id=id;
+		this.codicePIVA=codicePIVA;
+		this.manager=managerPlusResponse;
+		this.numEventi=numEventi;
+		this.comesMean = Math.round(mediaComes*100.0)/100.0;
+		this.numFuturi=numFuturi;
+		this.rating = Math.round(rating*100.0)/100.0;
 	}
 
 

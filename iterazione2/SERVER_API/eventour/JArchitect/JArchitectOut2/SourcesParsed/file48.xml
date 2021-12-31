@@ -1,0 +1,20 @@
+<root><type name="com.scarcolo.eventour.model.request.Request" s="16"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="4" >
+<annotations>
+<annotation name="com.scarcolo.eventour.model.request.Document"/>
+</annotations><field name="id" s="24" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.request.Id"/></annotations></field>
+<field name="managerId" s="28" type="com.scarcolo.eventour.model.request.ObjectId" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.request.JsonProperty"/></annotations></field>
+<field name="active" s="32" type="boolean" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.request.JsonProperty"/></annotations></field>
+<field name="dateRenewal" s="36" type="java.util.Date" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.request.JsonProperty"/></annotations></field>
+<method name="Request(java.lang.String)" s="40" e="49" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.request.Request" s="managerId"/>
+<fm p="com.scarcolo.eventour.model.request.Request" s="active"/>
+<fm p="com.scarcolo.eventour.model.request.Request" s="dateRenewal"/>
+<metrics cc="1" cm="4" vars="0" loc="3"/></method><method name="Request()" s="51" e="56" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="()"><metrics cc="1" cm="2" vars="0" loc="1"/></method><method name="getId()" s="58" e="65" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setId(java.lang.String)" s="67" e="74" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.request.Request" s="id"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getManagerId()" s="76" e="83" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="com.scarcolo.eventour.model.request.ObjectId"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setManagerId(com.scarcolo.eventour.model.request.ObjectId)" s="85" e="92" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(com.scarcolo.eventour.model.request.ObjectId)"><params><param type="com.scarcolo.eventour.model.request.ObjectId"/></params><fm p="com.scarcolo.eventour.model.request.Request" s="managerId"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="isActive()" s="94" e="101" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="boolean"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setActive(boolean)" s="103" e="110" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(boolean)"><params><param type="boolean"/></params><fm p="com.scarcolo.eventour.model.request.Request" s="active"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getDateRenewal()" s="112" e="119" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.util.Date"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setDateRenewal(java.util.Date)" s="121" e="128" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.util.Date)"><params><param type="java.util.Date"/></params><fm p="com.scarcolo.eventour.model.request.Request" s="dateRenewal"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method>
+</type></root>

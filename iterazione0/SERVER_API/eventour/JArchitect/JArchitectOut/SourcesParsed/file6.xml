@@ -1,0 +1,23 @@
+<root><type name="com.scarcolo.eventour.functions.Functionalities" s="14"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="4" >
+<method name="isValidEmailAddress(java.lang.String)" s="21" e="36" n ="false" sta ="true" sync ="false" vis="public" return="boolean"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="javax.mail.internet.InternetAddress" s="InternetAddress(java.lang.String)"/>
+<dm p="javax.mail.internet.InternetAddress" s="validate()"/>
+<metrics cc="2" cm="5" vars="2" loc="6"/></method><method name="isValidCode(java.lang.String)" s="38" e="48" n ="false" sta ="true" sync ="false" vis="public" return="boolean"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><metrics cc="1" cm="5" vars="0" loc="1"/></method><method name="convertToDate(java.time.LocalDateTime)" s="50" e="60" n ="false" sta ="true" sync ="false" vis="public" return="java.util.Date"  signature="(java.time.LocalDateTime)"><params><param type="java.time.LocalDateTime"/></params><dm p="java.util.Date" s="from(java.time.Instant)"/>
+<dm p="java.time.chrono.ChronoZonedDateTime" s="toInstant()"/>
+<dm p="java.time.LocalDateTime" s="atZone(java.time.ZoneId)"/>
+<dm p="java.time.ZoneId" s="systemDefault()"/>
+<metrics cc="1" cm="5" vars="0" loc="1"/></method><method name="convertToDate(java.time.LocalDate)" s="62" e="72" n ="false" sta ="true" sync ="false" vis="public" return="java.util.Date"  signature="(java.time.LocalDate)"><params><param type="java.time.LocalDate"/></params><dm p="java.util.Date" s="from(java.time.Instant)"/>
+<dm p="java.time.chrono.ChronoZonedDateTime" s="toInstant()"/>
+<dm p="java.time.LocalDateTime" s="atZone(java.time.ZoneId)"/>
+<dm p="java.time.LocalDate" s="atStartOfDay()"/>
+<dm p="java.time.ZoneId" s="systemDefault()"/>
+<metrics cc="1" cm="5" vars="0" loc="1"/></method><method name="convertToLocalDate(java.util.Date)" s="74" e="83" n ="false" sta ="true" sync ="false" vis="public" return="java.time.LocalDate"  signature="(java.util.Date)"><params><param type="java.util.Date"/></params><dm p="java.util.Date" s="toInstant()"/>
+<dm p="java.time.ZoneId" s="systemDefault()"/>
+<metrics cc="1" cm="5" vars="0" loc="1"/></method><method name="convertToLocalDateTime(java.util.Date)" s="85" e="94" n ="false" sta ="true" sync ="false" vis="public" return="java.time.LocalDateTime"  signature="(java.util.Date)"><params><param type="java.util.Date"/></params><dm p="java.time.LocalDateTime" s="ofInstant(java.time.Instant,java.time.ZoneId)"/>
+<dm p="java.util.Date" s="toInstant()"/>
+<dm p="java.time.ZoneId" s="systemDefault()"/>
+<metrics cc="1" cm="5" vars="0" loc="1"/></method><method name="similType(java.lang.String,java.lang.String)" s="96" e="113" n ="false" sta ="true" sync ="false" vis="public" return="boolean"  signature="(java.lang.String,java.lang.String)"><params><param type="java.lang.String"/><param type="java.lang.String"/></params><dm p="java.lang.String" s="split(java.lang.String)"/>
+<dm p="java.lang.String" s="split(java.lang.String)"/>
+<dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<metrics cc="4" cm="6" vars="2" loc="8"/></method>
+</type></root>

@@ -1,0 +1,41 @@
+<root><type name="com.scarcolo.eventour.service.user.UserService" s="23"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<annotations>
+<annotation name="com.scarcolo.eventour.service.user.Service"/>
+</annotations><field name="userRepository" s="29" type="com.scarcolo.eventour.repository.user.UserRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.user.Autowired"/></annotations></field>
+<field name="managerRepository" s="33" type="com.scarcolo.eventour.repository.manager.ManagerRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.user.Autowired"/></annotations></field>
+<field name="ticketInspRepository" s="37" type="com.scarcolo.eventour.repository.ticketisp.TicketInspRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.user.Autowired"/></annotations></field>
+<method name="getAccount(java.lang.String,java.lang.String)" s="41" e="95" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.user.ResponseEntity"  signature="(java.lang.String,java.lang.String)"><params><param type="java.lang.String"/><param type="java.lang.String"/></params><dm p="java.lang.String" s="isEmpty()"/>
+<dm p="java.lang.String" s="contains(java.lang.CharSequence)"/>
+<dm p="com.scarcolo.eventour.repository.ticketisp.TicketInspRepository" s="findByCode(java.lang.String)"/>
+<dm p="java.util.List" s="size()"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="java.lang.String" s="equals(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="getPassword()"/>
+<dm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="TicketInspResponse(com.scarcolo.eventour.model.ticketinsp.TicketInsp)"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.repository.user.UserRepository" s="findByMail(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.repository.manager.ManagerRepository" s="findByMail(java.lang.String)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.lang.String" s="equals(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getPassword()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.model.user.UserResponse" s="UserResponse(com.scarcolo.eventour.model.user.User)"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="java.lang.String" s="equals(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="getPassword()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="ManagerResponse(com.scarcolo.eventour.model.manager.Manager)"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<metrics cc="12" cm="6" vars="4" loc="27"/></method>
+</type></root>

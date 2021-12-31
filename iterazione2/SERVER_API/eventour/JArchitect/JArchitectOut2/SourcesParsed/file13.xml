@@ -1,0 +1,5 @@
+<root><type name="com.scarcolo.eventour.functions.PartitaIVAFunctions" s="2"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="6" >
+<method name="normalize(java.lang.String)" s="11" e="20" n ="false" sta ="true" sync ="false" vis="public" return="java.lang.String"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="java.lang.String" s="replaceAll(java.lang.String,java.lang.String)"/>
+<metrics cc="1" cm="5" vars="0" loc="1"/></method><method name="format(java.lang.String)" s="22" e="30" n ="false" sta ="true" sync ="false" vis="public" return="java.lang.String"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.functions.PartitaIVAFunctions" s="normalize(java.lang.String)"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="validate(java.lang.String)" s="32" e="61" n ="false" sta ="true" sync ="false" vis="public" return="java.lang.String"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><metrics cc="1" cm="5" vars="0" loc="1"/></method>
+</type></root>

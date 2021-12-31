@@ -1,0 +1,54 @@
+<root><type name="com.scarcolo.eventour.model.user.UserResponse" s="14"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="4" >
+<field name="id" s="22" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.user.JsonProperty"/></annotations></field>
+<field name="name" s="26" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.user.JsonProperty"/></annotations></field>
+<field name="surname" s="30" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.user.JsonProperty"/></annotations></field>
+<field name="sex" s="34" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.user.JsonProperty"/></annotations></field>
+<field name="dateOfBirth" s="38" type="java.time.LocalDate" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.user.JsonProperty"/></annotations></field>
+<field name="residence" s="42" type="com.scarcolo.eventour.model.Location" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.user.JsonProperty"/></annotations></field>
+<field name="types" s="46" type="java.lang.String[]" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.user.JsonProperty"/></annotations></field>
+<field name="mail" s="50" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.user.JsonProperty"/></annotations></field>
+<field name="password" s="54" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.user.JsonProperty"/></annotations></field>
+<field name="username" s="58" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.user.JsonProperty"/></annotations></field>
+<method name="UserResponse(com.scarcolo.eventour.model.user.User)" s="62" e="78" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(com.scarcolo.eventour.model.user.User)"><params><param type="com.scarcolo.eventour.model.user.User"/></params><fm p="com.scarcolo.eventour.model.user.UserResponse" s="id"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getId()"/>
+<fm p="com.scarcolo.eventour.model.user.UserResponse" s="username"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getUsername()"/>
+<fm p="com.scarcolo.eventour.model.user.UserResponse" s="mail"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getEmail()"/>
+<fm p="com.scarcolo.eventour.model.user.UserResponse" s="password"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getPassword()"/>
+<fm p="com.scarcolo.eventour.model.user.UserResponse" s="name"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getName()"/>
+<fm p="com.scarcolo.eventour.model.user.UserResponse" s="surname"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getSurname()"/>
+<fm p="com.scarcolo.eventour.model.user.UserResponse" s="sex"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getSex()"/>
+<fm p="com.scarcolo.eventour.model.user.UserResponse" s="dateOfBirth"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getDateOfBirth()"/>
+<fm p="com.scarcolo.eventour.model.user.UserResponse" s="residence"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getResidence()"/>
+<fm p="com.scarcolo.eventour.model.user.UserResponse" s="types"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getTypes()"/>
+<metrics cc="1" cm="4" vars="0" loc="10"/></method><method name="UserResponse()" s="80" e="85" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="()"><metrics cc="1" cm="2" vars="0" loc="1"/></method><method name="getId()" s="88" e="95" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setId(java.lang.String)" s="97" e="104" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.user.UserResponse" s="id"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getUsername()" s="106" e="113" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setUsername(java.lang.String)" s="115" e="122" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.user.UserResponse" s="username"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getName()" s="124" e="131" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setName(java.lang.String)" s="133" e="140" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.user.UserResponse" s="name"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getSurname()" s="142" e="149" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setSurname(java.lang.String)" s="151" e="158" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.user.UserResponse" s="surname"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getSex()" s="160" e="167" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setSex(java.lang.String)" s="169" e="176" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.user.UserResponse" s="sex"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getDateOfBirth()" s="178" e="185" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.time.LocalDate"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setDateOfBirth(java.time.LocalDate)" s="187" e="194" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.time.LocalDate)"><params><param type="java.time.LocalDate"/></params><fm p="com.scarcolo.eventour.model.user.UserResponse" s="dateOfBirth"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getResidence()" s="196" e="203" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="com.scarcolo.eventour.model.Location"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setResidence(com.scarcolo.eventour.model.Location)" s="205" e="212" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(com.scarcolo.eventour.model.Location)"><params><param type="com.scarcolo.eventour.model.Location"/></params><fm p="com.scarcolo.eventour.model.user.UserResponse" s="residence"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getTypes()" s="214" e="221" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String[]"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setTypes(java.lang.String[])" s="223" e="230" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String[])"><params><param type="java.lang.String[]"/></params><fm p="com.scarcolo.eventour.model.user.UserResponse" s="types"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getMail()" s="232" e="239" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setMail(java.lang.String)" s="241" e="248" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.user.UserResponse" s="mail"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getPassword()" s="250" e="257" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setPassword(java.lang.String)" s="259" e="267" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.user.UserResponse" s="password"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="getMd5(java.lang.String)"/>
+<metrics cc="1" cm="5" vars="0" loc="1"/></method>
+</type></root>

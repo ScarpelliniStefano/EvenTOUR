@@ -1,0 +1,55 @@
+<root><type name="com.scarcolo.eventour.service.manager.RequestService" s="19"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<annotations>
+<annotation name="com.scarcolo.eventour.service.manager.Service"/>
+</annotations><field name="requestRepository" s="25" type="com.scarcolo.eventour.repository.manager.RequestRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.manager.Autowired"/></annotations></field>
+<field name="managerRepository" s="29" type="com.scarcolo.eventour.repository.manager.ManagerRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.manager.Autowired"/></annotations></field>
+<method name="add(com.scarcolo.eventour.model.request.Request)" s="33" e="41" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.model.request.Request"  signature="(com.scarcolo.eventour.model.request.Request)"><params><param type="com.scarcolo.eventour.model.request.Request"/></params><metrics cc="1" cm="5" vars="0" loc="1"/></method><method name="update(com.scarcolo.eventour.model.request.Request)" s="43" e="64" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.model.request.Request"  signature="(com.scarcolo.eventour.model.request.Request)"><params><param type="com.scarcolo.eventour.model.request.Request"/></params><dm p="com.scarcolo.eventour.model.request.Request" s="getId()"/>
+<dm p="java.util.Optional" s="get()"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="getDateRenewal()"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="getDateRenewal()"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="setDateRenewal(java.util.Date)"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="getDateRenewal()"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="isActive()"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="isActive()"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="setActive(boolean)"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="isActive()"/>
+<metrics cc="4" cm="5" vars="2" loc="10"/></method><method name="updateActivation(java.lang.String)" s="66" e="82" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.model.request.Request"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.repository.manager.RequestRepository" s="findByManagerId(java.lang.String)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="setActive(boolean)"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="isActive()"/>
+<metrics cc="2" cm="5" vars="2" loc="7"/></method><method name="updateRenewal(java.lang.String)" s="84" e="100" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.model.request.Request"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.repository.manager.RequestRepository" s="findByManagerId(java.lang.String)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="setDateRenewal(java.util.Date)"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="convertToDate(java.time.LocalDate)"/>
+<dm p="java.time.LocalDate" s="now()"/>
+<metrics cc="2" cm="5" vars="2" loc="7"/></method><method name="getById(java.lang.String)" s="103" e="117" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.model.request.Request"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.repository.manager.RequestRepository" s="findByManagerId(java.lang.String)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.List" s="get(int)"/>
+<metrics cc="2" cm="5" vars="1" loc="4"/></method><method name="delete(java.lang.String)" s="119" e="132" n ="false" sta ="false" sync ="false" vis="public" return="boolean"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.repository.manager.RequestRepository" s="findByManagerId(java.lang.String)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.lang.String" s="toString()"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="getId()"/>
+<dm p="java.util.List" s="get(int)"/>
+<metrics cc="2" cm="5" vars="1" loc="5"/></method><method name="getAll(boolean,boolean)" s="134" e="165" n ="false" sta ="false" sync ="false" vis="public" return="java.util.List"  signature="(boolean,boolean)"><params><param type="boolean"/><param type="boolean"/></params><dm p="java.util.ArrayList" s="ArrayList&lt;Request&gt;()"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="convertToDate(java.time.LocalDate)"/>
+<dm p="java.time.LocalDate" s="minusYears(long)"/>
+<dm p="java.time.LocalDate" s="now()"/>
+<dm p="com.scarcolo.eventour.repository.manager.RequestRepository" s="findAllActive(com.scarcolo.eventour.repository.manager.Sort)"/>
+<dm p="java.util.Collection" s="removeIf(java.util.function.Predicate)"/>
+<dm p="java.util.Date" s="after(java.util.Date)"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="getDateRenewal()"/>
+<dm p="java.util.Collection" s="removeIf(java.util.function.Predicate)"/>
+<dm p="java.util.Date" s="before(java.util.Date)"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="getDateRenewal()"/>
+<dm p="com.scarcolo.eventour.repository.manager.RequestRepository" s="findAllNotActive(com.scarcolo.eventour.repository.manager.Sort)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;ManagerPlusResponse&gt;()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.manager.ManagerPlusResponse" s="ManagerPlusResponse(com.scarcolo.eventour.model.manager.Manager,com.scarcolo.eventour.model.request.Request)"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="getManagerId()"/>
+<metrics cc="5" cm="6" vars="5" loc="14"/></method>
+</type></root>

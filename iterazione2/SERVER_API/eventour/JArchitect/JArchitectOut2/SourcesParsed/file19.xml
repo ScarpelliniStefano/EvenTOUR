@@ -1,0 +1,41 @@
+<root><type name="com.scarcolo.eventour.model.admin.Admin" s="15"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="4" >
+<annotations>
+<annotation name="com.scarcolo.eventour.model.admin.Document"/>
+</annotations><field name="id" s="23" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.Id"/></annotations></field>
+<field name="mail" s="27" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="password" s="30" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="name" s="33" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="surname" s="36" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="role" s="39" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<method name="Admin(com.scarcolo.eventour.model.admin.AddAdminRequest)" s="43" e="63" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(com.scarcolo.eventour.model.admin.AddAdminRequest)"><params><param type="com.scarcolo.eventour.model.admin.AddAdminRequest"/></params><dm p="com.scarcolo.eventour.functions.Functionalities" s="isValidEmailAddress(java.lang.String)"/>
+<fm p="com.scarcolo.eventour.model.admin.Admin" s="mail"/>
+<dm p="javax.mail.internet.AddressException" s="AddressException()"/>
+<fm p="com.scarcolo.eventour.model.admin.Admin" s="password"/>
+<fm p="com.scarcolo.eventour.model.admin.Admin" s="name"/>
+<fm p="com.scarcolo.eventour.model.admin.Admin" s="surname"/>
+<dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<fm p="com.scarcolo.eventour.model.admin.Admin" s="role"/>
+<dm p="java.lang.String" s="toUpperCase()"/>
+<fm p="com.scarcolo.eventour.model.admin.Admin" s="role"/>
+<metrics cc="4" cm="5" vars="1" loc="10"/></method><method name="Admin()" s="65" e="70" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="()"><metrics cc="1" cm="2" vars="0" loc="1"/></method><method name="getId()" s="72" e="79" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setId(java.lang.String)" s="81" e="88" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.admin.Admin" s="id"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getMail()" s="90" e="97" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setMail(java.lang.String)" s="99" e="112" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.functions.Functionalities" s="isValidEmailAddress(java.lang.String)"/>
+<fm p="com.scarcolo.eventour.model.admin.Admin" s="mail"/>
+<dm p="javax.mail.internet.AddressException" s="AddressException()"/>
+<metrics cc="2" cm="5" vars="1" loc="4"/></method><method name="getPassword()" s="114" e="121" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setPassword(java.lang.String)" s="123" e="130" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.admin.Admin" s="password"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getName()" s="132" e="139" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setName(java.lang.String)" s="141" e="148" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.admin.Admin" s="name"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getSurname()" s="150" e="157" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setSurname(java.lang.String)" s="159" e="166" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.admin.Admin" s="surname"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getRole()" s="168" e="175" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setRole(java.lang.String)" s="177" e="187" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<fm p="com.scarcolo.eventour.model.admin.Admin" s="role"/>
+<dm p="java.lang.String" s="toUpperCase()"/>
+<fm p="com.scarcolo.eventour.model.admin.Admin" s="role"/>
+<metrics cc="4" cm="4" vars="0" loc="3"/></method>
+</type></root>

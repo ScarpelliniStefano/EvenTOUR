@@ -1,0 +1,19 @@
+<root><type name="com.scarcolo.eventour.model.manager.AddManagerRequest" s="9"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<field name="name" s="14" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="surname" s="18" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="dateOfBirth" s="22" type="java.time.LocalDate" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="residence" s="26" type="com.scarcolo.eventour.model.Location" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="codicePIVA" s="30" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="ragioneSociale" s="34" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="mail" s="38" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="password" s="42" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+
+</type></root>

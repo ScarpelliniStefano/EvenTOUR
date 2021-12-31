@@ -1,0 +1,58 @@
+<root><type name="com.scarcolo.eventour.model.event.EventResponse" s="16"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="4" >
+<field name="id" s="24" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="title" s="28" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="description" s="32" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="location" s="36" type="com.scarcolo.eventour.model.Location" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="types" s="40" type="java.lang.String[]" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="dataOra" s="44" type="java.time.LocalDateTime" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="managerId" s="48" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="urlImage" s="52" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="totSeat" s="56" type="java.lang.Integer" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="freeSeat" s="60" type="java.lang.Integer" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="price" s="64" type="java.lang.Double" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<method name="EventResponse(com.scarcolo.eventour.model.event.Event)" s="68" e="85" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(com.scarcolo.eventour.model.event.Event)"><params><param type="com.scarcolo.eventour.model.event.Event"/></params><fm p="com.scarcolo.eventour.model.event.EventResponse" s="id"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getId()"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponse" s="title"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getTitle()"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponse" s="description"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getDescription()"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponse" s="location"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getLocation()"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponse" s="types"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getTypes()"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponse" s="dataOra"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getDataOra()"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponse" s="managerId"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getManagerId()"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponse" s="urlImage"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getUrlImage()"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponse" s="totSeat"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getTotSeat()"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponse" s="freeSeat"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getFreeSeat()"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponse" s="price"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getPrice()"/>
+<metrics cc="1" cm="4" vars="0" loc="11"/></method><method name="EventResponse()" s="87" e="91" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="()"><metrics cc="1" cm="2" vars="0" loc="0"/></method><method name="getId()" s="93" e="100" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setId(java.lang.String)" s="102" e="109" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.event.EventResponse" s="id"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getTitle()" s="111" e="118" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setTitle(java.lang.String)" s="120" e="127" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.event.EventResponse" s="title"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getDescription()" s="129" e="136" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setDescription(java.lang.String)" s="138" e="145" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.event.EventResponse" s="description"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getLocation()" s="147" e="154" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="com.scarcolo.eventour.model.Location"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setLocation(com.scarcolo.eventour.model.Location)" s="156" e="163" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(com.scarcolo.eventour.model.Location)"><params><param type="com.scarcolo.eventour.model.Location"/></params><fm p="com.scarcolo.eventour.model.event.EventResponse" s="location"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getTypes()" s="165" e="172" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String[]"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setTypes(java.lang.String[])" s="174" e="181" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String[])"><params><param type="java.lang.String[]"/></params><fm p="com.scarcolo.eventour.model.event.EventResponse" s="types"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getDataOra()" s="183" e="190" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.time.LocalDateTime"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setDataOra(java.time.LocalDateTime)" s="192" e="199" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.time.LocalDateTime)"><params><param type="java.time.LocalDateTime"/></params><fm p="com.scarcolo.eventour.model.event.EventResponse" s="dataOra"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getManagerId()" s="201" e="208" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setManagerId(java.lang.String)" s="210" e="217" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.event.EventResponse" s="managerId"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getUrlImage()" s="219" e="226" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setUrlImage(java.lang.String)" s="228" e="235" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.event.EventResponse" s="urlImage"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getTotSeat()" s="238" e="245" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Integer"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setTotSeat(java.lang.Integer)" s="247" e="254" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Integer)"><params><param type="java.lang.Integer"/></params><fm p="com.scarcolo.eventour.model.event.EventResponse" s="totSeat"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getFreeSeat()" s="256" e="263" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Integer"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setFreeSeat(java.lang.Integer)" s="265" e="272" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Integer)"><params><param type="java.lang.Integer"/></params><fm p="com.scarcolo.eventour.model.event.EventResponse" s="freeSeat"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getPrice()" s="274" e="281" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Double"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setPrice(java.lang.Double)" s="283" e="290" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Double)"><params><param type="java.lang.Double"/></params><fm p="com.scarcolo.eventour.model.event.EventResponse" s="price"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method>
+</type></root>

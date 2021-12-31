@@ -1,0 +1,11 @@
+<root><type name="com.scarcolo.eventour.controller.ticketisp.TicketInspController" s="16"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<annotations>
+<annotation name="com.scarcolo.eventour.controller.ticketisp.CrossOrigin"/>
+<annotation name="com.scarcolo.eventour.controller.ticketisp.RestController"/>
+<annotation name="com.scarcolo.eventour.controller.ticketisp.RequestMapping"/>
+</annotations><field name="ticketInspService" s="24" type="com.scarcolo.eventour.service.ticketisp.TicketInspService" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.controller.ticketisp.Autowired"/></annotations></field>
+<method name="getTicketInspByEventId(java.lang.String)" s="28" e="37" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.controller.ticketisp.ResponseEntity"  signature="(java.lang.String)"><annotations><annotation name="com.scarcolo.eventour.controller.ticketisp.GetMapping"/></annotations><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.service.ticketisp.TicketInspService" s="getByEventId(java.lang.String)"/>
+<metrics cc="1" cm="5" vars="0" loc="1"/></method><method name="getTicketInspById(java.lang.String)" s="40" e="49" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.controller.ticketisp.ResponseEntity"  signature="(java.lang.String)"><annotations><annotation name="com.scarcolo.eventour.controller.ticketisp.GetMapping"/></annotations><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.service.ticketisp.TicketInspService" s="getById(java.lang.String)"/>
+<metrics cc="1" cm="5" vars="0" loc="1"/></method>
+</type></root>

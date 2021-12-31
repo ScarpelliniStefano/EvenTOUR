@@ -1,0 +1,131 @@
+<root><type name="com.scarcolo.eventour.service.user.UserService" s="36"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<annotations>
+<annotation name="com.scarcolo.eventour.service.user.Service"/>
+</annotations><field name="userRepository" s="42" type="com.scarcolo.eventour.repository.user.UserRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.user.Autowired"/></annotations></field>
+<field name="managerRepository" s="46" type="com.scarcolo.eventour.repository.manager.ManagerRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.user.Autowired"/></annotations></field>
+<field name="ticketInspRepository" s="50" type="com.scarcolo.eventour.repository.ticketisp.TicketInspRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.user.Autowired"/></annotations></field>
+<field name="eventRepository" s="54" type="com.scarcolo.eventour.repository.event.EventRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.user.Autowired"/></annotations></field>
+<field name="bookingRepository" s="58" type="com.scarcolo.eventour.repository.booking.BookingRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.user.Autowired"/></annotations></field>
+<method name="add(com.scarcolo.eventour.model.user.AddUserRequest)" s="63" e="77" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.user.ResponseEntity"  signature="(com.scarcolo.eventour.model.user.AddUserRequest)"><params><param type="com.scarcolo.eventour.model.user.AddUserRequest"/></params><dm p="com.scarcolo.eventour.model.user.User" s="User(com.scarcolo.eventour.model.user.AddUserRequest)"/>
+<dm p="com.scarcolo.eventour.model.user.UserResponse" s="UserResponse(com.scarcolo.eventour.model.user.User)"/>
+<metrics cc="2" cm="5" vars="1" loc="5"/></method><method name="update(com.scarcolo.eventour.model.user.EditUserRequest)" s="80" e="101" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.user.ResponseEntity"  signature="(com.scarcolo.eventour.model.user.EditUserRequest)"><params><param type="com.scarcolo.eventour.model.user.EditUserRequest"/></params><dm p="java.util.Optional" s="get()"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="setResidence(com.scarcolo.eventour.model.Location)"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="setTypes(java.lang.String[])"/>
+<dm p="com.scarcolo.eventour.model.user.UserResponse" s="UserResponse(com.scarcolo.eventour.model.user.User)"/>
+<metrics cc="4" cm="6" vars="2" loc="10"/></method><method name="getById(java.lang.String)" s="104" e="118" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.user.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="java.util.Optional" s="isPresent()"/>
+<dm p="com.scarcolo.eventour.model.user.UserResponse" s="UserResponse(com.scarcolo.eventour.model.user.User)"/>
+<dm p="java.util.Optional" s="get()"/>
+<metrics cc="2" cm="5" vars="1" loc="4"/></method><method name="delete(java.lang.String)" s="121" e="134" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.user.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.model.user.User" s="getId()"/>
+<dm p="java.util.Optional" s="get()"/>
+<metrics cc="2" cm="5" vars="1" loc="5"/></method><method name="getAll()" s="136" e="154" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.user.ResponseEntity"  signature="()"><dm p="java.util.ArrayList" s="ArrayList&lt;User&gt;()"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;UserResponse&gt;()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.user.UserResponse" s="UserResponse(com.scarcolo.eventour.model.user.User)"/>
+<metrics cc="4" cm="4" vars="2" loc="10"/></method><method name="getAccount(java.lang.String,java.lang.String)" s="156" e="211" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.user.ResponseEntity"  signature="(java.lang.String,java.lang.String)"><params><param type="java.lang.String"/><param type="java.lang.String"/></params><dm p="java.lang.String" s="isEmpty()"/>
+<dm p="java.lang.String" s="contains(java.lang.CharSequence)"/>
+<dm p="com.scarcolo.eventour.repository.ticketisp.TicketInspRepository" s="findByCode(java.lang.String)"/>
+<dm p="java.util.List" s="size()"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="java.lang.String" s="equals(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="getMd5(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="getPassword()"/>
+<dm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="TicketInspResponse(com.scarcolo.eventour.model.ticketinsp.TicketInsp)"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.repository.user.UserRepository" s="findByMail(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.repository.manager.ManagerRepository" s="findByMail(java.lang.String)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.lang.String" s="equals(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="getMd5(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getPassword()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.model.user.UserResponse" s="UserResponse(com.scarcolo.eventour.model.user.User)"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="java.lang.String" s="equals(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="getMd5(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="getPassword()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="ManagerResponse(com.scarcolo.eventour.model.manager.Manager)"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.AccountResponse" s="AccountResponse(java.lang.String,java.lang.Object)"/>
+<metrics cc="12" cm="6" vars="4" loc="27"/></method><method name="getByIdUser(java.lang.String)" s="215" e="229" n ="false" sta ="false" sync ="false" vis="private" return="java.util.List"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.repository.booking.BookingRepository" s="findByUserId(java.lang.String)"/>
+<metrics cc="2" cm="5" vars="1" loc="4"/></method><method name="getEvenTour(java.lang.String,java.lang.Integer)" s="231" e="308" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.user.ResponseEntity"  signature="(java.lang.String,java.lang.Integer)"><params><param type="java.lang.String"/><param type="java.lang.Integer"/></params><dm p="java.util.Optional" s="isPresent()"/>
+<dm p="java.util.Optional" s="get()"/>
+<dm p="com.scarcolo.eventour.service.user.UserService" s="getByIdUser(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findByLocationRegioneLikeAndFreeSeatGreaterThanZero(java.lang.String,com.scarcolo.eventour.repository.event.Sort)"/>
+<dm p="com.scarcolo.eventour.model.Location" s="getRegione()"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getResidence()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;Event&gt;()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;Event&gt;()"/>
+<dm p="java.util.List" s="size()"/>
+<dm p="java.util.List" s="remove(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.event.EventBookedResponse" s="getEvent()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="java.time.LocalDateTime" s="toLocalDate()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getDataOra()"/>
+<dm p="com.scarcolo.eventour.model.event.EventBookedResponse" s="getEvent()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="java.util.Collection" s="removeIf(java.util.function.Predicate)"/>
+<dm p="java.time.LocalDate" s="isEqual(java.time.chrono.ChronoLocalDate)"/>
+<dm p="java.time.LocalDateTime" s="toLocalDate()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getDataOra()"/>
+<dm p="java.util.List" s="size()"/>
+<dm p="java.lang.Integer" s="compareTo(java.lang.Integer)"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;EventResponse&gt;()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.event.EventResponse" s="EventResponse(com.scarcolo.eventour.model.event.Event)"/>
+<f p="null" s="length"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getTypes()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getTypes()"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.time.LocalDate" s="isEqual(java.time.chrono.ChronoLocalDate)"/>
+<dm p="java.time.LocalDateTime" s="toLocalDate()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getDataOra()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="java.util.List" s="size()"/>
+<dm p="java.time.LocalDateTime" s="toLocalDate()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getDataOra()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<dm p="java.lang.String" s="toString()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getTypes()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="java.lang.String" s="toString()"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getId()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="java.util.List" s="size()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getId()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="java.util.List" s="remove(int)"/>
+<dm p="java.util.List" s="size()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="similType(java.lang.String,java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getTypes()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="java.util.List" s="size()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="orderByData(java.util.List)"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;EventResponse&gt;()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.event.EventResponse" s="EventResponse(com.scarcolo.eventour.model.event.Event)"/>
+<metrics cc="21" cm="6" vars="18" loc="46"/></method>
+</type></root>

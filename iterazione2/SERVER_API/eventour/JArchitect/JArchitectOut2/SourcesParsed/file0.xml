@@ -1,0 +1,5 @@
+<root><type name="com.scarcolo.eventour.EventourApplication" s="6"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<annotations>
+<annotation name="com.scarcolo.eventour.SpringBootApplication"/>
+</annotations><method name="main(java.lang.String[])" s="12" e="19" n ="false" sta ="true" sync ="false" vis="public" return="void"  signature="(java.lang.String[])"><params><param type="java.lang.String[]"/></params><metrics cc="1" cm="4" vars="0" loc="1"/></method>
+</type></root>

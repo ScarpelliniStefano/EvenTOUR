@@ -1,0 +1,7 @@
+<root><type name="com.scarcolo.eventour.model.user.EditUserRequest" s="6"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<extends>
+<extend  name="com.scarcolo.eventour.model.user.AddUserRequest"></extend></extends>
+<field name="id" s="11" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.user.JsonProperty"/></annotations></field>
+
+</type></root>

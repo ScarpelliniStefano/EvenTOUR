@@ -1,0 +1,15 @@
+<root><type name="com.scarcolo.eventour.model.manager.ManagerPlusResponse" s="13"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="4" >
+<extends>
+<extend  name="com.scarcolo.eventour.model.manager.ManagerResponse"></extend></extends>
+<field name="active" s="21" type="boolean" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="dateRenewal" s="25" type="java.util.Date" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<method name="ManagerPlusResponse(com.scarcolo.eventour.model.manager.Manager,com.scarcolo.eventour.model.request.Request)" s="30" e="40" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(com.scarcolo.eventour.model.manager.Manager,com.scarcolo.eventour.model.request.Request)"><params><param type="com.scarcolo.eventour.model.manager.Manager"/><param type="com.scarcolo.eventour.model.request.Request"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerPlusResponse" s="active"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="isActive()"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerPlusResponse" s="dateRenewal"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="getDateRenewal()"/>
+<metrics cc="1" cm="5" vars="0" loc="3"/></method><method name="isActive()" s="43" e="50" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="boolean"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setActive(boolean)" s="53" e="60" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(boolean)"><params><param type="boolean"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerPlusResponse" s="active"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getDateRenewal()" s="63" e="70" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.util.Date"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setDateRenewal(java.util.Date)" s="73" e="80" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.util.Date)"><params><param type="java.util.Date"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerPlusResponse" s="dateRenewal"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method>
+</type></root>

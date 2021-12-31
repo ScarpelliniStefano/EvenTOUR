@@ -1,0 +1,73 @@
+<root><type name="com.scarcolo.eventour.service.manager.ManagerService" s="31"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<annotations>
+<annotation name="com.scarcolo.eventour.service.manager.Service"/>
+</annotations><field name="managerRepository" s="37" type="com.scarcolo.eventour.repository.manager.ManagerRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.manager.Autowired"/></annotations></field>
+<field name="requestRepository" s="41" type="com.scarcolo.eventour.repository.manager.RequestRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.manager.Autowired"/></annotations></field>
+<field name="eventRepository" s="45" type="com.scarcolo.eventour.repository.event.EventRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.manager.Autowired"/></annotations></field>
+<method name="add(com.scarcolo.eventour.model.manager.AddManagerRequest)" s="49" e="68" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.manager.ResponseEntity"  signature="(com.scarcolo.eventour.model.manager.AddManagerRequest)"><params><param type="com.scarcolo.eventour.model.manager.AddManagerRequest"/></params><dm p="com.scarcolo.eventour.model.manager.Manager" s="Manager(com.scarcolo.eventour.model.manager.AddManagerRequest)"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="Request(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="getId()"/>
+<dm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="ManagerResponse(com.scarcolo.eventour.model.manager.Manager)"/>
+<metrics cc="3" cm="5" vars="1" loc="8"/></method><method name="update(com.scarcolo.eventour.model.manager.EditManagerRequest)" s="70" e="97" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.manager.ResponseEntity"  signature="(com.scarcolo.eventour.model.manager.EditManagerRequest)"><params><param type="com.scarcolo.eventour.model.manager.EditManagerRequest"/></params><dm p="java.util.Optional" s="get()"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="setResidence(com.scarcolo.eventour.model.Location)"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="setMail(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="setPassword(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="ManagerResponse(com.scarcolo.eventour.model.manager.Manager)"/>
+<metrics cc="6" cm="5" vars="3" loc="14"/></method><method name="getById(java.lang.String)" s="100" e="114" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.manager.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="java.util.Optional" s="isPresent()"/>
+<dm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="ManagerResponse(com.scarcolo.eventour.model.manager.Manager)"/>
+<dm p="java.util.Optional" s="get()"/>
+<metrics cc="2" cm="5" vars="1" loc="4"/></method><method name="delete(java.lang.String)" s="116" e="131" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.manager.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.model.manager.Manager" s="getId()"/>
+<dm p="java.util.Optional" s="get()"/>
+<dm p="java.util.List" s="get(int)"/>
+<dm p="com.scarcolo.eventour.repository.manager.RequestRepository" s="findByManagerId(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="getId()"/>
+<dm p="java.util.Optional" s="get()"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="getId()"/>
+<metrics cc="2" cm="5" vars="2" loc="7"/></method><method name="getAll()" s="133" e="151" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.manager.ResponseEntity"  signature="()"><dm p="java.util.ArrayList" s="ArrayList&lt;Manager&gt;()"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;ManagerResponse&gt;()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="ManagerResponse(com.scarcolo.eventour.model.manager.Manager)"/>
+<metrics cc="4" cm="4" vars="2" loc="10"/></method><method name="getManagerFromEvent(java.lang.String)" s="155" e="172" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.manager.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findManagerById(java.lang.String)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.List" s="get(int)"/>
+<metrics cc="3" cm="5" vars="2" loc="7"/></method><method name="getManagerReport(java.lang.String)" s="174" e="218" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.manager.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findReports(java.lang.String)"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;ManagerReportResponse&gt;()"/>
+<dm p="java.time.LocalDateTime" s="isBefore(java.time.chrono.ChronoLocalDateTime)"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getDataOra()"/>
+<dm p="java.time.LocalDateTime" s="now()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getTotSeat()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getFreeSeat()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getBooking()"/>
+<dm p="com.scarcolo.eventour.model.booking.Booking" s="getCome()"/>
+<dm p="com.scarcolo.eventour.model.booking.Booking" s="getPrenotedSeat()"/>
+<dm p="com.scarcolo.eventour.model.booking.Booking" s="getReview()"/>
+<dm p="com.scarcolo.eventour.model.booking.Booking" s="getReview()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getBooking()"/>
+<f p="null" s="length"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getBooking()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getPrice()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getFreeSeat()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getPrice()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="Event(java.lang.String,java.lang.String,java.lang.String,com.scarcolo.eventour.model.Location,java.lang.String[],java.time.LocalDateTime,java.lang.String,java.lang.String,java.lang.Integer,java.lang.Integer,java.lang.Double)"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getId()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getTitle()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getDescription()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getLocation()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getTypes()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getDataOra()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getManagerId()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getUrlImage()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getTotSeat()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getFreeSeat()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getPrice()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="ManagerReportResponse(java.lang.String,java.lang.String,com.scarcolo.eventour.model.event.EventResponse,java.lang.Integer,java.lang.Integer,java.lang.Double,java.lang.Double,java.lang.Double)"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getId()"/>
+<dm p="com.scarcolo.eventour.model.manager.ReportManResponse" s="getTitle()"/>
+<dm p="com.scarcolo.eventour.model.event.EventResponse" s="EventResponse(com.scarcolo.eventour.model.event.Event)"/>
+<metrics cc="9" cm="5" vars="10" loc="28"/></method>
+</type></root>

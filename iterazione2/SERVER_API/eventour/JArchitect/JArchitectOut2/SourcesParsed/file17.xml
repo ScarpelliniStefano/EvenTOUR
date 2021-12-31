@@ -1,0 +1,37 @@
+<root><type name="com.scarcolo.eventour.model.admin.AdminResponse" s="13"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="4" >
+<field name="id" s="21" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.JsonProperty"/></annotations></field>
+<field name="name" s="25" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.JsonProperty"/></annotations></field>
+<field name="surname" s="29" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.JsonProperty"/></annotations></field>
+<field name="mail" s="33" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.JsonProperty"/></annotations></field>
+<field name="password" s="37" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.JsonProperty"/></annotations></field>
+<field name="role" s="41" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.JsonProperty"/></annotations></field>
+<method name="AdminResponse(com.scarcolo.eventour.model.admin.Admin)" s="46" e="62" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(com.scarcolo.eventour.model.admin.Admin)"><params><param type="com.scarcolo.eventour.model.admin.Admin"/></params><fm p="com.scarcolo.eventour.model.admin.AdminResponse" s="id"/>
+<dm p="com.scarcolo.eventour.model.admin.Admin" s="getId()"/>
+<fm p="com.scarcolo.eventour.model.admin.AdminResponse" s="mail"/>
+<dm p="com.scarcolo.eventour.model.admin.Admin" s="getMail()"/>
+<fm p="com.scarcolo.eventour.model.admin.AdminResponse" s="password"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="getMd5(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.admin.Admin" s="getPassword()"/>
+<fm p="com.scarcolo.eventour.model.admin.AdminResponse" s="password"/>
+<dm p="com.scarcolo.eventour.model.admin.Admin" s="getPassword()"/>
+<fm p="com.scarcolo.eventour.model.admin.AdminResponse" s="name"/>
+<dm p="com.scarcolo.eventour.model.admin.Admin" s="getName()"/>
+<fm p="com.scarcolo.eventour.model.admin.AdminResponse" s="surname"/>
+<dm p="com.scarcolo.eventour.model.admin.Admin" s="getSurname()"/>
+<fm p="com.scarcolo.eventour.model.admin.AdminResponse" s="role"/>
+<dm p="com.scarcolo.eventour.model.admin.Admin" s="getRole()"/>
+<metrics cc="2" cm="4" vars="0" loc="8"/></method><method name="AdminResponse()" s="64" e="69" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="()"><metrics cc="1" cm="2" vars="0" loc="0"/></method><method name="getId()" s="71" e="78" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setId(java.lang.String)" s="80" e="87" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.admin.AdminResponse" s="id"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getName()" s="89" e="96" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setName(java.lang.String)" s="98" e="105" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.admin.AdminResponse" s="name"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getSurname()" s="107" e="114" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setSurname(java.lang.String)" s="116" e="123" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.admin.AdminResponse" s="surname"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getMail()" s="125" e="132" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setMail(java.lang.String)" s="134" e="141" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.admin.AdminResponse" s="mail"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getPassword()" s="143" e="150" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setPassword(java.lang.String)" s="152" e="164" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.admin.AdminResponse" s="password"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="getMd5(java.lang.String)"/>
+<metrics cc="2" cm="5" vars="0" loc="3"/></method><method name="getRole()" s="166" e="173" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setRole(java.lang.String)" s="175" e="182" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.admin.AdminResponse" s="role"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method>
+</type></root>

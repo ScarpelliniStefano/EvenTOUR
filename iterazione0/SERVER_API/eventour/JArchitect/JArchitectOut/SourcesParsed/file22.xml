@@ -1,0 +1,29 @@
+<root><type name="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="12"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="4" >
+<annotations>
+<annotation name="com.scarcolo.eventour.model.ticketinsp.Document"/>
+</annotations><field name="id" s="20" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.ticketinsp.Id"/></annotations></field>
+<field name="code" s="24" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="password" s="27" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="fullName" s="30" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="eventId" s="33" type="com.scarcolo.eventour.model.ticketinsp.ObjectId" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<method name="TicketInsp(com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest)" s="36" e="48" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest)"><params><param type="com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest"/></params><fm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="password"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="isValidCode(java.lang.String)"/>
+<dm p="java.lang.IllegalArgumentException" s="IllegalArgumentException()"/>
+<fm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="code"/>
+<fm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="eventId"/>
+<fm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="fullName"/>
+<metrics cc="2" cm="5" vars="0" loc="6"/></method><method name="TicketInsp()" s="50" e="55" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="()"><metrics cc="1" cm="2" vars="0" loc="1"/></method><method name="getId()" s="59" e="66" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setId(java.lang.String)" s="68" e="75" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="id"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getPassword()" s="77" e="84" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setPassword(java.lang.String)" s="86" e="93" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="password"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getFullName()" s="95" e="102" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setFullName(java.lang.String)" s="104" e="111" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="fullName"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getEventId()" s="113" e="120" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setEventId(java.lang.String)" s="122" e="129" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="eventId"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getCode()" s="131" e="138" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><f p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="code"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setCode(java.lang.String)" s="140" e="154" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.functions.Functionalities" s="isValidCode(java.lang.String)"/>
+<fm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="code"/>
+<dm p="java.lang.IllegalArgumentException" s="IllegalArgumentException()"/>
+<metrics cc="2" cm="5" vars="1" loc="4"/></method>
+</type></root>

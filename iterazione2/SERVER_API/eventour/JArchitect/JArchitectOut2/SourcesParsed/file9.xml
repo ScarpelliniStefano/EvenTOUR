@@ -1,0 +1,6 @@
+<root><type name="com.scarcolo.eventour.functions.BootstrapSingleton" s="6"  vis="public"  kind="class"  dep ="false" fin ="true" sta ="false" abs ="false" n ="false" c="2" >
+<field name="LOOKUP" s="11" type="java.util.Map" vis="public"  fin ="true" sta ="true" c="0" >
+</field>
+<dm p="java.util.HashMap" s="HashMap&lt;String,TypesE&gt;()"/>
+
+</type></root>

@@ -1,0 +1,10 @@
+<root><type name="com.scarcolo.eventour.controller.user.UserController" s="16"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<annotations>
+<annotation name="com.scarcolo.eventour.controller.user.CrossOrigin"/>
+<annotation name="com.scarcolo.eventour.controller.user.RestController"/>
+<annotation name="com.scarcolo.eventour.controller.user.RequestMapping"/>
+</annotations><field name="userService" s="24" type="com.scarcolo.eventour.service.user.UserService" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.controller.user.Autowired"/></annotations></field>
+<method name="getAccount(com.scarcolo.eventour.model.AccountRequest)" s="28" e="37" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.controller.user.ResponseEntity"  signature="(com.scarcolo.eventour.model.AccountRequest)"><annotations><annotation name="com.scarcolo.eventour.controller.user.PostMapping"/></annotations><params><param type="com.scarcolo.eventour.model.AccountRequest"/></params><dm p="com.scarcolo.eventour.service.user.UserService" s="getAccount(java.lang.String,java.lang.String)"/>
+<metrics cc="1" cm="5" vars="0" loc="1"/></method>
+</type></root>

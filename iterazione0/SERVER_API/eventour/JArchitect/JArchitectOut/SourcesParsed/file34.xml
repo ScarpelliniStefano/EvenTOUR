@@ -1,0 +1,15 @@
+<root><type name="com.scarcolo.eventour.service.ticketisp.TicketInspService" s="20"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<annotations>
+<annotation name="com.scarcolo.eventour.service.ticketisp.Service"/>
+</annotations><field name="ticketInspRepository" s="26" type="com.scarcolo.eventour.repository.ticketisp.TicketInspRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.ticketisp.Autowired"/></annotations></field>
+<method name="getById(java.lang.String)" s="31" e="45" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.ticketisp.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="java.util.Optional" s="isPresent()"/>
+<dm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="TicketInspResponse(com.scarcolo.eventour.model.ticketinsp.TicketInsp)"/>
+<dm p="java.util.Optional" s="get()"/>
+<metrics cc="2" cm="5" vars="1" loc="4"/></method><method name="getByEventId(java.lang.String)" s="48" e="68" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.ticketisp.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.repository.ticketisp.TicketInspRepository" s="findByEventId(com.scarcolo.eventour.repository.ticketisp.ObjectId)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;TicketInspResponse&gt;()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="TicketInspResponse(com.scarcolo.eventour.model.ticketinsp.TicketInsp)"/>
+<metrics cc="4" cm="5" vars="2" loc="9"/></method>
+</type></root>

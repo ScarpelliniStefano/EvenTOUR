@@ -1,0 +1,28 @@
+<root><type name="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="11"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="4" >
+<field name="id" s="19" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.ticketinsp.JsonProperty"/></annotations></field>
+<field name="code" s="23" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.ticketinsp.JsonProperty"/></annotations></field>
+<field name="eventId" s="27" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.ticketinsp.JsonProperty"/></annotations></field>
+<field name="fullName" s="31" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.ticketinsp.JsonProperty"/></annotations></field>
+<field name="password" s="35" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.ticketinsp.JsonProperty"/></annotations></field>
+<method name="TicketInspResponse(com.scarcolo.eventour.model.ticketinsp.TicketInsp)" s="39" e="50" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(com.scarcolo.eventour.model.ticketinsp.TicketInsp)"><params><param type="com.scarcolo.eventour.model.ticketinsp.TicketInsp"/></params><fm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="id"/>
+<dm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="getId()"/>
+<fm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="code"/>
+<dm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="getCode()"/>
+<fm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="eventId"/>
+<dm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="getEventId()"/>
+<fm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="fullName"/>
+<dm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="getFullName()"/>
+<fm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="password"/>
+<dm p="com.scarcolo.eventour.model.ticketinsp.TicketInsp" s="getPassword()"/>
+<metrics cc="1" cm="4" vars="0" loc="5"/></method><method name="TicketInspResponse()" s="52" e="56" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="()"><metrics cc="1" cm="2" vars="0" loc="0"/></method><method name="getId()" s="58" e="65" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setId(java.lang.String)" s="67" e="74" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="id"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getCode()" s="76" e="83" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setCode(java.lang.String)" s="85" e="92" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="code"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getEventId()" s="94" e="101" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setEventId(java.lang.String)" s="103" e="110" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="eventId"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getFullName()" s="112" e="119" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setFullName(java.lang.String)" s="121" e="128" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="fullName"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getPassword()" s="130" e="137" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setPassword(java.lang.String)" s="139" e="146" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" s="password"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method>
+</type></root>

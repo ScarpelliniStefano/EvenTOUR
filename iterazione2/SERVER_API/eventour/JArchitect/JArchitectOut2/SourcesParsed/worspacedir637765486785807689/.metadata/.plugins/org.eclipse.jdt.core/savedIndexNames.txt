@@ -1,0 +1,25 @@
+INDEX VERSION 1.131+C:\Users\stefa\Desktop\proveTest\jarch\JArchitectOut2\SourcesParsed\worspacedir637765486785807689\.metadata\.plugins\org.eclipse.jdt.core
+930703562.index
+14872356.index
+1817977300.index
+1377619784.index
+2761741089.index
+1192421016.index
+3532992305.index
+2776065247.index
+662355710.index
+2404973117.index
+3391230703.index
+579507161.index
+1425898426.index
+77376205.index
+2139862.index
+198703247.index
+82822309.index
+345994605.index
+1941294736.index
+562158699.index
+1215945507.index
+3624576263.index
+3485946093.index
+1956169876.index

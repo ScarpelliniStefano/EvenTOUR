@@ -1,0 +1,24 @@
+<root><type name="com.scarcolo.eventour.model.booking.Booking" s="16"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="3" >
+<annotations>
+<annotation name="com.scarcolo.eventour.model.booking.Document"/>
+</annotations><field name="id" s="23" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.booking.Id"/></annotations></field>
+<field name="userId" s="27" type="com.scarcolo.eventour.model.booking.ObjectId" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="eventId" s="30" type="com.scarcolo.eventour.model.booking.ObjectId" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="prenotedSeat" s="33" type="java.lang.Integer" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="come" s="36" type="java.lang.Boolean" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<method name="Booking(com.scarcolo.eventour.model.booking.AddBookingRequest)" s="39" e="49" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(com.scarcolo.eventour.model.booking.AddBookingRequest)"><params><param type="com.scarcolo.eventour.model.booking.AddBookingRequest"/></params><dm p="com.scarcolo.eventour.model.booking.Booking" s="setUserId(com.scarcolo.eventour.model.booking.ObjectId)"/>
+<dm p="com.scarcolo.eventour.model.booking.Booking" s="setEventId(com.scarcolo.eventour.model.booking.ObjectId)"/>
+<fm p="com.scarcolo.eventour.model.booking.Booking" s="prenotedSeat"/>
+<dm p="com.scarcolo.eventour.model.booking.Booking" s="setCome(java.lang.Boolean)"/>
+<metrics cc="2" cm="4" vars="0" loc="4"/></method><method name="Booking()" s="51" e="56" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="()"><metrics cc="1" cm="2" vars="0" loc="0"/></method><method name="getId()" s="58" e="65" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setId(java.lang.String)" s="67" e="74" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.booking.Booking" s="id"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getUserId()" s="76" e="83" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setUserId(com.scarcolo.eventour.model.booking.ObjectId)" s="85" e="92" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(com.scarcolo.eventour.model.booking.ObjectId)"><params><param type="com.scarcolo.eventour.model.booking.ObjectId"/></params><fm p="com.scarcolo.eventour.model.booking.Booking" s="userId"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getEventId()" s="94" e="101" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setEventId(com.scarcolo.eventour.model.booking.ObjectId)" s="103" e="110" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(com.scarcolo.eventour.model.booking.ObjectId)"><params><param type="com.scarcolo.eventour.model.booking.ObjectId"/></params><fm p="com.scarcolo.eventour.model.booking.Booking" s="eventId"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getPrenotedSeat()" s="112" e="119" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Integer"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setPrenotedSeat(java.lang.Integer)" s="121" e="128" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Integer)"><params><param type="java.lang.Integer"/></params><fm p="com.scarcolo.eventour.model.booking.Booking" s="prenotedSeat"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getCome()" s="130" e="137" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Boolean"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setCome(java.lang.Boolean)" s="139" e="146" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Boolean)"><params><param type="java.lang.Boolean"/></params><fm p="com.scarcolo.eventour.model.booking.Booking" s="come"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method>
+</type></root>

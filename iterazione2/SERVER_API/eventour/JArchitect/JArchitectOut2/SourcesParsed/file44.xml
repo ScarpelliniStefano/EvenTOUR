@@ -1,0 +1,5 @@
+<root><type name="com.scarcolo.eventour.model.manager.EventTick" s="6"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<field name="ticketInsps" s="11" type="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse[]" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+
+</type></root>

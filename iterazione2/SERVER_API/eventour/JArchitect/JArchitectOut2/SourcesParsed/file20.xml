@@ -1,0 +1,35 @@
+<root><type name="com.scarcolo.eventour.model.admin.AdminReportResponse" s="6"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<field name="id" s="11" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.JsonProperty"/></annotations></field>
+<field name="codicePIVA" s="15" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.JsonProperty"/></annotations></field>
+<field name="manager" s="19" type="com.scarcolo.eventour.model.manager.ManagerPlusResponse" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.JsonProperty"/></annotations></field>
+<field name="numEventi" s="23" type="java.lang.Integer" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.JsonProperty"/></annotations></field>
+<field name="numFuturi" s="27" type="java.lang.Integer" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.JsonProperty"/></annotations></field>
+<field name="comesMean" s="31" type="java.lang.Double" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.JsonProperty"/></annotations></field>
+<field name="rating" s="35" type="java.lang.Double" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.admin.JsonProperty"/></annotations></field>
+<method name="AdminReportResponse(java.lang.String,java.lang.String,com.scarcolo.eventour.model.manager.ManagerPlusResponse,java.lang.Integer,java.lang.Integer,java.lang.Double,java.lang.Double)" s="40" e="60" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(java.lang.String,java.lang.String,com.scarcolo.eventour.model.manager.ManagerPlusResponse,java.lang.Integer,java.lang.Integer,java.lang.Double,java.lang.Double)"><params><param type="java.lang.String"/><param type="java.lang.String"/><param type="com.scarcolo.eventour.model.manager.ManagerPlusResponse"/><param type="java.lang.Integer"/><param type="java.lang.Integer"/><param type="java.lang.Double"/><param type="java.lang.Double"/></params><fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="id"/>
+<fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="codicePIVA"/>
+<fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="manager"/>
+<fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="numEventi"/>
+<fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="comesMean"/>
+<dm p="java.lang.Math" s="round(double)"/>
+<fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="numFuturi"/>
+<fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="rating"/>
+<dm p="java.lang.Math" s="round(double)"/>
+<metrics cc="1" cm="10" vars="0" loc="7"/></method><method name="getId()" s="63" e="70" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setId(java.lang.String)" s="73" e="80" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="id"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getCodicePIVA()" s="83" e="90" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setCodicePIVA(java.lang.String)" s="93" e="100" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="codicePIVA"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getManager()" s="103" e="110" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="com.scarcolo.eventour.model.manager.ManagerPlusResponse"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setManager(com.scarcolo.eventour.model.manager.ManagerPlusResponse)" s="113" e="120" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(com.scarcolo.eventour.model.manager.ManagerPlusResponse)"><params><param type="com.scarcolo.eventour.model.manager.ManagerPlusResponse"/></params><fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="manager"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getNumEventi()" s="123" e="130" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Integer"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setNumEventi(java.lang.Integer)" s="133" e="140" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Integer)"><params><param type="java.lang.Integer"/></params><fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="numEventi"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getNumFuturi()" s="143" e="150" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Integer"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setNumFuturi(java.lang.Integer)" s="153" e="160" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Integer)"><params><param type="java.lang.Integer"/></params><fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="numFuturi"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getComesMean()" s="163" e="170" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Double"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setComesMean(java.lang.Double)" s="173" e="180" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Double)"><params><param type="java.lang.Double"/></params><fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="comesMean"/>
+<dm p="java.lang.Math" s="round(double)"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getRating()" s="183" e="190" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Double"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setRating(java.lang.Double)" s="193" e="200" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Double)"><params><param type="java.lang.Double"/></params><fm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="rating"/>
+<dm p="java.lang.Math" s="round(double)"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method>
+</type></root>

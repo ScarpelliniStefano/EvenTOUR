@@ -1,0 +1,99 @@
+<root><type name="com.scarcolo.eventour.service.admin.AdminService" s="32"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<annotations>
+<annotation name="com.scarcolo.eventour.service.admin.Service"/>
+</annotations><field name="adminRepository" s="38" type="com.scarcolo.eventour.repository.admin.AdminRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.admin.Autowired"/></annotations></field>
+<field name="managerRepository" s="42" type="com.scarcolo.eventour.repository.manager.ManagerRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.admin.Autowired"/></annotations></field>
+<field name="managerService" s="46" type="com.scarcolo.eventour.service.manager.ManagerService" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.admin.Autowired"/></annotations></field>
+<field name="userService" s="50" type="com.scarcolo.eventour.service.user.UserService" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.admin.Autowired"/></annotations></field>
+<field name="requestService" s="54" type="com.scarcolo.eventour.service.manager.RequestService" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.admin.Autowired"/></annotations></field>
+<method name="add(com.scarcolo.eventour.model.admin.AddAdminRequest)" s="59" e="73" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.admin.ResponseEntity"  signature="(com.scarcolo.eventour.model.admin.AddAdminRequest)"><params><param type="com.scarcolo.eventour.model.admin.AddAdminRequest"/></params><dm p="com.scarcolo.eventour.model.admin.Admin" s="Admin(com.scarcolo.eventour.model.admin.AddAdminRequest)"/>
+<dm p="com.scarcolo.eventour.model.admin.AdminResponse" s="AdminResponse(com.scarcolo.eventour.model.admin.Admin)"/>
+<metrics cc="2" cm="5" vars="1" loc="5"/></method><method name="update(com.scarcolo.eventour.model.admin.EditAdminRequest)" s="75" e="102" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.admin.ResponseEntity"  signature="(com.scarcolo.eventour.model.admin.EditAdminRequest)"><params><param type="com.scarcolo.eventour.model.admin.EditAdminRequest"/></params><dm p="java.util.Optional" s="get()"/>
+<dm p="com.scarcolo.eventour.model.admin.Admin" s="setName(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.admin.Admin" s="setSurname(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.admin.Admin" s="setPassword(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.admin.Admin" s="setRole(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.admin.AdminResponse" s="AdminResponse(com.scarcolo.eventour.model.admin.Admin)"/>
+<metrics cc="6" cm="5" vars="2" loc="14"/></method><method name="getById(java.lang.String)" s="104" e="118" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.admin.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="java.util.Optional" s="isPresent()"/>
+<dm p="com.scarcolo.eventour.model.admin.AdminResponse" s="AdminResponse(com.scarcolo.eventour.model.admin.Admin)"/>
+<dm p="java.util.Optional" s="get()"/>
+<metrics cc="2" cm="5" vars="1" loc="4"/></method><method name="delete(java.lang.String)" s="120" e="133" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.admin.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="java.lang.String" s="toString()"/>
+<dm p="com.scarcolo.eventour.model.admin.Admin" s="getId()"/>
+<dm p="java.util.Optional" s="get()"/>
+<metrics cc="2" cm="5" vars="1" loc="5"/></method><method name="getAll()" s="135" e="153" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.admin.ResponseEntity"  signature="()"><dm p="java.util.ArrayList" s="ArrayList&lt;Admin&gt;()"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;AdminResponse&gt;()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.admin.AdminResponse" s="AdminResponse(com.scarcolo.eventour.model.admin.Admin)"/>
+<metrics cc="4" cm="4" vars="2" loc="10"/></method><method name="getAdminReport()" s="156" e="202" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.admin.ResponseEntity"  signature="()"><dm p="com.scarcolo.eventour.repository.manager.ManagerRepository" s="findReports()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;AdminReportResponse&gt;()"/>
+<f p="null" s="length"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getRequest()"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="isActive()"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getRequest()"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getEvent()"/>
+<f p="null" s="length"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getEvent()"/>
+<fm p="null" s="length"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getEvent()"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="dataFutura(com.scarcolo.eventour.model.event.EventPlus[])"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getEvent()"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getEvent()"/>
+<dm p="java.time.LocalDateTime" s="isBefore(java.time.chrono.ChronoLocalDateTime)"/>
+<dm p="com.scarcolo.eventour.model.event.EventPlus" s="getDataOra()"/>
+<dm p="java.time.LocalDateTime" s="now()"/>
+<dm p="com.scarcolo.eventour.model.event.EventPlus" s="getTotSeat()"/>
+<dm p="com.scarcolo.eventour.model.event.EventPlus" s="getFreeSeat()"/>
+<dm p="com.scarcolo.eventour.model.event.EventPlus" s="getTotSeat()"/>
+<dm p="com.scarcolo.eventour.model.event.EventPlus" s="getReviewSum()"/>
+<dm p="com.scarcolo.eventour.model.event.EventPlus" s="getReviewTot()"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="Manager(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.util.Date,java.lang.String,java.lang.String,com.scarcolo.eventour.model.Location)"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getId()"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getName()"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getSurname()"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getMail()"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getCodicePIVA()"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getDateOfBirth()"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getRagioneSociale()"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getResidence()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.admin.AdminReportResponse" s="AdminReportResponse(java.lang.String,java.lang.String,com.scarcolo.eventour.model.manager.ManagerPlusResponse,java.lang.Integer,java.lang.Integer,java.lang.Double,java.lang.Double)"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getId()"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getCodicePIVA()"/>
+<dm p="com.scarcolo.eventour.model.manager.ManagerPlusResponse" s="ManagerPlusResponse(com.scarcolo.eventour.model.manager.Manager,com.scarcolo.eventour.model.request.Request)"/>
+<dm p="com.scarcolo.eventour.model.admin.ReportAdmResponse" s="getRequest()"/>
+<dm p="java.lang.Throwable" s="printStackTrace()"/>
+<metrics cc="9" cm="4" vars="8" loc="27"/></method><method name="getAdminFromMail(java.lang.String)" s="204" e="219" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.admin.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.functions.Functionalities" s="isValidEmailAddress(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.repository.admin.AdminRepository" s="findByMail(java.lang.String)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="com.scarcolo.eventour.model.admin.AdminResponse" s="AdminResponse(com.scarcolo.eventour.model.admin.Admin)"/>
+<dm p="java.util.List" s="get(int)"/>
+<metrics cc="3" cm="5" vars="1" loc="6"/></method><method name="getRequest(boolean,boolean)" s="223" e="238" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.admin.ResponseEntity"  signature="(boolean,boolean)"><params><param type="boolean"/><param type="boolean"/></params><dm p="com.scarcolo.eventour.service.manager.RequestService" s="getAll(boolean,boolean)"/>
+<dm p="java.lang.Throwable" s="printStackTrace()"/>
+<metrics cc="2" cm="6" vars="1" loc="5"/></method><method name="setRequestActive(java.lang.String)" s="240" e="259" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.admin.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.service.manager.RequestService" s="getById(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="setActive(boolean)"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="isActive()"/>
+<dm p="com.scarcolo.eventour.service.admin.AdminService" s="setRequestDate(com.scarcolo.eventour.model.request.Request)"/>
+<dm p="com.scarcolo.eventour.service.manager.RequestService" s="update(com.scarcolo.eventour.model.request.Request)"/>
+<metrics cc="3" cm="5" vars="1" loc="9"/></method><method name="setRequestDate(com.scarcolo.eventour.model.request.Request)" s="261" e="274" n ="false" sta ="false" sync ="false" vis="private" return="java.lang.Boolean"  signature="(com.scarcolo.eventour.model.request.Request)"><params><param type="com.scarcolo.eventour.model.request.Request"/></params><dm p="com.scarcolo.eventour.model.request.Request" s="setDateRenewal(java.util.Date)"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="convertToDate(java.time.LocalDate)"/>
+<dm p="java.time.LocalDate" s="now()"/>
+<dm p="com.scarcolo.eventour.service.manager.RequestService" s="update(com.scarcolo.eventour.model.request.Request)"/>
+<metrics cc="2" cm="5" vars="0" loc="5"/></method><method name="setRequestDateMalus(java.lang.String)" s="276" e="294" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.admin.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.service.manager.RequestService" s="getById(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.request.Request" s="setDateRenewal(java.util.Date)"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="convertToDate(java.time.LocalDateTime)"/>
+<dm p="java.time.LocalDate" s="atStartOfDay()"/>
+<dm p="java.time.LocalDate" s="minusYears(long)"/>
+<dm p="java.time.LocalDate" s="now()"/>
+<dm p="com.scarcolo.eventour.service.manager.RequestService" s="update(com.scarcolo.eventour.model.request.Request)"/>
+<metrics cc="3" cm="5" vars="1" loc="8"/></method><method name="sendNewsletter()" s="298" e="310" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.admin.ResponseEntity"  signature="()"><dm p="com.scarcolo.eventour.service.user.UserService" s="sendNews()"/>
+<metrics cc="2" cm="4" vars="1" loc="4"/></method><method name="removeRequest(java.lang.String)" s="314" e="332" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.admin.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.service.manager.RequestService" s="getById(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.service.manager.ManagerService" s="delete(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.service.manager.RequestService" s="delete(java.lang.String)"/>
+<metrics cc="3" cm="5" vars="1" loc="8"/></method>
+</type></root>

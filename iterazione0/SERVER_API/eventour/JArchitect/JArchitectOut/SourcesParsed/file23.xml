@@ -1,0 +1,11 @@
+<root><type name="com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest" s="7"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<field name="code" s="12" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.ticketinsp.JsonProperty"/></annotations></field>
+<field name="fullName" s="16" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.ticketinsp.JsonProperty"/></annotations></field>
+<field name="eventId" s="20" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.ticketinsp.JsonProperty"/></annotations></field>
+<field name="password" s="24" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.ticketinsp.JsonProperty"/></annotations></field>
+
+</type></root>

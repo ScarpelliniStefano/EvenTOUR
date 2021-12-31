@@ -1,0 +1,5 @@
+<root><type name="com.scarcolo.eventour.repository.user.UserRepository" s="16"  vis="public"  kind="interface"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<interfaces>
+<interface name="com.scarcolo.eventour.repository.user.MongoRepository"/>
+</interfaces><method name="findByMail(java.lang.String)" s="21" e="27" n ="false" sta ="false" sync ="false" vis="package" return="java.util.List"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><metrics cc="1" cm="5" vars="0" loc="0"/></method><method name="findbyUsername(java.lang.String)" s="29" e="36" n ="false" sta ="false" sync ="false" vis="package" return="java.util.List"  signature="(java.lang.String)"><annotations><annotation name="com.scarcolo.eventour.repository.user.Query"/></annotations><params><param type="java.lang.String"/></params><metrics cc="1" cm="5" vars="0" loc="0"/></method>
+</type></root>

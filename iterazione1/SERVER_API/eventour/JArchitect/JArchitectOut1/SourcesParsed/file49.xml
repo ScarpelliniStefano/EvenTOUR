@@ -1,0 +1,154 @@
+<root><type name="com.scarcolo.eventour.service.event.EventService" s="37"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<annotations>
+<annotation name="com.scarcolo.eventour.service.event.Service"/>
+</annotations><field name="eventRepository" s="43" type="com.scarcolo.eventour.repository.event.EventRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.event.Autowired"/></annotations></field>
+<field name="userRepository" s="47" type="com.scarcolo.eventour.repository.user.UserRepository" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.event.Autowired"/></annotations></field>
+<field name="bookingService" s="51" type="com.scarcolo.eventour.service.booking.BookingService" vis="package"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.event.Autowired"/></annotations></field>
+<field name="ticketService" s="55" type="com.scarcolo.eventour.service.ticketisp.TicketInspService" vis="package"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.service.event.Autowired"/></annotations></field>
+<method name="add(com.scarcolo.eventour.model.event.AddEventRequest)" s="60" e="75" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.event.ResponseEntity"  signature="(com.scarcolo.eventour.model.event.AddEventRequest)"><params><param type="com.scarcolo.eventour.model.event.AddEventRequest"/></params><dm p="com.scarcolo.eventour.model.event.Event" s="Event(com.scarcolo.eventour.model.event.AddEventRequest)"/>
+<dm p="com.scarcolo.eventour.model.event.EventResponse" s="EventResponse(com.scarcolo.eventour.model.event.Event)"/>
+<metrics cc="2" cm="6" vars="1" loc="4"/></method><method name="update(com.scarcolo.eventour.model.event.EditEventRequest)" s="78" e="117" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.event.ResponseEntity"  signature="(com.scarcolo.eventour.model.event.EditEventRequest)"><params><param type="com.scarcolo.eventour.model.event.EditEventRequest"/></params><dm p="java.util.Optional" s="get()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="setTitle(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="setDescription(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="setDataOra(java.util.Date)"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="convertToDate(java.time.LocalDateTime)"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="setLocation(com.scarcolo.eventour.model.Location)"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="setPrice(java.lang.Double)"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="setTotSeat(java.lang.Integer)"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="setUrlImage(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="setTypes(java.lang.String[])"/>
+<dm p="com.scarcolo.eventour.model.event.EventResponse" s="EventResponse(com.scarcolo.eventour.model.event.Event)"/>
+<metrics cc="10" cm="6" vars="2" loc="22"/></method><method name="getById(java.lang.String)" s="120" e="134" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.event.ResponseEntity"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="java.util.Optional" s="isPresent()"/>
+<dm p="com.scarcolo.eventour.model.event.EventResponse" s="EventResponse(com.scarcolo.eventour.model.event.Event)"/>
+<dm p="java.util.Optional" s="get()"/>
+<metrics cc="2" cm="5" vars="1" loc="4"/></method><method name="delete(java.lang.String)" s="139" e="162" n ="false" sta ="false" sync ="false" vis="public" return="boolean"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.service.booking.BookingService" s="deleteAllBookingFromEvent(com.scarcolo.eventour.model.event.Event)"/>
+<dm p="java.util.Optional" s="get()"/>
+<dm p="java.lang.IllegalArgumentException" s="IllegalArgumentException()"/>
+<dm p="com.scarcolo.eventour.service.ticketisp.TicketInspService" s="deleteAllTicketsFromEvent(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getId()"/>
+<dm p="java.util.Optional" s="get()"/>
+<dm p="java.lang.IllegalArgumentException" s="IllegalArgumentException()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getId()"/>
+<dm p="java.util.Optional" s="get()"/>
+<metrics cc="4" cm="5" vars="2" loc="11"/></method><method name="getAll(int,int,java.lang.String,java.lang.String)" s="164" e="223" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.event.ResponseEntity"  signature="(int,int,java.lang.String,java.lang.String)"><params><param type="int"/><param type="int"/><param type="java.lang.String"/><param type="java.lang.String"/></params><dm p="java.util.ArrayList" s="ArrayList&lt;Event&gt;()"/>
+<dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findAllFuture(com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<dm p="java.lang.String" s="equals(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findAllFuture(com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="java.lang.String" s="equals(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findAllFuture(com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findAllFuture(com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findAllFuture(com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="java.lang.String" s="equals(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findAllFuture(com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findAllFuture(com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;EventResponse&gt;()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.event.EventResponse" s="EventResponse(com.scarcolo.eventour.model.event.Event)"/>
+<dm p="java.util.HashMap" s="HashMap&lt;String,Object&gt;()"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<metrics cc="10" cm="8" vars="5" loc="36"/></method><method name="getByData(int,int,java.lang.String)" s="225" e="274" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.event.ResponseEntity"  signature="(int,int,java.lang.String)"><params><param type="int"/><param type="int"/><param type="java.lang.String"/></params><dm p="java.util.ArrayList" s="ArrayList&lt;Event&gt;()"/>
+<dm p="java.lang.String" s="contains(java.lang.CharSequence)"/>
+<dm p="java.text.DateFormat" s="parse(java.lang.String)"/>
+<dm p="java.text.SimpleDateFormat" s="SimpleDateFormat(java.lang.String)"/>
+<dm p="java.lang.String" s="split(java.lang.String)"/>
+<dm p="java.text.DateFormat" s="parse(java.lang.String)"/>
+<dm p="java.text.SimpleDateFormat" s="SimpleDateFormat(java.lang.String)"/>
+<dm p="java.lang.String" s="split(java.lang.String)"/>
+<dm p="java.util.Calendar" s="getInstance()"/>
+<dm p="java.util.Calendar" s="setTime(java.util.Date)"/>
+<dm p="java.util.Calendar" s="add(int,int)"/>
+<dm p="java.util.Calendar" s="getTime()"/>
+<dm p="java.text.DateFormat" s="parse(java.lang.String)"/>
+<dm p="java.text.SimpleDateFormat" s="SimpleDateFormat(java.lang.String)"/>
+<dm p="java.text.SimpleDateFormat" s="SimpleDateFormat(java.lang.String)"/>
+<dm p="java.text.DateFormat" s="parse(java.lang.String)"/>
+<dm p="java.text.DateFormat" s="format(java.util.Date)"/>
+<dm p="java.util.Calendar" s="getInstance()"/>
+<dm p="java.util.Calendar" s="setTime(java.util.Date)"/>
+<dm p="java.util.Calendar" s="add(int,int)"/>
+<dm p="java.util.Calendar" s="getTime()"/>
+<dm p="java.text.DateFormat" s="parse(java.lang.String)"/>
+<dm p="java.text.DateFormat" s="format(java.util.Date)"/>
+<dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findByDataOraBetweenOrderByDataOraAsc(java.util.Date,java.util.Date,com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;EventResponse&gt;()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.event.EventResponse" s="EventResponse(com.scarcolo.eventour.model.event.Event)"/>
+<dm p="java.util.HashMap" s="HashMap&lt;String,Object&gt;()"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<metrics cc="5" cm="7" vars="11" loc="34"/></method><method name="getByLoc(int,int,java.lang.String,java.lang.String)" s="277" e="317" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.event.ResponseEntity"  signature="(int,int,java.lang.String,java.lang.String)"><params><param type="int"/><param type="int"/><param type="java.lang.String"/><param type="java.lang.String"/></params><dm p="java.util.ArrayList" s="ArrayList&lt;Event&gt;()"/>
+<dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findByLocationLike(java.lang.String,java.lang.String,com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findByLocationLike(java.lang.String,java.lang.String,com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="java.lang.String" s="equalsIgnoreCase(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findByLocationLike(java.lang.String,java.lang.String,com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;EventResponse&gt;()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.event.EventResponse" s="EventResponse(com.scarcolo.eventour.model.event.Event)"/>
+<dm p="java.util.HashMap" s="HashMap&lt;String,Object&gt;()"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<metrics cc="7" cm="8" vars="5" loc="24"/></method><method name="getByPreferences(int,int,java.lang.String,boolean)" s="320" e="341" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.event.ResponseEntity"  signature="(int,int,java.lang.String,boolean)"><params><param type="int"/><param type="int"/><param type="java.lang.String"/><param type="boolean"/></params><dm p="java.util.Optional" s="isPresent()"/>
+<dm p="com.scarcolo.eventour.service.event.EventService" s="getByTypes(int,int,java.lang.String)"/>
+<dm p="java.lang.String" s="replace(java.lang.CharSequence,java.lang.CharSequence)"/>
+<dm p="java.lang.String" s="replace(java.lang.CharSequence,java.lang.CharSequence)"/>
+<dm p="java.lang.String" s="replace(java.lang.CharSequence,java.lang.CharSequence)"/>
+<dm p="java.util.Arrays" s="toString(java.lang.Object[])"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getTypes()"/>
+<dm p="java.util.Optional" s="get()"/>
+<dm p="com.scarcolo.eventour.service.event.EventService" s="getByTypesWithLoc(int,int,java.lang.String[],java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getTypes()"/>
+<dm p="java.util.Optional" s="get()"/>
+<dm p="com.scarcolo.eventour.model.Location" s="getRegione()"/>
+<dm p="com.scarcolo.eventour.model.user.User" s="getResidence()"/>
+<dm p="java.util.Optional" s="get()"/>
+<metrics cc="3" cm="8" vars="1" loc="6"/></method><method name="getByTypesWithLoc(int,int,java.lang.String[],java.lang.String)" s="344" e="374" n ="false" sta ="false" sync ="false" vis="private" return="com.scarcolo.eventour.service.event.ResponseEntity"  signature="(int,int,java.lang.String[],java.lang.String)"><params><param type="int"/><param type="int"/><param type="java.lang.String[]"/><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findByTypesAndLocationRegioneLike(java.lang.String[],java.lang.String,com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;EventResponse&gt;()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.event.EventResponse" s="EventResponse(com.scarcolo.eventour.model.event.Event)"/>
+<dm p="java.util.HashMap" s="HashMap&lt;String,Object&gt;()"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<metrics cc="4" cm="8" vars="5" loc="17"/></method><method name="getByTypes(int,int,java.lang.String)" s="377" e="408" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.event.ResponseEntity"  signature="(int,int,java.lang.String)"><params><param type="int"/><param type="int"/><param type="java.lang.String"/></params><dm p="java.lang.String" s="split(java.lang.String)"/>
+<dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findByTypes(java.lang.String[],com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;EventResponse&gt;()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.event.EventResponse" s="EventResponse(com.scarcolo.eventour.model.event.Event)"/>
+<dm p="java.util.HashMap" s="HashMap&lt;String,Object&gt;()"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<metrics cc="4" cm="7" vars="6" loc="18"/></method><method name="getByIdMan(int,int,java.lang.String)" s="411" e="441" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.service.event.ResponseEntity"  signature="(int,int,java.lang.String)"><params><param type="int"/><param type="int"/><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.repository.event.EventRepository" s="findByManagerId(com.scarcolo.eventour.repository.event.ObjectId,com.scarcolo.eventour.repository.event.Pageable)"/>
+<dm p="java.util.List" s="isEmpty()"/>
+<dm p="java.util.ArrayList" s="ArrayList&lt;EventResponse&gt;()"/>
+<dm p="java.util.List" s="add(java.lang.Object)"/>
+<dm p="com.scarcolo.eventour.model.event.EventResponse" s="EventResponse(com.scarcolo.eventour.model.event.Event)"/>
+<dm p="java.util.HashMap" s="HashMap&lt;String,Object&gt;()"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<metrics cc="4" cm="7" vars="5" loc="17"/></method>
+</type></root>

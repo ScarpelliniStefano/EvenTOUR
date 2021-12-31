@@ -1,0 +1,63 @@
+<root><type name="com.scarcolo.eventour.functions.TypesE" s="3"  vis="public"  kind="enum"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2">
+<field name="POP" s="8" type="int" vis="package"  c="0" >
+</field>
+<field name="DISCODANCE" s="11" type="int" vis="package"  c="0" >
+</field>
+<field name="ALTRO_COMM" s="14" type="int" vis="package"  c="0" >
+</field>
+<field name="HARD_ROCK" s="17" type="int" vis="package"  c="0" >
+</field>
+<field name="METAL" s="20" type="int" vis="package"  c="0" >
+</field>
+<field name="PUNK" s="23" type="int" vis="package"  c="0" >
+</field>
+<field name="ALTRO_ROCK" s="26" type="int" vis="package"  c="0" >
+</field>
+<field name="TRAP" s="29" type="int" vis="package"  c="0" >
+</field>
+<field name="FREESTYLE" s="32" type="int" vis="package"  c="0" >
+</field>
+<field name="BATTLE" s="35" type="int" vis="package"  c="0" >
+</field>
+<field name="LIRICA" s="38" type="int" vis="package"  c="0" >
+</field>
+<field name="ORCHESTRALE" s="41" type="int" vis="package"  c="0" >
+</field>
+<field name="STRUMENTALE" s="44" type="int" vis="package"  c="0" >
+</field>
+<field name="GOSPEL" s="47" type="int" vis="package"  c="0" >
+</field>
+<field name="MUSICAL" s="50" type="int" vis="package"  c="0" >
+</field>
+<field name="COMMEDIA" s="53" type="int" vis="package"  c="0" >
+</field>
+<field name="OPERA_LIRICA" s="56" type="int" vis="package"  c="0" >
+</field>
+<field name="PROSA" s="59" type="int" vis="package"  c="0" >
+</field>
+<field name="MAGIA_CABARET" s="62" type="int" vis="package"  c="0" >
+</field>
+<field name="TRAGEDIA" s="65" type="int" vis="package"  c="0" >
+</field>
+<field name="DANZA" s="68" type="int" vis="package"  c="0" >
+</field>
+<field name="SFILATA" s="71" type="int" vis="package"  c="0" >
+</field>
+<field name="PROIEZIONE_SPECIALE" s="74" type="int" vis="package"  c="0" >
+</field>
+<field name="EVENTO_SPORTIVO" s="77" type="int" vis="package"  c="0" >
+</field>
+<field name="FIRMACOPIE_PRESENTAZIONE" s="80" type="int" vis="package"  c="0" >
+</field>
+<field name="CIRCO" s="83" type="int" vis="package"  c="0" >
+</field>
+<field name="code" s="86" type="java.lang.String" vis="private"  fin ="true" sta ="false" c="0" >
+</field>
+<field name="name" s="89" type="java.lang.String" vis="private"  fin ="true" sta ="false" c="0" >
+</field>
+<method name="TypesE(java.lang.String,java.lang.String)" s="92" e="102" cons ="true" n ="false" sta ="false" sync ="false" vis="package" return="void"  signature="(java.lang.String,java.lang.String)"><params><param type="java.lang.String"/><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.functions.TypesE" s="code"/>
+<fm p="com.scarcolo.eventour.functions.TypesE" s="name"/>
+<dm p="java.util.Map" s="put(java.lang.Object,java.lang.Object)"/>
+<metrics cc="1" cm="5" vars="0" loc="3"/></method><method name="code()" s="104" e="109" n ="false" sta ="false" sync ="false" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="description()" s="111" e="116" n ="false" sta ="false" sync ="false" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="findCode(java.lang.String)" s="118" e="126" n ="false" sta ="true" sync ="false" vis="public" return="com.scarcolo.eventour.functions.TypesE"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="java.util.Map" s="get(java.lang.Object)"/>
+<metrics cc="1" cm="5" vars="0" loc="1"/></method>
+</type></root>

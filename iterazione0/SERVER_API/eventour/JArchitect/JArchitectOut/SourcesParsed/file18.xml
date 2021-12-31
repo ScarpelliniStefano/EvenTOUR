@@ -1,0 +1,49 @@
+<root><type name="com.scarcolo.eventour.model.manager.ManagerResponse" s="13"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="4" >
+<field name="id" s="21" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="name" s="25" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="surname" s="29" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="dateOfBirth" s="33" type="java.time.LocalDate" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="residence" s="37" type="com.scarcolo.eventour.model.Location" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="codicePIVA" s="41" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="ragioneSociale" s="45" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="mail" s="49" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="password" s="53" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<method name="ManagerResponse(com.scarcolo.eventour.model.manager.Manager)" s="58" e="74" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(com.scarcolo.eventour.model.manager.Manager)"><params><param type="com.scarcolo.eventour.model.manager.Manager"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="id"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="getId()"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="mail"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="getMail()"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="password"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="getPassword()"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="name"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="getName()"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="surname"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="getSurname()"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="dateOfBirth"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="convertToLocalDate(java.util.Date)"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="getDateOfBirth()"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="residence"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="getResidence()"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="codicePIVA"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="getCodicePIVA()"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="ragioneSociale"/>
+<dm p="com.scarcolo.eventour.model.manager.Manager" s="getRagioneSociale()"/>
+<metrics cc="1" cm="5" vars="0" loc="9"/></method><method name="getId()" s="76" e="83" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setId(java.lang.String)" s="85" e="92" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="id"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getName()" s="94" e="101" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setName(java.lang.String)" s="103" e="110" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="name"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getSurname()" s="112" e="119" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setSurname(java.lang.String)" s="121" e="128" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="surname"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getDateOfBirth()" s="130" e="137" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.time.LocalDate"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setDateOfBirth(java.time.LocalDate)" s="139" e="146" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.time.LocalDate)"><params><param type="java.time.LocalDate"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="dateOfBirth"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getResidence()" s="148" e="155" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="com.scarcolo.eventour.model.Location"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setResidence(com.scarcolo.eventour.model.Location)" s="157" e="164" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(com.scarcolo.eventour.model.Location)"><params><param type="com.scarcolo.eventour.model.Location"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="residence"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getCodicePIVA()" s="166" e="173" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setCodicePIVA(java.lang.String)" s="175" e="182" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="codicePIVA"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getRagioneSociale()" s="184" e="191" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setRagioneSociale(java.lang.String)" s="193" e="200" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="ragioneSociale"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getMail()" s="202" e="209" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setMail(java.lang.String)" s="211" e="218" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="mail"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getPassword()" s="220" e="227" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setPassword(java.lang.String)" s="229" e="236" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerResponse" s="password"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method>
+</type></root>

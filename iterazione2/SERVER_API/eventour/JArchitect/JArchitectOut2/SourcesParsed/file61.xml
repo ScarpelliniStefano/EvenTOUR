@@ -1,0 +1,5 @@
+<root><type name="com.scarcolo.eventour.repository.event.EventPlusRepository" s="6"  vis="public"  kind="interface"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<interfaces>
+<interface name="com.scarcolo.eventour.repository.event.MongoRepository"/>
+</interfaces>
+</type></root>

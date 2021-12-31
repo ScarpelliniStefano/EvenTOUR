@@ -1,0 +1,10 @@
+!SESSION 2021-12-31 11:53:48.029 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.13
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=it_IT
+Framework arguments:  -output C:\Users\stefa\Desktop\proveTest\jarch\JArchitectOut1\SourcesParsed
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\Users\stefa\Desktop\proveTest\jarch\JArchitectOut1\SourcesParsed/worspacedir637765484279173061 -clean -output C:\Users\stefa\Desktop\proveTest\jarch\JArchitectOut1\SourcesParsed
+
+!ENTRY org.eclipse.core.resources 2 10035 2021-12-31 11:53:50.681
+!MESSAGE The workspace will exit with unsaved changes in this session.

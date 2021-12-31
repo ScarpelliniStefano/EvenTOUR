@@ -1,0 +1,74 @@
+<root><type name="com.scarcolo.eventour.model.manager.Manager" s="21"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="4" >
+<annotations>
+<annotation name="com.scarcolo.eventour.model.manager.Document"/>
+</annotations><field name="id" s="29" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.Id"/></annotations></field>
+<field name="mail" s="33" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="password" s="36" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="name" s="39" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="surname" s="42" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="dateOfBirth" s="45" type="java.util.Date" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="residence" s="48" type="com.scarcolo.eventour.model.Location" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="codicePIVA" s="51" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="ragioneSociale" s="54" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<method name="Manager(com.scarcolo.eventour.model.manager.AddManagerRequest)" s="57" e="87" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(com.scarcolo.eventour.model.manager.AddManagerRequest)"><params><param type="com.scarcolo.eventour.model.manager.AddManagerRequest"/></params><dm p="com.scarcolo.eventour.functions.Functionalities" s="isValidEmailAddress(java.lang.String)"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="mail"/>
+<dm p="javax.mail.internet.AddressException" s="AddressException()"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="password"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="name"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="surname"/>
+<dm p="java.time.LocalDate" s="isBefore(java.time.chrono.ChronoLocalDate)"/>
+<dm p="java.time.LocalDate" s="now()"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="dateOfBirth"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="convertToDate(java.time.LocalDate)"/>
+<dm p="java.time.DateTimeException" s="DateTimeException(java.lang.String)"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="residence"/>
+<dm p="com.scarcolo.eventour.functions.PartitaIVAFunctions" s="validate(java.lang.String)"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="codicePIVA"/>
+<dm p="java.lang.IllegalArgumentException" s="IllegalArgumentException()"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="ragioneSociale"/>
+<metrics cc="4" cm="5" vars="2" loc="16"/></method><method name="Manager()" s="89" e="94" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="()"><metrics cc="1" cm="2" vars="0" loc="1"/></method><method name="Manager(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.util.Date,java.lang.String,java.lang.String,com.scarcolo.eventour.model.Location)" s="96" e="136" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.util.Date,java.lang.String,java.lang.String,com.scarcolo.eventour.model.Location)"><params><param type="java.lang.String"/><param type="java.lang.String"/><param type="java.lang.String"/><param type="java.lang.String"/><param type="java.lang.String"/><param type="java.util.Date"/><param type="java.lang.String"/><param type="java.lang.String"/><param type="com.scarcolo.eventour.model.Location"/></params><fm p="com.scarcolo.eventour.model.manager.Manager" s="id"/>
+<dm p="com.scarcolo.eventour.functions.Functionalities" s="isValidEmailAddress(java.lang.String)"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="mail"/>
+<dm p="javax.mail.internet.AddressException" s="AddressException()"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="password"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="name"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="surname"/>
+<dm p="java.util.Date" s="before(java.util.Date)"/>
+<dm p="java.util.Date" s="Date()"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="dateOfBirth"/>
+<dm p="java.time.DateTimeException" s="DateTimeException(java.lang.String)"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="residence"/>
+<dm p="com.scarcolo.eventour.functions.PartitaIVAFunctions" s="validate(java.lang.String)"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="codicePIVA"/>
+<dm p="java.lang.IllegalArgumentException" s="IllegalArgumentException()"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="ragioneSociale"/>
+<metrics cc="4" cm="13" vars="2" loc="17"/></method><method name="getId()" s="138" e="145" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setId(java.lang.String)" s="147" e="154" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.Manager" s="id"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getMail()" s="156" e="163" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setMail(java.lang.String)" s="165" e="178" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.functions.Functionalities" s="isValidEmailAddress(java.lang.String)"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="mail"/>
+<dm p="javax.mail.internet.AddressException" s="AddressException()"/>
+<metrics cc="2" cm="5" vars="1" loc="4"/></method><method name="getPassword()" s="180" e="187" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setPassword(java.lang.String)" s="189" e="196" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.Manager" s="password"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getName()" s="198" e="205" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setName(java.lang.String)" s="207" e="214" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.Manager" s="name"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getSurname()" s="216" e="223" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setSurname(java.lang.String)" s="225" e="232" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.Manager" s="surname"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getDateOfBirth()" s="234" e="241" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.util.Date"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getDateOfBirthLocal()" s="244" e="251" n ="false" sta ="false" sync ="false" vis="public" return="java.time.LocalDate"  signature="()"><dm p="com.scarcolo.eventour.functions.Functionalities" s="convertToLocalDate(java.util.Date)"/>
+<f p="com.scarcolo.eventour.model.manager.Manager" s="dateOfBirth"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setDateOfBirthCheck(java.util.Date)" s="254" e="267" n ="false" sta ="false" sync ="false" vis="private" return="void"  signature="(java.util.Date)"><params><param type="java.util.Date"/></params><dm p="java.util.Date" s="before(java.util.Date)"/>
+<dm p="java.util.Date" s="Date()"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="dateOfBirth"/>
+<dm p="java.time.DateTimeException" s="DateTimeException(java.lang.String)"/>
+<metrics cc="2" cm="5" vars="0" loc="3"/></method><method name="setDateOfBirth(java.util.Date)" s="269" e="277" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.util.Date)"><params><param type="java.util.Date"/></params><dm p="com.scarcolo.eventour.model.manager.Manager" s="setDateOfBirthCheck(java.util.Date)"/>
+<metrics cc="1" cm="5" vars="0" loc="1"/></method><method name="getResidence()" s="279" e="286" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="com.scarcolo.eventour.model.Location"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setResidence(com.scarcolo.eventour.model.Location)" s="288" e="295" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(com.scarcolo.eventour.model.Location)"><params><param type="com.scarcolo.eventour.model.Location"/></params><fm p="com.scarcolo.eventour.model.manager.Manager" s="residence"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getCodicePIVA()" s="297" e="304" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setCodicePIVA(java.lang.String)" s="306" e="318" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><dm p="com.scarcolo.eventour.functions.PartitaIVAFunctions" s="validate(java.lang.String)"/>
+<fm p="com.scarcolo.eventour.model.manager.Manager" s="codicePIVA"/>
+<dm p="java.lang.IllegalArgumentException" s="IllegalArgumentException(java.lang.String)"/>
+<metrics cc="2" cm="5" vars="1" loc="4"/></method><method name="getRagioneSociale()" s="320" e="327" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setRagioneSociale(java.lang.String)" s="329" e="336" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.Manager" s="ragioneSociale"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method>
+</type></root>

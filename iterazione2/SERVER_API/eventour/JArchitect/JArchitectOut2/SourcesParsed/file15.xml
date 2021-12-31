@@ -1,0 +1,27 @@
+<root><type name="com.scarcolo.eventour.model.Location" s="4"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<field name="locality" s="9" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="city" s="12" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="cap" s="15" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="provincia" s="18" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="sigla" s="21" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="regione" s="24" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="lat" s="27" type="java.lang.Double" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="lng" s="30" type="java.lang.Double" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<method name="getLocality()" s="33" e="40" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setLocality(java.lang.String)" s="42" e="49" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.Location" s="locality"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getCity()" s="51" e="58" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setCity(java.lang.String)" s="60" e="67" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.Location" s="city"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getCap()" s="69" e="76" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setCap(java.lang.String)" s="78" e="85" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.Location" s="cap"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getProvincia()" s="87" e="94" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setProvincia(java.lang.String)" s="96" e="103" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.Location" s="provincia"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getSigla()" s="105" e="112" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setSigla(java.lang.String)" s="114" e="121" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.Location" s="sigla"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getRegione()" s="123" e="130" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setRegione(java.lang.String)" s="132" e="139" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.Location" s="regione"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getLat()" s="141" e="148" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Double"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setLat(java.lang.Double)" s="150" e="157" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Double)"><params><param type="java.lang.Double"/></params><fm p="com.scarcolo.eventour.model.Location" s="lat"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getLng()" s="159" e="166" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Double"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setLng(java.lang.Double)" s="168" e="175" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Double)"><params><param type="java.lang.Double"/></params><fm p="com.scarcolo.eventour.model.Location" s="lng"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method>
+</type></root>

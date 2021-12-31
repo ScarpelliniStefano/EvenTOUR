@@ -1,0 +1,13 @@
+<root><type name="com.scarcolo.eventour.configuration.MongoDBConfiguration" s="14"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<annotations>
+<annotation name="com.scarcolo.eventour.configuration.Configuration"/>
+</annotations><field name="databaseName" s="21" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="user" s="27" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<field name="pass" s="31" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+</field>
+<method name="mongoClient()" s="35" e="48" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.configuration.MongoClient"  signature="()"><annotations><annotation name="com.scarcolo.eventour.configuration.Bean"/></annotations><metrics cc="1" cm="4" vars="2" loc="3"/></method><method name="mongoTemplate()" s="50" e="59" n ="false" sta ="false" sync ="false" vis="public" return="com.scarcolo.eventour.configuration.MongoTemplate"  signature="()"><annotations><annotation name="com.scarcolo.eventour.configuration.Bean"/></annotations><dm p="java.lang.Object" s="Object()"/>
+<dm p="com.scarcolo.eventour.configuration.MongoDBConfiguration" s="mongoClient()"/>
+<metrics cc="1" cm="5" vars="0" loc="1"/></method>
+</type></root>

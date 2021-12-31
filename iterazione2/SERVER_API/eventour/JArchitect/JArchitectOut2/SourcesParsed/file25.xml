@@ -1,0 +1,15 @@
+<root><type name="com.scarcolo.eventour.model.booking.PaymentRequest" s="6"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<field name="idUser" s="11" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.booking.JsonProperty"/></annotations></field>
+<field name="cardNr" s="15" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.booking.JsonProperty"/></annotations></field>
+<field name="cardName" s="19" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.booking.JsonProperty"/></annotations></field>
+<field name="authNr" s="23" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.booking.JsonProperty"/></annotations></field>
+<field name="dateScad" s="27" type="java.lang.String" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.booking.JsonProperty"/></annotations></field>
+<field name="amount" s="31" type="java.lang.Double" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.booking.JsonProperty"/></annotations></field>
+
+</type></root>

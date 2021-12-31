@@ -1,0 +1,44 @@
+<root><type name="com.scarcolo.eventour.functions.Mail" s="18"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<field name="prop" s="23" type="java.util.Properties" vis="package"  fin ="false" sta ="true" c="0" >
+</field>
+<method name="sendMail(java.lang.String,java.lang.String,java.lang.String)" s="26" e="64" n ="false" sta ="true" sync ="false" vis="private" return="void"  signature="(java.lang.String,java.lang.String,java.lang.String)"><params><param type="java.lang.String"/><param type="java.lang.String"/><param type="java.lang.String"/></params><dm p="java.util.Properties" s="Properties()"/>
+<dm p="java.util.Hashtable" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Hashtable" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Hashtable" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Hashtable" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="java.util.Hashtable" s="put(java.lang.Object,java.lang.Object)"/>
+<dm p="javax.mail.Session" s="getInstance(java.util.Properties,javax.mail.Authenticator)"/>
+<dm p="null" s="()"/>
+<method name="getPasswordAuthentication()" s="43" e="46" n ="false" sta ="false" sync ="false" vis="protected" return="javax.mail.PasswordAuthentication"  signature="()"><annotations><annotation name="java.lang.Override"/></annotations><dm p="javax.mail.PasswordAuthentication" s="PasswordAuthentication(java.lang.String,java.lang.String)"/>
+<metrics cc="1" cm="0" vars="0" loc="1"/></method><dm p="javax.mail.internet.MimeMessage" s="MimeMessage(javax.mail.Session)"/>
+<dm p="javax.mail.Message" s="setFrom(javax.mail.Address)"/>
+<dm p="javax.mail.internet.InternetAddress" s="InternetAddress(java.lang.String)"/>
+<dm p="javax.mail.Message" s="setRecipients(javax.mail.Message$RecipientType,javax.mail.Address[])"/>
+<dm p="javax.mail.internet.InternetAddress" s="parse(java.lang.String)"/>
+<dm p="javax.mail.Message" s="setSubject(java.lang.String)"/>
+<dm p="javax.mail.internet.MimeBodyPart" s="MimeBodyPart()"/>
+<dm p="javax.mail.internet.MimeBodyPart" s="setContent(java.lang.Object,java.lang.String)"/>
+<dm p="javax.mail.internet.MimeMultipart" s="MimeMultipart()"/>
+<dm p="javax.mail.Multipart" s="addBodyPart(javax.mail.BodyPart)"/>
+<dm p="javax.mail.Part" s="setContent(javax.mail.Multipart)"/>
+<dm p="javax.mail.Transport" s="send(javax.mail.Message)"/>
+<metrics cc="1" cm="0" vars="3" loc="11"/></method><method name="sendDeleteEventMsg(java.lang.String,com.scarcolo.eventour.model.event.Event)" s="66" e="91" n ="false" sta ="true" sync ="false" vis="public" return="boolean"  signature="(java.lang.String,com.scarcolo.eventour.model.event.Event)"><params><param type="java.lang.String"/><param type="com.scarcolo.eventour.model.event.Event"/></params><dm p="java.time.LocalDateTime" s="getHour()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getDataOra()"/>
+<dm p="java.time.LocalDateTime" s="getMinute()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getDataOra()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getTitle()"/>
+<dm p="java.time.LocalDateTime" s="getDayOfMonth()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getDataOra()"/>
+<dm p="java.time.LocalDateTime" s="getMonthValue()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getDataOra()"/>
+<dm p="java.time.LocalDateTime" s="getYear()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getDataOra()"/>
+<dm p="java.lang.String" s="substring(int)"/>
+<dm p="java.lang.String" s="length()"/>
+<dm p="java.lang.String" s="substring(int)"/>
+<dm p="java.lang.String" s="length()"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getPrice()"/>
+<dm p="com.scarcolo.eventour.functions.Mail" s="sendMail(java.lang.String,java.lang.String,java.lang.String)"/>
+<dm p="com.scarcolo.eventour.model.event.Event" s="getTitle()"/>
+<metrics cc="3" cm="6" vars="3" loc="10"/></method>
+</type></root>

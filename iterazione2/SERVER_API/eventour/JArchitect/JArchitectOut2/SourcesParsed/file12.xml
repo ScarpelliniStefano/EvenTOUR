@@ -1,0 +1,9 @@
+<root><type name="com.scarcolo.eventour.functions.Sex" s="6"  vis="public"  kind="enum"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="4">
+<field name="MAN" s="13" type="int" vis="package"  c="0" >
+</field>
+<field name="WOMAN" s="16" type="int" vis="package"  c="0" >
+</field>
+<field name="OTHER" s="19" type="int" vis="package"  c="0" >
+</field>
+
+</type></root>

@@ -1,0 +1,37 @@
+<root><type name="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="6"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<field name="id" s="11" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="title" s="15" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="event" s="19" type="com.scarcolo.eventour.model.event.EventResponse" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="occupedSeat" s="23" type="java.lang.Integer" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="comedPeople" s="27" type="java.lang.Integer" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="saldo" s="31" type="java.lang.Double" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="perdita" s="35" type="java.lang.Double" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<field name="review" s="39" type="java.lang.Double" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.manager.JsonProperty"/></annotations></field>
+<method name="ManagerReportResponse(java.lang.String,java.lang.String,com.scarcolo.eventour.model.event.EventResponse,java.lang.Integer,java.lang.Integer,java.lang.Double,java.lang.Double,java.lang.Double)" s="43" e="66" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(java.lang.String,java.lang.String,com.scarcolo.eventour.model.event.EventResponse,java.lang.Integer,java.lang.Integer,java.lang.Double,java.lang.Double,java.lang.Double)"><params><param type="java.lang.String"/><param type="java.lang.String"/><param type="com.scarcolo.eventour.model.event.EventResponse"/><param type="java.lang.Integer"/><param type="java.lang.Integer"/><param type="java.lang.Double"/><param type="java.lang.Double"/><param type="java.lang.Double"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="id"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="title"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="event"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="occupedSeat"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="comedPeople"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="saldo"/>
+<dm p="java.lang.Math" s="round(double)"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="perdita"/>
+<dm p="java.lang.Math" s="round(double)"/>
+<fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="review"/>
+<dm p="java.lang.Math" s="round(double)"/>
+<metrics cc="1" cm="11" vars="0" loc="9"/></method><method name="getId()" s="68" e="75" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setId(java.lang.String)" s="77" e="84" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="id"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getTitle()" s="86" e="93" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setTitle(java.lang.String)" s="95" e="102" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="title"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getEvent()" s="104" e="111" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="com.scarcolo.eventour.model.event.EventResponse"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setEvent(com.scarcolo.eventour.model.event.EventResponse)" s="113" e="120" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(com.scarcolo.eventour.model.event.EventResponse)"><params><param type="com.scarcolo.eventour.model.event.EventResponse"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="event"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getOccupedSeat()" s="122" e="129" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Integer"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setOccupedSeat(java.lang.Integer)" s="131" e="138" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Integer)"><params><param type="java.lang.Integer"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="occupedSeat"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getComedPeople()" s="140" e="147" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Integer"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setComedPeople(java.lang.Integer)" s="149" e="156" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Integer)"><params><param type="java.lang.Integer"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="comedPeople"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getSaldo()" s="158" e="165" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Double"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setSaldo(java.lang.Double)" s="167" e="174" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Double)"><params><param type="java.lang.Double"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="saldo"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getPerdita()" s="176" e="183" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Double"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setPerdita(java.lang.Double)" s="185" e="192" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Double)"><params><param type="java.lang.Double"/></params><fm p="com.scarcolo.eventour.model.manager.ManagerReportResponse" s="perdita"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method>
+</type></root>

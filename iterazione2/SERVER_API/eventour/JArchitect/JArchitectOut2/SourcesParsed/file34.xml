@@ -1,0 +1,22 @@
+<root><type name="com.scarcolo.eventour.model.event.EventResponseTourComplete" s="14"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="4" >
+<field name="numberRequested" s="22" type="java.lang.Integer" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="numberFinded" s="26" type="java.lang.Integer" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="totalPrice" s="30" type="java.lang.Double" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="totalDistance" s="34" type="java.lang.Double" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="user" s="38" type="com.scarcolo.eventour.model.user.UserResponse" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<field name="events" s="42" type="java.util.List" vis="public"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.event.JsonProperty"/></annotations></field>
+<method name="EventResponseTourComplete(java.util.List,com.scarcolo.eventour.model.user.UserResponse,int,int,double,double)" s="46" e="63" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(java.util.List,com.scarcolo.eventour.model.user.UserResponse,int,int,double,double)"><params><param type="java.util.List"/><param type="com.scarcolo.eventour.model.user.UserResponse"/><param type="int"/><param type="int"/><param type="double"/><param type="double"/></params><fm p="com.scarcolo.eventour.model.event.EventResponseTourComplete" s="events"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponseTourComplete" s="numberFinded"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponseTourComplete" s="numberRequested"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponseTourComplete" s="totalDistance"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponseTourComplete" s="totalPrice"/>
+<dm p="java.lang.Math" s="round(double)"/>
+<fm p="com.scarcolo.eventour.model.event.EventResponseTourComplete" s="user"/>
+<metrics cc="1" cm="9" vars="0" loc="6"/></method><method name="EventResponseTourComplete()" s="65" e="69" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="()"><metrics cc="1" cm="2" vars="0" loc="0"/></method>
+</type></root>

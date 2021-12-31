@@ -1,0 +1,11 @@
+<root><type name="com.scarcolo.eventour.model.AccountResponse" s="5"  vis="public"  kind="class"  dep ="false" fin ="false" sta ="false" abs ="false" n ="false" c="2" >
+<field name="typeUser" s="10" type="java.lang.String" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.JsonProperty"/></annotations></field>
+<field name="user" s="14" type="java.lang.Object" vis="private"  fin ="false" sta ="false" c="0" >
+<annotations><annotation name="com.scarcolo.eventour.model.JsonProperty"/></annotations></field>
+<method name="AccountResponse(java.lang.String,java.lang.Object)" s="19" e="28" cons ="true" n ="false" sta ="false" sync ="false" vis="public" return="void"  signature="(java.lang.String,java.lang.Object)"><params><param type="java.lang.String"/><param type="java.lang.Object"/></params><fm p="com.scarcolo.eventour.model.AccountResponse" s="typeUser"/>
+<fm p="com.scarcolo.eventour.model.AccountResponse" s="user"/>
+<metrics cc="1" cm="5" vars="0" loc="2"/></method><method name="getTypeUser()" s="30" e="37" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.String"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setTypeUser(java.lang.String)" s="39" e="46" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.String)"><params><param type="java.lang.String"/></params><fm p="com.scarcolo.eventour.model.AccountResponse" s="typeUser"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="getUser()" s="48" e="55" n ="false" sta ="false" sync ="false" get ="true" vis="public" return="java.lang.Object"  signature="()"><metrics cc="1" cm="4" vars="0" loc="1"/></method><method name="setUser(java.lang.Object)" s="57" e="64" n ="false" sta ="false" sync ="false" set ="true" vis="public" return="void"  signature="(java.lang.Object)"><params><param type="java.lang.Object"/></params><fm p="com.scarcolo.eventour.model.AccountResponse" s="user"/>
+<metrics cc="1" cm="4" vars="0" loc="1"/></method>
+</type></root>

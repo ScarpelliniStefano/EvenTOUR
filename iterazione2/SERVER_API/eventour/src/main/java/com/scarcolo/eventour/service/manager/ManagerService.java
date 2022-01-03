@@ -199,10 +199,10 @@ public class ManagerService {
 					comedPeople=0;
 					for(Booking book: resp.getBooking()) {
 						comedPeople+=(book.getCome()==true ? book.getPrenotedSeat() : 0);
-						review+=book.getReview()>0 ? book.getReview() : 0;
 					}
-					if(resp.getBooking() != null)
-						review=review/(resp.getBooking().length);
+					review=0d;
+					if(resp.getReviewTot()>0)
+						review=(resp.getReviewSum()*1.0d)/resp.getReviewTot();
 					saldo=comedPeople*resp.getPrice();
 					perdita=resp.getFreeSeat()*resp.getPrice();
 					eventDetails=new Event(resp.getId(), resp.getTitle(), resp.getDescription(), resp.getLocation(), resp.getTypes(),

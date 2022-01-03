@@ -174,21 +174,28 @@ public class AdminService {
 			for(ReportAdmResponse resp : reportMongo) {
 				if(resp.getRequest().length>0) {
 					if(resp.getRequest()[0].isActive()) {
+						
 						if(resp.getEvent()!=null && resp.getEvent().length>0) {
 							numEventi=resp.getEvent().length;
 							numFuturi=Functionalities.dataFutura(resp.getEvent());
 							mediaComes=0d;
 							rating=0d;
+							int cont=0;
 							for(EventPlus event: resp.getEvent()) {
 								if(event.getDataOra().isBefore(LocalDateTime.now())) {
 									mediaComes+=(event.getTotSeat()-event.getFreeSeat())*1.0d/event.getTotSeat();
-									rating+=(event.getReviewSum()*1.0d)/event.getReviewTot();
+									if(event.getReviewTot()>0) {
+										rating+=(event.getReviewSum()*1.0d)/event.getReviewTot();
+										cont++;
+									}
 								}
 								
 							}
-							rating=rating/(numEventi-numFuturi);
+							
+							rating=rating/cont;
 							mediaComes=100*mediaComes/(numEventi-numFuturi);
 						}
+						
 						Manager manager=new Manager(resp.getId(),resp.getName(), resp.getSurname(), resp.getMail(),resp.getCodicePIVA(),resp.getDateOfBirth(),
 								"", resp.getRagioneSociale(), resp.getResidence());
 						reportR.add(new AdminReportResponse(resp.getId(), resp.getCodicePIVA(), new ManagerPlusResponse(manager,resp.getRequest()[0]), numEventi, numFuturi, mediaComes, rating));

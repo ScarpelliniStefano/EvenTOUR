@@ -28,7 +28,6 @@
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
     <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.service.user.UserService"/>
-    <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Mail"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.Pageable"/>
     <fullyQualifiedTypeName name="com.scarcolo.eventour.service.manager.ManagerService"/>
     <fullyQualifiedTypeName name="java.lang.ArrayStoreException"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="org.bson.types.ObjectId"/>
     <fullyQualifiedTypeName name="java.time.DateTimeException"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpStatus"/>
+    <fullyQualifiedTypeName name="com.scarcolo.eventour.functions.Mail"/>
 </qualifiedTypeNameHistroy>

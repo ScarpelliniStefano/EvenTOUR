@@ -176,9 +176,10 @@ public class EventService {
 			Pageable paging = PageRequest.of(page, size,Sort.by("dataOra").ascending());
 			
 			Page<Event> pageEvents;
-			if(param==null)
-					pageEvents=eventRepository.findAllFuture(paging);
-			else {
+			if(param==null) {
+					pageEvents=eventRepository.findAllFuture(paging); 
+					
+			}else {
 				if(ordered.equalsIgnoreCase("desc")) {
 					if(param.equals("dataOra")) {
 						paging = PageRequest.of(page, size,Sort.by("dataOra").descending());

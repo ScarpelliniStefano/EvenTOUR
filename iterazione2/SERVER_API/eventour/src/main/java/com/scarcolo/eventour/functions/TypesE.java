@@ -2,7 +2,7 @@ package com.scarcolo.eventour.functions;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Enum TypesE.
+ * The Enum TypesE for explication of different types of event.
  */
 public enum TypesE {
 	

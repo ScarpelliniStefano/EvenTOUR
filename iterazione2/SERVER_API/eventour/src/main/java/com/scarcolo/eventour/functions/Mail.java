@@ -187,6 +187,48 @@ public class Mail {
 	}
 	
 	/**
+	 * Send accept request of signup manager mail.
+	 *
+	 * @param destination the destination mail
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static boolean sendAcceptManagerMsg(String destination) throws IOException{
+		String msg = "Salve,<br><br> ti confermiamo che la richiesta di iscrizione a EvenTour è stata accettata.<br> Ti aspettiamo.<br><br>";
+				 
+				  msg+="Buona giornata<br><br> <p style=\"text-align:right\"><b>Il team evenTour</b></p>";
+
+		try{
+			sendMail(destination,"Accettazione iscrizione EvenTour","Gentile manager","CONGRATULAZIONE!",msg);
+		
+			return true;
+		} catch (MessagingException e) {
+			return false;
+		}
+	}
+	
+	/**
+	 * Send accept request of signup manager mail.
+	 *
+	 * @param destination the destination mail
+	 * @return true, if successful
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static boolean sendRefuseManagerMsg(String destination) throws IOException{
+		String msg = "Salve,<br><br> ti confermiamo che la richiesta di iscrizione a EvenTour non è stata accettata.<br> Ti attendiamo.<br><br>";
+				 
+				  msg+="Buona giornata<br><br> <p style=\"text-align:right\"><b>Il team evenTour</b></p>";
+
+		try{
+			sendMail(destination,"Rifiuto iscrizione EvenTour","Gentile manager","CI DISPIACE!",msg);
+		
+			return true;
+		} catch (MessagingException e) {
+			return false;
+		}
+	}
+	
+	/**
 	 * Send newsletter mail.
 	 *
 	 * @param destination the destination mail

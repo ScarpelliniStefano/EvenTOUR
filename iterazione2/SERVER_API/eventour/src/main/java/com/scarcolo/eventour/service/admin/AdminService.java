@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.functions.Mail;
 import com.scarcolo.eventour.model.admin.AddAdminRequest;
 import com.scarcolo.eventour.model.admin.Admin;
 import com.scarcolo.eventour.model.admin.AdminResponse;
@@ -246,12 +247,16 @@ public class AdminService {
 	 */
 	public ResponseEntity<Boolean> setRequestActive(String id) {
 		try {
-			Request reqManager=requestService.getById(id);
-			if(reqManager!=null) {
-				reqManager.setActive(!reqManager.isActive());
-				this.setRequestDate(reqManager);
-				requestService.update(reqManager);
-				return new ResponseEntity<>(true, HttpStatus.OK);
+			Optional<Manager> man=managerRepository.findById(id);
+			if(man.isPresent()) {
+				Request reqManager=requestService.getById(id);
+				if(reqManager!=null) {
+					reqManager.setActive(!reqManager.isActive());
+					this.setRequestDate(reqManager);
+					requestService.update(reqManager);
+					Mail.sendAcceptManagerMsg(man.get().getMail());
+					return new ResponseEntity<>(true, HttpStatus.OK);
+				}
 			}
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}catch(Exception e) {
@@ -320,11 +325,15 @@ public class AdminService {
 	 */
 	public ResponseEntity<Boolean> removeRequest(String id) {
 		try {
-			Request reqManager=requestService.getById(id);
-			if(reqManager!=null) {
-				managerService.delete(id);
-				requestService.delete(id);
-				return new ResponseEntity<>(true, HttpStatus.OK);
+			Optional<Manager> man=managerRepository.findById(id);
+			if(man.isPresent()) {
+				Request reqManager=requestService.getById(id);
+				if(reqManager!=null) {
+					Mail.sendRefuseManagerMsg(man.get().getMail());
+					managerService.delete(id);
+					requestService.delete(id);
+					return new ResponseEntity<>(true, HttpStatus.OK);
+				}
 			}
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}catch(Exception e) {

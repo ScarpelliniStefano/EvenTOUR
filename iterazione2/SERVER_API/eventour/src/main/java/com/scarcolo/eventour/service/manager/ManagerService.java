@@ -1,12 +1,12 @@
 package com.scarcolo.eventour.service.manager;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.mail.internet.AddressException;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
@@ -15,18 +15,16 @@ import org.springframework.stereotype.Service;
 
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.event.Event;
-import com.scarcolo.eventour.model.event.EventManResponse;
 import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.manager.AddManagerRequest;
 import com.scarcolo.eventour.model.manager.EditManagerRequest;
-import com.scarcolo.eventour.model.manager.ManagerReportResponse;
+import com.scarcolo.eventour.model.manager.EventReportResponse;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
 import com.scarcolo.eventour.model.manager.ReportManResponse;
-import com.scarcolo.eventour.model.request.Request;
+import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
-import com.scarcolo.eventour.repository.manager.RequestRepository;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -39,10 +37,6 @@ public class ManagerService {
 	@Autowired
 	private ManagerRepository managerRepository;
 	
-	/** The request repository. */
-	@Autowired
-	private RequestRepository requestRepository;	
-	
 	/** The event repository. */
 	@Autowired
 	private EventRepository eventRepository;
@@ -51,19 +45,14 @@ public class ManagerService {
 	 * Adds a manager.
 	 *
 	 * @param request the request of new manager
-	 * @return the response entity with new manager
+	 * @return the response entity with new manager data
 	 */
 	public ResponseEntity<ManagerResponse> add(AddManagerRequest request){
-		Manager manager = null;
+		Manager manager;
 		try {
 			manager = managerRepository.save(new Manager(request));
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		}
-		try {
-			requestRepository.save(new Request(manager.getId()));
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<>(new ManagerResponse(manager), HttpStatus.OK);
 	}
@@ -71,11 +60,11 @@ public class ManagerService {
 	/**
 	 * Update a manager.
 	 *
-	 * @param request the request of update
-	 * @return the response entity
+	 * @param request the request with data to change
+	 * @return the response entity with modified data
 	 */
-	public ResponseEntity<ManagerResponse> update(EditManagerRequest request){
-        Optional<Manager> optionalManager = managerRepository.findById(request.id);
+	public ResponseEntity<ManagerResponse> update(EditManagerRequest request) {
+		Optional<Manager> optionalManager = managerRepository.findById(request.id);
         if (optionalManager.isEmpty()) {
             return null;
         }
@@ -99,9 +88,9 @@ public class ManagerService {
 
    
 	 /**
- 	 * Gets the manager by his id.
+ 	 * Gets the manager by id.
  	 *
- 	 * @param id the id manager
+ 	 * @param id the id of manager
  	 * @return the manager by id
  	 */
  	public ResponseEntity<ManagerResponse> getById(String id){
@@ -117,18 +106,16 @@ public class ManagerService {
     /**
      * Delete a manager.
      *
-     * @param id the id manager
+     * @param id the id of manager
      * @return true, if successful
      */
-    public ResponseEntity<Boolean> delete(String id) {
-    	 Optional<Manager> optionalManager = managerRepository.findById(id);
-         if (optionalManager.isEmpty()) {
-             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-         }
-         managerRepository.deleteById(optionalManager.get().getId());
-         Request r=requestRepository.findByManagerId(optionalManager.get().getId()).get(0);
-         requestRepository.deleteById(r.getId());
-         return new ResponseEntity<>(true,HttpStatus.OK);
+     public ResponseEntity<Boolean> delete(String id) {
+        Optional<Manager> optionalManager = managerRepository.findById(id);
+        if (optionalManager.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        managerRepository.deleteById(optionalManager.get().getId());
+        return new ResponseEntity<>(true,HttpStatus.OK);
     }
 
 	/**
@@ -151,26 +138,9 @@ public class ManagerService {
 		}
 	}
 
-
 	
-	/**
-	 * Gets a manager from event id.
-	 *
-	 * @param id the event id
-	 * @return the manager from event
-	 */
-	public ResponseEntity<EventManResponse> getManagerFromEvent(String id) {
-		try {
-			AggregationResults<EventManResponse> userEventA=eventRepository.findManagerById(id);
-			List<EventManResponse> eventR=userEventA.getMappedResults();
-			if(eventR.isEmpty()) {
-				return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-			}
-			return new ResponseEntity<>(eventR.get(0), HttpStatus.OK);
-		}catch(Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+	
+
 
 	/**
 	 * Gets the manager report.
@@ -178,7 +148,7 @@ public class ManagerService {
 	 * @param id the id of manager
 	 * @return the manager report
 	 */
-	public ResponseEntity<List<ManagerReportResponse>> getManagerReport(String id) {
+	public ResponseEntity<List<EventReportResponse>> getManagerReport(String id) {
 		try {
 			Optional<Manager> manOpt=managerRepository.findById(id);
 			if(manOpt.isEmpty()) {
@@ -186,34 +156,30 @@ public class ManagerService {
 			}
 			AggregationResults<ReportManResponse> reportA=eventRepository.findReports(id);
 			List<ReportManResponse> reportMongo=reportA.getMappedResults();
-			List<ManagerReportResponse> reportR=new ArrayList<>();
+			List<EventReportResponse> reportR=new ArrayList<>();
 			Integer occuped=0;
 			Integer comedPeople=0;
 			Double saldo=0d;
 			Double perdita=0d;
 			Event eventDetails=null;
-			Double review=0d;
 			for(ReportManResponse resp : reportMongo) {
-				if(resp.getDataOra().isBefore(LocalDateTime.now())) {
-					occuped=resp.getTotSeat()-resp.getFreeSeat();
-					comedPeople=0;
-					for(Booking book: resp.getBooking()) {
-						comedPeople+=(book.getCome()==true ? book.getPrenotedSeat() : 0);
-					}
-					review=0d;
-					if(resp.getReviewTot()>0)
-						review=(resp.getReviewSum()*1.0d)/resp.getReviewTot();
-					saldo=comedPeople*resp.getPrice();
-					perdita=resp.getFreeSeat()*resp.getPrice();
-					eventDetails=new Event(resp.getId(), resp.getTitle(), resp.getDescription(), resp.getLocation(), resp.getTypes(),
-							resp.getDataOra(), resp.getManagerId(),resp.getUrlImage(), resp.getTotSeat(), resp.getFreeSeat(), resp.getPrice());
-					reportR.add(new ManagerReportResponse(resp.getId(), resp.getTitle(), new EventResponse(eventDetails), occuped, comedPeople, saldo, perdita, review));
-			
+				
+				occuped=resp.getTotSeat()-resp.getFreeSeat();
+				comedPeople=0;
+				for(Booking book: resp.getBooking()) {
+					comedPeople+=(book.getCome()==true ? book.getPrenotedSeat() : 0);
 				}
+				saldo=comedPeople*resp.getPrice();
+				perdita=(occuped-comedPeople)*resp.getPrice();
+				eventDetails=new Event(resp.getId(), resp.getTitle(), resp.getDescription(), resp.getLocation(), resp.getTypes(),
+						resp.getDataOra(), resp.getManagerId(),resp.getUrlImage(), resp.getTotSeat(), resp.getFreeSeat(), resp.getPrice());
+				reportR.add(new EventReportResponse(resp.getId(), resp.getTitle(), new EventResponse(eventDetails), occuped, comedPeople, saldo, perdita));
 			}
 			
 			return new ResponseEntity<>(reportR, HttpStatus.OK);
 		}catch(Exception e) {
+			//System.out.println(e);
+			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

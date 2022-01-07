@@ -1,19 +1,12 @@
 package com.scarcolo.eventour.repository.booking;
 
 
-import java.util.List;
-
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
-import com.scarcolo.eventour.model.user.UserBookedResponse;
-
-
-
-
 
 
 // TODO: Auto-generated Javadoc
@@ -25,9 +18,7 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 	/**
 	 * Find by user id.
 	 *
-	 * @param userId the id
-	 * @param pageSize the page*size
-	 * @param size the size
+	 * @param id the id
 	 * @return the aggregation results
 	 */
 	@Aggregation(pipeline = {"{\n"
@@ -41,73 +32,20 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'foreignField': '_id', \n"
 			+ "            'as': 'event'\n"
 			+ "        }\n"
-			+ "    }","{\n"
-			+ "        '$skip': ?1\n"
-			+ "    }"," {\n"
-			+ "        '$limit': ?2\n"
-			+ "    }"," {\n"
-			+ "        '$sort': {\n"
-			+ "            'event.dataOra': 1\n"
-			+ "        }\n"
 			+ "    }"})
-	AggregationResults<EventBookedResponse> findByUserId(ObjectId userId,int pageSize, int size);
-	
+	AggregationResults<EventBookedResponse> findByUserId(ObjectId id);
+
 	/**
-	 * Find by user id.
+	 * Find by user id and event id.
 	 *
-	 * @param userId the id
+	 * @param id the id
+	 * @param idE the id event
 	 * @return the aggregation results
 	 */
 	@Aggregation(pipeline = {"{\n"
 			+ "        '$match': {\n"
 			+ "            'userId': ObjectId('?0')\n"
-			+ "        }\n"
-			+ "    }"," {\n"
-			+ "        '$lookup': {\n"
-			+ "            'from': 'events', \n"
-			+ "            'localField': 'eventId', \n"
-			+ "            'foreignField': '_id', \n"
-			+ "            'as': 'event'\n"
-			+ "        }\n"
-			+ "    }"," {\n"
-			+ "        '$sort': {\n"
-			+ "            'event.dataOra': 1\n"
-			+ "        }\n"
-			+ "    }"})
-	List<EventBookedResponse> findByUserId(String userId);
-	
-	/**
-	 * Find by event id.
-	 *
-	 * @param eventId the eventId
-	 * @return the aggregation results
-	 */
-	@Aggregation(pipeline = {"{\n"
-			+ "        '$match': {\n"
-			+ "            'eventId': ObjectId('?0')\n"
-			+ "        }\n"
-			+ "    }"," {\n"
-			+ "        '$lookup': {\n"
-			+ "            'from': 'users', \n"
-			+ "            'localField': 'userId', \n"
-			+ "            'foreignField': '_id', \n"
-			+ "            'as': 'user'\n"
-			+ "        }\n"
-			+ "    }"})
-	AggregationResults<UserBookedResponse> findByEventId(ObjectId eventId);
-
-	
-	/**
-	 * Find by user and event.
-	 *
-	 * @param id the id of user
-	 * @param idEv the id of event
-	 * @return the aggregation results
-	 */
-	@Aggregation(pipeline = {"{\n"
-			+ "        '$match': {\n"
-			+ "            	'userId': ObjectId('?0')\n"
-			+ "				'eventId': ObjectId('?1')\n"
+			+ "            'eventId': ObjectId('?1')\n"
 			+ "        }\n"
 			+ "    }"," {\n"
 			+ "        '$lookup': {\n"
@@ -117,8 +55,9 @@ public interface BookingRepository extends MongoRepository<Booking, String> {
 			+ "            'as': 'event'\n"
 			+ "        }\n"
 			+ "    }"})
-	AggregationResults<EventBookedResponse> findByUserAndEvent(String id, String idEv);
-
+	AggregationResults<EventBookedResponse> findByUserIdAndEventId(String id, String idE);
+	
+	
 	
 
 	

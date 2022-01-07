@@ -21,7 +21,6 @@ import org.passay.CharacterData;
 import org.passay.PasswordGenerator;
 
 import com.scarcolo.eventour.model.event.Event;
-import com.scarcolo.eventour.model.event.EventPlus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -55,18 +54,16 @@ public class Functionalities {
 	 * @return true, if is valid code
 	 */
 	public static boolean isValidCode(String code) {
-		if(code.startsWith("TI-") && code.split("-").length==3) return true;
-		else return false;
-		//DA FARE MATCHES DEI CODICI CON REGEX
-		/*if(code.matches(code))*/  
+		//DA FARE MATCHES DEI CODICI
+		/*if(code.matches(code))*/  return true;
 		/*return false;*/
 	}
 	
 	/**
-	 * Convert to date from LocalDateTime.
+	 * Convert to date.
 	 *
-	 * @param dateToConvert the date to convert (type LocalDateTime)
-	 * @return the date in Date type
+	 * @param dateToConvert the date to convert, passed in LocalDateTime
+	 * @return the date in Date format
 	 */
 	public static Date convertToDate(LocalDateTime dateToConvert) {
 		return java.util.Date
@@ -75,10 +72,10 @@ public class Functionalities {
 	}
 	
 	/**
-	 * Convert to date from LocalDate.
+	 * Convert to date.
 	 *
-	 * @param dateToConvert the date to convert (type LocalDate)
-	 * @return the date in Date type
+	 * @param dateToConvert the date to convert, passed in LocalDate
+	 * @return the date in Date
 	 */
 	public static Date convertToDate(LocalDate dateToConvert) {
 	    return java.util.Date.from(dateToConvert.atStartOfDay()
@@ -87,9 +84,9 @@ public class Functionalities {
 	}
 	
 	/**
-	 * Convert to LocalDate from Date.
+	 * Convert to LocalDate.
 	 *
-	 * @param dateToConvert the date to convert (type Date)
+	 * @param dateToConvert the date to convert, passed in Date
 	 * @return the local date in LocalDate
 	 */
 	public static LocalDate convertToLocalDate(Date dateToConvert) {
@@ -98,9 +95,9 @@ public class Functionalities {
 	}
 	
 	/**
-	 * Convert to LocalDate.
+	 * Convert to LocalDateTime.
 	 *
-	 * @param dateToConvert the date to convert (type Date)
+	 * @param dateToConvert the date to convert, passed in Date
 	 * @return the local date time in LocalDateTime
 	 */
 	public static LocalDateTime convertToLocalDateTime(Date dateToConvert) {
@@ -109,10 +106,10 @@ public class Functionalities {
 	}
 	
 	/**
-	 * Simil type method.
+	 * Return if two types are similar
 	 *
-	 * @param evTyp the first type
-	 * @param usTyp the second type to compare
+	 * @param evTyp the event type
+	 * @param usTyp the user type to check
 	 * @return true, if successful
 	 */
 	public static boolean similType(String evTyp, String usTyp) {
@@ -128,10 +125,10 @@ public class Functionalities {
 	}
 	
 	/**
-	 * Order by datetime.
+	 * List of events to order by data.
 	 *
 	 * @param listToOrder the list to order
-	 * @return the list
+	 * @return the list ordered
 	 */
 	public static List<Event> orderByData(List<Event> listToOrder){
 		for(int i=0;i<listToOrder.size();i++) {
@@ -148,11 +145,11 @@ public class Functionalities {
 	}
 
 	/**
-	 * Gets the md 5 hash.
+	 * Gets the md5 hash.
 	 *
-	 * @param input the input string
-	 * @return the md 5
-	 * @throws NoSuchAlgorithmException md5 library non present
+	 * @param input the input string to hash
+	 * @return the md5 hashing of the string
+	 * @throws NoSuchAlgorithmException algorithm md5 not implemented
 	 */
 	public static String getMd5(String input) throws NoSuchAlgorithmException
     {
@@ -184,10 +181,10 @@ public class Functionalities {
 	
 	
 	/**
-	 * Generate passay password.
+	 * Generate passay password for generate a secure password 
 	 *
-	 * @param lenght the lenght
-	 * @return the string
+	 * @param lenght the lenght of the password
+	 * @return the string of the password
 	 */
 	public static String generatePassayPassword(int lenght) {
 	    PasswordGenerator gen = new PasswordGenerator();
@@ -222,34 +219,5 @@ public class Functionalities {
 	    String password = gen.generatePassword(lenght, splCharRule, lowerCaseRule, 
 	      upperCaseRule, digitRule);
 	    return password;
-	}
-
-	/**
-	 * Number of event with datetime after now.
-	 *
-	 * @param eventPlus the event plus data
-	 * @return how many events have date after now
-	 */
-	public static Integer dataFutura(EventPlus[] eventPlus) {
-		int i=0;
-		for(EventPlus e : eventPlus) {
-			if(e.getDataOra().isAfter(LocalDateTime.now())) i++;
-		}
-		return i;
-	}
-	
-	/**
-	 * Distance of two coordinates.
-	 *
-	 * @param lat1 the latitude 1
-	 * @param lng1 the longitude 1
-	 * @param lat2 the latitude 2
-	 * @param lng2 the longitude 2
-	 * @return the air distance
-	 */
-	public static Double distance(Double lat1, Double lng1, Double lat2, Double lng2) {
-		Double[] pointA= {lat1*Math.PI/180,lng1*Math.PI/180};
-		Double[] pointB= {lat2*Math.PI/180,lng2*Math.PI/180};
-		return 6372.795477598 * Math.acos(Math.sin(pointA[0]) * Math.sin(pointB[0]) + Math.cos(pointA[0]) * Math.cos(pointB[0]) * Math.cos(pointA[1]-pointB[1]));
 	}
 }

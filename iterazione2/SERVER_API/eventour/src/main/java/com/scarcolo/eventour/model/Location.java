@@ -26,10 +26,10 @@ public class Location {
 	private String regione;
 	
 	/** The lat. */
-	private Double lat;
+	private Float lat;
 	
 	/** The lng. */
-	private Double lng;
+	private Float lng;
 	
 	/**
 	 * Gets the locality.
@@ -144,7 +144,7 @@ public class Location {
 	 *
 	 * @return the lat
 	 */
-	public Double getLat() {
+	public Float getLat() {
 		return lat;
 	}
 	
@@ -153,7 +153,7 @@ public class Location {
 	 *
 	 * @param lat the new lat
 	 */
-	public void setLat(Double lat) {
+	public void setLat(Float lat) {
 		this.lat = lat;
 	}
 	
@@ -162,7 +162,7 @@ public class Location {
 	 *
 	 * @return the lng
 	 */
-	public Double getLng() {
+	public Float getLng() {
 		return lng;
 	}
 	
@@ -171,7 +171,7 @@ public class Location {
 	 *
 	 * @param lng the new lng
 	 */
-	public void setLng(Double lng) {
+	public void setLng(Float lng) {
 		this.lng = lng;
 	}
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventourApplication_TicketTests.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour</a> &gt; <span class="el_source">EventourApplication_TicketTests.java</span></div><h1>EventourApplication_TicketTests.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventourApplication_TicketTests.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (1) (30 dic 2021 11:07:32)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour</a> &gt; <span class="el_source">EventourApplication_TicketTests.java</span></div><h1>EventourApplication_TicketTests.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour;
 
 
 
@@ -9,20 +9,30 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest;
-import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
+import com.scarcolo.eventour.model.AccountRequest;
+import com.scarcolo.eventour.model.AccountResponse;
+import com.scarcolo.eventour.model.Location;
+import com.scarcolo.eventour.model.booking.AddBookingRequest;
+import com.scarcolo.eventour.model.event.AddEventRequest;
+import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
+import com.scarcolo.eventour.model.user.AddUserRequest;
+import com.scarcolo.eventour.model.user.User;
+import com.scarcolo.eventour.model.user.UserResponse;
+
 import static org.junit.Assert.assertEquals;
+import java.time.LocalDateTime;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-<span class="fc" id="L25">class EventourApplication_TicketTests {</span>
+<span class="fc" id="L35">class EventourApplication_TicketTests {</span>
 	@LocalServerPort
 	private int port;
 
@@ -31,116 +41,42 @@ import org.json.JSONArray;
 	
 	@Test
 	public void getTicket() throws Exception {
-<span class="fc" id="L34">		TicketInspResponse request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/61a0b05abce0e98fbb2dad3e&quot;,</span>
-<span class="fc" id="L35">				TicketInspResponse.class);</span>
-<span class="fc" id="L36">		assertEquals(request.getCode(),&quot;TI-379-7253&quot;);</span>
-<span class="fc" id="L37">		assertEquals(request.getEventId(),&quot;61a0a85ebce0e98fbb2d8ec8&quot;);</span>
-<span class="fc" id="L38">		assertEquals(request.getFullName(),&quot;Magno Filice&quot;);</span>
-<span class="fc" id="L39">		assertEquals(request.getPassword(),&quot;vosipowo&quot;);</span>
+<span class="fc" id="L44">		TicketInspResponse request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/61a0b05abce0e98fbb2dad3e&quot;,</span>
+<span class="fc" id="L45">				TicketInspResponse.class);</span>
+<span class="fc" id="L46">		assertEquals(request.getCode(),&quot;TI-379-7253&quot;);</span>
+<span class="fc" id="L47">		assertEquals(request.getEventId(),&quot;61a0a85ebce0e98fbb2d8ec8&quot;);</span>
+<span class="fc" id="L48">		assertEquals(request.getFullName(),&quot;Magno Filice&quot;);</span>
+<span class="fc" id="L49">		assertEquals(request.getPassword(),&quot;vosipowo&quot;);</span>
 		
-<span class="fc" id="L41">	}</span>
+<span class="fc" id="L51">	}</span>
 	
 	@Test
 	public void getTicketError() throws Exception {
-<span class="fc" id="L45">		ResponseEntity&lt;TicketInspResponse&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/61a0b05abce0e98fbb2dad3b&quot;,</span>
-<span class="fc" id="L46">				TicketInspResponse.class);</span>
-<span class="fc" id="L47">		assertEquals(request.getStatusCode(),HttpStatus.NOT_FOUND);</span>
+<span class="fc" id="L55">		ResponseEntity&lt;TicketInspResponse&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/61a0b05abce0e98fbb2dad3b&quot;,</span>
+<span class="fc" id="L56">				TicketInspResponse.class);</span>
+<span class="fc" id="L57">		assertEquals(request.getStatusCode(),HttpStatus.NOT_FOUND);</span>
 		
-<span class="fc" id="L49">	}</span>
+<span class="fc" id="L59">	}</span>
 	
 	@Test
 	public void getTicketByEvent() throws Exception {
-<span class="fc" id="L53">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/event/61a0a85ebce0e98fbb2d9117&quot;,</span>
-<span class="fc" id="L54">				String.class);</span>
-<span class="fc" id="L55">		JSONArray array=new JSONArray(request);</span>
-<span class="fc bfc" id="L56" title="All 2 branches covered.">		for(int i=0;i&lt;array.length();i++) {</span>
-<span class="fc" id="L57">			assertEquals(array.getJSONObject(i).getString(&quot;eventId&quot;), &quot;61a0a85ebce0e98fbb2d9117&quot;);</span>
+<span class="fc" id="L63">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/event/61a0a85ebce0e98fbb2d9117&quot;,</span>
+<span class="fc" id="L64">				String.class);</span>
+<span class="fc" id="L65">		JSONArray array=new JSONArray(request);</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">		for(int i=0;i&lt;array.length();i++) {</span>
+<span class="fc" id="L67">			assertEquals(array.getJSONObject(i).getString(&quot;eventId&quot;), &quot;61a0a85ebce0e98fbb2d9117&quot;);</span>
 		}
 		
-<span class="fc" id="L60">	}</span>
+<span class="fc" id="L70">	}</span>
 	
 	@Test
 	public void getTicketByEventError() throws Exception {
-<span class="fc" id="L64">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/event/61a0a85ebce0e98fbb2d9116&quot;,</span>
-<span class="fc" id="L65">				String.class);</span>
-<span class="fc" id="L66">		assertEquals(request.getStatusCode(), HttpStatus.NO_CONTENT);</span>
+<span class="fc" id="L74">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/event/61a0a85ebce0e98fbb2d9116&quot;,</span>
+<span class="fc" id="L75">				String.class);</span>
+<span class="fc" id="L76">		assertEquals(request.getStatusCode(), HttpStatus.NO_CONTENT);</span>
 		
-<span class="fc" id="L68">	}</span>
+<span class="fc" id="L78">	}</span>
 	
-	@Test
-	public void newTicket() throws Exception {
-<span class="fc" id="L72">		AddTicketInspRequest request=new AddTicketInspRequest();</span>
-<span class="fc" id="L73">		request.eventId=&quot;61a0a85ebce0e98fbb2d862b&quot;;</span>
-<span class="fc" id="L74">		request.fullName=&quot;Utente Prova&quot;;</span>
-<span class="fc" id="L75">		TicketInspResponse ticketCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps&quot;, request, TicketInspResponse.class);</span>
-<span class="fc" id="L76">		assertEquals(ticketCreated.getEventId(), &quot;61a0a85ebce0e98fbb2d862b&quot;);</span>
-<span class="fc" id="L77">		String reqDel=&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/&quot;+ticketCreated.getId();</span>
-<span class="fc" id="L78">		restTemplate.delete(reqDel);</span>
-		
-
-<span class="fc" id="L81">	}</span>
-	
-	@Test
-	public void updateTicket() throws Exception {
-<span class="fc" id="L85">		AddTicketInspRequest request=new AddTicketInspRequest();</span>
-<span class="fc" id="L86">		request.eventId=&quot;61a0a85ebce0e98fbb2d862b&quot;;</span>
-<span class="fc" id="L87">		request.fullName=&quot;Utente Prova&quot;;</span>
-<span class="fc" id="L88">		TicketInspResponse ticketCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps&quot;, request, TicketInspResponse.class);</span>
-		
-<span class="fc" id="L90">		EditTicketInspRequest reqUpd=new EditTicketInspRequest();</span>
-<span class="fc" id="L91">		reqUpd.id=ticketCreated.getId();</span>
-<span class="fc" id="L92">		reqUpd.fullName=&quot;Utente Aggiornato&quot;;</span>
-<span class="fc" id="L93">		ResponseEntity&lt;TicketInspResponse&gt; resp=restTemplate.exchange(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps&quot;, HttpMethod.PUT, new HttpEntity&lt;EditTicketInspRequest&gt;(reqUpd), TicketInspResponse.class);</span>
-<span class="fc" id="L94">		assertEquals(resp.getStatusCodeValue(),200);</span>
-<span class="fc" id="L95">		assertEquals(resp.getBody().getCode(),ticketCreated.getCode());</span>
-<span class="fc" id="L96">		assertEquals(resp.getBody().getEventId(),&quot;61a0a85ebce0e98fbb2d862b&quot;);</span>
-<span class="fc" id="L97">		assertEquals(resp.getBody().getFullName(),&quot;Utente Aggiornato&quot;);</span>
-<span class="fc" id="L98">		assertEquals(resp.getBody().getPassword(),ticketCreated.getPassword());</span>
-<span class="fc" id="L99">		String reqDel=&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/&quot;+ticketCreated.getId();</span>
-<span class="fc" id="L100">		restTemplate.delete(reqDel);</span>
-		
-<span class="fc" id="L102">		reqUpd.id=&quot;61a89029facdaf0af830be5a&quot;;</span>
-<span class="fc" id="L103">		resp=restTemplate.exchange(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps&quot;, HttpMethod.PUT, new HttpEntity&lt;EditTicketInspRequest&gt;(reqUpd), TicketInspResponse.class);</span>
-<span class="fc" id="L104">		assertEquals(resp.getStatusCodeValue(),404);</span>
-		
-		
-<span class="fc" id="L107">	}</span>
-	
-	@Test
-	public void newTicketError() throws Exception {
-<span class="fc" id="L111">		AddTicketInspRequest request=new AddTicketInspRequest();</span>
-<span class="fc" id="L112">		request.eventId=&quot;61a0a85ebce0e98fbb2d860a&quot;;</span>
-<span class="fc" id="L113">		request.fullName=&quot;Utente Prova&quot;;</span>
-<span class="fc" id="L114">		ResponseEntity&lt;TicketInspResponse&gt; ticketCreated = restTemplate.postForEntity(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps&quot;, request, TicketInspResponse.class);</span>
-<span class="fc" id="L115">		assertEquals(ticketCreated.getStatusCode(), HttpStatus.NOT_ACCEPTABLE);</span>
-		
-		
-<span class="fc" id="L118">	}</span>
-	
-	@Test
-	public void deleteTicket() throws Exception {
-<span class="fc" id="L122">		AddTicketInspRequest request=new AddTicketInspRequest();</span>
-<span class="fc" id="L123">		request.eventId=&quot;61a0a85ebce0e98fbb2d862b&quot;;</span>
-<span class="fc" id="L124">		request.fullName=&quot;Utente Prova&quot;;</span>
-<span class="fc" id="L125">		TicketInspResponse ticketCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps&quot;, request, TicketInspResponse.class);</span>
-<span class="fc" id="L126">		String reqDel=&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/&quot;+ticketCreated.getId();</span>
-<span class="fc" id="L127">		ResponseEntity&lt;Boolean&gt; resp=restTemplate.exchange(reqDel, HttpMethod.DELETE, null, Boolean.class);</span>
-<span class="fc" id="L128">		assertEquals(resp.getBody(),true);</span>
-		
-<span class="fc" id="L130">	}</span>
-	
-	@Test
-	public void deleteTicketNonCorrect() throws Exception {
-<span class="fc" id="L134">		ResponseEntity&lt;Boolean&gt; resp=restTemplate.exchange(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/61a89029facdaf0af830be5a&quot;, HttpMethod.DELETE, null, Boolean.class);</span>
-<span class="fc" id="L135">		assertEquals(resp.getStatusCode(),HttpStatus.BAD_REQUEST);</span>
-<span class="fc" id="L136">	}</span>
-	
-	@Test
-	public void getTicketAll() throws Exception {
-<span class="fc" id="L140">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/&quot;,</span>
-<span class="fc" id="L141">				String.class);</span>
-<span class="fc" id="L142">		assertEquals(request.getStatusCode(),HttpStatus.OK);</span>
-<span class="fc" id="L143">	}</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (1) (30 dic 2021 11:07:32)</div></body></html>

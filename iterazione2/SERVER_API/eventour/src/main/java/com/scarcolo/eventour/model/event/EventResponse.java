@@ -10,6 +10,10 @@ import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.scarcolo.eventour.model.Location;
 
+
+
+
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class EventResponse.

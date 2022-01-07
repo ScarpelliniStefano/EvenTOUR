@@ -1,0 +1,1289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE ODEM PUBLIC "-//PFSW//DTD ODEM 1.2" "http://pfsw.org/ODEM/schema/dtd/odem-1.2.dtd">
+
+<ODEM version="1">
+  <header>
+    <created-by>
+      <exporter version="1.4.0">org.pfsw.tools.cda.ext.export.xml.XmlFileODEMExporter</exporter>
+      <provider>Manfred Duchrow Consulting &amp; Software</provider>
+    </created-by>
+  </header>
+  <context name="it2">
+    <container name="C:/Users/stefa/Desktop/proveTest/stan/it2/SERVER_API/eventour/target/classes" classification="dir">
+      <namespace name="com.scarcolo.eventour">
+        <type name="com.scarcolo.eventour.EventourApplication" classification="class" visibility="public">
+          <dependencies count="6">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="org.springframework.boot.autoconfigure.SpringBootApplication" classification="uses" />
+            <depends-on name="org.springframework.boot.SpringApplication" classification="uses" />
+            <depends-on name="java.lang.Class" classification="uses" />
+            <depends-on name="org.springframework.context.ConfigurableApplicationContext" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.configuration">
+        <type name="com.scarcolo.eventour.configuration.MongoDBConfiguration" classification="class" visibility="public">
+          <dependencies count="12">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.mongodb.client.MongoClient" classification="uses" />
+            <depends-on name="com.mongodb.ConnectionString" classification="uses" />
+            <depends-on name="com.mongodb.MongoClientSettings" classification="uses" />
+            <depends-on name="org.springframework.context.annotation.Bean" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.MongoTemplate" classification="uses" />
+            <depends-on name="org.springframework.context.annotation.Configuration" classification="uses" />
+            <depends-on name="java.lang.StringBuilder" classification="uses" />
+            <depends-on name="com.mongodb.MongoClientSettings$Builder" classification="uses" />
+            <depends-on name="com.mongodb.client.MongoClients" classification="uses" />
+            <depends-on name="java.lang.Exception" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.controller.admin">
+        <type name="com.scarcolo.eventour.controller.admin.AdminController" classification="class" visibility="public">
+          <dependencies count="23">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.service.admin.AdminService" classification="uses" />
+            <depends-on name="org.springframework.beans.factory.annotation.Autowired" classification="uses" />
+            <depends-on name="org.springframework.http.ResponseEntity" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.AddAdminRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.AdminResponse" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestBody" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PostMapping" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.EditAdminRequest" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PutMapping" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PathVariable" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.GetMapping" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.AdminReportResponse" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.ManagerPlusResponse" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestParam" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.DeleteMapping" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.CrossOrigin" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RestController" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestMapping" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.controller.booking">
+        <type name="com.scarcolo.eventour.controller.booking.BookingController" classification="class" visibility="public">
+          <dependencies count="26">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.service.booking.BookingService" classification="uses" />
+            <depends-on name="org.springframework.beans.factory.annotation.Autowired" classification="uses" />
+            <depends-on name="org.springframework.http.ResponseEntity" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.AddBookingRequest" classification="uses" />
+            <depends-on name="java.io.IOException" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestBody" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PostMapping" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.Booking" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PathVariable" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.GetMapping" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.UserEventBookedResponse" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventBookedResponse" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestParam" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.UserBookedResponse" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.DeleteMapping" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.CheckBookingRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.ReviewBookingRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.PaymentRequest" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.CrossOrigin" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RestController" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestMapping" classification="uses" />
+            <depends-on name="org.springframework.http.HttpStatus" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.controller.event">
+        <type name="com.scarcolo.eventour.controller.event.EventController" classification="class" visibility="public">
+          <dependencies count="23">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.service.event.EventService" classification="uses" />
+            <depends-on name="org.springframework.beans.factory.annotation.Autowired" classification="uses" />
+            <depends-on name="org.springframework.http.ResponseEntity" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.AddEventRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventResponse" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestBody" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PostMapping" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EditEventRequest" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PutMapping" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PathVariable" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.GetMapping" classification="uses" />
+            <depends-on name="java.util.Map" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestParam" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="java.io.IOException" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.DeleteMapping" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.CrossOrigin" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RestController" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestMapping" classification="uses" />
+            <depends-on name="java.text.ParseException" classification="uses" />
+            <depends-on name="org.springframework.http.HttpStatus" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.controller.manager">
+        <type name="com.scarcolo.eventour.controller.manager.ManagerController" classification="class" visibility="public">
+          <dependencies count="23">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.service.manager.ManagerService" classification="uses" />
+            <depends-on name="org.springframework.beans.factory.annotation.Autowired" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.service.booking.BookingService" classification="uses" />
+            <depends-on name="org.springframework.http.ResponseEntity" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.AddManagerRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.ManagerResponse" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestBody" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PostMapping" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.EditManagerRequest" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PutMapping" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PathVariable" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.GetMapping" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventManResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.ManagerReportResponse" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.DeleteMapping" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.PaymentRequest" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.CrossOrigin" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RestController" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestMapping" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.controller.ticketisp">
+        <type name="com.scarcolo.eventour.controller.ticketisp.TicketInspController" classification="class" visibility="public">
+          <dependencies count="19">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.service.ticketisp.TicketInspService" classification="uses" />
+            <depends-on name="org.springframework.beans.factory.annotation.Autowired" classification="uses" />
+            <depends-on name="org.springframework.http.ResponseEntity" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestBody" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PostMapping" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PutMapping" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PathVariable" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.GetMapping" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.DeleteMapping" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.CrossOrigin" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RestController" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestMapping" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.controller.user">
+        <type name="com.scarcolo.eventour.controller.user.UserController" classification="class" visibility="public">
+          <dependencies count="24">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.service.user.UserService" classification="uses" />
+            <depends-on name="org.springframework.beans.factory.annotation.Autowired" classification="uses" />
+            <depends-on name="org.springframework.http.ResponseEntity" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.AddUserRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.UserResponse" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestBody" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PostMapping" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.EditUserRequest" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PutMapping" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.PathVariable" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.GetMapping" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventResponseTourComplete" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestParam" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.AccountRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.AccountResponse" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.DeleteMapping" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.CrossOrigin" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RestController" classification="uses" />
+            <depends-on name="org.springframework.web.bind.annotation.RequestMapping" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.functions">
+        <type name="com.scarcolo.eventour.functions.BootstrapSingleton" classification="class" visibility="public" isFinal="yes">
+          <dependencies count="5">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.util.Map" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.TypesE" classification="uses" />
+            <depends-on name="java.util.HashMap" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.functions.Functionalities$1" classification="class" visibility="default">
+          <dependencies count="4">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="org.passay.CharacterData" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.functions.Functionalities" classification="class" visibility="public">
+          <dependencies count="26">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="javax.mail.internet.InternetAddress" classification="uses" />
+            <depends-on name="javax.mail.internet.AddressException" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+            <depends-on name="java.time.LocalDateTime" classification="uses" />
+            <depends-on name="java.time.LocalDate" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.Event" classification="uses" />
+            <depends-on name="java.security.MessageDigest" classification="uses" />
+            <depends-on name="java.math.BigInteger" classification="uses" />
+            <depends-on name="java.security.NoSuchAlgorithmException" classification="uses" />
+            <depends-on name="org.passay.PasswordGenerator" classification="uses" />
+            <depends-on name="org.passay.CharacterData" classification="uses" />
+            <depends-on name="org.passay.CharacterRule" classification="uses" />
+            <depends-on name="org.passay.EnglishCharacterData" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventPlus" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="java.time.ZoneId" classification="uses" />
+            <depends-on name="java.time.ZonedDateTime" classification="uses" />
+            <depends-on name="java.time.Instant" classification="uses" />
+            <depends-on name="java.time.chrono.ChronoLocalDateTime" classification="uses" />
+            <depends-on name="java.lang.StringBuilder" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities$1" classification="uses" />
+            <depends-on name="java.lang.Math" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.functions.Mail$1" classification="class" visibility="default">
+          <dependencies count="4">
+            <depends-on name="javax.mail.Authenticator" classification="extends" />
+            <depends-on name="javax.mail.PasswordAuthentication" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Mail" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.functions.Mail" classification="class" visibility="public">
+          <dependencies count="37">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.util.Properties" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="javax.mail.Session" classification="uses" />
+            <depends-on name="javax.mail.Message" classification="uses" />
+            <depends-on name="java.io.InputStream" classification="uses" />
+            <depends-on name="java.lang.StringBuilder" classification="uses" />
+            <depends-on name="java.io.BufferedReader" classification="uses" />
+            <depends-on name="javax.mail.internet.MimeBodyPart" classification="uses" />
+            <depends-on name="javax.mail.Multipart" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.Event" classification="uses" />
+            <depends-on name="javax.mail.MessagingException" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.Booking" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="java.io.IOException" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Mail$1" classification="uses" />
+            <depends-on name="javax.mail.Authenticator" classification="uses" />
+            <depends-on name="javax.mail.internet.MimeMessage" classification="uses" />
+            <depends-on name="javax.mail.internet.InternetAddress" classification="uses" />
+            <depends-on name="javax.mail.Address" classification="uses" />
+            <depends-on name="javax.mail.Message$RecipientType" classification="uses" />
+            <depends-on name="java.nio.file.Paths" classification="uses" />
+            <depends-on name="java.nio.file.Path" classification="uses" />
+            <depends-on name="java.nio.file.OpenOption" classification="uses" />
+            <depends-on name="java.nio.file.Files" classification="uses" />
+            <depends-on name="java.io.InputStreamReader" classification="uses" />
+            <depends-on name="java.io.Reader" classification="uses" />
+            <depends-on name="java.lang.Throwable" classification="uses" />
+            <depends-on name="javax.mail.internet.MimeMultipart" classification="uses" />
+            <depends-on name="javax.mail.BodyPart" classification="uses" />
+            <depends-on name="javax.mail.Transport" classification="uses" />
+            <depends-on name="java.time.LocalDateTime" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.util.Iterator" classification="uses" />
+            <depends-on name="java.time.format.DateTimeFormatter" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.functions.PartitaIVAFunctions" classification="class" visibility="public">
+          <dependencies count="2">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.functions.Sex" classification="enum" visibility="public" isFinal="yes">
+          <dependencies count="5">
+            <depends-on name="java.lang.Enum" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="java.lang.System" classification="uses" />
+            <depends-on name="java.lang.Object" classification="uses" />
+            <depends-on name="java.lang.Class" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.functions.TypesE" classification="enum" visibility="public" isFinal="yes">
+          <dependencies count="7">
+            <depends-on name="java.lang.Enum" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.BootstrapSingleton" classification="uses" />
+            <depends-on name="java.util.Map" classification="uses" />
+            <depends-on name="java.lang.Object" classification="uses" />
+            <depends-on name="java.lang.System" classification="uses" />
+            <depends-on name="java.lang.Class" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.model">
+        <type name="com.scarcolo.eventour.model.AccountRequest" classification="class" visibility="public">
+          <dependencies count="3">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.AccountResponse" classification="class" visibility="public">
+          <dependencies count="3">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.Location" classification="class" visibility="public">
+          <dependencies count="3">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.model.admin">
+        <type name="com.scarcolo.eventour.model.admin.AddAdminRequest" classification="class" visibility="public">
+          <dependencies count="3">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.admin.Admin" classification="class" visibility="public">
+          <dependencies count="8">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="org.springframework.data.annotation.Id" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.AddAdminRequest" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.mapping.Document" classification="uses" />
+            <depends-on name="java.lang.Exception" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+            <depends-on name="javax.mail.internet.AddressException" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.admin.AdminReportResponse" classification="class" visibility="public">
+          <dependencies count="7">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.ManagerPlusResponse" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="java.lang.Math" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.admin.AdminResponse" classification="class" visibility="public">
+          <dependencies count="6">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.Admin" classification="uses" />
+            <depends-on name="java.security.NoSuchAlgorithmException" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.admin.EditAdminRequest" classification="class" visibility="public">
+          <dependencies count="3">
+            <depends-on name="com.scarcolo.eventour.model.admin.AddAdminRequest" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.admin.ReportAdmResponse" classification="class" visibility="public">
+          <dependencies count="7">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventPlus" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.request.Request" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.model.booking">
+        <type name="com.scarcolo.eventour.model.booking.AddBookingRequest" classification="class" visibility="public">
+          <dependencies count="4">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.booking.Booking" classification="class" visibility="public">
+          <dependencies count="9">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="org.springframework.data.annotation.Id" classification="uses" />
+            <depends-on name="org.bson.types.ObjectId" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.AddBookingRequest" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.mapping.Document" classification="uses" />
+            <depends-on name="java.lang.IllegalArgumentException" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.booking.CheckBookingRequest" classification="class" visibility="public">
+          <dependencies count="3">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.booking.EditBookingRequest" classification="class" visibility="public">
+          <dependencies count="3">
+            <depends-on name="com.scarcolo.eventour.model.booking.AddBookingRequest" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.booking.PaymentRequest" classification="class" visibility="public">
+          <dependencies count="4">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.booking.ReviewBookingRequest" classification="class" visibility="public">
+          <dependencies count="4">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.booking.UserEventBookedResponse" classification="class" visibility="public">
+          <dependencies count="7">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.User" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.Event" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.model.event">
+        <type name="com.scarcolo.eventour.model.event.AddEventRequest" classification="class" visibility="public">
+          <dependencies count="7">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="java.time.LocalDateTime" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.event.EditEventRequest" classification="class" visibility="public">
+          <dependencies count="3">
+            <depends-on name="com.scarcolo.eventour.model.event.AddEventRequest" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.event.Event" classification="class" visibility="public">
+          <dependencies count="15">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="org.springframework.data.annotation.Id" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+            <depends-on name="org.bson.types.ObjectId" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.AddEventRequest" classification="uses" />
+            <depends-on name="java.time.LocalDateTime" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.mapping.Document" classification="uses" />
+            <depends-on name="java.lang.Exception" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+            <depends-on name="java.time.DateTimeException" classification="uses" />
+            <depends-on name="java.util.Arrays" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.event.EventBookedResponse" classification="class" visibility="public">
+          <dependencies count="6">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.Event" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.event.EventManResponse" classification="class" visibility="public">
+          <dependencies count="8">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="java.time.LocalDateTime" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.Manager" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.event.EventPlus" classification="class" visibility="public">
+          <dependencies count="15">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="org.springframework.data.annotation.Id" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+            <depends-on name="org.bson.types.ObjectId" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.AddEventRequest" classification="uses" />
+            <depends-on name="java.time.LocalDateTime" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.mapping.Document" classification="uses" />
+            <depends-on name="java.lang.Exception" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+            <depends-on name="java.time.DateTimeException" classification="uses" />
+            <depends-on name="java.util.Arrays" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.event.EventResponse" classification="class" visibility="public">
+          <dependencies count="8">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="java.time.LocalDateTime" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.Event" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.event.EventResponseTour" classification="class" visibility="public">
+          <dependencies count="9">
+            <depends-on name="com.scarcolo.eventour.model.event.EventResponse" classification="extends" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.Event" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="java.time.LocalDateTime" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Math" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.event.EventResponseTourComplete" classification="class" visibility="public">
+          <dependencies count="9">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.UserResponse" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventResponseTour" classification="uses" />
+            <depends-on name="java.lang.Math" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.model.manager">
+        <type name="com.scarcolo.eventour.model.manager.AddManagerRequest" classification="class" visibility="public">
+          <dependencies count="5">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.time.LocalDate" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.manager.EditManagerRequest" classification="class" visibility="public">
+          <dependencies count="3">
+            <depends-on name="com.scarcolo.eventour.model.manager.AddManagerRequest" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.manager.EventTick" classification="class" visibility="public">
+          <dependencies count="4">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.manager.Manager" classification="class" visibility="public">
+          <dependencies count="15">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="org.springframework.data.annotation.Id" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.AddManagerRequest" classification="uses" />
+            <depends-on name="java.time.LocalDate" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.mapping.Document" classification="uses" />
+            <depends-on name="java.lang.Exception" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+            <depends-on name="javax.mail.internet.AddressException" classification="uses" />
+            <depends-on name="java.time.chrono.ChronoLocalDate" classification="uses" />
+            <depends-on name="java.time.DateTimeException" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.PartitaIVAFunctions" classification="uses" />
+            <depends-on name="java.lang.IllegalArgumentException" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.manager.ManagerPlusResponse" classification="class" visibility="public">
+          <dependencies count="6">
+            <depends-on name="com.scarcolo.eventour.model.manager.ManagerResponse" classification="extends" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.Manager" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.request.Request" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.manager.ManagerReportResponse" classification="class" visibility="public">
+          <dependencies count="7">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventResponse" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="java.lang.Math" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.manager.ManagerResponse" classification="class" visibility="public">
+          <dependencies count="9">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.time.LocalDate" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.Manager" classification="uses" />
+            <depends-on name="java.security.NoSuchAlgorithmException" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.manager.ReportManResponse" classification="class" visibility="public">
+          <dependencies count="8">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="java.time.LocalDateTime" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.Booking" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.manager.TicketManResponse" classification="class" visibility="public">
+          <dependencies count="4">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.EventTick" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.model.request">
+        <type name="com.scarcolo.eventour.model.request.Request" classification="class" visibility="public">
+          <dependencies count="7">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="org.springframework.data.annotation.Id" classification="uses" />
+            <depends-on name="org.bson.types.ObjectId" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.mapping.Document" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.model.ticketinsp">
+        <type name="com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest" classification="class" visibility="public">
+          <dependencies count="3">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest" classification="class" visibility="public">
+          <dependencies count="3">
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.ticketinsp.TicketInsp" classification="class" visibility="public">
+          <dependencies count="9">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="org.springframework.data.annotation.Id" classification="uses" />
+            <depends-on name="org.bson.types.ObjectId" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.mapping.Document" classification="uses" />
+            <depends-on name="java.lang.Exception" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+            <depends-on name="java.lang.IllegalArgumentException" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" classification="class" visibility="public">
+          <dependencies count="4">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.TicketInsp" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.model.user">
+        <type name="com.scarcolo.eventour.model.user.AddUserRequest" classification="class" visibility="public">
+          <dependencies count="5">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.time.LocalDate" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.user.EditUserRequest" classification="class" visibility="public">
+          <dependencies count="3">
+            <depends-on name="com.scarcolo.eventour.model.user.AddUserRequest" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.user.User" classification="class" visibility="public">
+          <dependencies count="16">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="org.springframework.data.annotation.Id" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.AddUserRequest" classification="uses" />
+            <depends-on name="java.time.LocalDate" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.mapping.Document" classification="uses" />
+            <depends-on name="java.lang.Exception" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+            <depends-on name="javax.mail.internet.AddressException" classification="uses" />
+            <depends-on name="java.time.chrono.ChronoLocalDate" classification="uses" />
+            <depends-on name="java.time.DateTimeException" classification="uses" />
+            <depends-on name="java.lang.CharSequence" classification="uses" />
+            <depends-on name="java.util.Arrays" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.user.UserBookedResponse" classification="class" visibility="public">
+          <dependencies count="6">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.User" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.model.user.UserResponse" classification="class" visibility="public">
+          <dependencies count="9">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.fasterxml.jackson.annotation.JsonProperty" classification="uses" />
+            <depends-on name="java.time.LocalDate" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.User" classification="uses" />
+            <depends-on name="java.security.NoSuchAlgorithmException" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.repository.admin">
+        <type name="com.scarcolo.eventour.repository.admin.AdminRepository" classification="interface" visibility="public" isAbstract="yes">
+          <dependencies count="5">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="org.springframework.data.mongodb.repository.MongoRepository" classification="extends" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.Admin" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.repository.booking">
+        <type name="com.scarcolo.eventour.repository.booking.BookingRepository" classification="interface" visibility="public" isAbstract="yes">
+          <dependencies count="10">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="org.springframework.data.mongodb.repository.MongoRepository" classification="extends" />
+            <depends-on name="org.springframework.data.mongodb.core.aggregation.AggregationResults" classification="uses" />
+            <depends-on name="org.bson.types.ObjectId" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventBookedResponse" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.repository.Aggregation" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.UserBookedResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.UserEventBookedResponse" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.repository.event">
+        <type name="com.scarcolo.eventour.repository.event.EventPlusRepository" classification="interface" visibility="public" isAbstract="yes">
+          <dependencies count="2">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="org.springframework.data.mongodb.repository.MongoRepository" classification="extends" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.repository.event.EventRepository" classification="interface" visibility="public" isAbstract="yes">
+          <dependencies count="16">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="org.springframework.data.mongodb.repository.MongoRepository" classification="extends" />
+            <depends-on name="org.springframework.data.domain.Page" classification="uses" />
+            <depends-on name="org.springframework.data.domain.Pageable" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.Event" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.repository.Query" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+            <depends-on name="org.bson.types.ObjectId" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="org.springframework.data.domain.Sort" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.aggregation.AggregationResults" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventManResponse" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.repository.Aggregation" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.ReportManResponse" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.repository.manager">
+        <type name="com.scarcolo.eventour.repository.manager.ManagerRepository" classification="interface" visibility="public" isAbstract="yes">
+          <dependencies count="9">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="org.springframework.data.mongodb.repository.MongoRepository" classification="extends" />
+            <depends-on name="org.springframework.data.mongodb.core.aggregation.AggregationResults" classification="uses" />
+            <depends-on name="org.bson.types.ObjectId" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.repository.Aggregation" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.Manager" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.ReportAdmResponse" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.repository.manager.RequestRepository" classification="interface" visibility="public" isAbstract="yes">
+          <dependencies count="7">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="org.springframework.data.mongodb.repository.MongoRepository" classification="extends" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.request.Request" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.repository.Query" classification="uses" />
+            <depends-on name="org.springframework.data.domain.Sort" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.repository.ticketisp">
+        <type name="com.scarcolo.eventour.repository.ticketisp.TicketInspRepository" classification="interface" visibility="public" isAbstract="yes">
+          <dependencies count="8">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="org.springframework.data.mongodb.repository.MongoRepository" classification="extends" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.TicketInsp" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.repository.Query" classification="uses" />
+            <depends-on name="org.bson.types.ObjectId" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.repository.DeleteQuery" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.repository.user">
+        <type name="com.scarcolo.eventour.repository.user.UserRepository" classification="interface" visibility="public" isAbstract="yes">
+          <dependencies count="6">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="org.springframework.data.mongodb.repository.MongoRepository" classification="extends" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.User" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.repository.Query" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.service.admin">
+        <type name="com.scarcolo.eventour.service.admin.AdminService" classification="class" visibility="public">
+          <dependencies count="44">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.repository.admin.AdminRepository" classification="uses" />
+            <depends-on name="org.springframework.beans.factory.annotation.Autowired" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.manager.ManagerRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.service.manager.ManagerService" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.service.user.UserService" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.service.manager.RequestService" classification="uses" />
+            <depends-on name="org.springframework.http.ResponseEntity" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.AddAdminRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.AdminResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.Admin" classification="uses" />
+            <depends-on name="java.lang.Exception" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.EditAdminRequest" classification="uses" />
+            <depends-on name="java.util.Optional" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.AdminReportResponse" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.aggregation.AggregationResults" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.ReportAdmResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventPlus" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.Manager" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.ManagerPlusResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.request.Request" classification="uses" />
+            <depends-on name="org.springframework.stereotype.Service" classification="uses" />
+            <depends-on name="org.springframework.http.HttpStatus" classification="uses" />
+            <depends-on name="java.util.ArrayList" classification="uses" />
+            <depends-on name="java.lang.Class" classification="uses" />
+            <depends-on name="java.util.function.Consumer" classification="uses" />
+            <depends-on name="java.util.Iterator" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+            <depends-on name="java.time.LocalDateTime" classification="uses" />
+            <depends-on name="java.time.chrono.ChronoLocalDateTime" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="java.time.LocalDate" classification="uses" />
+            <depends-on name="java.lang.invoke.LambdaMetafactory" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandles$Lookup" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodType" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandle" classification="uses" />
+            <depends-on name="java.lang.invoke.CallSite" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandles" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.service.booking">
+        <type name="com.scarcolo.eventour.service.booking.BookingService" classification="class" visibility="public">
+          <dependencies count="51">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.repository.booking.BookingRepository" classification="uses" />
+            <depends-on name="org.springframework.beans.factory.annotation.Autowired" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.event.EventRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.event.EventPlusRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.user.UserRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.manager.ManagerRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.service.manager.RequestService" classification="uses" />
+            <depends-on name="org.springframework.http.ResponseEntity" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.AddBookingRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.Booking" classification="uses" />
+            <depends-on name="java.util.Optional" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.Event" classification="uses" />
+            <depends-on name="java.io.IOException" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventPlus" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="java.lang.Exception" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventBookedResponse" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.aggregation.AggregationResults" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.UserBookedResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.UserEventBookedResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.PaymentRequest" classification="uses" />
+            <depends-on name="java.time.LocalDate" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.Manager" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.service.booking.PaymentService" classification="uses" />
+            <depends-on name="com.stripe.model.Order" classification="uses" />
+            <depends-on name="java.security.NoSuchAlgorithmException" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="org.springframework.stereotype.Service" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.User" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Mail" classification="uses" />
+            <depends-on name="org.springframework.http.HttpStatus" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="java.util.ArrayList" classification="uses" />
+            <depends-on name="java.lang.Class" classification="uses" />
+            <depends-on name="java.util.function.Consumer" classification="uses" />
+            <depends-on name="org.bson.types.ObjectId" classification="uses" />
+            <depends-on name="java.lang.StringBuilder" classification="uses" />
+            <depends-on name="java.time.chrono.ChronoLocalDate" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="java.lang.CharSequence" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.service.booking.PaymentServiceImpl" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.request.Request" classification="uses" />
+            <depends-on name="java.util.Iterator" classification="uses" />
+            <depends-on name="java.lang.invoke.LambdaMetafactory" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandles$Lookup" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodType" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandle" classification="uses" />
+            <depends-on name="java.lang.invoke.CallSite" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandles" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.service.booking.PaymentService" classification="interface" visibility="public" isAbstract="yes">
+          <dependencies count="5">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.stripe.model.Customer" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.stripe.model.Order" classification="uses" />
+            <depends-on name="java.security.NoSuchAlgorithmException" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.service.booking.PaymentServiceImpl" classification="class" visibility="public">
+          <dependencies count="17">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.service.booking.PaymentService" classification="implements" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="com.stripe.model.Customer" classification="uses" />
+            <depends-on name="java.util.Map" classification="uses" />
+            <depends-on name="com.stripe.exception.StripeException" classification="uses" />
+            <depends-on name="com.stripe.model.Order" classification="uses" />
+            <depends-on name="java.security.MessageDigest" classification="uses" />
+            <depends-on name="java.lang.StringBuilder" classification="uses" />
+            <depends-on name="org.springframework.stereotype.Service" classification="uses" />
+            <depends-on name="com.stripe.Stripe" classification="uses" />
+            <depends-on name="java.util.HashMap" classification="uses" />
+            <depends-on name="java.security.NoSuchAlgorithmException" classification="uses" />
+            <depends-on name="java.lang.CharSequence" classification="uses" />
+            <depends-on name="java.lang.Math" classification="uses" />
+            <depends-on name="java.nio.charset.Charset" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.service.event">
+        <type name="com.scarcolo.eventour.service.event.EventService" classification="class" visibility="public">
+          <dependencies count="41">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.repository.event.EventRepository" classification="uses" />
+            <depends-on name="org.springframework.beans.factory.annotation.Autowired" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.user.UserRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.service.booking.BookingService" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.service.ticketisp.TicketInspService" classification="uses" />
+            <depends-on name="org.springframework.http.ResponseEntity" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.AddEventRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.Event" classification="uses" />
+            <depends-on name="java.lang.Exception" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EditEventRequest" classification="uses" />
+            <depends-on name="java.util.Optional" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="java.util.Map" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="org.springframework.data.domain.Pageable" classification="uses" />
+            <depends-on name="org.springframework.data.domain.Page" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+            <depends-on name="java.util.Calendar" classification="uses" />
+            <depends-on name="java.text.DateFormat" classification="uses" />
+            <depends-on name="org.springframework.data.domain.Sort" classification="uses" />
+            <depends-on name="org.springframework.stereotype.Service" classification="uses" />
+            <depends-on name="org.springframework.http.HttpStatus" classification="uses" />
+            <depends-on name="java.time.LocalDateTime" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.io.IOException" classification="uses" />
+            <depends-on name="java.util.ArrayList" classification="uses" />
+            <depends-on name="org.springframework.data.domain.PageRequest" classification="uses" />
+            <depends-on name="java.util.Iterator" classification="uses" />
+            <depends-on name="java.util.HashMap" classification="uses" />
+            <depends-on name="java.lang.Long" classification="uses" />
+            <depends-on name="java.lang.CharSequence" classification="uses" />
+            <depends-on name="java.text.SimpleDateFormat" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.User" classification="uses" />
+            <depends-on name="java.util.Arrays" classification="uses" />
+            <depends-on name="org.bson.types.ObjectId" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.service.manager">
+        <type name="com.scarcolo.eventour.service.manager.ManagerService" classification="class" visibility="public">
+          <dependencies count="41">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.repository.manager.ManagerRepository" classification="uses" />
+            <depends-on name="org.springframework.beans.factory.annotation.Autowired" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.manager.RequestRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.event.EventRepository" classification="uses" />
+            <depends-on name="org.springframework.http.ResponseEntity" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.AddManagerRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.ManagerResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.Manager" classification="uses" />
+            <depends-on name="java.lang.Exception" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.EditManagerRequest" classification="uses" />
+            <depends-on name="java.util.Optional" classification="uses" />
+            <depends-on name="javax.mail.internet.AddressException" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.request.Request" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventManResponse" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.aggregation.AggregationResults" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.ManagerReportResponse" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.Event" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.ReportManResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.booking.Booking" classification="uses" />
+            <depends-on name="org.springframework.stereotype.Service" classification="uses" />
+            <depends-on name="org.springframework.http.HttpStatus" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="java.util.ArrayList" classification="uses" />
+            <depends-on name="java.lang.Class" classification="uses" />
+            <depends-on name="java.util.function.Consumer" classification="uses" />
+            <depends-on name="java.util.Iterator" classification="uses" />
+            <depends-on name="java.time.LocalDateTime" classification="uses" />
+            <depends-on name="java.time.chrono.ChronoLocalDateTime" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventResponse" classification="uses" />
+            <depends-on name="java.lang.invoke.LambdaMetafactory" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandles$Lookup" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodType" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandle" classification="uses" />
+            <depends-on name="java.lang.invoke.CallSite" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandles" classification="uses" />
+          </dependencies>
+        </type>
+        <type name="com.scarcolo.eventour.service.manager.RequestService" classification="class" visibility="public">
+          <dependencies count="25">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.repository.manager.RequestRepository" classification="uses" />
+            <depends-on name="org.springframework.beans.factory.annotation.Autowired" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.manager.ManagerRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.request.Request" classification="uses" />
+            <depends-on name="java.util.Optional" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.ManagerPlusResponse" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+            <depends-on name="org.springframework.stereotype.Service" classification="uses" />
+            <depends-on name="java.time.LocalDate" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+            <depends-on name="java.util.ArrayList" classification="uses" />
+            <depends-on name="org.springframework.data.domain.Sort" classification="uses" />
+            <depends-on name="java.util.function.Predicate" classification="uses" />
+            <depends-on name="java.util.Iterator" classification="uses" />
+            <depends-on name="org.bson.types.ObjectId" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.Manager" classification="uses" />
+            <depends-on name="java.lang.invoke.LambdaMetafactory" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandles$Lookup" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodType" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandle" classification="uses" />
+            <depends-on name="java.lang.invoke.CallSite" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandles" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.service.ticketisp">
+        <type name="com.scarcolo.eventour.service.ticketisp.TicketInspService" classification="class" visibility="public">
+          <dependencies count="33">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.repository.ticketisp.TicketInspRepository" classification="uses" />
+            <depends-on name="org.springframework.beans.factory.annotation.Autowired" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.manager.ManagerRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.event.EventRepository" classification="uses" />
+            <depends-on name="org.springframework.http.ResponseEntity" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.TicketInsp" classification="uses" />
+            <depends-on name="java.lang.Exception" classification="uses" />
+            <depends-on name="java.util.Optional" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="org.springframework.data.mongodb.core.aggregation.AggregationResults" classification="uses" />
+            <depends-on name="org.springframework.stereotype.Service" classification="uses" />
+            <depends-on name="org.springframework.http.HttpStatus" classification="uses" />
+            <depends-on name="java.lang.Math" classification="uses" />
+            <depends-on name="java.lang.StringBuilder" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+            <depends-on name="java.util.ArrayList" classification="uses" />
+            <depends-on name="java.lang.Class" classification="uses" />
+            <depends-on name="java.util.function.Consumer" classification="uses" />
+            <depends-on name="java.util.Iterator" classification="uses" />
+            <depends-on name="org.bson.types.ObjectId" classification="uses" />
+            <depends-on name="java.lang.invoke.LambdaMetafactory" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandles$Lookup" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodType" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandle" classification="uses" />
+            <depends-on name="java.lang.invoke.CallSite" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandles" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+      <namespace name="com.scarcolo.eventour.service.user">
+        <type name="com.scarcolo.eventour.service.user.UserService" classification="class" visibility="public">
+          <dependencies count="59">
+            <depends-on name="java.lang.Object" classification="extends" />
+            <depends-on name="com.scarcolo.eventour.repository.user.UserRepository" classification="uses" />
+            <depends-on name="org.springframework.beans.factory.annotation.Autowired" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.manager.ManagerRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.admin.AdminRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.manager.RequestRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.ticketisp.TicketInspRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.event.EventRepository" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.repository.booking.BookingRepository" classification="uses" />
+            <depends-on name="org.springframework.http.ResponseEntity" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.AddUserRequest" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.UserResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.User" classification="uses" />
+            <depends-on name="java.lang.Exception" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.user.EditUserRequest" classification="uses" />
+            <depends-on name="java.util.Optional" classification="uses" />
+            <depends-on name="java.lang.String" classification="uses" />
+            <depends-on name="java.lang.Boolean" classification="uses" />
+            <depends-on name="java.util.List" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventBookedResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.AccountResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.TicketInsp" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.request.Request" classification="uses" />
+            <depends-on name="java.time.LocalDate" classification="uses" />
+            <depends-on name="java.lang.Integer" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventResponseTourComplete" classification="uses" />
+            <depends-on name="java.lang.Double" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.Event" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.event.EventResponseTour" classification="uses" />
+            <depends-on name="org.springframework.data.domain.Page" classification="uses" />
+            <depends-on name="org.springframework.stereotype.Service" classification="uses" />
+            <depends-on name="org.springframework.http.HttpStatus" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Functionalities" classification="uses" />
+            <depends-on name="java.util.Date" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.Location" classification="uses" />
+            <depends-on name="java.util.Iterator" classification="uses" />
+            <depends-on name="java.util.ArrayList" classification="uses" />
+            <depends-on name="java.lang.Class" classification="uses" />
+            <depends-on name="java.util.function.Consumer" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.ticketinsp.TicketInspResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.Admin" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.admin.AdminResponse" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.Manager" classification="uses" />
+            <depends-on name="java.time.chrono.ChronoLocalDate" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.model.manager.ManagerPlusResponse" classification="uses" />
+            <depends-on name="org.springframework.data.domain.Sort" classification="uses" />
+            <depends-on name="java.time.LocalDateTime" classification="uses" />
+            <depends-on name="java.util.function.Predicate" classification="uses" />
+            <depends-on name="java.util.Collection" classification="uses" />
+            <depends-on name="org.springframework.data.domain.PageRequest" classification="uses" />
+            <depends-on name="org.springframework.data.domain.Pageable" classification="uses" />
+            <depends-on name="com.scarcolo.eventour.functions.Mail" classification="uses" />
+            <depends-on name="java.time.chrono.ChronoLocalDateTime" classification="uses" />
+            <depends-on name="java.lang.invoke.LambdaMetafactory" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandles$Lookup" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodType" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandle" classification="uses" />
+            <depends-on name="java.lang.invoke.CallSite" classification="uses" />
+            <depends-on name="java.lang.invoke.MethodHandles" classification="uses" />
+          </dependencies>
+        </type>
+      </namespace>
+    </container>
+  </context>
+</ODEM>

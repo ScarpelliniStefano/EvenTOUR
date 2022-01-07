@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Booking.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.booking</a> &gt; <span class="el_source">Booking.java</span></div><h1>Booking.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Booking.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.booking</a> &gt; <span class="el_source">Booking.java</span></div><h1>Booking.java</h1><pre class="source lang-java linenums">/**
  * 
  */
 package com.scarcolo.eventour.model.booking;
@@ -30,34 +30,30 @@ public class Booking {
 	/** The prenoted seat. */
 	private Integer prenotedSeat;	
 	
-	/**  Come?. */
+	/**  Come? */
 	private Boolean come;	
-	
-	/**  review. */
-	private int review;
 	
 	/**
 	 * Instantiates a new booking.
 	 *
 	 * @param request the request
 	 */
-<span class="fc" id="L44">	public Booking(AddBookingRequest request) {</span>
-<span class="fc" id="L45">        this.setUserId(new ObjectId(request.userId));</span>
-<span class="fc" id="L46">        this.setEventId(new ObjectId(request.eventId));</span>
-<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if(request.prenotedSeat&lt;0) {</span>
-<span class="nc" id="L48">        	throw new IllegalArgumentException();</span>
+<span class="fc" id="L41">	public Booking(AddBookingRequest request) {</span>
+<span class="fc" id="L42">        this.setUserId(new ObjectId(request.userId));</span>
+<span class="fc" id="L43">        this.setEventId(new ObjectId(request.eventId));</span>
+<span class="pc bpc" id="L44" title="1 of 2 branches missed.">        if(request.prenotedSeat&lt;0) {</span>
+<span class="nc" id="L45">        	throw new IllegalArgumentException();</span>
         }
-<span class="fc" id="L50">        this.prenotedSeat=request.prenotedSeat;</span>
-<span class="fc" id="L51">        this.come=false;</span>
-<span class="fc" id="L52">        this.review=-1;</span>
-<span class="fc" id="L53">    }</span>
+<span class="fc" id="L47">        this.prenotedSeat=request.prenotedSeat;</span>
+<span class="fc" id="L48">        this.setCome(false);</span>
+<span class="fc" id="L49">    }</span>
 	
 	/**
 	 * Instantiates a new booking.
 	 */
-<span class="fc" id="L58">	public Booking() {</span>
+<span class="fc" id="L54">	public Booking() {</span>
 		
-<span class="fc" id="L60">	}</span>
+<span class="fc" id="L56">	}</span>
 	
 	/**
 	 * Gets the id.
@@ -65,7 +61,7 @@ public class Booking {
 	 * @return the id
 	 */
 	public String getId() {
-<span class="fc" id="L68">		return id;</span>
+<span class="fc" id="L64">		return id;</span>
 	}
 
 	/**
@@ -74,8 +70,8 @@ public class Booking {
 	 * @param id the new id
 	 */
 	public void setId(String id) {
-<span class="nc" id="L77">		this.id = id;</span>
-<span class="nc" id="L78">	}</span>
+<span class="nc" id="L73">		this.id = id;</span>
+<span class="nc" id="L74">	}</span>
 
 	/**
 	 * Gets the user id.
@@ -83,7 +79,7 @@ public class Booking {
 	 * @return the user id
 	 */
 	public String getUserId() {
-<span class="fc" id="L86">		return userId.toHexString();</span>
+<span class="fc" id="L82">		return userId.toHexString();</span>
 	}
 
 	/**
@@ -92,8 +88,8 @@ public class Booking {
 	 * @param userId the new user id
 	 */
 	public void setUserId(ObjectId userId) {
-<span class="fc" id="L95">		this.userId = userId;</span>
-<span class="fc" id="L96">	}</span>
+<span class="fc" id="L91">		this.userId = userId;</span>
+<span class="fc" id="L92">	}</span>
 
 	/**
 	 * Gets the event id.
@@ -101,7 +97,7 @@ public class Booking {
 	 * @return the event id
 	 */
 	public String getEventId() {
-<span class="fc" id="L104">		return eventId.toHexString();</span>
+<span class="fc" id="L100">		return eventId.toHexString();</span>
 	}
 
 	/**
@@ -110,8 +106,8 @@ public class Booking {
 	 * @param eventId the new event id
 	 */
 	public void setEventId(ObjectId eventId) {
-<span class="fc" id="L113">		this.eventId = eventId;</span>
-<span class="fc" id="L114">	}</span>
+<span class="fc" id="L109">		this.eventId = eventId;</span>
+<span class="fc" id="L110">	}</span>
 
 	/**
 	 * Gets the prenoted seat.
@@ -119,7 +115,7 @@ public class Booking {
 	 * @return the prenoted seat
 	 */
 	public Integer getPrenotedSeat() {
-<span class="fc" id="L122">		return prenotedSeat;</span>
+<span class="fc" id="L118">		return prenotedSeat;</span>
 	}
 
 	/**
@@ -128,8 +124,8 @@ public class Booking {
 	 * @param prenotedSeat the new prenoted seat
 	 */
 	public void setPrenotedSeat(Integer prenotedSeat) {
-<span class="nc" id="L131">		this.prenotedSeat = prenotedSeat;</span>
-<span class="nc" id="L132">	}</span>
+<span class="nc" id="L127">		this.prenotedSeat = prenotedSeat;</span>
+<span class="nc" id="L128">	}</span>
 
 	/**
 	 * Gets the come.
@@ -137,7 +133,7 @@ public class Booking {
 	 * @return the come
 	 */
 	public Boolean getCome() {
-<span class="fc" id="L140">		return come;</span>
+<span class="fc" id="L136">		return come;</span>
 	}
 
 	/**
@@ -146,25 +142,7 @@ public class Booking {
 	 * @param come the new come
 	 */
 	public void setCome(Boolean come) {
-<span class="fc" id="L149">		this.come = come;</span>
-<span class="fc" id="L150">	}</span>
-
-	/**
-	 * Gets the review.
-	 *
-	 * @return the review
-	 */
-	public int getReview() {
-<span class="fc" id="L158">		return review;</span>
-	}
-
-	/**
-	 * Sets the review.
-	 *
-	 * @param review the new review
-	 */
-	public void setReview(int review) {
-<span class="pc bpc" id="L167" title="2 of 4 branches missed.">		this.review = (review&gt;0&amp;&amp;review&lt;6) ? review : -1;</span>
-<span class="fc" id="L168">	}</span>
+<span class="fc" id="L145">		this.come = come;</span>
+<span class="fc" id="L146">	}</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

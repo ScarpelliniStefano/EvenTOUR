@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventController.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.controller.event</a> &gt; <span class="el_source">EventController.java</span></div><h1>EventController.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.controller.event;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventController.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (1) (30 dic 2021 11:07:32)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.controller.event</a> &gt; <span class="el_source">EventController.java</span></div><h1>EventController.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.controller.event;
 
 
-import java.text.ParseException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +10,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.scarcolo.eventour.model.event.AddEventRequest;
-import com.scarcolo.eventour.model.event.EditEventRequest;
 import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.service.event.EventService;
 
@@ -29,48 +26,38 @@ import com.scarcolo.eventour.service.event.EventService;
 @CrossOrigin(origins = &quot;*&quot;, allowedHeaders = &quot;*&quot;)
 @RestController
 @RequestMapping(&quot;/api&quot;)
-<span class="fc" id="L32">public class EventController {</span>
+<span class="fc" id="L29">public class EventController {</span>
 	
-		/** The event service. */
-		@Autowired
-		private EventService eventService;
-		 
-	 	/**
-	 	 * Adds the event.
-	 	 *
-	 	 * @param request the request with data to add
-	 	 * @return the response entity with event formatted
-	 	 * @throws Exception the exception if add event is not possible
-	 	 */
-	 	@PostMapping(&quot;/events&quot;)
+	/** The event service. */
+	@Autowired
+	private EventService eventService;
+	 
+ 	/**
+ 	 * Adds the event.
+ 	 *
+ 	 * @param request the request
+ 	 * @return the response entity
+ 	 * @throws Exception the exception
+ 	 */
+ 	@PostMapping(&quot;/events&quot;)
 	    public ResponseEntity&lt;EventResponse&gt; addEvent(@RequestBody AddEventRequest request) throws Exception{
-<span class="fc" id="L47">	      return eventService.add(request);</span>
+<span class="fc" id="L44">	      return eventService.add(request);</span>
 	    }
 
-	   
-	    /**
-    	 * Update event.
-    	 *
-    	 * @param request the request with data to update
-    	 * @return the response entity  with event formatted
-    	 * @throws Exception the exception if update event is not possible
-    	 */
-    	@PutMapping(&quot;/events&quot;)
-	    public ResponseEntity&lt;EventResponse&gt; updateEvent(@RequestBody EditEventRequest request) throws Exception{
-<span class="fc" id="L60">	        return eventService.update(request);</span>
-	    }
-
-
+ 	@DeleteMapping(&quot;/events/{id}&quot;)
+    public boolean deleteEventById(@PathVariable(&quot;id&quot;) String id){
+<span class="fc" id="L49">        return eventService.delete(id);</span>
+    }
 	   
 	    /**
     	 * Gets the event by id.
     	 *
-    	 * @param id the id of event
-    	 * @return the event by id specified
+    	 * @param id the id
+    	 * @return the event by id
     	 */
     	@GetMapping(&quot;/events/{id}&quot;)
 	    public ResponseEntity&lt;EventResponse&gt; getEventById(@PathVariable(&quot;id&quot;) String id){
-<span class="fc" id="L73">	        return eventService.getById(id);</span>
+<span class="fc" id="L60">	        return eventService.getById(id);</span>
 	    }
 	    
 
@@ -79,134 +66,30 @@ import com.scarcolo.eventour.service.event.EventService;
     	 *
     	 * @param page the page
     	 * @param size the size
-    	 * @param ordered the order of response
-    	 * @param param the param to order
-    	 * @return all events ordered and divided by page
+    	 * @param ordered the ordered
+    	 * @param param the param
+    	 * @return the all events
     	 */
     	@GetMapping(&quot;/events&quot;)
 	    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; getAllEvents(@RequestParam(defaultValue = &quot;0&quot;) int page,@RequestParam(defaultValue = &quot;20&quot;) int size, @RequestParam(required = false) String ordered, @RequestParam(required = false) String param){
-<span class="fc" id="L88">	        return eventService.getAll(page,size,ordered,param);</span>
+<span class="fc" id="L75">	        return eventService.getAll(page,size,ordered,param);</span>
 	    }
 	    
+	    
 	    /**
-    	 * Gets the events by data or interval of data.
+    	 * Gets the event manager by id.
     	 *
     	 * @param page the page
     	 * @param size the size
-    	 * @param data the data/interval of data (ex. '2021-11-05' or '2021-11-05,2022-01-18')
-    	 * @return the events by data
-    	 * @throws ParseException the parse exception of data inserted
-    	 */
-    	@GetMapping(&quot;/events/data={data}&quot;)
-	    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; getEventsByData(@RequestParam(defaultValue = &quot;0&quot;) int page,@RequestParam(defaultValue = &quot;20&quot;) int size,@PathVariable(&quot;data&quot;) String data) throws ParseException{
-<span class="fc" id="L102">	    	 return eventService.getByData(page,size,data);</span>
-	    }
-	    
-	    /**
-    	 * Gets the events by location (regione, provincia o città).
-    	 *
-    	 * @param page the page
-    	 * @param size the size
-    	 * @param type the type of location (regione, provincia o città)
-    	 * @param loc the loc (name of the location)
-    	 * @return the events by location
-    	 */
-    	@GetMapping(&quot;/events/loc={type}/{loc}&quot;)
-	    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; getEventsByLocation(@RequestParam(defaultValue = &quot;0&quot;) int page,@RequestParam(defaultValue = &quot;20&quot;) int size,@PathVariable(&quot;type&quot;) String type, @PathVariable(&quot;loc&quot;) String loc){
-<span class="fc" id="L116">	    	return eventService.getByLoc(page,size,loc,type);</span>
-	    }
-	    
-	    /**
-    	 * Gets the events by type or types.
-    	 *
-    	 * @param page the page
-    	 * @param size the size
-    	 * @param type the type/types (ex. '1.4.1,1.1.2')
-    	 * @return the events by type
-    	 */
-    	@GetMapping(&quot;/events/type={type}&quot;)
-	    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; getEventsByType(@RequestParam(defaultValue = &quot;0&quot;) int page,@RequestParam(defaultValue = &quot;20&quot;) int size,@PathVariable(&quot;type&quot;) String type){
-<span class="fc" id="L129">	    	 return eventService.getByTypes(page,size,type);</span>
-	    }
-	    
-	    /**
-    	 * Gets the events by preference.
-    	 *
-    	 * @param page the page
-    	 * @param size the size
-    	 * @param idPref the preference
-    	 * @param locInclude if include filter with region or not
-    	 * @return the events by preference
-    	 */
-    	@GetMapping(&quot;/events/pref/{id}&quot;)
-	    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; getEventsByPref(@RequestParam(defaultValue = &quot;0&quot;) int page,@RequestParam(defaultValue = &quot;20&quot;) int size,@PathVariable(&quot;id&quot;) String idPref,@RequestParam(defaultValue = &quot;false&quot;) boolean locInclude){
-<span class="fc" id="L143">	    	 return eventService.getByPreferences(page,size,idPref,locInclude);</span>
-	    }
-	    
-	    /**
-    	 * Get all events of a manager.
-    	 *
-    	 * @param page the page
-    	 * @param size the size
-    	 * @param id the id of manager
+    	 * @param id the id
     	 * @return the event manager by id
     	 */
     	@GetMapping(&quot;/events/manager/{id}&quot;)
 	    public ResponseEntity&lt;Map&lt;String, Object&gt;&gt; getEventManagerById(@RequestParam(defaultValue = &quot;0&quot;) int page,@RequestParam(defaultValue = &quot;20&quot;) int size,@PathVariable(&quot;id&quot;) String id){
-<span class="fc" id="L156">	        return eventService.getByIdMan(page,size,id);</span>
+<span class="fc" id="L89">	        return eventService.getByIdMan(page,size,id);</span>
 	    }
 	    
-	    /**
-	  	 * Delete event by id.
-	  	 *
-	  	 * @param id the id
-	  	 * @return true, if successful
-	  	 */
-	  	@DeleteMapping(&quot;/events/{id}&quot;)
-	    public boolean deleteEventById(@PathVariable(&quot;id&quot;) String id){
-<span class="fc" id="L167">	        return eventService.delete(id);</span>
-	    }
-	  /*
-	   * API OF EVENTS WITHOUT PAGE AND SIZE, BUT WITH SAME SIGNATURE
-	   *   
-	   *   @GetMapping(&quot;/events&quot;)
-	    public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getAllEvents(@RequestParam(required = false) String ordered, @RequestParam(required = false) String param){
-	        return eventService.getAll(ordered,param);
-	    }
 	    
-	    @GetMapping(&quot;/events/data={data}&quot;)
-	    public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getEventsByData(@PathVariable(&quot;data&quot;) String data) throws ParseException{
-	    	 return eventService.getByData(data);
-	    }
-	    
-	    @GetMapping(&quot;/events/loc={type}/{loc}&quot;)
-	    public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getEventsByLocation(@PathVariable(&quot;type&quot;) String type, @PathVariable(&quot;loc&quot;) String loc){
-	    	return eventService.getByLoc(loc,type);
-	    }
-	    
-	    @GetMapping(&quot;/events/type={type}&quot;)
-	    public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getEventsByType(@PathVariable(&quot;type&quot;) String type){
-	    	 System.out.println(type);
-	    	 return eventService.getByTypes(type);
-	    }
-	    
-	    @GetMapping(&quot;/events/pref={pref}&quot;)
-	    public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getEventsByPref(@PathVariable(&quot;pref&quot;) String pref){
-	    	 return eventService.getByPreferences(pref);
-	    }
-	    
-	    @GetMapping(&quot;/events/manager/{id}&quot;)
-	    public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getEventManagerById(@PathVariable(&quot;id&quot;) String id){
-	        return eventService.getByIdMan(id);
-	    }
-	    
-	    @GetMapping(&quot;/events/disp&quot;)
-	    public ResponseEntity&lt;List&lt;EventResponse&gt;&gt; getEventDisp(){
-	        return eventService.getEventsDisp();
-	    }*/
-
-	   
-
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (1) (30 dic 2021 11:07:32)</div></body></html>

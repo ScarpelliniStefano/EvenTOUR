@@ -55,9 +55,6 @@ public class User{
 	/** The residence. */
 	private Location residence;
 	
-	/** The newsletter. */
-	private Boolean newsletter;
-	
 	/** The types. */
 	private String[] types;
 	
@@ -199,9 +196,9 @@ public class User{
 	 * Sets the date of birth check.
 	 *
 	 * @param dateOfBirth the new date of birth check
-	 * @throws Exception the exception
+	 * @throws DateTimeException the exception for date incorrect
 	 */
-	private void setDateOfBirthCheck(Date dateOfBirth) throws Exception {
+	private void setDateOfBirthCheck(Date dateOfBirth) throws DateTimeException {
 		if(dateOfBirth.before(new Date())) {
 			this.dateOfBirth = dateOfBirth;
 		}else {
@@ -235,7 +232,7 @@ public class User{
 	 * @param sex the new sex
 	 */
 	public void setSex(String sex) {
-		this.sex = (sex.equalsIgnoreCase("M")) ? "M" : "F";
+		this.sex = (sex.toUpperCase().contentEquals("M")) ? "M" : "F";
 	}
 
 	/**
@@ -330,23 +327,5 @@ public class User{
 			throw new AddressException();
 		}
 			
-	}
-
-	/**
-	 * Gets the newsletter.
-	 *
-	 * @return the newsletter
-	 */
-	public Boolean getNewsletter() {
-		return newsletter;
-	}
-
-	/**
-	 * Sets the newsletter.
-	 *
-	 * @param newsletter the new newsletter
-	 */
-	public void setNewsletter(Boolean newsletter) {
-		this.newsletter = newsletter;
 	}
 }

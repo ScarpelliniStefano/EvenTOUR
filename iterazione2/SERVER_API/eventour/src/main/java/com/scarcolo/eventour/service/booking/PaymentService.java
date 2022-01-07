@@ -14,10 +14,10 @@ public interface PaymentService {
   /**
    * Creates the customer.
    *
-   * @param descr the description of transaction
-   * @param name the name of user
-   * @param surname the surname of user
-   * @param mail the mail of user
+   * @param descr the descr
+   * @param name the name
+   * @param surname the surname
+   * @param mail the mail
    * @return the customer
    */
   public Customer createCustomer(String descr,String name,String surname,String mail);
@@ -26,7 +26,7 @@ public interface PaymentService {
    * Charge credit card.
    *
    * @param order the order
-   * @param cardNr the card number
+   * @param cardNr the card nr
    * @param month the month
    * @param year the year
    * @param cvv the cvv

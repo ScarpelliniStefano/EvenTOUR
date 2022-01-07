@@ -71,7 +71,7 @@ public class Event {
 	 * @throws Exception the exception of conversion of dates
 	 */
 	public Event(AddEventRequest request) throws Exception {
-		this.title=request.title;
+        this.title=request.title;
         this.description=request.description;
         this.location=request.location;
         this.types=request.types;
@@ -93,38 +93,6 @@ public class Event {
  	public Event() {
 	    }
 	
-	/**
-	 * Instantiates a new event.
-	 *
-	 * @param id the id
-	 * @param title the title
-	 * @param description the description
-	 * @param location the location
-	 * @param types the types
-	 * @param dataOra the data ora
-	 * @param managerId the manager id
-	 * @param urlImage the url image
-	 * @param totSeat the tot seat
-	 * @param freeSeat the free seat
-	 * @param price the price
-	 * @throws Exception the exception
-	 */
-	public Event(String id, String title, String description, Location location, String[] types,
-			LocalDateTime dataOra, String managerId, String urlImage, Integer totSeat, Integer freeSeat,
-			Double price) throws Exception {
-		this.id=id;
-		this.title=title;
-        this.description=description;
-        this.location=location;
-        this.types=types;
-        this.dataOra=Functionalities.convertToDate(dataOra);
-        this.managerId=new ObjectId(managerId);
-        this.urlImage=urlImage;
-        this.totSeat=totSeat;
-        this.freeSeat=freeSeat;
-        this.price=price;
-	}
-
 	/**
 	 * Gets the id.
 	 *
@@ -244,9 +212,9 @@ public class Event {
 	 * Sets the date check.
 	 *
 	 * @param dataOra the new date check
-	 * @throws DateTimeException the exception for date
+	 * @throws Exception the exception
 	 */
-	private void setDateCheck(Date dataOra) throws DateTimeException {
+	private void setDateCheck(Date dataOra) throws Exception {
 		if(dataOra.after(new Date())) {
 			this.dataOra = dataOra;
 		}else {

@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventourApplication_UserTests.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour</a> &gt; <span class="el_source">EventourApplication_UserTests.java</span></div><h1>EventourApplication_UserTests.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour;
+
+
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.junit.jupiter.api.Test;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.model.AccountRequest;
+import com.scarcolo.eventour.model.AccountResponse;
+import com.scarcolo.eventour.model.Location;
+import com.scarcolo.eventour.model.manager.ManagerResponse;
+import com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest;
+import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
+import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
+import com.scarcolo.eventour.model.user.AddUserRequest;
+import com.scarcolo.eventour.model.user.EditUserRequest;
+import com.scarcolo.eventour.model.user.UserResponse;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+
+import java.time.LocalDate;
+import java.util.LinkedHashMap;
+
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+<span class="fc" id="L38">class EventourApplication_UserTests {</span>
+	@LocalServerPort
+	private int port;
+
+	@Autowired
+	private TestRestTemplate restTemplate;
+	
+	@Test
+	public void getEvenTour() throws Exception {
+<span class="fc" id="L47">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api//users/61a0a933bce0e98fbb2da18a/eventour/5&quot;,</span>
+<span class="fc" id="L48">				String.class);</span>
+<span class="fc" id="L49">		JSONObject obj=new JSONObject(request);</span>
+<span class="fc" id="L50">		assertEquals(obj.getJSONObject(&quot;user&quot;).getString(&quot;id&quot;),&quot;61a0a933bce0e98fbb2da18a&quot;);</span>
+		
+<span class="fc" id="L52">	}</span>
+	
+	
+	@Test
+	public void getUserById() throws Exception {
+<span class="fc" id="L57">		UserResponse request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/users/61a0a933bce0e98fbb2da18a&quot;,</span>
+<span class="fc" id="L58">				UserResponse.class);</span>
+<span class="fc" id="L59">		assertEquals(request.getId(),&quot;61a0a933bce0e98fbb2da18a&quot;);</span>
+<span class="fc" id="L60">		assertEquals(request.getMail(),&quot;Morgana_Battistini@libero.it&quot;);</span>
+<span class="fc" id="L61">		assertEquals(request.getSurname(),&quot;Battistini&quot;);</span>
+		
+<span class="fc" id="L63">	}</span>
+	
+	@Test
+	public void getUserByIdError() throws Exception {
+<span class="fc" id="L67">		ResponseEntity&lt;TicketInspResponse&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/61a0a933bce0e98fbb2da184&quot;,</span>
+<span class="fc" id="L68">				TicketInspResponse.class);</span>
+<span class="fc" id="L69">		assertEquals(request.getStatusCode(),HttpStatus.NOT_FOUND);</span>
+		
+<span class="fc" id="L71">	}</span>
+	
+	@Test
+	public void newUser() throws Exception {
+<span class="fc" id="L75">		AddUserRequest request=new AddUserRequest();</span>
+<span class="fc" id="L76">		request.name=&quot;NomeProva&quot;;</span>
+<span class="fc" id="L77">		request.surname=&quot;CognomeProva&quot;;</span>
+<span class="fc" id="L78">		request.dateOfBirth=LocalDate.now().minusYears(30);</span>
+<span class="fc" id="L79">		request.mail=&quot;provaUser@gmail.com&quot;;</span>
+<span class="fc" id="L80">		request.password=&quot;provaPsw&quot;;</span>
+<span class="fc" id="L81">		request.residence=new Location();</span>
+<span class="fc" id="L82">			request.residence.setLocality(&quot;prova via&quot;);</span>
+<span class="fc" id="L83">			request.residence.setCap(&quot;24042&quot;);</span>
+<span class="fc" id="L84">			request.residence.setRegione(&quot;Lombardia&quot;);</span>
+<span class="fc" id="L85">			request.residence.setProvincia(&quot;Bergamo&quot;);</span>
+<span class="fc" id="L86">			request.residence.setCity(&quot;Albino&quot;);</span>
+<span class="fc" id="L87">			request.residence.setLat(44d);</span>
+<span class="fc" id="L88">			request.residence.setLng(9d);</span>
+<span class="fc" id="L89">			request.residence.setSigla(&quot;BG&quot;);</span>
+<span class="fc" id="L90">		request.sex=&quot;M&quot;;</span>
+<span class="fc" id="L91">		String[] tipi= {&quot;1.2.2&quot;,&quot;2.2&quot;};</span>
+<span class="fc" id="L92">		request.types=tipi;</span>
+<span class="fc" id="L93">		request.username=&quot;userProva&quot;;</span>
+<span class="fc" id="L94">		UserResponse userCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/users&quot;, request, UserResponse.class);</span>
+<span class="fc" id="L95">		assertEquals(userCreated.getMail(), &quot;provaUser@gmail.com&quot;);</span>
+<span class="fc" id="L96">		String reqDel=&quot;http://localhost:&quot; + port + &quot;/api/users/&quot;+userCreated.getId();</span>
+<span class="fc" id="L97">		restTemplate.delete(reqDel);</span>
+		
+
+<span class="fc" id="L100">	}</span>
+	
+	@Test
+	public void updateUser() throws Exception {
+<span class="fc" id="L104">		AddUserRequest request=new AddUserRequest();</span>
+<span class="fc" id="L105">		request.name=&quot;NomeProva&quot;;</span>
+<span class="fc" id="L106">		request.surname=&quot;CognomeProva&quot;;</span>
+<span class="fc" id="L107">		request.dateOfBirth=LocalDate.now().minusYears(30);</span>
+<span class="fc" id="L108">		request.mail=&quot;provaUser@gmail.com&quot;;</span>
+<span class="fc" id="L109">		request.password=&quot;provaPsw&quot;;</span>
+<span class="fc" id="L110">		request.residence=new Location();</span>
+<span class="fc" id="L111">			request.residence.setLocality(&quot;prova via&quot;);</span>
+<span class="fc" id="L112">			request.residence.setCap(&quot;24042&quot;);</span>
+<span class="fc" id="L113">			request.residence.setRegione(&quot;Lombardia&quot;);</span>
+<span class="fc" id="L114">			request.residence.setProvincia(&quot;Bergamo&quot;);</span>
+<span class="fc" id="L115">			request.residence.setCity(&quot;Albino&quot;);</span>
+<span class="fc" id="L116">			request.residence.setLat(44d);</span>
+<span class="fc" id="L117">			request.residence.setLng(9d);</span>
+<span class="fc" id="L118">			request.residence.setSigla(&quot;BG&quot;);</span>
+<span class="fc" id="L119">		request.sex=&quot;M&quot;;</span>
+<span class="fc" id="L120">		String[] tipi= {&quot;1.2.2&quot;,&quot;2.2&quot;};</span>
+<span class="fc" id="L121">		request.types=tipi;</span>
+<span class="fc" id="L122">		request.username=&quot;userProva&quot;;</span>
+<span class="fc" id="L123">		UserResponse userCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/users&quot;, request, UserResponse.class);</span>
+<span class="fc" id="L124">		assertEquals(userCreated.getMail(), &quot;provaUser@gmail.com&quot;);</span>
+		
+		
+<span class="fc" id="L127">		EditUserRequest reqUpd=new EditUserRequest();</span>
+<span class="fc" id="L128">		reqUpd.id=userCreated.getId();</span>
+<span class="fc" id="L129">		reqUpd.residence=userCreated.getResidence();</span>
+<span class="fc" id="L130">		reqUpd.residence.setCap(&quot;24021&quot;);</span>
+<span class="fc" id="L131">		ResponseEntity&lt;UserResponse&gt; resp=restTemplate.exchange(&quot;http://localhost:&quot; + port + &quot;/api/users&quot;, HttpMethod.PUT, new HttpEntity&lt;EditUserRequest&gt;(reqUpd), UserResponse.class);</span>
+<span class="fc" id="L132">		assertEquals(resp.getStatusCodeValue(),200);</span>
+<span class="fc" id="L133">		assertEquals(resp.getBody().getId(),userCreated.getId());</span>
+<span class="fc" id="L134">		assertEquals(resp.getBody().getResidence().getCap(),&quot;24021&quot;);</span>
+<span class="fc" id="L135">		String reqDel=&quot;http://localhost:&quot; + port + &quot;/api/users/&quot;+userCreated.getId();</span>
+<span class="fc" id="L136">		restTemplate.delete(reqDel);</span>
+		
+<span class="fc" id="L138">		reqUpd.id=&quot;61a0a933bce0e98fbb2da184&quot;;</span>
+<span class="fc" id="L139">		resp=restTemplate.exchange(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps&quot;, HttpMethod.PUT, new HttpEntity&lt;EditUserRequest&gt;(reqUpd), UserResponse.class);</span>
+<span class="fc" id="L140">		assertEquals(resp.getStatusCodeValue(),404);</span>
+		
+		
+<span class="fc" id="L143">	}</span>
+	
+	@Test
+	public void newUserError() throws Exception {
+<span class="fc" id="L147">		AddUserRequest request=new AddUserRequest();</span>
+<span class="fc" id="L148">		request.name=&quot;NomeProva&quot;;</span>
+<span class="fc" id="L149">		request.surname=&quot;CognomeProva&quot;;</span>
+<span class="fc" id="L150">		request.dateOfBirth=LocalDate.now().plusYears(2);</span>
+<span class="fc" id="L151">		request.mail=&quot;provaUser@gmail.com&quot;;</span>
+<span class="fc" id="L152">		request.password=&quot;provaPsw&quot;;</span>
+<span class="fc" id="L153">		request.residence=new Location();</span>
+<span class="fc" id="L154">			request.residence.setLocality(&quot;prova via&quot;);</span>
+<span class="fc" id="L155">			request.residence.setCap(&quot;24021&quot;);</span>
+<span class="fc" id="L156">			request.residence.setRegione(&quot;Lombardia&quot;);</span>
+<span class="fc" id="L157">			request.residence.setProvincia(&quot;Bergamo&quot;);</span>
+<span class="fc" id="L158">			request.residence.setCity(&quot;Albino&quot;);</span>
+<span class="fc" id="L159">			request.residence.setLat(44d);</span>
+<span class="fc" id="L160">			request.residence.setLng(9d);</span>
+<span class="fc" id="L161">			request.residence.setSigla(&quot;BG&quot;);</span>
+<span class="fc" id="L162">		request.sex=&quot;M&quot;;</span>
+<span class="fc" id="L163">		String[] tipi= {&quot;1.2.2&quot;,&quot;2.2&quot;};</span>
+<span class="fc" id="L164">		request.types=tipi;</span>
+<span class="fc" id="L165">		request.username=&quot;userProva&quot;;</span>
+<span class="fc" id="L166">		ResponseEntity&lt;UserResponse&gt; userCreated = restTemplate.postForEntity(&quot;http://localhost:&quot; + port + &quot;/api/users&quot;, request, UserResponse.class);</span>
+<span class="fc" id="L167">		assertEquals(userCreated.getStatusCode(), HttpStatus.NOT_ACCEPTABLE);</span>
+		
+		
+<span class="fc" id="L170">	}</span>
+	
+	@Test
+	public void deleteUser() throws Exception {
+<span class="fc" id="L174">		AddUserRequest request=new AddUserRequest();</span>
+<span class="fc" id="L175">		request.name=&quot;NomeProva&quot;;</span>
+<span class="fc" id="L176">		request.surname=&quot;CognomeProva&quot;;</span>
+<span class="fc" id="L177">		request.dateOfBirth=LocalDate.now().minusYears(30);</span>
+<span class="fc" id="L178">		request.mail=&quot;provaUser@gmail.com&quot;;</span>
+<span class="fc" id="L179">		request.password=&quot;provaPsw&quot;;</span>
+<span class="fc" id="L180">		request.residence=new Location();</span>
+<span class="fc" id="L181">			request.residence.setLocality(&quot;prova via&quot;);</span>
+<span class="fc" id="L182">			request.residence.setCap(&quot;24042&quot;);</span>
+<span class="fc" id="L183">			request.residence.setRegione(&quot;Lombardia&quot;);</span>
+<span class="fc" id="L184">			request.residence.setProvincia(&quot;Bergamo&quot;);</span>
+<span class="fc" id="L185">			request.residence.setCity(&quot;Albino&quot;);</span>
+<span class="fc" id="L186">			request.residence.setLat(44d);</span>
+<span class="fc" id="L187">			request.residence.setLng(9d);</span>
+<span class="fc" id="L188">			request.residence.setSigla(&quot;BG&quot;);</span>
+<span class="fc" id="L189">		request.sex=&quot;M&quot;;</span>
+<span class="fc" id="L190">		String[] tipi= {&quot;1.2.2&quot;,&quot;2.2&quot;};</span>
+<span class="fc" id="L191">		request.types=tipi;</span>
+<span class="fc" id="L192">		request.username=&quot;userProva&quot;;</span>
+<span class="fc" id="L193">		UserResponse userCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/users&quot;, request, UserResponse.class);</span>
+<span class="fc" id="L194">		assertEquals(userCreated.getMail(), &quot;provaUser@gmail.com&quot;);</span>
+<span class="fc" id="L195">		String reqDel=&quot;http://localhost:&quot; + port + &quot;/api/users/&quot;+userCreated.getId();</span>
+<span class="fc" id="L196">		ResponseEntity&lt;Boolean&gt; resp=restTemplate.exchange(reqDel, HttpMethod.DELETE, null, Boolean.class);</span>
+<span class="fc" id="L197">		assertEquals(resp.getBody(),true);</span>
+		
+<span class="fc" id="L199">	}</span>
+	
+	@Test
+	public void deleteUserNonCorrect() throws Exception {
+<span class="fc" id="L203">		ResponseEntity&lt;Boolean&gt; resp=restTemplate.exchange(&quot;http://localhost:&quot; + port + &quot;/api/users/61a0a933bce0e98fbb2da184&quot;, HttpMethod.DELETE, null, Boolean.class);</span>
+<span class="fc" id="L204">		assertEquals(resp.getStatusCode(),HttpStatus.BAD_REQUEST);</span>
+<span class="fc" id="L205">	}</span>
+	
+	@Test
+	public void getUserAll() throws Exception {
+<span class="fc" id="L209">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/users/&quot;,</span>
+<span class="fc" id="L210">				String.class);</span>
+<span class="fc" id="L211">		assertEquals(request.getStatusCode(),HttpStatus.OK);</span>
+<span class="fc" id="L212">	}</span>
+	
+	@Test
+	public void getAccountOfUser() throws Exception {
+<span class="fc" id="L216">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L217">		request.username=&quot;Colombano72@hotmail.com&quot;;</span>
+<span class="fc" id="L218">		request.password=Functionalities.getMd5(&quot;yelukare&quot;);</span>
+<span class="fc" id="L219">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L220">				AccountResponse.class);</span>
+<span class="fc" id="L221">		assertEquals(response.getTypeUser(),&quot;User&quot;);</span>
+<span class="fc" id="L222">		LinkedHashMap&lt;String,String&gt; user = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L223">		user=LinkedHashMap.class.cast(response.getUser());</span>
+		//JSONObject jsonResp=new JSONObject(response.getUser().toString());
+		//UserResponse user=(UserResponse)response.getUser();
+<span class="fc" id="L226">		assertEquals(user.get(&quot;id&quot;), &quot;61a0a933bce0e98fbb2d999d&quot;);</span>
+<span class="fc" id="L227">	}</span>
+	
+	@Test
+	public void getAccountOfManager() throws Exception {
+<span class="fc" id="L231">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L232">		request.username=&quot;Vera_Nucci@libero.it&quot;;</span>
+<span class="fc" id="L233">		request.password=Functionalities.getMd5(&quot;fanomuge&quot;);</span>
+<span class="fc" id="L234">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L235">				AccountResponse.class);</span>
+<span class="fc" id="L236">		assertEquals(response.getTypeUser(),&quot;Manager&quot;);</span>
+<span class="fc" id="L237">		LinkedHashMap&lt;String,String&gt; user = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L238">		user=LinkedHashMap.class.cast(response.getUser());</span>
+		//JSONObject jsonResp=new JSONObject(response.getUser().toString());
+		//UserResponse user=(UserResponse)response.getUser();
+<span class="fc" id="L241">		assertEquals(user.get(&quot;id&quot;), &quot;61a0a0eeb5f9b12d06e95240&quot;);</span>
+<span class="fc" id="L242">	}</span>
+	
+	@Test
+	public void getAccountOfTicket() throws Exception {
+<span class="fc" id="L246">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L247">		request.username=&quot;TI-379-7253&quot;;</span>
+<span class="fc" id="L248">		request.password=Functionalities.getMd5(&quot;vosipowo&quot;);</span>
+<span class="fc" id="L249">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L250">				AccountResponse.class);</span>
+<span class="fc" id="L251">		assertEquals(response.getTypeUser(),&quot;TicketInsp&quot;);</span>
+<span class="fc" id="L252">		LinkedHashMap&lt;String,String&gt; user = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L253">		user=LinkedHashMap.class.cast(response.getUser());</span>
+		//JSONObject jsonResp=new JSONObject(response.getUser().toString());
+		//UserResponse user=(UserResponse)response.getUser();
+<span class="fc" id="L256">		assertEquals(user.get(&quot;id&quot;), &quot;61a0b05abce0e98fbb2dad3e&quot;);</span>
+<span class="fc" id="L257">	}</span>
+	
+	@Test
+	public void getAccountOfAdmin() throws Exception {
+<span class="fc" id="L261">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L262">		request.username=&quot;admin@gmail.com&quot;;</span>
+<span class="fc" id="L263">		request.password=Functionalities.getMd5(&quot;administrator&quot;);</span>
+<span class="fc" id="L264">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L265">				AccountResponse.class);</span>
+<span class="fc" id="L266">		assertEquals(response.getTypeUser(),&quot;Admin&quot;);</span>
+<span class="fc" id="L267">		LinkedHashMap&lt;String,String&gt; user = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L268">		user=LinkedHashMap.class.cast(response.getUser());</span>
+		//JSONObject jsonResp=new JSONObject(response.getUser().toString());
+		//UserResponse user=(UserResponse)response.getUser();
+<span class="fc" id="L271">		assertEquals(user.get(&quot;id&quot;), &quot;618a43a5885c9f6aab4af98b&quot;);</span>
+<span class="fc" id="L272">	}</span>
+	
+	@Test
+	public void getAccountOfUserErr() throws Exception {
+<span class="fc" id="L276">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L277">		request.username=&quot;Colombano74@hotmail.com&quot;;</span>
+<span class="fc" id="L278">		request.password=Functionalities.getMd5(&quot;yelukare&quot;);</span>
+<span class="fc" id="L279">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L280">				AccountResponse.class);</span>
+<span class="fc" id="L281">		assertEquals(response.getTypeUser(),&quot;NONE&quot;);</span>
+<span class="fc" id="L282">		String stringErr=String.class.cast(response.getUser());</span>
+<span class="fc" id="L283">		assertEquals(stringErr, &quot;ERROR. unregistered user&quot;);</span>
+		
+<span class="fc" id="L285">		request=new AccountRequest();</span>
+<span class="fc" id="L286">		request.username=&quot;Colombano72@hotmail.com&quot;;</span>
+<span class="fc" id="L287">		request.password=&quot;yelukare2&quot;;</span>
+<span class="fc" id="L288">		response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L289">				AccountResponse.class);</span>
+<span class="fc" id="L290">		assertEquals(response.getTypeUser(),&quot;NONE&quot;);</span>
+<span class="fc" id="L291">		stringErr=String.class.cast(response.getUser());</span>
+<span class="fc" id="L292">		assertEquals(stringErr, &quot;ERROR. invalid password&quot;);</span>
+<span class="fc" id="L293">	}</span>
+	
+	@Test
+	public void getAccountOfManagerErr() throws Exception {
+<span class="fc" id="L297">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L298">		request.username=&quot;Vera_Nucci2@libero.it&quot;;</span>
+<span class="fc" id="L299">		request.password=Functionalities.getMd5(&quot;fanomuge&quot;);</span>
+<span class="fc" id="L300">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L301">				AccountResponse.class);</span>
+<span class="fc" id="L302">		assertEquals(response.getTypeUser(),&quot;NONE&quot;);</span>
+<span class="fc" id="L303">		String stringErr=String.class.cast(response.getUser());</span>
+<span class="fc" id="L304">		assertEquals(stringErr, &quot;ERROR. unregistered user&quot;);</span>
+		
+<span class="fc" id="L306">		request=new AccountRequest();</span>
+<span class="fc" id="L307">		request.username=&quot;Vera_Nucci@libero.it&quot;;</span>
+<span class="fc" id="L308">		request.password=&quot;fanomuge2&quot;;</span>
+<span class="fc" id="L309">		response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L310">				AccountResponse.class);</span>
+<span class="fc" id="L311">		assertEquals(response.getTypeUser(),&quot;NONE&quot;);</span>
+<span class="fc" id="L312">		stringErr=String.class.cast(response.getUser());</span>
+<span class="fc" id="L313">		assertEquals(stringErr, &quot;ERROR. invalid password&quot;);</span>
+<span class="fc" id="L314">	}</span>
+	
+	@Test
+	public void getAccountOfTicketErr() throws Exception {
+<span class="fc" id="L318">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L319">		request.username=&quot;TI-379-7252&quot;;</span>
+<span class="fc" id="L320">		request.password=Functionalities.getMd5(&quot;vosipowo&quot;);</span>
+<span class="fc" id="L321">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L322">				AccountResponse.class);</span>
+<span class="fc" id="L323">		assertEquals(response.getTypeUser(),&quot;NONE&quot;);</span>
+<span class="fc" id="L324">		String stringErr=String.class.cast(response.getUser());</span>
+<span class="fc" id="L325">		assertEquals(stringErr, &quot;ERROR. unregistered ticket inspector&quot;);</span>
+		
+<span class="fc" id="L327">		request=new AccountRequest();</span>
+<span class="fc" id="L328">		request.username=&quot;TI-379-7253&quot;;</span>
+<span class="fc" id="L329">		request.password=&quot;vosipowo2&quot;;</span>
+<span class="fc" id="L330">		response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L331">				AccountResponse.class);</span>
+<span class="fc" id="L332">		assertEquals(response.getTypeUser(),&quot;NONE&quot;);</span>
+<span class="fc" id="L333">		stringErr=String.class.cast(response.getUser());</span>
+<span class="fc" id="L334">		assertEquals(stringErr, &quot;ERROR. invalid password&quot;);</span>
+<span class="fc" id="L335">	}</span>
+	
+	@Test
+	public void getAccountOfAdminErr() throws Exception {
+<span class="fc" id="L339">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L340">		request.username=&quot;adminEventour@admin.com&quot;;</span>
+<span class="fc" id="L341">		request.password=Functionalities.getMd5(&quot;admin&quot;);</span>
+<span class="fc" id="L342">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L343">				AccountResponse.class);</span>
+<span class="fc" id="L344">		assertEquals(response.getTypeUser(),&quot;NONE&quot;);</span>
+<span class="fc" id="L345">		String stringErr=String.class.cast(response.getUser());</span>
+<span class="fc" id="L346">		assertEquals(stringErr, &quot;ERROR. unregistered user&quot;);</span>
+<span class="fc" id="L347">	}</span>
+	
+	@Test
+	public void getAccountNoCompileErr() throws Exception {
+<span class="fc" id="L351">		AccountRequest request=new AccountRequest();</span>
+<span class="fc" id="L352">		request.username=&quot;&quot;;</span>
+<span class="fc" id="L353">		request.password=Functionalities.getMd5(&quot;vosipowo&quot;);</span>
+<span class="fc" id="L354">		ResponseEntity&lt;AccountResponse&gt; response=this.restTemplate.postForEntity(&quot;http://localhost:&quot; + port + &quot;/api/account&quot;, request, </span>
+<span class="fc" id="L355">				AccountResponse.class);</span>
+<span class="fc" id="L356">		assertEquals(response.getStatusCode(),HttpStatus.NO_CONTENT);</span>
+<span class="fc" id="L357">	}</span>
+	
+	
+	///account/changePsw
+	@Test
+	public void changePswAccountUser() throws Exception {
+<span class="fc" id="L363">		UserResponse request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/users/61a0a933bce0e98fbb2da18a&quot;,</span>
+<span class="fc" id="L364">				UserResponse.class);</span>
+<span class="fc" id="L365">		AccountRequest requestAcc=new AccountRequest();</span>
+<span class="fc" id="L366">		requestAcc.username=request.getMail();</span>
+<span class="fc" id="L367">		requestAcc.password=&quot;cambioPsw&quot;;</span>
+<span class="fc" id="L368">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account/changePsw&quot;, requestAcc, </span>
+<span class="fc" id="L369">				AccountResponse.class);</span>
+<span class="fc" id="L370">		LinkedHashMap&lt;String,String&gt; user = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L371">		user=LinkedHashMap.class.cast(response.getUser());</span>
+<span class="fc" id="L372">		assertEquals(user.get(&quot;id&quot;), &quot;61a0a933bce0e98fbb2da18a&quot;);</span>
+<span class="fc" id="L373">		assertNotEquals(user.get(&quot;password&quot;),Functionalities.getMd5(&quot;biqivepo&quot;));</span>
+<span class="fc" id="L374">		assertEquals(user.get(&quot;password&quot;),Functionalities.getMd5(requestAcc.password));</span>
+		
+<span class="fc" id="L376">		requestAcc.password=&quot;biqivepo&quot;;</span>
+<span class="fc" id="L377">		response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account/changePsw&quot;, requestAcc, </span>
+<span class="fc" id="L378">				AccountResponse.class);</span>
+<span class="fc" id="L379">	}</span>
+	
+	@Test
+	public void changePswAccountManager() throws Exception {
+<span class="fc" id="L383">		ManagerResponse request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/managers/61a0a0eeb5f9b12d06e95240&quot;,</span>
+<span class="fc" id="L384">				ManagerResponse.class);</span>
+<span class="fc" id="L385">		AccountRequest requestAcc=new AccountRequest();</span>
+<span class="fc" id="L386">		requestAcc.username=request.getMail();</span>
+<span class="fc" id="L387">		requestAcc.password=&quot;cambioPsw&quot;;</span>
+<span class="fc" id="L388">		AccountResponse response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account/changePsw&quot;, requestAcc, </span>
+<span class="fc" id="L389">				AccountResponse.class);</span>
+<span class="fc" id="L390">		LinkedHashMap&lt;String,String&gt; user = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L391">		user=LinkedHashMap.class.cast(response.getUser());</span>
+<span class="fc" id="L392">		assertEquals(user.get(&quot;id&quot;), &quot;61a0a0eeb5f9b12d06e95240&quot;);</span>
+<span class="fc" id="L393">		assertNotEquals(user.get(&quot;password&quot;),Functionalities.getMd5(&quot;fanomuge&quot;));</span>
+<span class="fc" id="L394">		assertEquals(user.get(&quot;password&quot;),Functionalities.getMd5(requestAcc.password));</span>
+		
+<span class="fc" id="L396">		requestAcc.password=&quot;fanomuge&quot;;</span>
+<span class="fc" id="L397">		response=this.restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/account/changePsw&quot;, requestAcc, </span>
+<span class="fc" id="L398">				AccountResponse.class);</span>
+<span class="fc" id="L399">	}</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>

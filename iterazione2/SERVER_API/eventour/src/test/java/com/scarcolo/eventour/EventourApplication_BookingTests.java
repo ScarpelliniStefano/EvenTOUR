@@ -14,20 +14,14 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.CheckBookingRequest;
 import com.scarcolo.eventour.model.booking.EditBookingRequest;
 import com.scarcolo.eventour.model.booking.PaymentRequest;
-import com.scarcolo.eventour.model.booking.ReviewBookingRequest;
-import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -54,7 +48,7 @@ class EventourApplication_BookingTests {
 		ResponseEntity<String> request=this.restTemplate.getForEntity("http://localhost:" + port + "/api/bookings/user/61a0a933bce0e98fbb2da2a7/event/61a88e8efacdaf0af830bd2b",
 				String.class);
 		int statusCode=request.getStatusCodeValue();
-		assertEquals(statusCode,404);
+		assertEquals(statusCode,405);
 	}
 	
 	@Test
@@ -91,74 +85,6 @@ class EventourApplication_BookingTests {
 	@Test
 	public void getBookingByIdError() throws Exception {
 		ResponseEntity<String> request=this.restTemplate.getForEntity("http://localhost:" + port + "/api/bookings/61a8c480648e0931525c22a1",
-				String.class);
-		int statusCode=request.getStatusCodeValue();
-		assertEquals(statusCode,404);
-		
-	}
-	
-	@Test
-	public void getBookingByIdDetails() throws Exception {
-		UserEventBookedResponse request=this.restTemplate.getForObject("http://localhost:" + port + "/api/bookings/61a8c480648e0931525c2697/all",
-				UserEventBookedResponse.class);
-		assertEquals(request.getId(),"61a8c480648e0931525c2697");
-		assertEquals(request.getUserId(),"61a0a933bce0e98fbb2da2a7");
-		assertEquals(request.getUser()[0].getId(),"61a0a933bce0e98fbb2da2a7");
-		assertEquals(request.getEventId(),"61a88e8efacdaf0af830bd2c");
-		assertEquals(request.getEvent()[0].getId(),"61a88e8efacdaf0af830bd2c");
-	}
-	
-	@Test
-	public void getBookingByIdDetailsError() throws Exception {
-		ResponseEntity<UserEventBookedResponse> request=this.restTemplate.getForEntity("http://localhost:" + port + "/api/bookings/61a8c480648e0931525c22a1/all",
-				UserEventBookedResponse.class);
-		int statusCode=request.getStatusCodeValue();
-		assertEquals(statusCode,404);
-		
-	}
-	
-	@Test
-	public void getBookingByIdUserFuture() throws Exception {
-		String request=this.restTemplate.getForObject("http://localhost:" + port + "/api/bookings/u/61a0a933bce0e98fbb2da2a7/f",
-				String.class);
-		
-		JSONArray obj = new JSONArray(request);
-		for(int i=0;i<obj.length();i++) {
-			assertEquals(obj.getJSONObject(i).getString("userId"),"61a0a933bce0e98fbb2da2a7");
-			String dt=obj.getJSONObject(i).getJSONArray("event").getJSONObject(0).getString("dataOra");
-			String day=dt.substring(0, dt.indexOf("T"));
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			assertTrue(formatter.parse(day).after(Functionalities.convertToDate(LocalDate.now())));
-		}
-	}
-	
-	@Test
-	public void getBookingByIdUserFutureError() throws Exception {
-		ResponseEntity<String> request=this.restTemplate.getForEntity("http://localhost:" + port + "/api/bookings/u/61a0a933bce0e98fbb2d999c/f",
-				String.class);
-		int statusCode=request.getStatusCodeValue();
-		assertEquals(statusCode,404);
-		
-	}
-	
-	@Test
-	public void getBookingByIdUserPast() throws Exception {
-		String request=this.restTemplate.getForObject("http://localhost:" + port + "/api/bookings/u/61a0a933bce0e98fbb2da2a7/p",
-				String.class);
-		
-		JSONArray obj = new JSONArray(request);
-		for(int i=0;i<obj.length();i++) {
-			assertEquals(obj.getJSONObject(i).getString("userId"),"61a0a933bce0e98fbb2da2a7");
-			String dt=obj.getJSONObject(i).getJSONArray("event").getJSONObject(0).getString("dataOra");
-			String day=dt.substring(0, dt.indexOf("T"));
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			assertTrue(formatter.parse(day).before(Functionalities.convertToDate(LocalDate.now())));
-		}
-	}
-	
-	@Test
-	public void getBookingByIdUserPastError() throws Exception {
-		ResponseEntity<String> request=this.restTemplate.getForEntity("http://localhost:" + port + "/api/bookings/u/61a0a933bce0e98fbb2d999c/p",
 				String.class);
 		int statusCode=request.getStatusCodeValue();
 		assertEquals(statusCode,404);
@@ -287,7 +213,7 @@ class EventourApplication_BookingTests {
 		request.authNr="232";
 		request.dateScad="08/24";
 		request.cardNr="4000003800000008";
-		String bookingPay = restTemplate.postForObject("http://localhost:" + port + "/api/bookings/payment", request, String.class);
+		String bookingPay = restTemplate.postForObject("http://localhost:" + port + "/api//bookings/USER/payment", request, String.class);
 		assertTrue(bookingPay.startsWith("OK. Transaction:"));
 		
 	}
@@ -301,39 +227,13 @@ class EventourApplication_BookingTests {
 		request.authNr="232";
 		request.dateScad="08/24";
 		request.cardNr="4000003700000008";
-		String bookingPay = restTemplate.postForObject("http://localhost:" + port + "/api/bookings/payment", request, String.class);
+		String bookingPay = restTemplate.postForObject("http://localhost:" + port + "/api//bookings/user/payment", request, String.class);
 		assertTrue(bookingPay.contains("ERROR with payment. Transaction: cb5e100e5a9a3e7f6d1fd97512215282"));
 		
 		request.dateScad="08/21";
-		bookingPay = restTemplate.postForObject("http://localhost:" + port + "/api//bookings/payment", request, String.class);
+		bookingPay = restTemplate.postForObject("http://localhost:" + port + "/api//bookings/user/payment", request, String.class);
 		assertTrue(bookingPay.contains("INVALID DATE"));
 		
-		
-	}
-	
-	@Test
-	public void ReviewBooking() throws Exception {
-		ReviewBookingRequest request=new ReviewBookingRequest();
-		request.bookingNr="61a8c480648e0931525c26a4";
-		request.review=3;
-		String bookingReview = restTemplate.postForObject("http://localhost:" + port + "/api/bookings/review", request, String.class);
-		assertTrue(bookingReview.contains("MODIFIED"));
-		
-	}
-	
-	@Test
-	public void ReviewBookingErrorNotCome() throws Exception {
-		ReviewBookingRequest request=new ReviewBookingRequest();
-		request.bookingNr="61a8c480648e0931525c22a2";
-		request.review=3;
-		ResponseEntity<String> bookingReview = restTemplate.postForEntity("http://localhost:" + port + "/api/bookings/review", request, String.class);
-		assertTrue(bookingReview.getBody().contains("INVALID CODE BOOKING"));
-		
-		request=new ReviewBookingRequest();
-		request.bookingNr="61a8c480648e0931525c26a4";
-		request.review=8;
-		bookingReview = restTemplate.postForEntity("http://localhost:" + port + "/api/bookings/review", request, String.class);
-		assertTrue(bookingReview.getBody().contains("INVALID REVIEW"));
 		
 	}
 

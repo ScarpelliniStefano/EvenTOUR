@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ManagerService.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.service.manager</a> &gt; <span class="el_source">ManagerService.java</span></div><h1>ManagerService.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.service.manager;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ManagerService.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.service.manager</a> &gt; <span class="el_source">ManagerService.java</span></div><h1>ManagerService.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.service.manager;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.mail.internet.AddressException;
 
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
@@ -15,33 +15,27 @@ import org.springframework.stereotype.Service;
 
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.event.Event;
-import com.scarcolo.eventour.model.event.EventManResponse;
 import com.scarcolo.eventour.model.event.EventResponse;
 import com.scarcolo.eventour.model.manager.AddManagerRequest;
 import com.scarcolo.eventour.model.manager.EditManagerRequest;
-import com.scarcolo.eventour.model.manager.ManagerReportResponse;
+import com.scarcolo.eventour.model.manager.EventReportResponse;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
 import com.scarcolo.eventour.model.manager.ReportManResponse;
-import com.scarcolo.eventour.model.request.Request;
+import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
-import com.scarcolo.eventour.repository.manager.RequestRepository;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class ManagerService.
  */
 @Service
-<span class="fc" id="L36">public class ManagerService {</span>
+<span class="fc" id="L34">public class ManagerService {</span>
 	
 	/** The manager repository. */
 	@Autowired
 	private ManagerRepository managerRepository;
-	
-	/** The request repository. */
-	@Autowired
-	private RequestRepository requestRepository;	
 	
 	/** The event repository. */
 	@Autowired
@@ -51,84 +45,77 @@ import com.scarcolo.eventour.repository.manager.RequestRepository;
 	 * Adds a manager.
 	 *
 	 * @param request the request of new manager
-	 * @return the response entity with new manager
+	 * @return the response entity with new manager data
 	 */
 	public ResponseEntity&lt;ManagerResponse&gt; add(AddManagerRequest request){
-<span class="fc" id="L57">		Manager manager = null;</span>
+		Manager manager;
 		try {
-<span class="fc" id="L59">			manager = managerRepository.save(new Manager(request));</span>
-<span class="fc" id="L60">		} catch (Exception e) {</span>
-<span class="fc" id="L61">			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_ACCEPTABLE);</span>
+<span class="fc" id="L53">			manager = managerRepository.save(new Manager(request));</span>
+<span class="fc" id="L54">		} catch (Exception e) {</span>
+<span class="fc" id="L55">			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_ACCEPTABLE);</span>
 		}
-		try {
-<span class="fc" id="L64">			requestRepository.save(new Request(manager.getId()));</span>
-<span class="pc" id="L65">		} catch (Exception e) {</span>
-<span class="nc" id="L66">			return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
-		}
-<span class="fc" id="L68">		return new ResponseEntity&lt;&gt;(new ManagerResponse(manager), HttpStatus.OK);</span>
+<span class="fc" id="L57">		return new ResponseEntity&lt;&gt;(new ManagerResponse(manager), HttpStatus.OK);</span>
 	}
 	
 	/**
 	 * Update a manager.
 	 *
-	 * @param request the request of update
-	 * @return the response entity
+	 * @param request the request with data to change
+	 * @return the response entity with modified data
 	 */
-	public ResponseEntity&lt;ManagerResponse&gt; update(EditManagerRequest request){
-<span class="fc" id="L78">        Optional&lt;Manager&gt; optionalManager = managerRepository.findById(request.id);</span>
-<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        if (optionalManager.isEmpty()) {</span>
-<span class="nc" id="L80">            return null;</span>
+	public ResponseEntity&lt;ManagerResponse&gt; update(EditManagerRequest request) {
+<span class="fc" id="L67">		Optional&lt;Manager&gt; optionalManager = managerRepository.findById(request.id);</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">        if (optionalManager.isEmpty()) {</span>
+<span class="nc" id="L69">            return null;</span>
         }
-<span class="fc" id="L82">        Manager m=optionalManager.get();</span>
-<span class="pc bpc" id="L83" title="1 of 2 branches missed.">        if(request.residence!=null) {</span>
-<span class="fc" id="L84">        	m.setResidence(request.residence);</span>
+<span class="fc" id="L71">        Manager m=optionalManager.get();</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">        if(request.residence!=null) {</span>
+<span class="fc" id="L73">        	m.setResidence(request.residence);</span>
         }
-<span class="pc bpc" id="L86" title="1 of 2 branches missed.">        if(request.mail!=null) {</span>
+<span class="pc bpc" id="L75" title="1 of 2 branches missed.">        if(request.mail!=null) {</span>
         	try {
-<span class="fc" id="L88">				m.setMail(request.mail);</span>
-<span class="pc" id="L89">			} catch (AddressException e) {</span>
-<span class="nc" id="L90">				return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+<span class="fc" id="L77">				m.setMail(request.mail);</span>
+<span class="pc" id="L78">			} catch (AddressException e) {</span>
+<span class="nc" id="L79">				return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
 			}
         }
-<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        if(request.password!=null) {</span>
-<span class="nc" id="L94">        	m.setPassword(request.password);</span>
+<span class="pc bpc" id="L82" title="1 of 2 branches missed.">        if(request.password!=null) {</span>
+<span class="nc" id="L83">        	m.setPassword(request.password);</span>
         }
-<span class="fc" id="L96">        Manager man=managerRepository.save(m);</span>
-<span class="fc" id="L97">        return new ResponseEntity&lt;&gt;(new ManagerResponse(man), HttpStatus.OK);</span>
+<span class="fc" id="L85">        Manager man=managerRepository.save(m);</span>
+<span class="fc" id="L86">        return new ResponseEntity&lt;&gt;(new ManagerResponse(man), HttpStatus.OK);</span>
     }
 
    
 	 /**
- 	 * Gets the manager by his id.
+ 	 * Gets the manager by id.
  	 *
- 	 * @param id the id manager
+ 	 * @param id the id of manager
  	 * @return the manager by id
  	 */
  	public ResponseEntity&lt;ManagerResponse&gt; getById(String id){
-<span class="fc" id="L108">	    	Optional&lt;Manager&gt; managerData = managerRepository.findById(id);</span>
+<span class="fc" id="L97">	    	Optional&lt;Manager&gt; managerData = managerRepository.findById(id);</span>
 
-<span class="fc bfc" id="L110" title="All 2 branches covered.">	  	  if (managerData.isPresent()) {</span>
-<span class="fc" id="L111">	  	    return new ResponseEntity&lt;&gt;(new ManagerResponse(managerData.get()), HttpStatus.OK);</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">	  	  if (managerData.isPresent()) {</span>
+<span class="fc" id="L100">	  	    return new ResponseEntity&lt;&gt;(new ManagerResponse(managerData.get()), HttpStatus.OK);</span>
 	  	  } else {
-<span class="fc" id="L113">	  	    return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+<span class="fc" id="L102">	  	    return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
 	  	  }
 	 }
   
     /**
      * Delete a manager.
      *
-     * @param id the id manager
+     * @param id the id of manager
      * @return true, if successful
      */
-    public ResponseEntity&lt;Boolean&gt; delete(String id) {
-<span class="fc" id="L124">    	 Optional&lt;Manager&gt; optionalManager = managerRepository.findById(id);</span>
-<span class="fc bfc" id="L125" title="All 2 branches covered.">         if (optionalManager.isEmpty()) {</span>
-<span class="fc" id="L126">             return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
-         }
-<span class="fc" id="L128">         managerRepository.deleteById(optionalManager.get().getId());</span>
-<span class="fc" id="L129">         Request r=requestRepository.findByManagerId(optionalManager.get().getId()).get(0);</span>
-<span class="fc" id="L130">         requestRepository.deleteById(r.getId());</span>
-<span class="fc" id="L131">         return new ResponseEntity&lt;&gt;(true,HttpStatus.OK);</span>
+     public ResponseEntity&lt;Boolean&gt; delete(String id) {
+<span class="fc" id="L113">        Optional&lt;Manager&gt; optionalManager = managerRepository.findById(id);</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">        if (optionalManager.isEmpty()) {</span>
+<span class="fc" id="L115">            return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+        }
+<span class="fc" id="L117">        managerRepository.deleteById(optionalManager.get().getId());</span>
+<span class="fc" id="L118">        return new ResponseEntity&lt;&gt;(true,HttpStatus.OK);</span>
     }
 
 	/**
@@ -138,39 +125,22 @@ import com.scarcolo.eventour.repository.manager.RequestRepository;
 	 */
 	public ResponseEntity&lt;List&lt;ManagerResponse&gt;&gt; getAll() {
 		try {
-<span class="fc" id="L141">			List&lt;Manager&gt; managers = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L142">			managerRepository.findAll().forEach(managers::add);</span>
-<span class="pc bpc" id="L143" title="1 of 2 branches missed.">			if(managers.isEmpty()) {</span>
-<span class="nc" id="L144">				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+<span class="fc" id="L128">			List&lt;Manager&gt; managers = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L129">			managerRepository.findAll().forEach(managers::add);</span>
+<span class="pc bpc" id="L130" title="1 of 2 branches missed.">			if(managers.isEmpty()) {</span>
+<span class="nc" id="L131">				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
 			}
-<span class="fc" id="L146">			List&lt;ManagerResponse&gt; managerR= new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L147" title="All 2 branches covered.">			for(Manager manager: managers) managerR.add(new ManagerResponse(manager));</span>
-<span class="fc" id="L148">			return new ResponseEntity&lt;&gt;(managerR, HttpStatus.OK);</span>
-<span class="nc" id="L149">		}catch(Exception e) {</span>
-<span class="nc" id="L150">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+<span class="fc" id="L133">			List&lt;ManagerResponse&gt; managerR= new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L134" title="All 2 branches covered.">			for(Manager manager: managers) managerR.add(new ManagerResponse(manager));</span>
+<span class="fc" id="L135">			return new ResponseEntity&lt;&gt;(managerR, HttpStatus.OK);</span>
+<span class="nc" id="L136">		}catch(Exception e) {</span>
+<span class="nc" id="L137">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
 		}
 	}
-
 
 	
-	/**
-	 * Gets a manager from event id.
-	 *
-	 * @param id the event id
-	 * @return the manager from event
-	 */
-	public ResponseEntity&lt;EventManResponse&gt; getManagerFromEvent(String id) {
-		try {
-<span class="fc" id="L164">			AggregationResults&lt;EventManResponse&gt; userEventA=eventRepository.findManagerById(id);</span>
-<span class="fc" id="L165">			List&lt;EventManResponse&gt; eventR=userEventA.getMappedResults();</span>
-<span class="fc bfc" id="L166" title="All 2 branches covered.">			if(eventR.isEmpty()) {</span>
-<span class="fc" id="L167">				return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
-			}
-<span class="fc" id="L169">			return new ResponseEntity&lt;&gt;(eventR.get(0), HttpStatus.OK);</span>
-<span class="nc" id="L170">		}catch(Exception e) {</span>
-<span class="nc" id="L171">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
-		}
-	}
+	
+
 
 	/**
 	 * Gets the manager report.
@@ -178,46 +148,42 @@ import com.scarcolo.eventour.repository.manager.RequestRepository;
 	 * @param id the id of manager
 	 * @return the manager report
 	 */
-	public ResponseEntity&lt;List&lt;ManagerReportResponse&gt;&gt; getManagerReport(String id) {
+	public ResponseEntity&lt;List&lt;EventReportResponse&gt;&gt; getManagerReport(String id) {
 		try {
-<span class="fc" id="L183">			Optional&lt;Manager&gt; manOpt=managerRepository.findById(id);</span>
-<span class="fc bfc" id="L184" title="All 2 branches covered.">			if(manOpt.isEmpty()) {</span>
-<span class="fc" id="L185">				return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+<span class="fc" id="L153">			Optional&lt;Manager&gt; manOpt=managerRepository.findById(id);</span>
+<span class="fc bfc" id="L154" title="All 2 branches covered.">			if(manOpt.isEmpty()) {</span>
+<span class="fc" id="L155">				return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
 			}
-<span class="fc" id="L187">			AggregationResults&lt;ReportManResponse&gt; reportA=eventRepository.findReports(id);</span>
-<span class="fc" id="L188">			List&lt;ReportManResponse&gt; reportMongo=reportA.getMappedResults();</span>
-<span class="fc" id="L189">			List&lt;ManagerReportResponse&gt; reportR=new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L190">			Integer occuped=0;</span>
-<span class="fc" id="L191">			Integer comedPeople=0;</span>
-<span class="fc" id="L192">			Double saldo=0d;</span>
-<span class="fc" id="L193">			Double perdita=0d;</span>
-<span class="fc" id="L194">			Event eventDetails=null;</span>
-<span class="fc" id="L195">			Double review=0d;</span>
-<span class="fc bfc" id="L196" title="All 2 branches covered.">			for(ReportManResponse resp : reportMongo) {</span>
-<span class="pc bpc" id="L197" title="1 of 2 branches missed.">				if(resp.getDataOra().isBefore(LocalDateTime.now())) {</span>
-<span class="fc" id="L198">					occuped=resp.getTotSeat()-resp.getFreeSeat();</span>
-<span class="fc" id="L199">					comedPeople=0;</span>
-<span class="fc bfc" id="L200" title="All 2 branches covered.">					for(Booking book: resp.getBooking()) {</span>
-<span class="fc bfc" id="L201" title="All 2 branches covered.">						comedPeople+=(book.getCome()==true ? book.getPrenotedSeat() : 0);</span>
-<span class="pc bpc" id="L202" title="1 of 2 branches missed.">						review+=book.getReview()&gt;0 ? book.getReview() : 0;</span>
-					}
-<span class="pc bpc" id="L204" title="1 of 2 branches missed.">					if(resp.getBooking() != null)</span>
-<span class="fc" id="L205">						review=review/(resp.getBooking().length);</span>
-<span class="fc" id="L206">					saldo=comedPeople*resp.getPrice();</span>
-<span class="fc" id="L207">					perdita=resp.getFreeSeat()*resp.getPrice();</span>
-<span class="fc" id="L208">					eventDetails=new Event(resp.getId(), resp.getTitle(), resp.getDescription(), resp.getLocation(), resp.getTypes(),</span>
-<span class="fc" id="L209">							resp.getDataOra(), resp.getManagerId(),resp.getUrlImage(), resp.getTotSeat(), resp.getFreeSeat(), resp.getPrice());</span>
-<span class="fc" id="L210">					reportR.add(new ManagerReportResponse(resp.getId(), resp.getTitle(), new EventResponse(eventDetails), occuped, comedPeople, saldo, perdita, review));</span>
-			
+<span class="fc" id="L157">			AggregationResults&lt;ReportManResponse&gt; reportA=eventRepository.findReports(id);</span>
+<span class="fc" id="L158">			List&lt;ReportManResponse&gt; reportMongo=reportA.getMappedResults();</span>
+<span class="fc" id="L159">			List&lt;EventReportResponse&gt; reportR=new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L160">			Integer occuped=0;</span>
+<span class="fc" id="L161">			Integer comedPeople=0;</span>
+<span class="fc" id="L162">			Double saldo=0d;</span>
+<span class="fc" id="L163">			Double perdita=0d;</span>
+<span class="fc" id="L164">			Event eventDetails=null;</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">			for(ReportManResponse resp : reportMongo) {</span>
+				
+<span class="fc" id="L167">				occuped=resp.getTotSeat()-resp.getFreeSeat();</span>
+<span class="fc" id="L168">				comedPeople=0;</span>
+<span class="fc bfc" id="L169" title="All 2 branches covered.">				for(Booking book: resp.getBooking()) {</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">					comedPeople+=(book.getCome()==true ? book.getPrenotedSeat() : 0);</span>
 				}
+<span class="fc" id="L172">				saldo=comedPeople*resp.getPrice();</span>
+<span class="fc" id="L173">				perdita=(occuped-comedPeople)*resp.getPrice();</span>
+<span class="fc" id="L174">				eventDetails=new Event(resp.getId(), resp.getTitle(), resp.getDescription(), resp.getLocation(), resp.getTypes(),</span>
+<span class="fc" id="L175">						resp.getDataOra(), resp.getManagerId(),resp.getUrlImage(), resp.getTotSeat(), resp.getFreeSeat(), resp.getPrice());</span>
+<span class="fc" id="L176">				reportR.add(new EventReportResponse(resp.getId(), resp.getTitle(), new EventResponse(eventDetails), occuped, comedPeople, saldo, perdita));</span>
 			}
 			
-<span class="fc" id="L215">			return new ResponseEntity&lt;&gt;(reportR, HttpStatus.OK);</span>
-<span class="nc" id="L216">		}catch(Exception e) {</span>
-<span class="nc" id="L217">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+<span class="fc" id="L179">			return new ResponseEntity&lt;&gt;(reportR, HttpStatus.OK);</span>
+<span class="nc" id="L180">		}catch(Exception e) {</span>
+			//System.out.println(e);
+<span class="nc" id="L182">			e.printStackTrace();</span>
+<span class="nc" id="L183">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
 		}
 	}
 
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

@@ -1,19 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ManagerResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.manager</a> &gt; <span class="el_source">ManagerResponse.java</span></div><h1>ManagerResponse.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>ManagerResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (1) (30 dic 2021 11:07:32)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.manager</a> &gt; <span class="el_source">ManagerResponse.java</span></div><h1>ManagerResponse.java</h1><pre class="source lang-java linenums">/**
  * 
  */
 package com.scarcolo.eventour.model.manager;
 
 
-import java.security.NoSuchAlgorithmException;
-import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.Date;
-
-import javax.mail.internet.AddressException;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.scarcolo.eventour.functions.Functionalities;
-import com.scarcolo.eventour.functions.PartitaIVAFunctions;
 import com.scarcolo.eventour.model.Location;
 
 
@@ -67,24 +60,19 @@ public class ManagerResponse{
 	 * Instantiates a new manager response.
 	 *
 	 * @param manager the manager
+	 * @throws Exception 
 	 */
-<span class="fc" id="L71">	public ManagerResponse(Manager manager){</span>
-<span class="fc" id="L72">		this.id=manager.getId();</span>
-<span class="fc" id="L73">		this.mail=manager.getMail();</span>
-<span class="fc" id="L74">		this.password=manager.getPassword();</span>
-<span class="fc" id="L75">		this.name=manager.getName();</span>
-<span class="fc" id="L76">		this.surname=manager.getSurname();</span>
-<span class="fc" id="L77">		this.dateOfBirth=Functionalities.convertToLocalDate(manager.getDateOfBirth());</span>
-<span class="fc" id="L78">		this.residence=manager.getResidence();</span>
-<span class="fc" id="L79">		this.codicePIVA=manager.getCodicePIVA();</span>
-<span class="fc" id="L80">		this.ragioneSociale=manager.getRagioneSociale();</span>
-<span class="fc" id="L81">	}</span>
-	
-	/**
- 	 * Instantiates a new manager response.
- 	 */
-<span class="fc" id="L86"> 	public ManagerResponse() {</span>
-<span class="fc" id="L87">	    }</span>
+<span class="fc" id="L65">	public ManagerResponse(Manager manager) throws Exception{</span>
+<span class="fc" id="L66">		this.id=manager.getId();</span>
+<span class="fc" id="L67">		this.mail=manager.getMail();</span>
+<span class="fc" id="L68">		this.password=manager.getPassword();</span>
+<span class="fc" id="L69">		this.name=manager.getName();</span>
+<span class="fc" id="L70">		this.surname=manager.getSurname();</span>
+<span class="fc" id="L71">		this.dateOfBirth=Functionalities.convertToLocalDate(manager.getDateOfBirth());</span>
+<span class="fc" id="L72">		this.residence=manager.getResidence();</span>
+<span class="fc" id="L73">		this.codicePIVA = manager.getCodicePIVA();</span>
+<span class="fc" id="L74">		this.ragioneSociale=manager.getRagioneSociale();</span>
+<span class="fc" id="L75">	}</span>
 
 	/**
 	 * Gets the id.
@@ -92,7 +80,7 @@ public class ManagerResponse{
 	 * @return the id
 	 */
 	public String getId() {
-<span class="fc" id="L95">		return id;</span>
+<span class="fc" id="L83">		return id;</span>
 	}
 
 	/**
@@ -101,8 +89,8 @@ public class ManagerResponse{
 	 * @param id the new id
 	 */
 	public void setId(String id) {
-<span class="fc" id="L104">		this.id = id;</span>
-<span class="fc" id="L105">	}</span>
+<span class="nc" id="L92">		this.id = id;</span>
+<span class="nc" id="L93">	}</span>
 
 	/**
 	 * Gets the name.
@@ -110,7 +98,7 @@ public class ManagerResponse{
 	 * @return the name
 	 */
 	public String getName() {
-<span class="fc" id="L113">		return name;</span>
+<span class="fc" id="L101">		return name;</span>
 	}
 
 	/**
@@ -119,8 +107,8 @@ public class ManagerResponse{
 	 * @param name the new name
 	 */
 	public void setName(String name) {
-<span class="fc" id="L122">		this.name = name;</span>
-<span class="fc" id="L123">	}</span>
+<span class="nc" id="L110">		this.name = name;</span>
+<span class="nc" id="L111">	}</span>
 
 	/**
 	 * Gets the surname.
@@ -128,7 +116,7 @@ public class ManagerResponse{
 	 * @return the surname
 	 */
 	public String getSurname() {
-<span class="fc" id="L131">		return surname;</span>
+<span class="fc" id="L119">		return surname;</span>
 	}
 
 	/**
@@ -137,8 +125,8 @@ public class ManagerResponse{
 	 * @param surname the new surname
 	 */
 	public void setSurname(String surname) {
-<span class="fc" id="L140">		this.surname = surname;</span>
-<span class="fc" id="L141">	}</span>
+<span class="nc" id="L128">		this.surname = surname;</span>
+<span class="nc" id="L129">	}</span>
 
 	/**
 	 * Gets the date of birth.
@@ -146,7 +134,7 @@ public class ManagerResponse{
 	 * @return the date of birth
 	 */
 	public LocalDate getDateOfBirth() {
-<span class="fc" id="L149">		return dateOfBirth;</span>
+<span class="fc" id="L137">		return dateOfBirth;</span>
 	}
 
 	/**
@@ -155,8 +143,8 @@ public class ManagerResponse{
 	 * @param dateOfBirth the new date of birth
 	 */
 	public void setDateOfBirth(LocalDate dateOfBirth) {
-<span class="fc" id="L158">		this.dateOfBirth = dateOfBirth;</span>
-<span class="fc" id="L159">	}</span>
+<span class="nc" id="L146">		this.dateOfBirth = dateOfBirth;</span>
+<span class="nc" id="L147">	}</span>
 
 	/**
 	 * Gets the residence.
@@ -164,7 +152,7 @@ public class ManagerResponse{
 	 * @return the residence
 	 */
 	public Location getResidence() {
-<span class="fc" id="L167">		return residence;</span>
+<span class="fc" id="L155">		return residence;</span>
 	}
 
 	/**
@@ -173,8 +161,8 @@ public class ManagerResponse{
 	 * @param residence the new residence
 	 */
 	public void setResidence(Location residence) {
-<span class="fc" id="L176">		this.residence = residence;</span>
-<span class="fc" id="L177">	}</span>
+<span class="nc" id="L164">		this.residence = residence;</span>
+<span class="nc" id="L165">	}</span>
 
 	/**
 	 * Gets the codice PIVA.
@@ -182,7 +170,7 @@ public class ManagerResponse{
 	 * @return the codice PIVA
 	 */
 	public String getCodicePIVA() {
-<span class="fc" id="L185">		return codicePIVA;</span>
+<span class="fc" id="L173">		return codicePIVA;</span>
 	}
 
 	/**
@@ -191,8 +179,8 @@ public class ManagerResponse{
 	 * @param codicePIVA the new codice PIVA
 	 */
 	public void setCodicePIVA(String codicePIVA) {
-<span class="fc" id="L194">		this.codicePIVA = codicePIVA;</span>
-<span class="fc" id="L195">	}</span>
+<span class="nc" id="L182">		this.codicePIVA = codicePIVA;</span>
+<span class="nc" id="L183">	}</span>
 
 	/**
 	 * Gets the ragione sociale.
@@ -200,7 +188,7 @@ public class ManagerResponse{
 	 * @return the ragione sociale
 	 */
 	public String getRagioneSociale() {
-<span class="fc" id="L203">		return ragioneSociale;</span>
+<span class="fc" id="L191">		return ragioneSociale;</span>
 	}
 
 	/**
@@ -209,8 +197,8 @@ public class ManagerResponse{
 	 * @param ragioneSociale the new ragione sociale
 	 */
 	public void setRagioneSociale(String ragioneSociale) {
-<span class="fc" id="L212">		this.ragioneSociale = ragioneSociale;</span>
-<span class="fc" id="L213">	}</span>
+<span class="nc" id="L200">		this.ragioneSociale = ragioneSociale;</span>
+<span class="nc" id="L201">	}</span>
 
 	/**
 	 * Gets the mail.
@@ -218,7 +206,7 @@ public class ManagerResponse{
 	 * @return the mail
 	 */
 	public String getMail() {
-<span class="fc" id="L221">		return mail;</span>
+<span class="fc" id="L209">		return mail;</span>
 	}
 
 	/**
@@ -227,8 +215,8 @@ public class ManagerResponse{
 	 * @param mail the new mail
 	 */
 	public void setMail(String mail) {
-<span class="fc" id="L230">		this.mail = mail;</span>
-<span class="fc" id="L231">	}</span>
+<span class="nc" id="L218">		this.mail = mail;</span>
+<span class="nc" id="L219">	}</span>
 
 	/**
 	 * Gets the password.
@@ -236,23 +224,18 @@ public class ManagerResponse{
 	 * @return the password
 	 */
 	public String getPassword() {
-<span class="fc" id="L239">		return password;</span>
+<span class="fc" id="L227">		return password;</span>
 	}
 
 	/**
 	 * Sets the password.
 	 *
 	 * @param password the new password
-	 * @throws NoSuchAlgorithmException error in md5
 	 */
-	public void setPassword(String password) throws NoSuchAlgorithmException {
-		try {
-<span class="fc" id="L250">			this.password = Functionalities.getMd5(password);</span>
-<span class="pc" id="L251">		} catch (NoSuchAlgorithmException e) {</span>
-<span class="nc" id="L252">			throw new NoSuchAlgorithmException();</span>
-		}
-<span class="fc" id="L254">	}</span>
+	public void setPassword(String password) {
+<span class="nc" id="L236">		this.password = password;</span>
+<span class="nc" id="L237">	}</span>
 	
 	
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (1) (30 dic 2021 11:07:32)</div></body></html>

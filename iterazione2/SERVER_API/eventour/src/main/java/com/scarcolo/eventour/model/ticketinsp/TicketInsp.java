@@ -41,7 +41,7 @@ public class TicketInsp{
 	 * @throws Exception the exception
 	 */
 	public TicketInsp(AddTicketInspRequest request) throws Exception {
-		this.eventId=new ObjectId(request.eventId);
+        this.eventId=new ObjectId(request.eventId);
         this.fullName=request.fullName;
     }
 	
@@ -139,9 +139,9 @@ public class TicketInsp{
 	 * Sets the code.
 	 *
 	 * @param code the new code
-	 * @throws Exception the exception
+	 * @throws IllegalArgumentException the exception for invalid code
 	 */
-	public void setCode(String code) throws Exception {
+	public void setCode(String code) throws IllegalArgumentException {
 		boolean res=Functionalities.isValidCode(code);
 		if(res) {
 			this.code=code;

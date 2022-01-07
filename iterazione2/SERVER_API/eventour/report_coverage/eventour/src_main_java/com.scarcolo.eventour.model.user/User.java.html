@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.user</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.user</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">/**
  * 
  */
 package com.scarcolo.eventour.model.user;
@@ -55,9 +55,6 @@ public class User{
 	/** The residence. */
 	private Location residence;
 	
-	/** The newsletter. */
-	private Boolean newsletter;
-	
 	/** The types. */
 	private String[] types;
 	
@@ -67,33 +64,33 @@ public class User{
 	 * @param request the request
 	 * @throws Exception the exception
 	 */
-<span class="fc" id="L70">	public User(AddUserRequest request) throws Exception {</span>
-<span class="fc" id="L71">		this.username=request.username;</span>
-<span class="fc" id="L72">		boolean res=Functionalities.isValidEmailAddress(request.mail);</span>
-<span class="pc bpc" id="L73" title="1 of 2 branches missed.">		if(res) {</span>
-<span class="fc" id="L74">			this.mail=request.mail;</span>
-<span class="fc" id="L75">		}else {</span>
-<span class="nc" id="L76">			throw new AddressException();</span>
+<span class="fc" id="L67">	public User(AddUserRequest request) throws Exception {</span>
+<span class="fc" id="L68">		this.username=request.username;</span>
+<span class="fc" id="L69">		boolean res=Functionalities.isValidEmailAddress(request.mail);</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">		if(res) {</span>
+<span class="fc" id="L71">			this.mail=request.mail;</span>
+<span class="fc" id="L72">		}else {</span>
+<span class="nc" id="L73">			throw new AddressException();</span>
 		}
-<span class="fc" id="L78">        this.password=request.password;</span>
-<span class="fc" id="L79">        this.name=request.name;</span>
-<span class="fc" id="L80">        this.surname=request.surname;</span>
-<span class="fc bfc" id="L81" title="All 2 branches covered.">        if(request.dateOfBirth.isBefore(LocalDate.now())) {</span>
-<span class="fc" id="L82">			this.dateOfBirth=Functionalities.convertToDate(request.dateOfBirth);</span>
-<span class="fc" id="L83">		}else {</span>
-<span class="fc" id="L84">			throw new DateTimeException(&quot;Errore data futura&quot;);</span>
+<span class="fc" id="L75">        this.password=request.password;</span>
+<span class="fc" id="L76">        this.name=request.name;</span>
+<span class="fc" id="L77">        this.surname=request.surname;</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">        if(request.dateOfBirth.isBefore(LocalDate.now())) {</span>
+<span class="fc" id="L79">			this.dateOfBirth=Functionalities.convertToDate(request.dateOfBirth);</span>
+<span class="fc" id="L80">		}else {</span>
+<span class="fc" id="L81">			throw new DateTimeException(&quot;Errore data futura&quot;);</span>
 		}
-<span class="pc bpc" id="L86" title="3 of 4 branches missed.">        this.sex=(request.sex.toUpperCase().contentEquals(&quot;M&quot;) || request.sex.toUpperCase().contentEquals(&quot;F&quot;))? request.sex.toUpperCase() : &quot;N&quot;;</span>
-<span class="fc" id="L87">        this.residence=request.residence;</span>
-<span class="fc" id="L88">        this.types=request.types;</span>
-<span class="fc" id="L89">    }</span>
+<span class="pc bpc" id="L83" title="3 of 4 branches missed.">        this.sex=(request.sex.toUpperCase().contentEquals(&quot;M&quot;) || request.sex.toUpperCase().contentEquals(&quot;F&quot;))? request.sex.toUpperCase() : &quot;N&quot;;</span>
+<span class="fc" id="L84">        this.residence=request.residence;</span>
+<span class="fc" id="L85">        this.types=request.types;</span>
+<span class="fc" id="L86">    }</span>
 	
 	/**
 	 * Instantiates a new user.
 	 */
 	public User() {
-<span class="fc" id="L95">		super();</span>
-<span class="fc" id="L96">	}</span>
+<span class="fc" id="L92">		super();</span>
+<span class="fc" id="L93">	}</span>
 	
 	/**
 	 * Gets the id.
@@ -101,7 +98,7 @@ public class User{
 	 * @return the id
 	 */
 	public String getId() {
-<span class="fc" id="L104">		return id;</span>
+<span class="fc" id="L101">		return id;</span>
 	}
 
 	/**
@@ -110,8 +107,8 @@ public class User{
 	 * @param id the new id
 	 */
 	public void setId(String id) {
-<span class="fc" id="L113">		this.id = id;</span>
-<span class="fc" id="L114">	}</span>
+<span class="nc" id="L110">		this.id = id;</span>
+<span class="nc" id="L111">	}</span>
 
 	/**
 	 * Gets the username.
@@ -119,7 +116,7 @@ public class User{
 	 * @return the username
 	 */
 	public String getUsername() {
-<span class="fc" id="L122">		return username;</span>
+<span class="fc" id="L119">		return username;</span>
 	}
 
 	/**
@@ -128,8 +125,8 @@ public class User{
 	 * @param username the new username
 	 */
 	public void setUsername(String username) {
-<span class="fc" id="L131">		this.username = username;</span>
-<span class="fc" id="L132">	}</span>
+<span class="nc" id="L128">		this.username = username;</span>
+<span class="nc" id="L129">	}</span>
 
 	/**
 	 * Gets the password.
@@ -137,7 +134,7 @@ public class User{
 	 * @return the password
 	 */
 	public String getPassword() {
-<span class="fc" id="L140">		return password;</span>
+<span class="fc" id="L137">		return password;</span>
 	}
 
 	/**
@@ -146,8 +143,8 @@ public class User{
 	 * @param password the new password
 	 */
 	public void setPassword(String password) {
-<span class="fc" id="L149">		this.password = password;</span>
-<span class="fc" id="L150">	}</span>
+<span class="nc" id="L146">		this.password = password;</span>
+<span class="nc" id="L147">	}</span>
 
 	/**
 	 * Gets the name.
@@ -155,7 +152,7 @@ public class User{
 	 * @return the name
 	 */
 	public String getName() {
-<span class="fc" id="L158">		return name;</span>
+<span class="fc" id="L155">		return name;</span>
 	}
 	
 	/**
@@ -164,8 +161,8 @@ public class User{
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-<span class="fc" id="L167">		this.name = name;</span>
-<span class="fc" id="L168">	}</span>
+<span class="nc" id="L164">		this.name = name;</span>
+<span class="nc" id="L165">	}</span>
 	
 	/**
 	 * Gets the surname.
@@ -173,7 +170,7 @@ public class User{
 	 * @return the surname
 	 */
 	public String getSurname() {
-<span class="fc" id="L176">		return surname;</span>
+<span class="fc" id="L173">		return surname;</span>
 	}
 	
 	/**
@@ -182,8 +179,8 @@ public class User{
 	 * @param surname the surname to set
 	 */
 	public void setSurname(String surname) {
-<span class="fc" id="L185">		this.surname = surname;</span>
-<span class="fc" id="L186">	}</span>
+<span class="nc" id="L182">		this.surname = surname;</span>
+<span class="nc" id="L183">	}</span>
 
 	
 	/**
@@ -192,23 +189,23 @@ public class User{
 	 * @return the date of birth
 	 */
 	public LocalDate getDateOfBirth() {
-<span class="fc" id="L195">		return Functionalities.convertToLocalDate(this.dateOfBirth);</span>
+<span class="fc" id="L192">		return Functionalities.convertToLocalDate(this.dateOfBirth);</span>
 	}
 	
 	/**
 	 * Sets the date of birth check.
 	 *
 	 * @param dateOfBirth the new date of birth check
-	 * @throws Exception the exception
+	 * @throws DateTimeException the exception for date incorrect
 	 */
-	private void setDateOfBirthCheck(Date dateOfBirth) throws Exception {
-<span class="pc bpc" id="L205" title="1 of 2 branches missed.">		if(dateOfBirth.before(new Date())) {</span>
-<span class="fc" id="L206">			this.dateOfBirth = dateOfBirth;</span>
-<span class="fc" id="L207">		}else {</span>
-<span class="nc" id="L208">			throw new DateTimeException(&quot;Errore data futura&quot;);</span>
+	private void setDateOfBirthCheck(Date dateOfBirth) throws DateTimeException {
+<span class="nc bnc" id="L202" title="All 2 branches missed.">		if(dateOfBirth.before(new Date())) {</span>
+<span class="nc" id="L203">			this.dateOfBirth = dateOfBirth;</span>
+<span class="nc" id="L204">		}else {</span>
+<span class="nc" id="L205">			throw new DateTimeException(&quot;Errore data futura&quot;);</span>
 		}
 		
-<span class="fc" id="L211">	}</span>
+<span class="nc" id="L208">	}</span>
 	
 	/**
 	 * Sets the date of birth.
@@ -217,8 +214,8 @@ public class User{
 	 * @throws Exception the exception
 	 */
 	public void setDateOfBirth(Date dateOfBirth) throws Exception {
-<span class="fc" id="L220">		setDateOfBirthCheck(dateOfBirth);</span>
-<span class="fc" id="L221">	}</span>
+<span class="nc" id="L217">		setDateOfBirthCheck(dateOfBirth);</span>
+<span class="nc" id="L218">	}</span>
 
 	/**
 	 * Gets the sex.
@@ -226,7 +223,7 @@ public class User{
 	 * @return the sex
 	 */
 	public String getSex() {
-<span class="fc" id="L229">		return sex;</span>
+<span class="fc" id="L226">		return sex;</span>
 	}
 
 	/**
@@ -235,8 +232,8 @@ public class User{
 	 * @param sex the new sex
 	 */
 	public void setSex(String sex) {
-<span class="pc bpc" id="L238" title="1 of 2 branches missed.">		this.sex = (sex.equalsIgnoreCase(&quot;M&quot;)) ? &quot;M&quot; : &quot;F&quot;;</span>
-<span class="fc" id="L239">	}</span>
+<span class="nc bnc" id="L235" title="All 2 branches missed.">		this.sex = (sex.toUpperCase().contentEquals(&quot;M&quot;)) ? &quot;M&quot; : &quot;F&quot;;</span>
+<span class="nc" id="L236">	}</span>
 
 	/**
 	 * Gets the types.
@@ -244,7 +241,7 @@ public class User{
 	 * @return the types
 	 */
 	public String[] getTypes() {
-<span class="fc" id="L247">		return types;</span>
+<span class="fc" id="L244">		return types;</span>
 	}
 	
 	/*public String[] getTypesName() {
@@ -273,8 +270,8 @@ public class User{
 	 * @param types the new types
 	 */
 	public void setTypes(String[] types) {
-<span class="fc" id="L276">		this.types = types;</span>
-<span class="fc" id="L277">	}</span>
+<span class="nc" id="L273">		this.types = types;</span>
+<span class="nc" id="L274">	}</span>
 	
 	/**
 	 * Adds the type.
@@ -282,11 +279,11 @@ public class User{
 	 * @param type the type
 	 */
 	public void addType(String type) {
-<span class="nc" id="L285">		String[] newArr=Arrays.copyOf(this.types, this.types.length+1);</span>
-<span class="nc" id="L286">		newArr[this.types.length+1]=type;</span>
-<span class="nc" id="L287">		this.types=newArr;</span>
+<span class="nc" id="L282">		String[] newArr=Arrays.copyOf(this.types, this.types.length+1);</span>
+<span class="nc" id="L283">		newArr[this.types.length+1]=type;</span>
+<span class="nc" id="L284">		this.types=newArr;</span>
 		
-<span class="nc" id="L289">	}</span>
+<span class="nc" id="L286">	}</span>
 
 	
 	/**
@@ -295,7 +292,7 @@ public class User{
 	 * @return the residence
 	 */
 	public Location getResidence() {
-<span class="fc" id="L298">		return residence;</span>
+<span class="fc" id="L295">		return residence;</span>
 	}
 	
 	/**
@@ -304,8 +301,8 @@ public class User{
 	 * @param residence the residence to set
 	 */
 	public void setResidence(Location residence) {
-<span class="fc" id="L307">		this.residence = residence;</span>
-<span class="fc" id="L308">	}</span>
+<span class="fc" id="L304">		this.residence = residence;</span>
+<span class="fc" id="L305">	}</span>
 	
 	/**
 	 * Gets the email.
@@ -313,7 +310,7 @@ public class User{
 	 * @return the username
 	 */
 	public String getEmail() {
-<span class="fc" id="L316">		return this.mail;</span>
+<span class="fc" id="L313">		return this.mail;</span>
 	}
 
 	/**
@@ -323,31 +320,13 @@ public class User{
 	 * @throws AddressException the address exception
 	 */
 	public void setEmail(String mail) throws AddressException {
-<span class="fc" id="L326">		boolean res=Functionalities.isValidEmailAddress(mail);</span>
-<span class="pc bpc" id="L327" title="1 of 2 branches missed.">		if(res) {</span>
-<span class="fc" id="L328">			this.mail=mail;</span>
-<span class="fc" id="L329">		}else {</span>
-<span class="nc" id="L330">			throw new AddressException();</span>
+<span class="nc" id="L323">		boolean res=Functionalities.isValidEmailAddress(mail);</span>
+<span class="nc bnc" id="L324" title="All 2 branches missed.">		if(res) {</span>
+<span class="nc" id="L325">			this.mail=mail;</span>
+<span class="nc" id="L326">		}else {</span>
+<span class="nc" id="L327">			throw new AddressException();</span>
 		}
 			
-<span class="fc" id="L333">	}</span>
-
-	/**
-	 * Gets the newsletter.
-	 *
-	 * @return the newsletter
-	 */
-	public Boolean getNewsletter() {
-<span class="fc" id="L341">		return newsletter;</span>
-	}
-
-	/**
-	 * Sets the newsletter.
-	 *
-	 * @param newsletter the new newsletter
-	 */
-	public void setNewsletter(Boolean newsletter) {
-<span class="fc" id="L350">		this.newsletter = newsletter;</span>
-<span class="fc" id="L351">	}</span>
+<span class="nc" id="L330">	}</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

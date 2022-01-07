@@ -29,12 +29,14 @@ public class PaymentServiceImpl implements PaymentService {
     Stripe.apiKey = TEST_STRIPE_SECRET_KEY;
   }
   
+  
+
   /**
    * Creates the customer.
    *
-   * @param descr the description of transaction
-   * @param name the name of user
-   * @param surname the surname of user
+   * @param descr the description of payment
+   * @param name the name of credit card
+   * @param surname the surname of credit card
    * @param mail the mail of user
    * @return the customer
    */
@@ -56,20 +58,20 @@ public class PaymentServiceImpl implements PaymentService {
   }
 
   /**
-   * Charge credit card.
+   * Charge credit card data.
    *
-   * @param order the order
-   * @param cardNr the card number
+   * @param order the order of payment
+   * @param cardNr the card nr
    * @param month the month
    * @param year the year
    * @param cvv the cvv
-   * @return the string
+   * @return the string with transaction
    * @throws NoSuchAlgorithmException the no such algorithm exception
    */
   public String chargeCreditCard(Order order,String cardNr,String month,String year,String cvv) throws NoSuchAlgorithmException {
 	  if(cardNr.startsWith("400000380000")&&cvv.contains("2")) {
 				MessageDigest md = MessageDigest.getInstance("MD5");
-				String stringa=""+cardNr+month+year+cvv+Math.floor(Math.random()*1000);
+				String stringa=cardNr+month+year+cvv+Math.floor(Math.random()*1000);
 				if(Charset.isSupported("CP1252"))
 					md.update(stringa.getBytes(Charset.forName("CP1252")));
 				else
@@ -79,13 +81,15 @@ public class PaymentServiceImpl implements PaymentService {
 				StringBuilder str = new StringBuilder();
 				for(int i = 0; i < bytes.length; i++)
 					str.append(Integer.toHexString( ( bytes[i] & 0xFF ) | 0x100 ).substring(1, 3));
-				
 		  return str.toString();
 	  }else {
 		  return "cb5e100e5a9a3e7f6d1fd97512215282"; //hash of "error" string
 	  }
 
-	/*		STRIP PROPS AND SETTINGS FOR A REAL PAYMENT
+	/*		
+	 { real method for payment with stripe api }
+	 
+	 
     // Stripe requires the charge amount to be in cents
     int chargeAmountCents = (int) order.getAmount().doubleValue() * 100;
 

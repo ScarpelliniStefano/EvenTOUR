@@ -8,7 +8,7 @@ import com.scarcolo.eventour.model.booking.Booking;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class ReportManResponse.
+ * The Class TicketManResponse.
  */
 public class ReportManResponse {
 	
@@ -56,14 +56,6 @@ public class ReportManResponse {
 	@JsonProperty("price")
 	private Double price;
 	
-	/** The review sum. */
-	@JsonProperty("reviewSum")
-	private Integer reviewSum;
-	
-	/** The review number. */
-	@JsonProperty("reviewTot")
-	private Integer reviewTot;
-	
 	/** The bookings. */
 	@JsonProperty("booking")
 	private Booking[] booking;
@@ -84,12 +76,10 @@ public class ReportManResponse {
 	 * @param totSeat the tot seat
 	 * @param freeSeat the free seat
 	 * @param price the price
-	 * @param reviewSum the review sum
-	 * @param reviewTot the review tot
 	 * @param booking the bookings
 	 */
 	public ReportManResponse(String id, String title, String description, Location location, String[] types,
-			LocalDateTime dataOra, String managerId, String urlImage, Integer totSeat, Integer freeSeat, Double price, Integer reviewSum, Integer reviewTot,
+			LocalDateTime dataOra, String managerId, String urlImage, Integer totSeat, Integer freeSeat, Double price,
 			Booking[] booking) {
 		super();
 		this.id = id;
@@ -103,8 +93,6 @@ public class ReportManResponse {
 		this.totSeat = totSeat;
 		this.freeSeat = freeSeat;
 		this.price = price;
-		this.reviewSum = reviewSum;
-		this.reviewTot = reviewTot;
 		this.booking = booking;
 	}
 
@@ -304,22 +292,6 @@ public class ReportManResponse {
 	 */
 	public void setPrice(Double price) {
 		this.price = price;
-	}
-
-	public Integer getReviewSum() {
-		return reviewSum;
-	}
-
-	public void setReviewSum(Integer reviewSum) {
-		this.reviewSum = reviewSum;
-	}
-
-	public Integer getReviewTot() {
-		return reviewTot;
-	}
-
-	public void setReviewTot(Integer reviewTot) {
-		this.reviewTot = reviewTot;
 	}
 
 	/**

@@ -40,10 +40,6 @@ public class UserResponse{
 	@JsonProperty("dateOfBirth")
 	private LocalDate dateOfBirth;
 	
-	/** The newsletter. */
-	@JsonProperty("newsletter")
-	private Boolean newsletter;
-	
 	/** The residence. */
 	@JsonProperty("residence")
 	private Location residence;
@@ -73,26 +69,23 @@ public class UserResponse{
 		this.id=user.getId();
 		this.username=user.getUsername();
 		this.mail=user.getEmail();
-		try {
-			this.password=Functionalities.getMd5(user.getPassword()) ;
-		} catch (NoSuchAlgorithmException e) {
-			this.password=user.getPassword();
-		}
+		this.password=user.getPassword();
 		this.name=user.getName();
 		this.surname=user.getSurname();
 		this.sex=user.getSex();
 		this.dateOfBirth=user.getDateOfBirth();
 		this.residence=user.getResidence();
 		this.types=user.getTypes();
-		this.newsletter=user.getNewsletter();
-	}
-	
-	/**
-	 * Instantiates a new user.
-	 */
-	public UserResponse() {
 	}
 
+	/**
+	 * Instantiates a new user response.
+	 */
+	public UserResponse() {
+		super();
+	}
+	
+	
 	/**
 	 * Gets the id.
 	 *
@@ -268,32 +261,10 @@ public class UserResponse{
 	 * Sets the password.
 	 *
 	 * @param password the new password
-	 * @throws NoSuchAlgorithmException if algorithm md5 is not found
+	 * @throws NoSuchAlgorithmException exception for md5 not present
 	 */
 	public void setPassword(String password) throws NoSuchAlgorithmException {
-		try {
-			this.password = Functionalities.getMd5(password);
-		} catch (NoSuchAlgorithmException e) {
-			throw e;
-		}
-	}
-
-	/**
-	 * Gets the newsletter.
-	 *
-	 * @return the newsletter
-	 */
-	public Boolean getNewsletter() {
-		return newsletter;
-	}
-
-	/**
-	 * Sets the newsletter.
-	 *
-	 * @param newsletter the new newsletter
-	 */
-	public void setNewsletter(Boolean newsletter) {
-		this.newsletter = newsletter;
+		this.password = Functionalities.getMd5(password);
 	}
 
 	

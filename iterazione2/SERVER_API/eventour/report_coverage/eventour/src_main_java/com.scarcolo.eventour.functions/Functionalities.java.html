@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Functionalities.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.functions</a> &gt; <span class="el_source">Functionalities.java</span></div><h1>Functionalities.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Functionalities.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.functions</a> &gt; <span class="el_source">Functionalities.java</span></div><h1>Functionalities.java</h1><pre class="source lang-java linenums">/**
  * 
  */
 package com.scarcolo.eventour.functions;
@@ -21,7 +21,6 @@ import org.passay.CharacterData;
 import org.passay.PasswordGenerator;
 
 import com.scarcolo.eventour.model.event.Event;
-import com.scarcolo.eventour.model.event.EventPlus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -29,7 +28,7 @@ import com.scarcolo.eventour.model.event.EventPlus;
  *
  * @author stefa
  */
-<span class="nc" id="L32">public class Functionalities {</span>
+<span class="nc" id="L31">public class Functionalities {</span>
 
 	/**
 	 * Checks if is valid email address.
@@ -38,14 +37,14 @@ import com.scarcolo.eventour.model.event.EventPlus;
 	 * @return true, if is valid email address
 	 */
 	public static boolean isValidEmailAddress(String mail) {
-<span class="fc" id="L41">		 boolean result = true;</span>
+<span class="fc" id="L40">		 boolean result = true;</span>
 		 try {
-<span class="fc" id="L43">		     InternetAddress emailAddr = new InternetAddress(mail);</span>
-<span class="fc" id="L44">		     emailAddr.validate();</span>
-<span class="fc" id="L45">		 } catch (AddressException ex) {</span>
-<span class="fc" id="L46">		      result = false;</span>
+<span class="fc" id="L42">		     InternetAddress emailAddr = new InternetAddress(mail);</span>
+<span class="fc" id="L43">		     emailAddr.validate();</span>
+<span class="pc" id="L44">		 } catch (AddressException ex) {</span>
+<span class="nc" id="L45">		      result = false;</span>
 		 }
-<span class="fc" id="L48">		 return result;</span>
+<span class="fc" id="L47">		 return result;</span>
 	}
 
 	/**
@@ -55,202 +54,171 @@ import com.scarcolo.eventour.model.event.EventPlus;
 	 * @return true, if is valid code
 	 */
 	public static boolean isValidCode(String code) {
-<span class="pc bpc" id="L58" title="2 of 4 branches missed.">		if(code.startsWith(&quot;TI-&quot;) &amp;&amp; code.split(&quot;-&quot;).length==3) return true;</span>
-<span class="nc" id="L59">		else return false;</span>
-		//DA FARE MATCHES DEI CODICI CON REGEX
-		/*if(code.matches(code))*/  
+		//DA FARE MATCHES DEI CODICI
+<span class="fc" id="L58">		/*if(code.matches(code))*/  return true;</span>
 		/*return false;*/
 	}
 	
 	/**
-	 * Convert to date from LocalDateTime.
+	 * Convert to date.
 	 *
-	 * @param dateToConvert the date to convert (type LocalDateTime)
-	 * @return the date in Date type
+	 * @param dateToConvert the date to convert, passed in LocalDateTime
+	 * @return the date in Date format
 	 */
 	public static Date convertToDate(LocalDateTime dateToConvert) {
-<span class="fc" id="L72">		return java.util.Date</span>
-<span class="fc" id="L73">			      .from(dateToConvert.atZone(ZoneId.systemDefault())</span>
-<span class="fc" id="L74">			      .toInstant());</span>
+<span class="fc" id="L69">		return java.util.Date</span>
+<span class="fc" id="L70">			      .from(dateToConvert.atZone(ZoneId.systemDefault())</span>
+<span class="fc" id="L71">			      .toInstant());</span>
 	}
 	
 	/**
-	 * Convert to date from LocalDate.
+	 * Convert to date.
 	 *
-	 * @param dateToConvert the date to convert (type LocalDate)
-	 * @return the date in Date type
+	 * @param dateToConvert the date to convert, passed in LocalDate
+	 * @return the date in Date
 	 */
 	public static Date convertToDate(LocalDate dateToConvert) {
-<span class="fc" id="L84">	    return java.util.Date.from(dateToConvert.atStartOfDay()</span>
-<span class="fc" id="L85">	      .atZone(ZoneId.systemDefault())</span>
-<span class="fc" id="L86">	      .toInstant());</span>
-	}
-	
-	/**
-	 * Convert to LocalDate from Date.
-	 *
-	 * @param dateToConvert the date to convert (type Date)
-	 * @return the local date in LocalDate
-	 */
-	public static LocalDate convertToLocalDate(Date dateToConvert) {
-<span class="fc" id="L96">	    return LocalDate.ofInstant(</span>
-<span class="fc" id="L97">	      dateToConvert.toInstant(), ZoneId.systemDefault());</span>
+<span class="fc" id="L81">	    return java.util.Date.from(dateToConvert.atStartOfDay()</span>
+<span class="fc" id="L82">	      .atZone(ZoneId.systemDefault())</span>
+<span class="fc" id="L83">	      .toInstant());</span>
 	}
 	
 	/**
 	 * Convert to LocalDate.
 	 *
-	 * @param dateToConvert the date to convert (type Date)
+	 * @param dateToConvert the date to convert, passed in Date
+	 * @return the local date in LocalDate
+	 */
+	public static LocalDate convertToLocalDate(Date dateToConvert) {
+<span class="fc" id="L93">	    return LocalDate.ofInstant(</span>
+<span class="fc" id="L94">	      dateToConvert.toInstant(), ZoneId.systemDefault());</span>
+	}
+	
+	/**
+	 * Convert to LocalDateTime.
+	 *
+	 * @param dateToConvert the date to convert, passed in Date
 	 * @return the local date time in LocalDateTime
 	 */
 	public static LocalDateTime convertToLocalDateTime(Date dateToConvert) {
-<span class="fc" id="L107">	    return LocalDateTime.ofInstant(</span>
-<span class="fc" id="L108">	      dateToConvert.toInstant(), ZoneId.systemDefault());</span>
+<span class="fc" id="L104">	    return LocalDateTime.ofInstant(</span>
+<span class="fc" id="L105">	      dateToConvert.toInstant(), ZoneId.systemDefault());</span>
 	}
 	
 	/**
-	 * Simil type method.
+	 * Return if two types are similar
 	 *
-	 * @param evTyp the first type
-	 * @param usTyp the second type to compare
+	 * @param evTyp the event type
+	 * @param usTyp the user type to check
 	 * @return true, if successful
 	 */
 	public static boolean similType(String evTyp, String usTyp) {
-<span class="fc" id="L119">		String[] splittedE=evTyp.split(&quot;\\.&quot;);</span>
-<span class="fc" id="L120">		String[] splittedU=usTyp.split(&quot;\\.&quot;);</span>
-<span class="fc bfc" id="L121" title="All 2 branches covered.">		if(!splittedE[0].equalsIgnoreCase(splittedU[0]))</span>
-<span class="fc" id="L122">			return false;</span>
-<span class="fc bfc" id="L123" title="All 2 branches covered.">		if(splittedE.length&gt;2) {</span>
-<span class="fc bfc" id="L124" title="All 2 branches covered.">			if(!splittedE[1].equalsIgnoreCase(splittedU[1]))</span>
-<span class="fc" id="L125">				return false;</span>
+<span class="fc" id="L116">		String[] splittedE=evTyp.split(&quot;\\.&quot;);</span>
+<span class="fc" id="L117">		String[] splittedU=usTyp.split(&quot;\\.&quot;);</span>
+<span class="fc bfc" id="L118" title="All 2 branches covered.">		if(!splittedE[0].equalsIgnoreCase(splittedU[0]))</span>
+<span class="fc" id="L119">			return false;</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">		if(splittedE.length&gt;2) {</span>
+<span class="fc bfc" id="L121" title="All 2 branches covered.">			if(!splittedE[1].equalsIgnoreCase(splittedU[1]))</span>
+<span class="fc" id="L122">				return false;</span>
 		}
-<span class="fc" id="L127">		return true;</span>
+<span class="fc" id="L124">		return true;</span>
 	}
 	
 	/**
-	 * Order by datetime.
+	 * List of events to order by data.
 	 *
 	 * @param listToOrder the list to order
-	 * @return the list
+	 * @return the list ordered
 	 */
 	public static List&lt;Event&gt; orderByData(List&lt;Event&gt; listToOrder){
-<span class="nc bnc" id="L137" title="All 2 branches missed.">		for(int i=0;i&lt;listToOrder.size();i++) {</span>
-<span class="nc bnc" id="L138" title="All 2 branches missed.">			for(int j=i+1;j&lt;listToOrder.size();j++) {</span>
-<span class="nc bnc" id="L139" title="All 2 branches missed.">				if(listToOrder.get(i).getDataOra().isAfter(listToOrder.get(j).getDataOra())) {</span>
-<span class="nc" id="L140">					Event tmp=listToOrder.get(j);</span>
-<span class="nc" id="L141">					listToOrder.set(j, listToOrder.get(i));</span>
-<span class="nc" id="L142">					listToOrder.set(i, tmp);</span>
+<span class="nc bnc" id="L134" title="All 2 branches missed.">		for(int i=0;i&lt;listToOrder.size();i++) {</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">			for(int j=i+1;j&lt;listToOrder.size();j++) {</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">				if(listToOrder.get(i).getDataOra().isAfter(listToOrder.get(j).getDataOra())) {</span>
+<span class="nc" id="L137">					Event tmp=listToOrder.get(j);</span>
+<span class="nc" id="L138">					listToOrder.set(j, listToOrder.get(i));</span>
+<span class="nc" id="L139">					listToOrder.set(i, tmp);</span>
 				}
 			}
 		}
-<span class="nc" id="L146">		return listToOrder;</span>
+<span class="nc" id="L143">		return listToOrder;</span>
 		
 	}
 
 	/**
-	 * Gets the md 5 hash.
+	 * Gets the md5 hash.
 	 *
-	 * @param input the input string
-	 * @return the md 5
-	 * @throws NoSuchAlgorithmException md5 library non present
+	 * @param input the input string to hash
+	 * @return the md5 hashing of the string
+	 * @throws NoSuchAlgorithmException algorithm md5 not implemented
 	 */
 	public static String getMd5(String input) throws NoSuchAlgorithmException
     {
         try {
   
             // Static getInstance method is called with hashing MD5
-<span class="fc" id="L162">            MessageDigest md = MessageDigest.getInstance(&quot;MD5&quot;);</span>
+<span class="fc" id="L159">            MessageDigest md = MessageDigest.getInstance(&quot;MD5&quot;);</span>
   
             // digest() method is called to calculate message digest
             //  of an input digest() return array of byte
-<span class="fc" id="L166">            byte[] messageDigest = md.digest(input.getBytes());</span>
+<span class="fc" id="L163">            byte[] messageDigest = md.digest(input.getBytes());</span>
   
             // Convert byte array into signum representation
-<span class="fc" id="L169">            BigInteger no = new BigInteger(1, messageDigest);</span>
+<span class="fc" id="L166">            BigInteger no = new BigInteger(1, messageDigest);</span>
   
             // Convert message digest into hex value
-<span class="fc" id="L172">            String hashtext = no.toString(16);</span>
-<span class="fc bfc" id="L173" title="All 2 branches covered.">            while (hashtext.length() &lt; 32) {</span>
-<span class="fc" id="L174">                hashtext = &quot;0&quot; + hashtext;</span>
+<span class="fc" id="L169">            String hashtext = no.toString(16);</span>
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">            while (hashtext.length() &lt; 32) {</span>
+<span class="nc" id="L171">                hashtext = &quot;0&quot; + hashtext;</span>
             }
-<span class="fc" id="L176">            return hashtext;</span>
+<span class="fc" id="L173">            return hashtext;</span>
         } 
   
         // For specifying wrong message digest algorithms
-<span class="nc" id="L180">        catch (NoSuchAlgorithmException e) {</span>
-<span class="nc" id="L181">            throw e;</span>
+<span class="nc" id="L177">        catch (NoSuchAlgorithmException e) {</span>
+<span class="nc" id="L178">            throw e;</span>
         }
     }
 	
 	
 	/**
-	 * Generate passay password.
+	 * Generate passay password for generate a secure password 
 	 *
-	 * @param lenght the lenght
-	 * @return the string
+	 * @param lenght the lenght of the password
+	 * @return the string of the password
 	 */
 	public static String generatePassayPassword(int lenght) {
-<span class="fc" id="L193">	    PasswordGenerator gen = new PasswordGenerator();</span>
-<span class="fc" id="L194">	    CharacterData lowerCaseChars = EnglishCharacterData.LowerCase;</span>
-<span class="fc" id="L195">	    CharacterRule lowerCaseRule = new CharacterRule(lowerCaseChars);</span>
-<span class="fc" id="L196">	    lowerCaseRule.setNumberOfCharacters(2);</span>
+<span class="fc" id="L190">	    PasswordGenerator gen = new PasswordGenerator();</span>
+<span class="fc" id="L191">	    CharacterData lowerCaseChars = EnglishCharacterData.LowerCase;</span>
+<span class="fc" id="L192">	    CharacterRule lowerCaseRule = new CharacterRule(lowerCaseChars);</span>
+<span class="fc" id="L193">	    lowerCaseRule.setNumberOfCharacters(2);</span>
 
-<span class="fc" id="L198">	    EnglishCharacterData upperCaseChars = EnglishCharacterData.UpperCase;</span>
-<span class="fc" id="L199">	    CharacterRule upperCaseRule = new CharacterRule(upperCaseChars);</span>
-<span class="fc" id="L200">	    upperCaseRule.setNumberOfCharacters(2);</span>
+<span class="fc" id="L195">	    EnglishCharacterData upperCaseChars = EnglishCharacterData.UpperCase;</span>
+<span class="fc" id="L196">	    CharacterRule upperCaseRule = new CharacterRule(upperCaseChars);</span>
+<span class="fc" id="L197">	    upperCaseRule.setNumberOfCharacters(2);</span>
 
-<span class="fc" id="L202">	    EnglishCharacterData digitChars = EnglishCharacterData.Digit;</span>
-<span class="fc" id="L203">	    CharacterRule digitRule = new CharacterRule(digitChars);</span>
-<span class="fc" id="L204">	    digitRule.setNumberOfCharacters(2);</span>
+<span class="fc" id="L199">	    EnglishCharacterData digitChars = EnglishCharacterData.Digit;</span>
+<span class="fc" id="L200">	    CharacterRule digitRule = new CharacterRule(digitChars);</span>
+<span class="fc" id="L201">	    digitRule.setNumberOfCharacters(2);</span>
 
-<span class="fc" id="L206">	    CharacterData date=new CharacterData() {</span>
+<span class="fc" id="L203">	    CharacterData date=new CharacterData() {</span>
 
 			@Override
 			public String getErrorCode() {
-<span class="nc" id="L210">				return &quot;&quot;;</span>
+<span class="nc" id="L207">				return &quot;&quot;;</span>
 			}
 
 			@Override
 			public String getCharacters() {
-<span class="fc" id="L215">				return &quot;!@#$%^&amp;*()_+&quot;;</span>
+<span class="fc" id="L212">				return &quot;!@#$%^&amp;*()_+&quot;;</span>
 			}
 	    	
 	    };
-<span class="fc" id="L219">	    CharacterRule splCharRule = new CharacterRule(date);</span>
-<span class="fc" id="L220">	    splCharRule.setNumberOfCharacters(2);</span>
+<span class="fc" id="L216">	    CharacterRule splCharRule = new CharacterRule(date);</span>
+<span class="fc" id="L217">	    splCharRule.setNumberOfCharacters(2);</span>
 
-<span class="fc" id="L222">	    String password = gen.generatePassword(lenght, splCharRule, lowerCaseRule, </span>
-<span class="fc" id="L223">	      upperCaseRule, digitRule);</span>
-<span class="fc" id="L224">	    return password;</span>
-	}
-
-	/**
-	 * Number of event with datetime after now.
-	 *
-	 * @param eventPlus the event plus data
-	 * @return how many events have date after now
-	 */
-	public static Integer dataFutura(EventPlus[] eventPlus) {
-<span class="fc" id="L234">		int i=0;</span>
-<span class="fc bfc" id="L235" title="All 2 branches covered.">		for(EventPlus e : eventPlus) {</span>
-<span class="fc bfc" id="L236" title="All 2 branches covered.">			if(e.getDataOra().isAfter(LocalDateTime.now())) i++;</span>
-		}
-<span class="fc" id="L238">		return i;</span>
-	}
-	
-	/**
-	 * Distance of two coordinates.
-	 *
-	 * @param lat1 the latitude 1
-	 * @param lng1 the longitude 1
-	 * @param lat2 the latitude 2
-	 * @param lng2 the longitude 2
-	 * @return the air distance
-	 */
-	public static Double distance(Double lat1, Double lng1, Double lat2, Double lng2) {
-<span class="fc" id="L251">		Double[] pointA= {lat1*Math.PI/180,lng1*Math.PI/180};</span>
-<span class="fc" id="L252">		Double[] pointB= {lat2*Math.PI/180,lng2*Math.PI/180};</span>
-<span class="fc" id="L253">		return 6372.795477598 * Math.acos(Math.sin(pointA[0]) * Math.sin(pointB[0]) + Math.cos(pointA[0]) * Math.cos(pointB[0]) * Math.cos(pointA[1]-pointB[1]));</span>
+<span class="fc" id="L219">	    String password = gen.generatePassword(lenght, splCharRule, lowerCaseRule, </span>
+<span class="fc" id="L220">	      upperCaseRule, digitRule);</span>
+<span class="fc" id="L221">	    return password;</span>
 	}
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

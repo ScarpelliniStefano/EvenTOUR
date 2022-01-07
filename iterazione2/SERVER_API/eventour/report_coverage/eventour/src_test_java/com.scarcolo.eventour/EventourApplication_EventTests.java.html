@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventourApplication_EventTests.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour</a> &gt; <span class="el_source">EventourApplication_EventTests.java</span></div><h1>EventourApplication_EventTests.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventourApplication_EventTests.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour</a> &gt; <span class="el_source">EventourApplication_EventTests.java</span></div><h1>EventourApplication_EventTests.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour;
 
 
 
@@ -120,268 +120,212 @@ import org.json.JSONObject;
 		
 <span class="fc" id="L121">		}</span>
 	
-	@Test
-	public void getEventsWithPrefLoc() throws Exception {
-<span class="fc" id="L125">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/events/pref/61a0a933bce0e98fbb2d999d?locInclude=true&quot;,</span>
-<span class="fc" id="L126">				String.class);</span>
-<span class="fc" id="L127">			assertEquals(request.getStatusCodeValue(),200);</span>
-		
-<span class="fc" id="L129">		}</span>
-	
-	@Test
-	public void getEventsDisp() throws Exception {
-<span class="fc" id="L133">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/events/disp&quot;,</span>
-<span class="fc" id="L134">				String.class);</span>
-<span class="fc" id="L135">			assertEquals(request.getStatusCodeValue(),200);</span>
-<span class="fc" id="L136">			JSONObject obj=new JSONObject(request.getBody());</span>
-			
-<span class="fc bfc" id="L138" title="All 2 branches covered.">			for(int i=0;i&lt;obj.getJSONArray(&quot;events&quot;).length();i++) {</span>
-<span class="pc bpc" id="L139" title="1 of 2 branches missed.">				assertTrue(obj.getJSONArray(&quot;events&quot;).getJSONObject(i).getInt(&quot;freeSeat&quot;)&gt;0);</span>
-			}
-		
-<span class="fc" id="L142">		}</span>
-	
 	
 	
 	@Test
 	public void getEventsPage3() throws Exception {
-<span class="fc" id="L148">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/events?page=3&quot;,</span>
-<span class="fc" id="L149">				String.class);</span>
+<span class="fc" id="L127">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/events?page=3&quot;,</span>
+<span class="fc" id="L128">				String.class);</span>
 		
-<span class="fc" id="L151">		JSONObject obj = new JSONObject(request);</span>
-<span class="fc" id="L152">		int pageActual = obj.getInt(&quot;currentPage&quot;);</span>
-<span class="fc" id="L153">		assertEquals(pageActual,3);</span>
-<span class="fc" id="L154">		JSONArray events = obj.getJSONArray(&quot;events&quot;);</span>
-<span class="fc" id="L155">		assertEquals(events.length(),20);</span>
-<span class="fc" id="L156">	}</span>
+<span class="fc" id="L130">		JSONObject obj = new JSONObject(request);</span>
+<span class="fc" id="L131">		int pageActual = obj.getInt(&quot;currentPage&quot;);</span>
+<span class="fc" id="L132">		assertEquals(pageActual,3);</span>
+<span class="fc" id="L133">		JSONArray events = obj.getJSONArray(&quot;events&quot;);</span>
+<span class="fc" id="L134">		assertEquals(events.length(),20);</span>
+<span class="fc" id="L135">	}</span>
 	
 	@Test
 	public void getEventsDescNotOrdered() throws Exception {
-<span class="fc" id="L160">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/events?ordered=desc&amp;param=loc&quot;,</span>
-<span class="fc" id="L161">				String.class);</span>
+<span class="fc" id="L139">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/events?ordered=desc&amp;param=loc&quot;,</span>
+<span class="fc" id="L140">				String.class);</span>
 		
-<span class="fc" id="L163">		JSONObject obj = new JSONObject(request);</span>
-<span class="fc" id="L164">		int pageActual = obj.getInt(&quot;currentPage&quot;);</span>
-<span class="fc" id="L165">		assertEquals(pageActual,0);</span>
-<span class="fc" id="L166">		JSONArray events = obj.getJSONArray(&quot;events&quot;);</span>
-<span class="fc" id="L167">		assertEquals(events.length(),20);</span>
-<span class="fc" id="L168">	}</span>
+<span class="fc" id="L142">		JSONObject obj = new JSONObject(request);</span>
+<span class="fc" id="L143">		int pageActual = obj.getInt(&quot;currentPage&quot;);</span>
+<span class="fc" id="L144">		assertEquals(pageActual,0);</span>
+<span class="fc" id="L145">		JSONArray events = obj.getJSONArray(&quot;events&quot;);</span>
+<span class="fc" id="L146">		assertEquals(events.length(),20);</span>
+<span class="fc" id="L147">	}</span>
 	
 	@Test
 	public void getEventsPageError() throws Exception {
-<span class="fc" id="L172">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/events?size=2000&amp;page=1000&quot;,</span>
-<span class="fc" id="L173">				String.class);</span>
+<span class="fc" id="L151">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/events?size=2000&amp;page=1000&quot;,</span>
+<span class="fc" id="L152">				String.class);</span>
 		
-<span class="fc" id="L175">		int statusCode=request.getStatusCodeValue();</span>
-<span class="fc" id="L176">		assertEquals(statusCode,204);</span>
-<span class="fc" id="L177">	}</span>
+<span class="fc" id="L154">		int statusCode=request.getStatusCodeValue();</span>
+<span class="fc" id="L155">		assertEquals(statusCode,204);</span>
+<span class="fc" id="L156">	}</span>
 	
 	@Test
 	public void getEventByIdCorrect() throws Exception {
-<span class="fc" id="L181">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/events/61a0a85ebce0e98fbb2d860f&quot;,</span>
-<span class="fc" id="L182">				String.class);</span>
+<span class="fc" id="L160">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/events/61a0a85ebce0e98fbb2d860f&quot;,</span>
+<span class="fc" id="L161">				String.class);</span>
 		
-<span class="fc" id="L184">		JSONObject obj = new JSONObject(request);</span>
-<span class="fc" id="L185">		String stringTitle = obj.getString(&quot;title&quot;);</span>
-<span class="fc" id="L186">		assertEquals(stringTitle,&quot;EVENTO 1&quot;);</span>
-<span class="fc" id="L187">	}</span>
+<span class="fc" id="L163">		JSONObject obj = new JSONObject(request);</span>
+<span class="fc" id="L164">		String stringTitle = obj.getString(&quot;title&quot;);</span>
+<span class="fc" id="L165">		assertEquals(stringTitle,&quot;EVENTO 1&quot;);</span>
+<span class="fc" id="L166">	}</span>
 	
 	@Test
 	public void getEventByIdError() throws Exception {
-<span class="fc" id="L191">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/events/61a0a85ebce0e98fbb2d860d&quot;,</span>
-<span class="fc" id="L192">				String.class);</span>
-<span class="fc" id="L193">		int statusCode=request.getStatusCodeValue();</span>
-<span class="fc" id="L194">		assertEquals(statusCode,404);</span>
-<span class="fc" id="L195">	}</span>
+<span class="fc" id="L170">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/events/61a0a85ebce0e98fbb2d860d&quot;,</span>
+<span class="fc" id="L171">				String.class);</span>
+<span class="fc" id="L172">		int statusCode=request.getStatusCodeValue();</span>
+<span class="fc" id="L173">		assertEquals(statusCode,404);</span>
+<span class="fc" id="L174">	}</span>
 	
 	@Test
 	public void newEvent() throws Exception {
-<span class="fc" id="L199">		AddEventRequest request=new AddEventRequest();</span>
-<span class="fc" id="L200">		request.title=&quot;eventProva&quot;;</span>
-<span class="fc" id="L201">		request.description=&quot;prova&quot;;</span>
-<span class="fc" id="L202">		request.dataOra=LocalDateTime.now().plusDays(3);</span>
-<span class="fc" id="L203">		request.location=new Location();</span>
-<span class="fc" id="L204">				request.location.setLocality(&quot;prova via&quot;);</span>
-<span class="fc" id="L205">				request.location.setCap(&quot;24042&quot;);</span>
-<span class="fc" id="L206">				request.location.setRegione(&quot;Lombardia&quot;);</span>
-<span class="fc" id="L207">				request.location.setProvincia(&quot;Bergamo&quot;);</span>
-<span class="fc" id="L208">				request.location.setCity(&quot;Albino&quot;);</span>
-<span class="fc" id="L209">				request.location.setLat(44d);</span>
-<span class="fc" id="L210">				request.location.setLng(9d);</span>
-<span class="fc" id="L211">				request.location.setSigla(&quot;BG&quot;);</span>
-<span class="fc" id="L212">		request.managerId=&quot;61a0a0eeb5f9b12d06e9523a&quot;;</span>
-<span class="fc" id="L213">		request.price=2.0d;</span>
-<span class="fc" id="L214">		request.totSeat=80;</span>
-<span class="fc" id="L215">		String[] tipi= {&quot;1.2.2&quot;,&quot;2.2&quot;};</span>
-<span class="fc" id="L216">		request.types=tipi;</span>
-<span class="fc" id="L217">		request.urlImage=&quot;https://fakeimg.pl/300/&quot;;</span>
-<span class="fc" id="L218">		EventResponse eventCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/events&quot;, request, EventResponse.class);</span>
-<span class="fc" id="L219">		assertEquals(eventCreated.getTitle(), &quot;eventProva&quot;);</span>
+<span class="fc" id="L178">		AddEventRequest request=new AddEventRequest();</span>
+<span class="fc" id="L179">		request.title=&quot;eventProva&quot;;</span>
+<span class="fc" id="L180">		request.description=&quot;prova&quot;;</span>
+<span class="fc" id="L181">		request.dataOra=LocalDateTime.now().plusDays(3);</span>
+<span class="fc" id="L182">		request.location=new Location();</span>
+<span class="fc" id="L183">				request.location.setLocality(&quot;prova via&quot;);</span>
+<span class="fc" id="L184">				request.location.setCap(&quot;24042&quot;);</span>
+<span class="fc" id="L185">				request.location.setRegione(&quot;Lombardia&quot;);</span>
+<span class="fc" id="L186">				request.location.setProvincia(&quot;Bergamo&quot;);</span>
+<span class="fc" id="L187">				request.location.setCity(&quot;Albino&quot;);</span>
+<span class="fc" id="L188">				request.location.setLat(44f);</span>
+<span class="fc" id="L189">				request.location.setLng(9f);</span>
+<span class="fc" id="L190">				request.location.setSigla(&quot;BG&quot;);</span>
+<span class="fc" id="L191">		request.managerId=&quot;61a0a0eeb5f9b12d06e9523a&quot;;</span>
+<span class="fc" id="L192">		request.price=2.0d;</span>
+<span class="fc" id="L193">		request.totSeat=80;</span>
+<span class="fc" id="L194">		String[] tipi= {&quot;1.2.2&quot;,&quot;2.2&quot;};</span>
+<span class="fc" id="L195">		request.types=tipi;</span>
+<span class="fc" id="L196">		request.urlImage=&quot;https://fakeimg.pl/300/&quot;;</span>
+<span class="fc" id="L197">		EventResponse eventCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/events&quot;, request, EventResponse.class);</span>
+<span class="fc" id="L198">		assertEquals(eventCreated.getTitle(), &quot;eventProva&quot;);</span>
 		
-<span class="fc" id="L221">		restTemplate.delete(&quot;http://localhost:&quot; + port + &quot;/api/events/&quot;+eventCreated.id);</span>
+<span class="fc" id="L200">		restTemplate.delete(&quot;http://localhost:&quot; + port + &quot;/api/events/&quot;+eventCreated.id);</span>
 		
-<span class="fc" id="L223">	}</span>
+<span class="fc" id="L202">	}</span>
 	
 	@Test
 	public void deleteEventWithBookingAndTicket() throws Exception {
-<span class="fc" id="L227">		AddEventRequest request=new AddEventRequest();</span>
-<span class="fc" id="L228">		request.title=&quot;eventProva&quot;;</span>
-<span class="fc" id="L229">		request.description=&quot;prova&quot;;</span>
-<span class="fc" id="L230">		request.dataOra=LocalDateTime.now().plusDays(3);</span>
-<span class="fc" id="L231">		request.location=new Location();</span>
-<span class="fc" id="L232">				request.location.setLocality(&quot;prova via&quot;);</span>
-<span class="fc" id="L233">				request.location.setCap(&quot;24042&quot;);</span>
-<span class="fc" id="L234">				request.location.setRegione(&quot;Lombardia&quot;);</span>
-<span class="fc" id="L235">				request.location.setProvincia(&quot;Bergamo&quot;);</span>
-<span class="fc" id="L236">				request.location.setCity(&quot;Albino&quot;);</span>
-<span class="fc" id="L237">				request.location.setLat(44d);</span>
-<span class="fc" id="L238">				request.location.setLng(9d);</span>
-<span class="fc" id="L239">				request.location.setSigla(&quot;BG&quot;);</span>
-<span class="fc" id="L240">		request.managerId=&quot;61a0a0eeb5f9b12d06e9523a&quot;;</span>
-<span class="fc" id="L241">		request.price=2.0d;</span>
-<span class="fc" id="L242">		request.totSeat=80;</span>
-<span class="fc" id="L243">		String[] tipi= {&quot;1.2.2&quot;,&quot;2.2&quot;};</span>
-<span class="fc" id="L244">		request.types=tipi;</span>
-<span class="fc" id="L245">		request.urlImage=&quot;https://fakeimg.pl/300/&quot;;</span>
-<span class="fc" id="L246">		EventResponse eventCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/events&quot;, request, EventResponse.class);</span>
-<span class="fc" id="L247">		AddTicketInspRequest requestTick=new AddTicketInspRequest();</span>
-<span class="fc" id="L248">		requestTick.eventId=eventCreated.id;</span>
-<span class="fc" id="L249">		requestTick.fullName=&quot;Ticket Prova&quot;;</span>
-<span class="fc" id="L250">		TicketInspResponse ticketCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps&quot;, requestTick, TicketInspResponse.class);</span>
-<span class="fc" id="L251">		AddBookingRequest requestBook=new AddBookingRequest();</span>
-<span class="fc" id="L252">		requestBook.eventId=eventCreated.id;</span>
-<span class="fc" id="L253">		requestBook.userId=&quot;61a0a933bce0e98fbb2d999d&quot;;</span>
-<span class="fc" id="L254">		requestBook.prenotedSeat=3;</span>
-<span class="fc" id="L255">		String bookingCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/bookings&quot;, requestBook, String.class);</span>
-<span class="fc" id="L256">		JSONObject obj = new JSONObject(bookingCreated);</span>
-<span class="fc" id="L257">		String reqDel=&quot;http://localhost:&quot; + port + &quot;/api/events/&quot;+eventCreated.getId();</span>
-<span class="fc" id="L258">		ResponseEntity&lt;Boolean&gt; resp=restTemplate.exchange(reqDel, HttpMethod.DELETE, null, Boolean.class);</span>
-<span class="fc" id="L259">		assertEquals(resp.getBody(),true);</span>
-<span class="fc" id="L260">		ResponseEntity&lt;String&gt; requestBookDel=restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/bookings/&quot;+obj.getString(&quot;id&quot;),</span>
-<span class="fc" id="L261">				String.class);</span>
-<span class="fc" id="L262">		int statusCode=requestBookDel.getStatusCodeValue();</span>
-<span class="fc" id="L263">		assertEquals(statusCode,404);</span>
-<span class="fc" id="L264">		ResponseEntity&lt;TicketInspResponse&gt; requestTickDel=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/&quot;+ticketCreated.getId(),</span>
-<span class="fc" id="L265">				TicketInspResponse.class);</span>
-<span class="fc" id="L266">		assertEquals(requestTickDel.getStatusCode(),HttpStatus.NOT_FOUND);</span>
-<span class="fc" id="L267">	}</span>
-	
-	@Test
-	public void deleteEventWithoutBookingAndTicket() throws Exception {
-<span class="fc" id="L271">		AddEventRequest request=new AddEventRequest();</span>
-<span class="fc" id="L272">		request.title=&quot;eventProva&quot;;</span>
-<span class="fc" id="L273">		request.description=&quot;prova&quot;;</span>
-<span class="fc" id="L274">		request.dataOra=LocalDateTime.now().plusDays(3);</span>
-<span class="fc" id="L275">		request.location=new Location();</span>
-<span class="fc" id="L276">				request.location.setLocality(&quot;prova via&quot;);</span>
-<span class="fc" id="L277">				request.location.setCap(&quot;24042&quot;);</span>
-<span class="fc" id="L278">				request.location.setRegione(&quot;Lombardia&quot;);</span>
-<span class="fc" id="L279">				request.location.setProvincia(&quot;Bergamo&quot;);</span>
-<span class="fc" id="L280">				request.location.setCity(&quot;Albino&quot;);</span>
-<span class="fc" id="L281">				request.location.setLat(44d);</span>
-<span class="fc" id="L282">				request.location.setLng(9d);</span>
-<span class="fc" id="L283">				request.location.setSigla(&quot;BG&quot;);</span>
-<span class="fc" id="L284">		request.managerId=&quot;61a0a0eeb5f9b12d06e9523a&quot;;</span>
-<span class="fc" id="L285">		request.price=2.0d;</span>
-<span class="fc" id="L286">		request.totSeat=80;</span>
-<span class="fc" id="L287">		String[] tipi= {&quot;1.2.2&quot;,&quot;2.2&quot;};</span>
-<span class="fc" id="L288">		request.types=tipi;</span>
-<span class="fc" id="L289">		request.urlImage=&quot;https://fakeimg.pl/300/&quot;;</span>
-<span class="fc" id="L290">		EventResponse eventCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/events&quot;, request, EventResponse.class);</span>
-<span class="fc" id="L291">		String reqDel=&quot;http://localhost:&quot; + port + &quot;/api/events/&quot;+eventCreated.getId();</span>
-<span class="fc" id="L292">		ResponseEntity&lt;Boolean&gt; resp=restTemplate.exchange(reqDel, HttpMethod.DELETE, null, Boolean.class);</span>
-<span class="fc" id="L293">		assertEquals(resp.getBody(),true);</span>
-<span class="fc" id="L294">	}</span>
+<span class="fc" id="L206">		AddEventRequest request=new AddEventRequest();</span>
+<span class="fc" id="L207">		request.title=&quot;eventProva&quot;;</span>
+<span class="fc" id="L208">		request.description=&quot;prova&quot;;</span>
+<span class="fc" id="L209">		request.dataOra=LocalDateTime.now().plusDays(3);</span>
+<span class="fc" id="L210">		request.location=new Location();</span>
+<span class="fc" id="L211">				request.location.setLocality(&quot;prova via&quot;);</span>
+<span class="fc" id="L212">				request.location.setCap(&quot;24042&quot;);</span>
+<span class="fc" id="L213">				request.location.setRegione(&quot;Lombardia&quot;);</span>
+<span class="fc" id="L214">				request.location.setProvincia(&quot;Bergamo&quot;);</span>
+<span class="fc" id="L215">				request.location.setCity(&quot;Albino&quot;);</span>
+<span class="fc" id="L216">				request.location.setLat(44f);</span>
+<span class="fc" id="L217">				request.location.setLng(9f);</span>
+<span class="fc" id="L218">				request.location.setSigla(&quot;BG&quot;);</span>
+<span class="fc" id="L219">		request.managerId=&quot;61a0a0eeb5f9b12d06e9523a&quot;;</span>
+<span class="fc" id="L220">		request.price=2.0d;</span>
+<span class="fc" id="L221">		request.totSeat=80;</span>
+<span class="fc" id="L222">		String[] tipi= {&quot;1.2.2&quot;,&quot;2.2&quot;};</span>
+<span class="fc" id="L223">		request.types=tipi;</span>
+<span class="fc" id="L224">		request.urlImage=&quot;https://fakeimg.pl/300/&quot;;</span>
+<span class="fc" id="L225">		EventResponse eventCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/events&quot;, request, EventResponse.class);</span>
+<span class="fc" id="L226">		AddTicketInspRequest requestTick=new AddTicketInspRequest();</span>
+<span class="fc" id="L227">		requestTick.eventId=eventCreated.id;</span>
+<span class="fc" id="L228">		requestTick.fullName=&quot;Ticket Prova&quot;;</span>
+<span class="fc" id="L229">		TicketInspResponse ticketCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps&quot;, requestTick, TicketInspResponse.class);</span>
+<span class="fc" id="L230">		AddBookingRequest requestBook=new AddBookingRequest();</span>
+<span class="fc" id="L231">		requestBook.eventId=eventCreated.id;</span>
+<span class="fc" id="L232">		requestBook.userId=&quot;61a0a933bce0e98fbb2d999d&quot;;</span>
+<span class="fc" id="L233">		requestBook.prenotedSeat=3;</span>
+<span class="fc" id="L234">		String bookingCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/bookings&quot;, requestBook, String.class);</span>
+<span class="fc" id="L235">		JSONObject obj = new JSONObject(bookingCreated);</span>
+<span class="fc" id="L236">		String reqDel=&quot;http://localhost:&quot; + port + &quot;/api/events/&quot;+eventCreated.getId();</span>
+<span class="fc" id="L237">		ResponseEntity&lt;Boolean&gt; resp=restTemplate.exchange(reqDel, HttpMethod.DELETE, null, Boolean.class);</span>
+<span class="fc" id="L238">		assertEquals(resp.getBody(),true);</span>
+<span class="fc" id="L239">		ResponseEntity&lt;String&gt; requestBookDel=restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/bookings/&quot;+obj.getString(&quot;id&quot;),</span>
+<span class="fc" id="L240">				String.class);</span>
+<span class="fc" id="L241">		int statusCode=requestBookDel.getStatusCodeValue();</span>
+<span class="fc" id="L242">		assertEquals(statusCode,404);</span>
+<span class="fc" id="L243">		ResponseEntity&lt;TicketInspResponse&gt; requestTickDel=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/&quot;+ticketCreated.getId(),</span>
+<span class="fc" id="L244">				TicketInspResponse.class);</span>
+<span class="fc" id="L245">		assertEquals(requestTickDel.getStatusCode(),HttpStatus.NOT_FOUND);</span>
+<span class="fc" id="L246">	}</span>
 	
 	@Test
 	public void updateEvent() throws Exception {
-<span class="fc" id="L298">		AddEventRequest request=new AddEventRequest();</span>
-<span class="fc" id="L299">		request.title=&quot;eventProva&quot;;</span>
-<span class="fc" id="L300">		request.description=&quot;prova&quot;;</span>
-<span class="fc" id="L301">		request.dataOra=LocalDateTime.now().plusDays(3);</span>
-<span class="fc" id="L302">		request.location=new Location();</span>
-<span class="fc" id="L303">				request.location.setLocality(&quot;prova via&quot;);</span>
-<span class="fc" id="L304">				request.location.setCap(&quot;24042&quot;);</span>
-<span class="fc" id="L305">				request.location.setRegione(&quot;Lombardia&quot;);</span>
-<span class="fc" id="L306">				request.location.setProvincia(&quot;Bergamo&quot;);</span>
-<span class="fc" id="L307">				request.location.setCity(&quot;Albino&quot;);</span>
-<span class="fc" id="L308">				request.location.setLat(44d);</span>
-<span class="fc" id="L309">				request.location.setLng(9d);</span>
-<span class="fc" id="L310">				request.location.setSigla(&quot;BG&quot;);</span>
-<span class="fc" id="L311">		request.managerId=&quot;61a0a0eeb5f9b12d06e9523a&quot;;</span>
-<span class="fc" id="L312">		request.price=2.0d;</span>
-<span class="fc" id="L313">		request.totSeat=80;</span>
-<span class="fc" id="L314">		String[] tipi= {&quot;1.2.2&quot;,&quot;2.2&quot;};</span>
-<span class="fc" id="L315">		request.types=tipi;</span>
-<span class="fc" id="L316">		request.urlImage=&quot;https://fakeimg.pl/300/&quot;;</span>
-<span class="fc" id="L317">		EventResponse eventCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/events&quot;, request, EventResponse.class);</span>
-<span class="fc" id="L318">		EditEventRequest reqUpd=new EditEventRequest();</span>
-<span class="fc" id="L319">		reqUpd.id=eventCreated.id;</span>
-<span class="fc" id="L320">		reqUpd.description=&quot;prova aggiornata&quot;;</span>
-<span class="fc" id="L321">		reqUpd.dataOra=LocalDateTime.now().plusDays(4);</span>
-<span class="fc" id="L322">        reqUpd.title=&quot;eventProvaUpd&quot;;</span>
-<span class="fc" id="L323">        reqUpd.location=request.location;</span>
-<span class="fc" id="L324">        reqUpd.location.setCap(&quot;24021&quot;);</span>
-<span class="fc" id="L325">        reqUpd.price=3.0d;</span>
-<span class="fc" id="L326">        reqUpd.totSeat=100;</span>
-<span class="fc" id="L327">        reqUpd.urlImage=&quot;https://fakeimg.pl/400/&quot;;</span>
-<span class="fc" id="L328">        String[] tipiUpd= {&quot;1.1.2&quot;,&quot;3.2&quot;};</span>
-<span class="fc" id="L329">        reqUpd.types=tipiUpd;</span>
-<span class="fc" id="L330">		ResponseEntity&lt;EventResponse&gt; resp=restTemplate.exchange(&quot;http://localhost:&quot; + port + &quot;/api/events&quot;, HttpMethod.PUT, new HttpEntity&lt;EditEventRequest&gt;(reqUpd), EventResponse.class);</span>
-<span class="fc" id="L331">		assertEquals(resp.getStatusCodeValue(),200);</span>
-<span class="fc" id="L332">		assertEquals(resp.getBody().description,&quot;prova aggiornata&quot;);</span>
-<span class="fc" id="L333">		assertNotEquals(resp.getBody().dataOra,eventCreated.dataOra);</span>
-<span class="fc" id="L334">		restTemplate.delete(&quot;http://localhost:&quot; + port + &quot;/api/events/&quot;+eventCreated.id);</span>
+<span class="fc" id="L250">		AddEventRequest request=new AddEventRequest();</span>
+<span class="fc" id="L251">		request.title=&quot;eventProva&quot;;</span>
+<span class="fc" id="L252">		request.description=&quot;prova&quot;;</span>
+<span class="fc" id="L253">		request.dataOra=LocalDateTime.now().plusDays(3);</span>
+<span class="fc" id="L254">		request.location=new Location();</span>
+<span class="fc" id="L255">				request.location.setLocality(&quot;prova via&quot;);</span>
+<span class="fc" id="L256">				request.location.setCap(&quot;24042&quot;);</span>
+<span class="fc" id="L257">				request.location.setRegione(&quot;Lombardia&quot;);</span>
+<span class="fc" id="L258">				request.location.setProvincia(&quot;Bergamo&quot;);</span>
+<span class="fc" id="L259">				request.location.setCity(&quot;Albino&quot;);</span>
+<span class="fc" id="L260">				request.location.setLat(44f);</span>
+<span class="fc" id="L261">				request.location.setLng(9f);</span>
+<span class="fc" id="L262">				request.location.setSigla(&quot;BG&quot;);</span>
+<span class="fc" id="L263">		request.managerId=&quot;61a0a0eeb5f9b12d06e9523a&quot;;</span>
+<span class="fc" id="L264">		request.price=2.0d;</span>
+<span class="fc" id="L265">		request.totSeat=80;</span>
+<span class="fc" id="L266">		String[] tipi= {&quot;1.2.2&quot;,&quot;2.2&quot;};</span>
+<span class="fc" id="L267">		request.types=tipi;</span>
+<span class="fc" id="L268">		request.urlImage=&quot;https://fakeimg.pl/300/&quot;;</span>
+<span class="fc" id="L269">		EventResponse eventCreated = restTemplate.postForObject(&quot;http://localhost:&quot; + port + &quot;/api/events&quot;, request, EventResponse.class);</span>
+<span class="fc" id="L270">		EditEventRequest reqUpd=new EditEventRequest();</span>
+<span class="fc" id="L271">		reqUpd.id=eventCreated.id;</span>
+<span class="fc" id="L272">		reqUpd.description=&quot;prova aggiornata&quot;;</span>
+<span class="fc" id="L273">		reqUpd.dataOra=LocalDateTime.now().plusDays(4);</span>
+<span class="fc" id="L274">		ResponseEntity&lt;EventResponse&gt; resp=restTemplate.exchange(&quot;http://localhost:&quot; + port + &quot;/api/events&quot;, HttpMethod.PUT, new HttpEntity&lt;EditEventRequest&gt;(reqUpd), EventResponse.class);</span>
+<span class="fc" id="L275">		assertEquals(resp.getStatusCodeValue(),200);</span>
+<span class="fc" id="L276">		assertEquals(resp.getBody().description,&quot;prova aggiornata&quot;);</span>
+<span class="fc" id="L277">		assertNotEquals(resp.getBody().dataOra,eventCreated.dataOra);</span>
+<span class="fc" id="L278">		restTemplate.delete(&quot;http://localhost:&quot; + port + &quot;/api/events/&quot;+eventCreated.id);</span>
 		
-<span class="fc" id="L336">	}</span>
+<span class="fc" id="L280">	}</span>
 	
 	@Test
 	public void newEventError() throws Exception {
-<span class="fc" id="L340">		AddEventRequest request=new AddEventRequest();</span>
-<span class="fc" id="L341">		request.title=&quot;eventProva&quot;;</span>
-<span class="fc" id="L342">		request.description=&quot;prova&quot;;</span>
-<span class="fc" id="L343">		request.dataOra=LocalDateTime.now().minusDays(3);</span>
-<span class="fc" id="L344">		request.location=new Location();</span>
-<span class="fc" id="L345">				request.location.setLocality(&quot;prova via&quot;);</span>
-<span class="fc" id="L346">				request.location.setCap(&quot;24042&quot;);</span>
-<span class="fc" id="L347">				request.location.setRegione(&quot;Lombardia&quot;);</span>
-<span class="fc" id="L348">				request.location.setProvincia(&quot;Bergamo&quot;);</span>
-<span class="fc" id="L349">				request.location.setCity(&quot;Albino&quot;);</span>
-<span class="fc" id="L350">				request.location.setLat(44d);</span>
-<span class="fc" id="L351">				request.location.setLng(9d);</span>
-<span class="fc" id="L352">				request.location.setSigla(&quot;BG&quot;);</span>
-<span class="fc" id="L353">		request.managerId=&quot;61a0a0eeb5f9b12d06e9523a&quot;;</span>
-<span class="fc" id="L354">		request.price=2.0d;</span>
-<span class="fc" id="L355">		request.totSeat=80;</span>
-<span class="fc" id="L356">		String[] tipi= {&quot;1.2.2&quot;,&quot;2.2&quot;};</span>
-<span class="fc" id="L357">		request.types=tipi;</span>
-<span class="fc" id="L358">		request.urlImage=&quot;https://fakeimg.pl/300/&quot;;</span>
-<span class="fc" id="L359">		ResponseEntity&lt;EventResponse&gt; eventCreated = restTemplate.postForEntity(&quot;http://localhost:&quot; + port + &quot;/api/events&quot;, request, EventResponse.class);</span>
-<span class="fc" id="L360">		assertEquals(eventCreated.getStatusCode(), HttpStatus.NOT_ACCEPTABLE);</span>
+<span class="fc" id="L284">		AddEventRequest request=new AddEventRequest();</span>
+<span class="fc" id="L285">		request.title=&quot;eventProva&quot;;</span>
+<span class="fc" id="L286">		request.description=&quot;prova&quot;;</span>
+<span class="fc" id="L287">		request.dataOra=LocalDateTime.now().minusDays(3);</span>
+<span class="fc" id="L288">		request.location=new Location();</span>
+<span class="fc" id="L289">				request.location.setLocality(&quot;prova via&quot;);</span>
+<span class="fc" id="L290">				request.location.setCap(&quot;24042&quot;);</span>
+<span class="fc" id="L291">				request.location.setRegione(&quot;Lombardia&quot;);</span>
+<span class="fc" id="L292">				request.location.setProvincia(&quot;Bergamo&quot;);</span>
+<span class="fc" id="L293">				request.location.setCity(&quot;Albino&quot;);</span>
+<span class="fc" id="L294">				request.location.setLat(44f);</span>
+<span class="fc" id="L295">				request.location.setLng(9f);</span>
+<span class="fc" id="L296">				request.location.setSigla(&quot;BG&quot;);</span>
+<span class="fc" id="L297">		request.managerId=&quot;61a0a0eeb5f9b12d06e9523a&quot;;</span>
+<span class="fc" id="L298">		request.price=2.0d;</span>
+<span class="fc" id="L299">		request.totSeat=80;</span>
+<span class="fc" id="L300">		String[] tipi= {&quot;1.2.2&quot;,&quot;2.2&quot;};</span>
+<span class="fc" id="L301">		request.types=tipi;</span>
+<span class="fc" id="L302">		request.urlImage=&quot;https://fakeimg.pl/300/&quot;;</span>
+<span class="fc" id="L303">		ResponseEntity&lt;EventResponse&gt; eventCreated = restTemplate.postForEntity(&quot;http://localhost:&quot; + port + &quot;/api/events&quot;, request, EventResponse.class);</span>
+<span class="fc" id="L304">		assertEquals(eventCreated.getStatusCode(), HttpStatus.NOT_ACCEPTABLE);</span>
 		
 		
-<span class="fc" id="L363">	}</span>
+<span class="fc" id="L307">	}</span>
 
 	@Test
 	public void getEventByIdManCorrect() throws Exception {
-<span class="fc" id="L367">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/events/manager/61a0a0eeb5f9b12d06e9523a&quot;,</span>
-<span class="fc" id="L368">				String.class);</span>
+<span class="fc" id="L311">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/events/manager/61a0a0eeb5f9b12d06e9523a&quot;,</span>
+<span class="fc" id="L312">				String.class);</span>
 		
-<span class="fc" id="L370">		JSONObject obj = new JSONObject(request);</span>
-<span class="fc bfc" id="L371" title="All 2 branches covered.">		for(int i=0;i&lt;obj.getJSONArray(&quot;events&quot;).length();i++) {</span>
-<span class="fc" id="L372">			assertEquals(obj.getJSONArray(&quot;events&quot;).getJSONObject(i).getString(&quot;managerId&quot;),&quot;61a0a0eeb5f9b12d06e9523a&quot;);</span>
+<span class="fc" id="L314">		JSONObject obj = new JSONObject(request);</span>
+<span class="fc bfc" id="L315" title="All 2 branches covered.">		for(int i=0;i&lt;obj.getJSONArray(&quot;events&quot;).length();i++) {</span>
+<span class="fc" id="L316">			assertEquals(obj.getJSONArray(&quot;events&quot;).getJSONObject(i).getString(&quot;managerId&quot;),&quot;61a0a0eeb5f9b12d06e9523a&quot;);</span>
 		}
 		
-<span class="fc" id="L375">	}</span>
+<span class="fc" id="L319">	}</span>
 	
 	@Test
 	public void getEventByIdManError() throws Exception {
-<span class="fc" id="L379">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/events/manager/61a0a0eeb5f9b12d06e95236&quot;,</span>
-<span class="fc" id="L380">				String.class);</span>
-<span class="fc" id="L381">		int statusCode=request.getStatusCodeValue();</span>
-<span class="fc" id="L382">		assertEquals(statusCode,204);</span>
-<span class="fc" id="L383">	}</span>
+<span class="fc" id="L323">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/events/manager/61a0a0eeb5f9b12d06e95236&quot;,</span>
+<span class="fc" id="L324">				String.class);</span>
+<span class="fc" id="L325">		int statusCode=request.getStatusCodeValue();</span>
+<span class="fc" id="L326">		assertEquals(statusCode,204);</span>
+<span class="fc" id="L327">	}</span>
 	
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

@@ -21,6 +21,4 @@ public class AddBookingRequest {
 	@JsonProperty("prenotedSeat")
 	public Integer prenotedSeat;
 	
-	
-	
 }

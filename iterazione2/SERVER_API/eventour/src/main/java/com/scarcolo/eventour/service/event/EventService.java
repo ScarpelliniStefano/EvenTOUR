@@ -22,7 +22,6 @@ import com.scarcolo.eventour.repository.user.UserRepository;
 import com.scarcolo.eventour.service.booking.BookingService;
 import com.scarcolo.eventour.service.ticketisp.TicketInspService;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -63,25 +62,28 @@ public class EventService {
      * Add a event.
      *
      * @param request the request of new event
-     * @return the response entity with event created
+     * @return the response entity of event created
+     * @throws Exception the exception for no event created
      */
-    public ResponseEntity<EventResponse> add(AddEventRequest request){
+    public ResponseEntity<EventResponse> add(AddEventRequest request) throws Exception {
     	try {
     		Event event = eventRepository.save(new Event(request));
     		return new ResponseEntity<>(new EventResponse(event), HttpStatus.OK);
     	}catch(Exception ex) {
     		return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
     	}
+        
     }
 
   
     /**
      * Update a event.
      *
-     * @param request the request of update
-     * @return the response entity with updated event
+     * @param request the request with data to change
+     * @return the response entity with modified event
+     * @throws Exception the exception
      */
-    public ResponseEntity<EventResponse> update(EditEventRequest request){
+    public ResponseEntity<EventResponse> update(EditEventRequest request) throws Exception {
         Optional<Event> optionalEvent = eventRepository.findById(request.id);
         if (optionalEvent.isEmpty()) {
             return null;
@@ -94,11 +96,7 @@ public class EventService {
         	e.setDescription(request.description);
         }
         if(request.dataOra!=null) {
-        	try {
-				e.setDataOra(Functionalities.convertToDate(request.dataOra));
-			} catch (Exception e1) {
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			}
+        	e.setDataOra(Functionalities.convertToDate(request.dataOra));
         }
         if(request.location!=null) {
         	e.setLocation(request.location);
@@ -123,7 +121,7 @@ public class EventService {
     /**
      * Get a event by id.
      *
-     * @param id the id
+     * @param id the id of event
      * @return the event by id
      */
     public ResponseEntity<EventResponse> getById(String id) {
@@ -136,28 +134,32 @@ public class EventService {
   	  }
     }
 
+  
+    
+    
     /**
-     * Delete a event and all bookings and ticket inspectors.
+     * Delete a event, its ticket inspector and all bookings to the event.
      *
      * @param id the id of event
      * @return true, if successful
-     * @throws IOException exception from inputstream file template
      */
-    public ResponseEntity<Boolean> delete(String id) throws IOException {
+    public boolean delete(String id) {
     	Optional<Event> optionalEvent = eventRepository.findById(id);
         if (optionalEvent.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            return false;
         }
-        Boolean resp=bookingService.deleteAllBookingFromEvent(optionalEvent.get());
+        boolean resp=bookingService.deleteAllBookingFromEvent(optionalEvent.get());
         if(resp==false) {
+        	throw new IllegalArgumentException();
         	//System.out.println("error in deleting bookings");
         }
         resp=ticketService.deleteAllTicketsFromEvent(optionalEvent.get().getId());
         if(resp==false) {
+        	throw new IllegalArgumentException();
         	//System.out.println("error in deleting tickets");
         }
         eventRepository.deleteById(optionalEvent.get().getId());
-        return new ResponseEntity<>(true,HttpStatus.OK);
+        return true;
     }
 
     /**
@@ -176,10 +178,9 @@ public class EventService {
 			Pageable paging = PageRequest.of(page, size,Sort.by("dataOra").ascending());
 			
 			Page<Event> pageEvents;
-			if(param==null) {
-					pageEvents=eventRepository.findAllFuture(paging); 
-					
-			}else {
+			if(param==null)
+					pageEvents=eventRepository.findAllFuture(paging);
+			else {
 				if(ordered.equalsIgnoreCase("desc")) {
 					if(param.equals("dataOra")) {
 						paging = PageRequest.of(page, size,Sort.by("dataOra").descending());
@@ -228,7 +229,7 @@ public class EventService {
 	 * @param page the page
 	 * @param size the size
 	 * @param dataS the data string
-	 * @return the events by data specified
+	 * @return the by data
 	 */
 	public ResponseEntity<Map<String, Object>> getByData(int page, int size, String dataS) {
 		try {
@@ -243,7 +244,6 @@ public class EventService {
 			    c.setTime(dataF); 
 			    c.add(Calendar.DATE, 1);
 			    dataF = c.getTime();
-				//System.out.println(dataI+" "+dataF);
 			}else {
 				Date data=new SimpleDateFormat("yyyy-MM-dd").parse(dataS) ;
 				DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -323,9 +323,9 @@ public class EventService {
 	 *
 	 * @param page the page
 	 * @param size the size
-	 * @param idPref the id of user
-	 * @param locInclude true if location is included in filter the events
-	 * @return the events by preferences
+	 * @param idPref the id pref
+	 * @param locInclude the loc include
+	 * @return the by preferences
 	 */
 	public ResponseEntity<Map<String, Object>> getByPreferences(int page, int size, String idPref, boolean locInclude) {
 		Optional<User> userData = userRepository.findById(idPref);
@@ -343,13 +343,13 @@ public class EventService {
 
 
 	/**
-	 * Gets all events by types with location filtered.
+	 * Gets the by types with location associated (equal region of user and event).
 	 *
 	 * @param page the page
 	 * @param size the size
-	 * @param types the types
-	 * @param region the region to witch filter
-	 * @return all event by types with location
+	 * @param types the types of events
+	 * @param region the region in which search
+	 * @return the by types with location
 	 */
 	private ResponseEntity<Map<String, Object>> getByTypesWithLoc(int page, int size, String[] types, String region) {
 		try {
@@ -442,37 +442,6 @@ public class EventService {
 	}
 
 
-	/**
-	 * Gets all events with free seats.
-	 *
-	 * @param page the page
-	 * @param size the size
-	 * @return the events with free seats
-	 */
-	public ResponseEntity<Map<String, Object>> getEventsDisp(int page, int size) {
-		try {
-			
-			Sort sort = Sort.by("dataOra").ascending().and(Sort.by("freeSeat").ascending());
-			Pageable paging = PageRequest.of(page, size,sort);
-			Page<Event> pageEvents;
-			pageEvents = eventRepository.findByFreeSeatGreaterThanZero(paging);
-			List<Event> events=pageEvents.getContent();
-		  	if (events.isEmpty()) {
-		  	    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		  	} 
-		  	List<EventResponse> eventR= new ArrayList<>();
-			for(Event event: events) eventR.add(new EventResponse(event));
-			Map<String, Object> response = new HashMap<>();
-			response.put("events", eventR);
-			response.put("currentPage", pageEvents.getNumber());
-			response.put("totalItems", pageEvents.getTotalElements());
-			response.put("totalPages", pageEvents.getTotalPages());
-			return new ResponseEntity<>(response, HttpStatus.OK);
-		  	  
-			}catch(Exception e) {
-				return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-			}
-	}
 
 
 	

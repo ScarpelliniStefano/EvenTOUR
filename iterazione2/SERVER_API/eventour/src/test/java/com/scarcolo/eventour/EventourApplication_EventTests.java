@@ -120,27 +120,6 @@ class EventourApplication_EventTests {
 		
 		}
 	
-	@Test
-	public void getEventsWithPrefLoc() throws Exception {
-		ResponseEntity<String> request=this.restTemplate.getForEntity("http://localhost:" + port + "/api/events/pref/61a0a933bce0e98fbb2d999d?locInclude=true",
-				String.class);
-			assertEquals(request.getStatusCodeValue(),200);
-		
-		}
-	
-	@Test
-	public void getEventsDisp() throws Exception {
-		ResponseEntity<String> request=this.restTemplate.getForEntity("http://localhost:" + port + "/api/events/disp",
-				String.class);
-			assertEquals(request.getStatusCodeValue(),200);
-			JSONObject obj=new JSONObject(request.getBody());
-			
-			for(int i=0;i<obj.getJSONArray("events").length();i++) {
-				assertTrue(obj.getJSONArray("events").getJSONObject(i).getInt("freeSeat")>0);
-			}
-		
-		}
-	
 	
 	
 	@Test
@@ -206,8 +185,8 @@ class EventourApplication_EventTests {
 				request.location.setRegione("Lombardia");
 				request.location.setProvincia("Bergamo");
 				request.location.setCity("Albino");
-				request.location.setLat(44d);
-				request.location.setLng(9d);
+				request.location.setLat(44f);
+				request.location.setLng(9f);
 				request.location.setSigla("BG");
 		request.managerId="61a0a0eeb5f9b12d06e9523a";
 		request.price=2.0d;
@@ -234,8 +213,8 @@ class EventourApplication_EventTests {
 				request.location.setRegione("Lombardia");
 				request.location.setProvincia("Bergamo");
 				request.location.setCity("Albino");
-				request.location.setLat(44d);
-				request.location.setLng(9d);
+				request.location.setLat(44f);
+				request.location.setLng(9f);
 				request.location.setSigla("BG");
 		request.managerId="61a0a0eeb5f9b12d06e9523a";
 		request.price=2.0d;
@@ -267,33 +246,6 @@ class EventourApplication_EventTests {
 	}
 	
 	@Test
-	public void deleteEventWithoutBookingAndTicket() throws Exception {
-		AddEventRequest request=new AddEventRequest();
-		request.title="eventProva";
-		request.description="prova";
-		request.dataOra=LocalDateTime.now().plusDays(3);
-		request.location=new Location();
-				request.location.setLocality("prova via");
-				request.location.setCap("24042");
-				request.location.setRegione("Lombardia");
-				request.location.setProvincia("Bergamo");
-				request.location.setCity("Albino");
-				request.location.setLat(44d);
-				request.location.setLng(9d);
-				request.location.setSigla("BG");
-		request.managerId="61a0a0eeb5f9b12d06e9523a";
-		request.price=2.0d;
-		request.totSeat=80;
-		String[] tipi= {"1.2.2","2.2"};
-		request.types=tipi;
-		request.urlImage="https://fakeimg.pl/300/";
-		EventResponse eventCreated = restTemplate.postForObject("http://localhost:" + port + "/api/events", request, EventResponse.class);
-		String reqDel="http://localhost:" + port + "/api/events/"+eventCreated.getId();
-		ResponseEntity<Boolean> resp=restTemplate.exchange(reqDel, HttpMethod.DELETE, null, Boolean.class);
-		assertEquals(resp.getBody(),true);
-	}
-	
-	@Test
 	public void updateEvent() throws Exception {
 		AddEventRequest request=new AddEventRequest();
 		request.title="eventProva";
@@ -305,8 +257,8 @@ class EventourApplication_EventTests {
 				request.location.setRegione("Lombardia");
 				request.location.setProvincia("Bergamo");
 				request.location.setCity("Albino");
-				request.location.setLat(44d);
-				request.location.setLng(9d);
+				request.location.setLat(44f);
+				request.location.setLng(9f);
 				request.location.setSigla("BG");
 		request.managerId="61a0a0eeb5f9b12d06e9523a";
 		request.price=2.0d;
@@ -319,14 +271,6 @@ class EventourApplication_EventTests {
 		reqUpd.id=eventCreated.id;
 		reqUpd.description="prova aggiornata";
 		reqUpd.dataOra=LocalDateTime.now().plusDays(4);
-        reqUpd.title="eventProvaUpd";
-        reqUpd.location=request.location;
-        reqUpd.location.setCap("24021");
-        reqUpd.price=3.0d;
-        reqUpd.totSeat=100;
-        reqUpd.urlImage="https://fakeimg.pl/400/";
-        String[] tipiUpd= {"1.1.2","3.2"};
-        reqUpd.types=tipiUpd;
 		ResponseEntity<EventResponse> resp=restTemplate.exchange("http://localhost:" + port + "/api/events", HttpMethod.PUT, new HttpEntity<EditEventRequest>(reqUpd), EventResponse.class);
 		assertEquals(resp.getStatusCodeValue(),200);
 		assertEquals(resp.getBody().description,"prova aggiornata");
@@ -347,8 +291,8 @@ class EventourApplication_EventTests {
 				request.location.setRegione("Lombardia");
 				request.location.setProvincia("Bergamo");
 				request.location.setCity("Albino");
-				request.location.setLat(44d);
-				request.location.setLng(9d);
+				request.location.setLat(44f);
+				request.location.setLng(9f);
 				request.location.setSigla("BG");
 		request.managerId="61a0a0eeb5f9b12d06e9523a";
 		request.price=2.0d;

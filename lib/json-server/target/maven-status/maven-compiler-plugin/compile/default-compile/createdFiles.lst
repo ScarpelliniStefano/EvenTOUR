@@ -1,0 +1,13 @@
+generalUser\IGeneralU.class
+DBClasses\User.class
+manager\IManage.class
+user\IUser.class
+DBClasses\Manager.class
+tickInsp\ITicketing.class
+DBClasses\Event.class
+DBClasses\Account.class
+DBClasses\TicketInsp.class
+admin\IAdministrate.class
+DBClasses\Sponsorship.class
+DBClasses\Admin.class
+DBClasses\Booking.class

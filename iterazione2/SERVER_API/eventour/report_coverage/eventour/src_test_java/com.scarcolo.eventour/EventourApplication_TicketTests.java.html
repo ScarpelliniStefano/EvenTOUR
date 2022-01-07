@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventourApplication_TicketTests.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour</a> &gt; <span class="el_source">EventourApplication_TicketTests.java</span></div><h1>EventourApplication_TicketTests.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>EventourApplication_TicketTests.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour</a> &gt; <span class="el_source">EventourApplication_TicketTests.java</span></div><h1>EventourApplication_TicketTests.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour;
 
 
 
@@ -141,25 +141,6 @@ import org.json.JSONArray;
 <span class="fc" id="L141">				String.class);</span>
 <span class="fc" id="L142">		assertEquals(request.getStatusCode(),HttpStatus.OK);</span>
 <span class="fc" id="L143">	}</span>
-	
-	///ticketInsps/manager/{id}
-	@Test
-	public void getTicketByManager() throws Exception {
-<span class="fc" id="L148">		String request=this.restTemplate.getForObject(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/manager/61a0a0eeb5f9b12d06e9525e&quot;,</span>
-<span class="fc" id="L149">				String.class);</span>
-<span class="fc" id="L150">		JSONArray array=new JSONArray(request);</span>
-<span class="fc" id="L151">		System.out.println(array);</span>
-<span class="fc" id="L152">		assertEquals(array.getJSONObject(0).getString(&quot;mail&quot;), &quot;Celinia.Casagrande36@libero.it&quot;);</span>
-		
-<span class="fc" id="L154">	}</span>
-	
-	@Test
-	public void getTicketByManagerError() throws Exception {
-<span class="fc" id="L158">		ResponseEntity&lt;String&gt; request=this.restTemplate.getForEntity(&quot;http://localhost:&quot; + port + &quot;/api/ticketInsps/manager/61a0a0eeb5f9b12d06e95235&quot;,</span>
-<span class="fc" id="L159">				String.class);</span>
-<span class="fc" id="L160">		assertEquals(request.getStatusCode(), HttpStatus.NO_CONTENT);</span>
-		
-<span class="fc" id="L162">	}</span>
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

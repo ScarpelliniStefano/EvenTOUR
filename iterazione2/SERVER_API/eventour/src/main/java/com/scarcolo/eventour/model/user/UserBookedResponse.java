@@ -29,10 +29,6 @@ public class UserBookedResponse {
 	@JsonProperty("come")
 	private Boolean come;
 	
-	/** The review. */
-	@JsonProperty("review")
-	private int review;
-	
 	/** The user. */
 	@JsonProperty("user")
 	private User[] user;
@@ -45,17 +41,15 @@ public class UserBookedResponse {
 	 * @param eventId the event id
 	 * @param prenotedSeat the prenoted seat
 	 * @param come the come
-	 * @param review the review
 	 * @param user the user
 	 */
-	public UserBookedResponse(String id, String userId, String eventId, Integer prenotedSeat,Boolean come,int review, User[] user) {
+	public UserBookedResponse(String id, String userId, String eventId, Integer prenotedSeat,Boolean come, User[] user) {
 		super();
 		this.id = id;
 		this.userId = userId;
 		this.eventId = eventId;
 		this.prenotedSeat = prenotedSeat;
 		this.come = come;
-		this.review = review;
 		this.user=user;
 	}
 	
@@ -149,24 +143,6 @@ public class UserBookedResponse {
 		this.come = come;
 	}
 	
-	/**
-	 * Gets the review.
-	 *
-	 * @return the review
-	 */
-	public int getReview() {
-		return review;
-	}
-
-	/**
-	 * Sets the review.
-	 *
-	 * @param review the new review
-	 */
-	public void setReview(int review) {
-		this.review = review;
-	}
-
 	/**
 	 * Gets the user.
 	 *

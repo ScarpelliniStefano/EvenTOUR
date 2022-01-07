@@ -28,88 +28,78 @@ import com.scarcolo.eventour.service.ticketisp.TicketInspService;
 @RequestMapping("/api")
 public class TicketInspController {
 	
-	/** The ticket insp service. */
-	@Autowired
-	private TicketInspService ticketInspService;
-	 
-	/**
-	 * Adds the ticket inspector.
-	 *
-	 * @param request the request of new ticket inspector
-	 * @return the response entity with created ticket inspector
-	 */
-	@PostMapping("/ticketInsps")
-	public ResponseEntity<TicketInspResponse> addTicketInsp(@RequestBody AddTicketInspRequest request){
-	      return ticketInspService.add(request);
-	}
+		/** The ticket insp service. */
+		@Autowired
+		private TicketInspService ticketInspService;
+		 
+		/**
+		 * Adds the ticket insp.
+		 *
+		 * @param request the request
+		 * @return the response entity
+		 * @throws Exception the exception
+		 */
+		@PostMapping("/ticketInsps")
+		public ResponseEntity<TicketInspResponse> addTicketInsp(@RequestBody AddTicketInspRequest request) throws Exception{
+		      return ticketInspService.add(request);
+		}
 
 	   
-    /**
-	 * Update ticket inspector.
-	 *
-	 * @param request the request of update
-	 * @return the response entity with update
-	 */
-	@PutMapping("/ticketInsps")
-    public ResponseEntity<TicketInspResponse> updateTicketInsp(@RequestBody EditTicketInspRequest request){
-        return ticketInspService.update(request);
-    }
-    
-    /**
-	 * Gets all ticket inspectors by event id.
-	 *
-	 * @param id the id of event
-	 * @return the ticket inspector by event id
-	 */
-	@GetMapping("/ticketInsps/event/{id}")
-    public ResponseEntity<List<TicketInspResponse>> getTicketInspByEventId(@PathVariable("id") String id){
-        return ticketInspService.getByEventId(id);
-    }
-    
-    /**
-	 * Gets all ticket inspectors by manager id.
-	 *
-	 * @param id the id of manager
-	 * @return the ticket inspector by manager id
-	 */
-	@GetMapping("/ticketInsps/manager/{id}")
-    public ResponseEntity<List<Object>> getTicketInspByManagerId(@PathVariable("id") String id){
-        return ticketInspService.getByManagerId(id);
-    }
-    
-   
-    /**
-	 * Gets the ticket inspector by id.
-	 *
-	 * @param id the id of ticket inspector
-	 * @return the ticket inspector by id
-	 */
-	@GetMapping("/ticketInsps/{id}")
-    public ResponseEntity<TicketInspResponse> getTicketInspById(@PathVariable("id") String id){
-        return ticketInspService.getById(id);
-    }
-    
+	    /**
+    	 * Update ticket insp.
+    	 *
+    	 * @param request the request
+    	 * @return the response entity
+    	 */
+    	@PutMapping("/ticketInsps")
+	    public ResponseEntity<TicketInspResponse> updateTicketInsp(@RequestBody EditTicketInspRequest request){
+	        return ticketInspService.update(request);
+	    }
+	    
+	    /**
+    	 * Gets all ticket inspectors by event id.
+    	 *
+    	 * @param id the id
+    	 * @return the ticket insp by event id
+    	 */
+    	@GetMapping("/ticketInsps/event/{id}")
+	    public ResponseEntity<List<TicketInspResponse>> getTicketInspByEventId(@PathVariable("id") String id){
+	        return ticketInspService.getByEventId(id);
+	    }
+	    
+	   
+	    /**
+    	 * Gets the ticket insp by id.
+    	 *
+    	 * @param id the id
+    	 * @return the ticket insp by id
+    	 */
+    	@GetMapping("/ticketInsps/{id}")
+	    public ResponseEntity<TicketInspResponse> getTicketInspById(@PathVariable("id") String id){
+	        return ticketInspService.getById(id);
+	    }
+	    
 
-    /**
-	 * Get all ticket inspectors.
-	 *
-	 * @return the all ticket inspectors
-	 */
-	@GetMapping("/ticketInsps")
-    public ResponseEntity<List<TicketInspResponse>> getAllTicketInsps(){
-        return ticketInspService.getAll();
-    }
-    
-   
-    /**
-	 * Delete ticket inspectors by id.
-	 *
-	 * @param id the id of ticket inspector
-	 * @return true, if successful
-	 */
-	@DeleteMapping("/ticketInsps/{id}")
-    public ResponseEntity<Boolean> deleteTicketInspById(@PathVariable("id") String id){
-        return ticketInspService.delete(id);
-    }
+	    /**
+    	 * Get all ticket insps.
+    	 *
+    	 * @return the all ticket insps
+    	 */
+    	@GetMapping("/ticketInsps")
+	    public ResponseEntity<List<TicketInspResponse>> getAllTicketInsps(){
+	        return ticketInspService.getAll();
+	    }
+	    
+	   
+	    /**
+    	 * Delete ticket insp by id.
+    	 *
+    	 * @param id the id
+    	 * @return true, if successful
+    	 */
+    	@DeleteMapping("/ticketInsps/{id}")
+	    public ResponseEntity<Boolean> deleteTicketInspById(@PathVariable("id") String id){
+	        return ticketInspService.delete(id);
+	    }
 
 }

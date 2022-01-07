@@ -1,0 +1,64 @@
+{
+
+	"events":[
+		{
+			"eventId": 1,
+			"title":"BusDelCul",
+			"description":"bdc ggg wp",
+			"location":"Bergamo",
+			"type":"concerto-pop",
+			"dataAAAA":2022,"dataMM":3,"dataGG":21,
+			"time":"21:30",
+			"managerId":"a5a5",
+			"urlImage":"./img/events/1.jpg",
+			"freeSeat":100,
+			"totSeat":100
+		},
+		{
+			"eventId": 2,
+			"title":"BusDelCul",
+			"description":"bdc ggg wp",
+			"location":"Bergamo",
+			"type":"concerto-pop",
+			"dataAAAA":2022,"dataMM":3,"dataGG":21,
+			"time":"22:30",
+			"managerId":"a5a5",
+			"urlImage":"./img/events/2.jpg",
+			"freeSeat":80,
+			"totSeat":100
+		},
+		{
+			"eventId": 3,
+			"title":"GigiHaLaPalla",
+			"description":"ghlp ma a me che me ne frega?",
+			"location":"Seriate",
+			"type":"spettacolo teatrale-commedia",
+			"dataAAAA":2022,"dataMM":1,"dataGG":5,
+			"managerId":"ag43",
+			"urlImage":"./img/events/3.jpg",
+			"freeSeat":100,
+			"totSeat":100
+		}
+	]
+	
+	,"users":
+	{
+	
+	}
+	
+	,"managers":{
+	
+	}
+	
+	,"admins":{
+	
+	}
+	
+	,"ticketInspectors":{
+	
+	}
+	
+	,"bookings":{
+	
+	}
+}

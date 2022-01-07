@@ -4,10 +4,8 @@
 package com.scarcolo.eventour.model.user;
 
 
-import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.Location;
 
 
@@ -78,14 +76,6 @@ public class UserResponse{
 		this.types=user.getTypes();
 	}
 
-	/**
-	 * Instantiates a new user response.
-	 */
-	public UserResponse() {
-		super();
-	}
-	
-	
 	/**
 	 * Gets the id.
 	 *
@@ -261,10 +251,9 @@ public class UserResponse{
 	 * Sets the password.
 	 *
 	 * @param password the new password
-	 * @throws NoSuchAlgorithmException exception for md5 not present
 	 */
-	public void setPassword(String password) throws NoSuchAlgorithmException {
-		this.password = Functionalities.getMd5(password);
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	

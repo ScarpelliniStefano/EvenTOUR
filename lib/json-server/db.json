@@ -1,0 +1,250 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Lady Gaga in concerto",
+      "description": "lady gaga remix",
+      "location": "Bergamo (BG)",
+      "types": [
+        {
+          "type": "1.1.1"
+        }
+      ],
+      "dataAAAA": 2022,
+      "dataMM": 3,
+      "dataGG": 21,
+      "time": "21:30",
+      "managerId": 1,
+      "urlImage": "./img/events/1.jpg",
+      "freeSeat": 100,
+      "totSeat": 100
+    },
+    {
+      "id": 2,
+      "title": "Lady Gaga in concerto",
+      "description": "lady gaga remix",
+      "location": "Bergamo (BG)",
+      "types": [
+        {
+          "type": "1.1.1"
+        }
+      ],
+      "dataAAAA": 2022,
+      "dataMM": 3,
+      "dataGG": 21,
+      "time": "22:30",
+      "managerId": 1,
+      "urlImage": "./img/events/2.jpg",
+      "freeSeat": 97,
+      "totSeat": 100
+    },
+    {
+      "id": 3,
+      "title": "Gigi Ha La Palla",
+      "description": "spettacolo comico ma tragico",
+      "location": "Concorrezzo (MI)",
+      "types": [
+        {
+          "type": "2.2"
+        }
+      ],
+      "dataAAAA": 2022,
+      "dataMM": 1,
+      "dataGG": 5,
+      "time": "21:30",
+      "managerId": 2,
+      "urlImage": "./img/events/3.jpg",
+      "freeSeat": 100,
+      "totSeat": 100
+    },
+    {
+      "id": 4,
+      "title": "prova",
+      "description": "prova",
+      "location": "Bergamo (BG)",
+      "types": [
+        {
+          "type": "3.4"
+        }
+      ],
+      "dataAAAA": 2022,
+      "dataMM": 1,
+      "dataGG": 1,
+      "time": "21:30",
+      "managerId": 2,
+      "urlImage": "./img/events/4.jpg",
+      "freeSeat": 100,
+      "totSeat": 100
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Pippo",
+      "surname": "Franco",
+      "dateOfBirth": "21/09/1995",
+      "sex": "M",
+      "residence": "Milano (MI)",
+      "types": [
+        {
+          "type": "1.1.1"
+        },
+        {
+          "type": "1.2.3"
+        }
+      ],
+      "mail": "pippo.f@gmail.com",
+      "password": "pippo1"
+    },
+    {
+      "id": 2,
+      "name": "Gigi",
+      "surname": "Prioetti",
+      "sex": "M",
+      "dateOfBirth": "12/07/1958",
+      "residence": "Brescia (BS)",
+      "types": [
+        {
+          "type": "2.1"
+        },
+        {
+          "type": "2.4"
+        },
+        {
+          "type": "3.1"
+        }
+      ],
+      "mail": "gigi.p@gmail.com",
+      "password": "gigi2"
+    },
+    {
+      "id": 3,
+      "name": "Guendalina",
+      "surname": "Occhibelli",
+      "sex": "F",
+      "dateOfBirth": "29/05/1989",
+      "residence": "Cascina de' pecchi (MI)",
+      "types": [
+        {
+          "type": "1.2.1"
+        },
+        {
+          "type": "1.2.2"
+        },
+        {
+          "type": "2.6"
+        }
+      ],
+      "mail": "guenda.o@gmail.com",
+      "password": "guenda3"
+    }
+  ],
+  "managers": [
+    {
+      "id": 1,
+      "name": "Carletto",
+      "surname": "Fracci",
+      "dateOfBirth": "31/12/1969",
+      "residence": "Milano (MI)",
+      "codicePIVA": "hshdkdh7296dbss",
+      "RagioneSociale": "The Best Entertainment SRL",
+      "mail": "carletto.TheBestEnter@gmail.com",
+      "password": "carloBestEnter"
+    },
+    {
+      "id": 2,
+      "name": "Fabio",
+      "surname": "Frizzi",
+      "dateOfBirth": "01/04/1986",
+      "residence": "Bergamo (BG)",
+      "codicePIVA": "ahdkdb777djdoeb",
+      "RagioneSociale": "Mystic SRL di Fabio Frizzi",
+      "mail": "fabio.MysticSRL@gmail.com",
+      "password": "fabioMSRL"
+    },
+    {
+      "id": 3,
+      "name": "Carlo",
+      "surname": "Ancelotti",
+      "dateOfBirth": "01/04/1986",
+      "residence": "Milano (MI)",
+      "codicePIVA": "knsdkSND83984748higdH",
+      "RagioneSociale": "FreeStyle SNC di Ancelotti C",
+      "mail": "carlo.FreeStyle@gmail.com",
+      "password": "carloFree"
+    },
+    {
+      "id": 4,
+      "name": "Marta",
+      "surname": "Marziala",
+      "dateOfBirth": "01/05/1963",
+      "residence": "Brescia (BS)",
+      "codicePIVA": "ieubd7978djgh",
+      "RagioneSociale": "M&Ms",
+      "mail": "m.marziala.MM@gmail.com",
+      "password": "martaMM"
+    }
+  ],
+  "admins": [
+    {
+      "id": 1,
+      "mail": "admin@gmail.com",
+      "password": "administrator"
+    }
+  ],
+  "ticketInspectors": [
+    {
+      "id": 1,
+      "code": "TI-1-0237",
+      "full name": "Franco Ciccio",
+      "eventId": 1,
+      "password": "atyz94q"
+    },
+    {
+      "id": 2,
+      "code": "TI-1-0235",
+      "full name": "Luca Ward",
+      "eventId": 1,
+      "password": "tayz94q"
+    },
+    {
+      "id": 3,
+      "code": "TI-2-0732",
+      "full name": "Ciccio Franco",
+      "eventId": 2,
+      "password": "qwer12ty"
+    },
+    {
+      "id": 4,
+      "code": "TI-3-0237",
+      "full name": "Ward Luca",
+      "eventId": 3,
+      "password": "ytre09wq"
+    }
+  ],
+  "bookings": [
+    {
+      "id": 1,
+      "userId": 1,
+      "eventId": 2,
+      "prenotedSeat": 3
+    }
+  ],
+  "sponsor": [
+    {
+      "id": 1,
+      "userId": 1,
+      "eventId": 2
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "eventId": 1
+    },
+    {
+      "id": 3,
+      "userId": 3,
+      "eventId": 3
+    }
+  ]
+}

@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TicketInspService.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.service.ticketisp</a> &gt; <span class="el_source">TicketInspService.java</span></div><h1>TicketInspService.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.service.ticketisp;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TicketInspService.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.service.ticketisp</a> &gt; <span class="el_source">TicketInspService.java</span></div><h1>TicketInspService.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.service.ticketisp;
 
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,6 @@ import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
 import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
 import com.scarcolo.eventour.repository.event.EventRepository;
-import com.scarcolo.eventour.repository.manager.ManagerRepository;
 import com.scarcolo.eventour.repository.ticketisp.TicketInspRepository;
 
 
@@ -29,67 +27,52 @@ import java.util.Optional;
  * The Class TicketInspService.
  */
 @Service
-<span class="fc" id="L32">public class TicketInspService {</span>
+<span class="fc" id="L30">public class TicketInspService {</span>
 
     /** The ticket insp repository. */
     @Autowired
     private TicketInspRepository ticketInspRepository;
     
-    /** The manager repository. */
-	@Autowired
-	private ManagerRepository managerRepository;
-	
-	 /** The ticket insp repository. */
+    /** The ticket insp repository. */
     @Autowired
     private EventRepository eventRepository;
+
    
     /**
      * Add a ticket inspector.
      *
-     * @param request the request
-     * @return the response entity
+     * @param request the request of new ticket inspector
+     * @return the response entity with all data of created ticket inspector
+     * @throws Exception the exception
      */
-    public ResponseEntity&lt;TicketInspResponse&gt; add(AddTicketInspRequest request){
-    	TicketInsp tick;
-		try {
-<span class="fc" id="L55">			tick = new TicketInsp(request);</span>
-<span class="pc" id="L56">		} catch (Exception e) {</span>
-<span class="nc" id="L57">			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_ACCEPTABLE);</span>
-		}
-<span class="fc" id="L59">    	Optional&lt;Event&gt; optEv=eventRepository.findById(request.eventId);</span>
-<span class="fc bfc" id="L60" title="All 2 branches covered.">    	if(optEv.isEmpty()) return new ResponseEntity&lt;&gt;(HttpStatus.NOT_ACCEPTABLE);</span>
-<span class="fc" id="L61">    	Integer numRand=(int) (Math.random()*9999);</span>
-    	try {
-<span class="fc" id="L63">			tick.setCode(&quot;TI-&quot;+request.eventId.substring(request.eventId.length()-5)+&quot;-&quot;+numRand);</span>
-<span class="pc" id="L64">		} catch (Exception e) {</span>
-<span class="nc" id="L65">			return new ResponseEntity&lt;&gt;(HttpStatus.EXPECTATION_FAILED);</span>
-		}
-<span class="fc" id="L67">    	tick.setPassword(Functionalities.generatePassayPassword(8));</span>
-<span class="fc" id="L68">        TicketInsp ticketInsp = ticketInspRepository.save(tick);</span>
-<span class="fc" id="L69">        return new ResponseEntity&lt;&gt;(new TicketInspResponse(ticketInsp), HttpStatus.OK);</span>
+    public ResponseEntity&lt;TicketInspResponse&gt; add(AddTicketInspRequest request) throws Exception {
+<span class="fc" id="L49">    	TicketInsp tick=new TicketInsp(request);</span>
+<span class="fc" id="L50">    	Optional&lt;Event&gt; optEv=eventRepository.findById(request.eventId);</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">    	if(optEv.isEmpty()) return new ResponseEntity&lt;&gt;(HttpStatus.NOT_ACCEPTABLE);</span>
+<span class="fc" id="L52">    	Integer numRand=(int) (Math.random()*9999);</span>
+<span class="fc" id="L53">    	tick.setCode(&quot;TI-&quot;+request.eventId.substring(request.eventId.length()-5)+&quot;-&quot;+numRand);</span>
+<span class="fc" id="L54">    	tick.setPassword(Functionalities.generatePassayPassword(8));</span>
+<span class="fc" id="L55">        TicketInsp ticketInsp = ticketInspRepository.save(tick);</span>
+<span class="fc" id="L56">        return new ResponseEntity&lt;&gt;(new TicketInspResponse(ticketInsp), HttpStatus.OK);</span>
     }
 
   
     /**
      * Update a ticket inspector.
      *
-     * @param request the request of update
-     * @return the response entity
+     * @param request the request with modified data
+     * @return the response entity with data modified
      */
     public ResponseEntity&lt;TicketInspResponse&gt; update(EditTicketInspRequest request) {
-<span class="fc" id="L80">        Optional&lt;TicketInsp&gt; optionalTicketInsp = ticketInspRepository.findById(request.id);</span>
-<span class="fc bfc" id="L81" title="All 2 branches covered.">        if (optionalTicketInsp.isEmpty()) {</span>
-<span class="fc" id="L82">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+<span class="fc" id="L67">        Optional&lt;TicketInsp&gt; optionalTicketInsp = ticketInspRepository.findById(request.id);</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        if (optionalTicketInsp.isEmpty()) {</span>
+<span class="fc" id="L69">            return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
         }
-<span class="fc" id="L84">        TicketInsp ti=optionalTicketInsp.get();</span>
-<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if(request.eventId!=null) {</span>
-<span class="nc" id="L86">        	ti.setEventId(request.eventId);</span>
+<span class="pc bpc" id="L71" title="1 of 2 branches missed.">        if(request.fullName!=null) {</span>
+<span class="fc" id="L72">        	optionalTicketInsp.get().setFullName(request.fullName);</span>
         }
-<span class="pc bpc" id="L88" title="1 of 2 branches missed.">        if(request.fullName!=null) {</span>
-<span class="fc" id="L89">        	ti.setFullName(request.fullName);</span>
-        }
-<span class="fc" id="L91">        ti=ticketInspRepository.save(ti);</span>
-<span class="fc" id="L92">        return new ResponseEntity&lt;&gt;(new TicketInspResponse(ti), HttpStatus.OK);</span>
+<span class="fc" id="L74">        ticketInspRepository.save(optionalTicketInsp.get());</span>
+<span class="fc" id="L75">        return new ResponseEntity&lt;&gt;(new TicketInspResponse(optionalTicketInsp.get()), HttpStatus.OK);</span>
     }
 
    
@@ -100,12 +83,12 @@ import java.util.Optional;
      * @return the ticket inspector by id
      */
     public ResponseEntity&lt;TicketInspResponse&gt; getById(String id) {
-<span class="fc" id="L103">    	Optional&lt;TicketInsp&gt; ticketInspData = ticketInspRepository.findById(id);</span>
+<span class="fc" id="L86">    	Optional&lt;TicketInsp&gt; ticketInspData = ticketInspRepository.findById(id);</span>
 
-<span class="fc bfc" id="L105" title="All 2 branches covered.">  	  if (ticketInspData.isPresent()) {</span>
-<span class="fc" id="L106">  	    return new ResponseEntity&lt;&gt;(new TicketInspResponse(ticketInspData.get()), HttpStatus.OK);</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">  	  if (ticketInspData.isPresent()) {</span>
+<span class="fc" id="L89">  	    return new ResponseEntity&lt;&gt;(new TicketInspResponse(ticketInspData.get()), HttpStatus.OK);</span>
   	  } else {
-<span class="fc" id="L108">  	    return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+<span class="fc" id="L91">  	    return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
   	  }
     }
 
@@ -117,12 +100,12 @@ import java.util.Optional;
      * @return true, if successful
      */
     public ResponseEntity&lt;Boolean&gt; delete(String id) {
-<span class="fc" id="L120">        Optional&lt;TicketInsp&gt; optionalTicketInsp = ticketInspRepository.findById(id);</span>
-<span class="fc bfc" id="L121" title="All 2 branches covered.">        if (optionalTicketInsp.isEmpty()) {</span>
-<span class="fc" id="L122">        	return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
+<span class="fc" id="L103">        Optional&lt;TicketInsp&gt; optionalTicketInsp = ticketInspRepository.findById(id);</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">        if (optionalTicketInsp.isEmpty()) {</span>
+<span class="fc" id="L105">        	return new ResponseEntity&lt;&gt;(HttpStatus.BAD_REQUEST);</span>
         }
-<span class="fc" id="L124">        ticketInspRepository.deleteById(optionalTicketInsp.get().getId());</span>
-<span class="fc" id="L125">        return new ResponseEntity&lt;&gt;(true,HttpStatus.OK);</span>
+<span class="fc" id="L107">        ticketInspRepository.deleteById(optionalTicketInsp.get().getId());</span>
+<span class="fc" id="L108">        return new ResponseEntity&lt;&gt;(true,HttpStatus.OK);</span>
     }
 
 	/**
@@ -132,74 +115,56 @@ import java.util.Optional;
 	 */
 	public ResponseEntity&lt;List&lt;TicketInspResponse&gt;&gt; getAll() {
 		try {
-<span class="fc" id="L135">			List&lt;TicketInsp&gt; ticketInsps = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L136">			ticketInspRepository.findAll().forEach(ticketInsps::add);</span>
-<span class="pc bpc" id="L137" title="1 of 2 branches missed.">			if(ticketInsps.isEmpty()) {</span>
-<span class="nc" id="L138">				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+<span class="fc" id="L118">			List&lt;TicketInsp&gt; ticketInsps = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L119">			ticketInspRepository.findAll().forEach(ticketInsps::add);</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">			if(ticketInsps.isEmpty()) {</span>
+<span class="nc" id="L121">				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
 			}
-<span class="fc" id="L140">			List&lt;TicketInspResponse&gt; ticketR= new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L141" title="All 2 branches covered.">			for(TicketInsp ticket: ticketInsps) ticketR.add(new TicketInspResponse(ticket));</span>
-<span class="fc" id="L142">			return new ResponseEntity&lt;&gt;(ticketR, HttpStatus.OK);</span>
-<span class="nc" id="L143">		}catch(Exception e) {</span>
-<span class="nc" id="L144">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+<span class="fc" id="L123">			List&lt;TicketInspResponse&gt; ticketR= new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">			for(TicketInsp ticket: ticketInsps) ticketR.add(new TicketInspResponse(ticket));</span>
+<span class="fc" id="L125">			return new ResponseEntity&lt;&gt;(ticketR, HttpStatus.OK);</span>
+<span class="nc" id="L126">		}catch(Exception e) {</span>
+<span class="nc" id="L127">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
 		}
 	}
 
 
 	/**
-	 * Get all ticket inspector of a given event id.
+	 * Get all ticket inspector by event id.
 	 *
-	 * @param id the id of event
+	 * @param id the id
 	 * @return list of ticket inspector of a event
 	 */
 	public ResponseEntity&lt;List&lt;TicketInspResponse&gt;&gt; getByEventId(String id) {
 		try {
 
-<span class="fc" id="L158">			List&lt;TicketInsp&gt; ticketInsps=ticketInspRepository.findByEventId(id);</span>
+<span class="fc" id="L141">			List&lt;TicketInsp&gt; ticketInsps=ticketInspRepository.findByEventId(new ObjectId(id));</span>
 
-<span class="fc bfc" id="L160" title="All 2 branches covered.">			if(ticketInsps.isEmpty()) {</span>
-<span class="fc" id="L161">				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+<span class="fc bfc" id="L143" title="All 2 branches covered.">			if(ticketInsps.isEmpty()) {</span>
+<span class="fc" id="L144">				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
 			}
-<span class="fc" id="L163">			List&lt;TicketInspResponse&gt; ticketR= new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L164" title="All 2 branches covered.">			for(TicketInsp ticket: ticketInsps) ticketR.add(new TicketInspResponse(ticket));</span>
-<span class="fc" id="L165">			return new ResponseEntity&lt;&gt;(ticketR, HttpStatus.OK);</span>
-<span class="nc" id="L166">		}catch(Exception e) {</span>
-<span class="nc" id="L167">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+<span class="fc" id="L146">			List&lt;TicketInspResponse&gt; ticketR= new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L147" title="All 2 branches covered.">			for(TicketInsp ticket: ticketInsps) ticketR.add(new TicketInspResponse(ticket));</span>
+<span class="fc" id="L148">			return new ResponseEntity&lt;&gt;(ticketR, HttpStatus.OK);</span>
+<span class="nc" id="L149">		}catch(Exception e) {</span>
+<span class="nc" id="L150">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
 		}
 	}
 	
-	/**
-	 * Gets all ticket inspector of a given manager id.
-	 *
-	 * @param id the id manager
-	 * @return all ticket inspectors by manager id
-	 */
-	public ResponseEntity&lt;List&lt;Object&gt;&gt; getByManagerId(String id) {
-		try {
-<span class="fc" id="L179">			AggregationResults&lt;Object&gt; ticketInspsA=managerRepository.findAllTicketInsps(new ObjectId(id));</span>
-<span class="fc" id="L180">			List&lt;Object&gt; ticketInsps=ticketInspsA.getMappedResults();</span>
-<span class="fc bfc" id="L181" title="All 2 branches covered.">			if(ticketInsps.isEmpty()) {</span>
-<span class="fc" id="L182">				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
-			}
-<span class="fc" id="L184">			return new ResponseEntity&lt;&gt;(ticketInsps, HttpStatus.OK);</span>
-<span class="nc" id="L185">		}catch(Exception e) {</span>
-<span class="nc" id="L186">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
-		}
-	}
 
 
 	/**
-	 * Delete all ticket inspectors of a event.
+	 * Delete all tickets from event.
 	 *
 	 * @param eventId the event id
 	 * @return true, if successful
 	 */
 	public boolean deleteAllTicketsFromEvent(String eventId) {
 		try {
-<span class="fc" id="L199">			ticketInspRepository.deleteByEventId(new ObjectId(eventId));</span>
-<span class="fc" id="L200">			return true;</span>
-<span class="nc" id="L201">		}catch(Exception e) {</span>
-<span class="nc" id="L202">			return false;</span>
+<span class="fc" id="L164">			ticketInspRepository.deleteByEventId(new ObjectId(eventId));</span>
+<span class="fc" id="L165">			return true;</span>
+<span class="nc" id="L166">		}catch(Exception e) {</span>
+<span class="nc" id="L167">			return false;</span>
 		}
 		
 		
@@ -207,4 +172,4 @@ import java.util.Optional;
 	 
 	
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

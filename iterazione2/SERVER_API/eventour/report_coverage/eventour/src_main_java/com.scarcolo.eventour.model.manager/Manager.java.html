@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Manager.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.manager</a> &gt; <span class="el_source">Manager.java</span></div><h1>Manager.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Manager.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.manager</a> &gt; <span class="el_source">Manager.java</span></div><h1>Manager.java</h1><pre class="source lang-java linenums">/**
  * 
  */
 package com.scarcolo.eventour.model.manager;
@@ -59,90 +59,49 @@ public class Manager{
 	 * Instantiates a new manager.
 	 *
 	 * @param request the request
-	 * @throws Exception the exception
+	 * @throws AddressException errore mail
+	 * @throws IllegalArgumentException errore partita iva
 	 */
-<span class="fc" id="L64">	public Manager(AddManagerRequest request) throws Exception{</span>
-<span class="fc" id="L65">		boolean res=Functionalities.isValidEmailAddress(request.mail);</span>
-<span class="pc bpc" id="L66" title="1 of 2 branches missed.">		if(res) {</span>
-<span class="fc" id="L67">			this.mail=request.mail;</span>
-<span class="fc" id="L68">		}else {</span>
-<span class="nc" id="L69">			throw new AddressException();</span>
+<span class="fc" id="L65">	public Manager(AddManagerRequest request) throws AddressException,IllegalArgumentException{</span>
+<span class="fc" id="L66">		boolean res=Functionalities.isValidEmailAddress(request.mail);</span>
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">		if(res) {</span>
+<span class="fc" id="L68">			this.mail=request.mail;</span>
+<span class="fc" id="L69">		}else {</span>
+<span class="nc" id="L70">			throw new AddressException();</span>
 		}
 		
-<span class="fc" id="L72">		this.password=request.password;</span>
-<span class="fc" id="L73">		this.name=request.name;</span>
-<span class="fc" id="L74">		this.surname=request.surname;</span>
-<span class="fc bfc" id="L75" title="All 2 branches covered.">		if(request.dateOfBirth.isBefore(LocalDate.now())) {</span>
-<span class="fc" id="L76">			this.dateOfBirth=Functionalities.convertToDate(request.dateOfBirth);</span>
-<span class="fc" id="L77">		}else {</span>
-<span class="fc" id="L78">			throw new DateTimeException(&quot;Errore data futura&quot;);</span>
+<span class="fc" id="L73">		this.password=request.password;</span>
+<span class="fc" id="L74">		this.name=request.name;</span>
+<span class="fc" id="L75">		this.surname=request.surname;</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">		if(request.dateOfBirth.isBefore(LocalDate.now())) {</span>
+<span class="fc" id="L77">			this.dateOfBirth=Functionalities.convertToDate(request.dateOfBirth);</span>
+<span class="fc" id="L78">		}else {</span>
+<span class="fc" id="L79">			throw new DateTimeException(&quot;Errore data futura&quot;);</span>
 		}
 		
-<span class="fc" id="L81">		this.residence=request.residence;</span>
-<span class="fc" id="L82">		String risorsa=PartitaIVAFunctions.validate(request.codicePIVA);</span>
-<span class="pc bpc" id="L83" title="1 of 2 branches missed.">		if(risorsa==&quot;ok&quot;)</span>
-<span class="fc" id="L84">			this.codicePIVA=request.codicePIVA;</span>
+<span class="fc" id="L82">		this.residence=request.residence;</span>
+<span class="fc" id="L83">		String risorsa=PartitaIVAFunctions.validate(request.codicePIVA);</span>
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">		if(risorsa==&quot;ok&quot;)</span>
+<span class="fc" id="L85">			this.codicePIVA=request.codicePIVA;</span>
 		else
-<span class="nc" id="L86">			throw new IllegalArgumentException();</span>
-<span class="fc" id="L87">		this.ragioneSociale=request.ragioneSociale;</span>
-<span class="fc" id="L88">	}</span>
+<span class="nc" id="L87">			throw new IllegalArgumentException();</span>
+<span class="fc" id="L88">		this.ragioneSociale=request.ragioneSociale;</span>
+<span class="fc" id="L89">	}</span>
 	
 	/**
 	 * Instantiates a new manager.
 	 */
 	public Manager() {
-<span class="fc" id="L94">		super();</span>
-<span class="fc" id="L95">	}</span>
+<span class="fc" id="L95">		super();</span>
+<span class="fc" id="L96">	}</span>
 	
-	/**
-	 * Instantiates a new manager.
-	 *
-	 * @param id the id
-	 * @param name the name
-	 * @param surname the surname
-	 * @param mail the mail
-	 * @param codicePIVA the codice PIVA
-	 * @param dateOfBirth the date of birth
-	 * @param psw the psw
-	 * @param ragioneSociale the ragione sociale
-	 * @param residence the residence
-	 * @throws Exception the exception
-	 */
-<span class="fc" id="L111">	public Manager(String id, String name, String surname, String mail, String codicePIVA, Date dateOfBirth,</span>
-			String psw, String ragioneSociale, Location residence) throws Exception {
-<span class="fc" id="L113">		this.id=id;</span>
-<span class="fc" id="L114">		boolean res=Functionalities.isValidEmailAddress(mail);</span>
-<span class="pc bpc" id="L115" title="1 of 2 branches missed.">		if(res) {</span>
-<span class="fc" id="L116">			this.mail=mail;</span>
-<span class="fc" id="L117">		}else {</span>
-<span class="nc" id="L118">			throw new AddressException();</span>
-		}
-		
-<span class="fc" id="L121">		this.password=psw;</span>
-<span class="fc" id="L122">		this.name=name;</span>
-<span class="fc" id="L123">		this.surname=surname;</span>
-<span class="pc bpc" id="L124" title="1 of 2 branches missed.">		if(dateOfBirth.before(new Date())) {</span>
-<span class="fc" id="L125">			this.dateOfBirth=dateOfBirth;</span>
-<span class="fc" id="L126">		}else {</span>
-<span class="nc" id="L127">			throw new DateTimeException(&quot;Errore data futura&quot;);</span>
-		}
-		
-<span class="fc" id="L130">		this.residence=residence;</span>
-<span class="fc" id="L131">		String risorsa=PartitaIVAFunctions.validate(codicePIVA);</span>
-<span class="pc bpc" id="L132" title="1 of 2 branches missed.">		if(risorsa==&quot;ok&quot;)</span>
-<span class="fc" id="L133">			this.codicePIVA=codicePIVA;</span>
-		else
-<span class="nc" id="L135">			throw new IllegalArgumentException();</span>
-<span class="fc" id="L136">		this.ragioneSociale=ragioneSociale;</span>
-<span class="fc" id="L137">	}</span>
-
 	/**
 	 * Gets the id.
 	 *
 	 * @return the id
 	 */
 	public String getId() {
-<span class="fc" id="L145">		return id;</span>
+<span class="fc" id="L104">		return id;</span>
 	}
 
 	/**
@@ -151,8 +110,8 @@ public class Manager{
 	 * @param id the new id
 	 */
 	public void setId(String id) {
-<span class="fc" id="L154">		this.id = id;</span>
-<span class="fc" id="L155">	}</span>
+<span class="nc" id="L113">		this.id = id;</span>
+<span class="nc" id="L114">	}</span>
 
 	/**
 	 * Gets the mail.
@@ -160,7 +119,7 @@ public class Manager{
 	 * @return the mail
 	 */
 	public String getMail() {
-<span class="fc" id="L163">		return mail;</span>
+<span class="fc" id="L122">		return mail;</span>
 	}
 
 	/**
@@ -170,13 +129,13 @@ public class Manager{
 	 * @throws AddressException the address exception
 	 */
 	public void setMail(String mail) throws AddressException {
-<span class="fc" id="L173">		boolean res=Functionalities.isValidEmailAddress(mail);</span>
-<span class="pc bpc" id="L174" title="1 of 2 branches missed.">		if(res) {</span>
-<span class="fc" id="L175">			this.mail=mail;</span>
-<span class="fc" id="L176">		}else {</span>
-<span class="nc" id="L177">			throw new AddressException();</span>
+<span class="fc" id="L132">		boolean res=Functionalities.isValidEmailAddress(mail);</span>
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">		if(res) {</span>
+<span class="fc" id="L134">			this.mail=mail;</span>
+<span class="fc" id="L135">		}else {</span>
+<span class="nc" id="L136">			throw new AddressException();</span>
 		}
-<span class="fc" id="L179">	}</span>
+<span class="fc" id="L138">	}</span>
 
 	/**
 	 * Gets the password.
@@ -184,7 +143,7 @@ public class Manager{
 	 * @return the password
 	 */
 	public String getPassword() {
-<span class="fc" id="L187">		return password;</span>
+<span class="fc" id="L146">		return password;</span>
 	}
 
 	/**
@@ -193,8 +152,8 @@ public class Manager{
 	 * @param password the new password
 	 */
 	public void setPassword(String password) {
-<span class="fc" id="L196">		this.password = password;</span>
-<span class="fc" id="L197">	}</span>
+<span class="nc" id="L155">		this.password = password;</span>
+<span class="nc" id="L156">	}</span>
 
 	/**
 	 * Gets the name.
@@ -202,7 +161,7 @@ public class Manager{
 	 * @return the name
 	 */
 	public String getName() {
-<span class="fc" id="L205">		return name;</span>
+<span class="fc" id="L164">		return name;</span>
 	}
 	
 	/**
@@ -211,8 +170,8 @@ public class Manager{
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
-<span class="fc" id="L214">		this.name = name;</span>
-<span class="fc" id="L215">	}</span>
+<span class="nc" id="L173">		this.name = name;</span>
+<span class="nc" id="L174">	}</span>
 	
 	/**
 	 * Gets the surname.
@@ -220,7 +179,7 @@ public class Manager{
 	 * @return the surname
 	 */
 	public String getSurname() {
-<span class="fc" id="L223">		return surname;</span>
+<span class="fc" id="L182">		return surname;</span>
 	}
 	
 	/**
@@ -229,8 +188,8 @@ public class Manager{
 	 * @param surname the surname to set
 	 */
 	public void setSurname(String surname) {
-<span class="fc" id="L232">		this.surname = surname;</span>
-<span class="fc" id="L233">	}</span>
+<span class="nc" id="L191">		this.surname = surname;</span>
+<span class="nc" id="L192">	}</span>
 
 	/**
 	 * Gets the date of birth.
@@ -238,7 +197,7 @@ public class Manager{
 	 * @return the date of birth
 	 */
 	public Date getDateOfBirth() {
-<span class="fc" id="L241">		return dateOfBirth;</span>
+<span class="fc" id="L200">		return dateOfBirth;</span>
 	}
 	
 	
@@ -248,7 +207,7 @@ public class Manager{
 	 * @return the date of birth local
 	 */
 	public LocalDate getDateOfBirthLocal() {
-<span class="fc" id="L251">		return Functionalities.convertToLocalDate(this.dateOfBirth);</span>
+<span class="nc" id="L210">		return Functionalities.convertToLocalDate(this.dateOfBirth);</span>
 	}
 	
 	
@@ -256,16 +215,16 @@ public class Manager{
 	 * Sets the date of birth check.
 	 *
 	 * @param dateOfBirth the new date of birth check
-	 * @throws Exception the exception
+	 * @throws DateTimeException the exception
 	 */
-	private void setDateOfBirthCheck(Date dateOfBirth) throws Exception {
-<span class="pc bpc" id="L262" title="1 of 2 branches missed.">		if(dateOfBirth.before(new Date())) {</span>
-<span class="fc" id="L263">			this.dateOfBirth = dateOfBirth;</span>
-<span class="fc" id="L264">		}else {</span>
-<span class="nc" id="L265">			throw new DateTimeException(&quot;Errore data futura&quot;);</span>
+	private void setDateOfBirthCheck(Date dateOfBirth) throws DateTimeException {
+<span class="nc bnc" id="L221" title="All 2 branches missed.">		if(dateOfBirth.before(new Date())) {</span>
+<span class="nc" id="L222">			this.dateOfBirth = dateOfBirth;</span>
+<span class="nc" id="L223">		}else {</span>
+<span class="nc" id="L224">			throw new DateTimeException(&quot;Errore data futura&quot;);</span>
 		}
 		
-<span class="fc" id="L268">	}</span>
+<span class="nc" id="L227">	}</span>
 	
 	/**
 	 * Sets the date of birth.
@@ -274,8 +233,8 @@ public class Manager{
 	 * @throws Exception the exception
 	 */
 	public void setDateOfBirth(Date dateOfBirth) throws Exception {
-<span class="fc" id="L277">		setDateOfBirthCheck(dateOfBirth);</span>
-<span class="fc" id="L278">	}</span>
+<span class="nc" id="L236">		setDateOfBirthCheck(dateOfBirth);</span>
+<span class="nc" id="L237">	}</span>
 	
 	/**
 	 * Gets the residence.
@@ -283,7 +242,7 @@ public class Manager{
 	 * @return the residence
 	 */
 	public Location getResidence() {
-<span class="fc" id="L286">		return residence;</span>
+<span class="fc" id="L245">		return residence;</span>
 	}
 	
 	/**
@@ -292,8 +251,8 @@ public class Manager{
 	 * @param residence the residence to set
 	 */
 	public void setResidence(Location residence) {
-<span class="fc" id="L295">		this.residence = residence;</span>
-<span class="fc" id="L296">	}</span>
+<span class="fc" id="L254">		this.residence = residence;</span>
+<span class="fc" id="L255">	}</span>
 	
 	/**
 	 * Gets the codice PIVA.
@@ -301,22 +260,22 @@ public class Manager{
 	 * @return the codicePIVA
 	 */
 	public String getCodicePIVA() {
-<span class="fc" id="L304">		return codicePIVA;</span>
+<span class="fc" id="L263">		return codicePIVA;</span>
 	}
 	
 	/**
 	 * Sets the codice PIVA.
 	 *
 	 * @param codicePIVA the codicePIVA to set
-	 * @throws Exception the exception
+	 * @throws IllegalArgumentException the exception of incorrect partita iva
 	 */
-	public void setCodicePIVA(String codicePIVA) throws Exception {
-<span class="fc" id="L314">		String res=PartitaIVAFunctions.validate(codicePIVA);</span>
-<span class="pc bpc" id="L315" title="1 of 2 branches missed.">		if(res==&quot;ok&quot;)</span>
-<span class="fc" id="L316">			this.codicePIVA = codicePIVA;</span>
+	public void setCodicePIVA(String codicePIVA) throws IllegalArgumentException {
+<span class="nc" id="L273">		String res=PartitaIVAFunctions.validate(codicePIVA);</span>
+<span class="nc bnc" id="L274" title="All 2 branches missed.">		if(res==&quot;ok&quot;)</span>
+<span class="nc" id="L275">			this.codicePIVA = codicePIVA;</span>
 		else
-<span class="nc" id="L318">			throw new IllegalArgumentException(res);</span>
-<span class="fc" id="L319">	}</span>
+<span class="nc" id="L277">			throw new IllegalArgumentException();</span>
+<span class="nc" id="L278">	}</span>
 	
 	/**
 	 * Gets the ragione sociale.
@@ -324,7 +283,7 @@ public class Manager{
 	 * @return the ragioneSociale
 	 */
 	public String getRagioneSociale() {
-<span class="fc" id="L327">		return ragioneSociale;</span>
+<span class="fc" id="L286">		return ragioneSociale;</span>
 	}
 	
 	/**
@@ -333,11 +292,11 @@ public class Manager{
 	 * @param ragioneSociale the ragioneSociale to set
 	 */
 	public void setRagioneSociale(String ragioneSociale) {
-<span class="fc" id="L336">		this.ragioneSociale = ragioneSociale;</span>
-<span class="fc" id="L337">	}</span>
+<span class="nc" id="L295">		this.ragioneSociale = ragioneSociale;</span>
+<span class="nc" id="L296">	}</span>
 
 	
 	
 	
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

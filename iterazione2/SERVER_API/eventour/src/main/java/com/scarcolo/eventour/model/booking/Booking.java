@@ -30,11 +30,8 @@ public class Booking {
 	/** The prenoted seat. */
 	private Integer prenotedSeat;	
 	
-	/**  Come?. */
+	/**  Come? */
 	private Boolean come;	
-	
-	/**  review. */
-	private int review;
 	
 	/**
 	 * Instantiates a new booking.
@@ -48,8 +45,7 @@ public class Booking {
         	throw new IllegalArgumentException();
         }
         this.prenotedSeat=request.prenotedSeat;
-        this.come=false;
-        this.review=-1;
+        this.setCome(false);
     }
 	
 	/**
@@ -147,23 +143,5 @@ public class Booking {
 	 */
 	public void setCome(Boolean come) {
 		this.come = come;
-	}
-
-	/**
-	 * Gets the review.
-	 *
-	 * @return the review
-	 */
-	public int getReview() {
-		return review;
-	}
-
-	/**
-	 * Sets the review.
-	 *
-	 * @param review the new review
-	 */
-	public void setReview(int review) {
-		this.review = (review>0&&review<6) ? review : -1;
 	}
 }

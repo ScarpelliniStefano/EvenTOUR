@@ -10,7 +10,6 @@ import org.springframework.data.mongodb.repository.Query;
 
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Interface TicketInspRepository.
@@ -20,26 +19,26 @@ public interface TicketInspRepository extends MongoRepository<TicketInsp, String
 	/**
 	 * Find by event id.
 	 *
-	 * @param eventId the event id
+	 * @param objectId the object id
 	 * @return the list
 	 */
-	@Query("{eventId:new ObjectId('?0')}")
-	List<TicketInsp> findByEventId(String eventId);
+	@Query("{eventId:new ObjectId(?0)}")
+	List<TicketInsp> findByEventId(ObjectId objectId);
 
 	/**
 	 * Find by code.
 	 *
 	 * @param code the code
-	 * @return the list
+	 * @return the list of ticket inspector
 	 */
 	List<TicketInsp> findByCode(String code);
 	
 	/**
 	 * Delete by event id.
 	 *
-	 * @param eventId the event id in ObjectId format
+	 * @param objectId the object id
 	 */
 	@DeleteQuery
-    void deleteByEventId(ObjectId eventId);
+    void deleteByEventId(ObjectId objectId);
 	
 }

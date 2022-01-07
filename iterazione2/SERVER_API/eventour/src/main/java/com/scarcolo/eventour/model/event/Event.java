@@ -17,6 +17,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.Location;
 
+
+
+
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Event.
@@ -240,9 +244,9 @@ public class Event {
 	 * Sets the date check.
 	 *
 	 * @param dataOra the new date check
-	 * @throws Exception the exception
+	 * @throws DateTimeException the exception for date
 	 */
-	private void setDateCheck(Date dataOra) throws Exception {
+	private void setDateCheck(Date dataOra) throws DateTimeException {
 		if(dataOra.after(new Date())) {
 			this.dataOra = dataOra;
 		}else {
@@ -258,7 +262,8 @@ public class Event {
 	 * @throws Exception the exception
 	 */
 	public void setDataOra(Date dataOra) throws Exception {
-		this.dataOra=dataOra;
+		
+		setDateCheck(dataOra);
 	}
 
 	/**

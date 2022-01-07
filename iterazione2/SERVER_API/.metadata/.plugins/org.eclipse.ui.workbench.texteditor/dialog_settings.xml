@@ -6,18 +6,13 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="latU"/>
+		<item key="selection" value="Illegal"/>
 		<list key="findhistory">
-			<item value="lanU"/>
-			<item value="”"/>
-			<item value="text"/>
-			<item value="text email"/>
+			<item value="illegal"/>
 			<item value="public"/>
 			<item value="protected"/>
 		</list>
 		<list key="replacehistory">
-			<item value="latU"/>
-			<item value="&quot;"/>
 			<item value="private"/>
 			<item value="public"/>
 		</list>

@@ -5,9 +5,15 @@ package com.scarcolo.eventour.model.manager;
 
 
 import java.security.NoSuchAlgorithmException;
+import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.util.Date;
+
+import javax.mail.internet.AddressException;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.scarcolo.eventour.functions.Functionalities;
+import com.scarcolo.eventour.functions.PartitaIVAFunctions;
 import com.scarcolo.eventour.model.Location;
 
 
@@ -65,11 +71,7 @@ public class ManagerResponse{
 	public ManagerResponse(Manager manager){
 		this.id=manager.getId();
 		this.mail=manager.getMail();
-		try {
-			this.password=Functionalities.getMd5(manager.getPassword());
-		} catch (NoSuchAlgorithmException e) {
-			this.password=manager.getPassword();
-		}
+		this.password=manager.getPassword();
 		this.name=manager.getName();
 		this.surname=manager.getSurname();
 		this.dateOfBirth=Functionalities.convertToLocalDate(manager.getDateOfBirth());
@@ -77,15 +79,13 @@ public class ManagerResponse{
 		this.codicePIVA=manager.getCodicePIVA();
 		this.ragioneSociale=manager.getRagioneSociale();
 	}
-
 	
 	/**
-	 * Instantiates a new manager response.
-	 */
-	public ManagerResponse(){
-	}
-	
-	
+ 	 * Instantiates a new manager response.
+ 	 */
+ 	public ManagerResponse() {
+	    }
+
 	/**
 	 * Gets the id.
 	 *
@@ -243,13 +243,13 @@ public class ManagerResponse{
 	 * Sets the password.
 	 *
 	 * @param password the new password
-	 * @throws NoSuchAlgorithmException exception of md5
+	 * @throws NoSuchAlgorithmException error in md5
 	 */
 	public void setPassword(String password) throws NoSuchAlgorithmException {
 		try {
 			this.password = Functionalities.getMd5(password);
 		} catch (NoSuchAlgorithmException e) {
-			throw e;
+			throw new NoSuchAlgorithmException();
 		}
 	}
 	

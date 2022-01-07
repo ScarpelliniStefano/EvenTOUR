@@ -51,6 +51,7 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	@Query("{types : {$in : ?0}, dataOra: {$gt: new Date()} }")
 	Page<Event> findByTypes(String[] type, Pageable paging);
 	
+	
 	/**
 	 * Find by types and location regione like.
 	 *
@@ -61,14 +62,6 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	 */
 	@Query("{types : {$in : ?0}, 'location.regione' : { '$regex' : ?1 , $options: 'i'}, dataOra: {$gt: new Date()}}")
 	Page<Event> findByTypesAndLocationRegioneLike(String[] type,String regione, Pageable paging);
-	/**
-	 * Find by free seat greater than zero.
-	 *
-	 * @param paging the paging
-	 * @return the page
-	 */
-	@Query("{freeSeat: {$gt: 0} , dataOra: {$gt: new Date()} }")
-	Page<Event> findByFreeSeatGreaterThanZero(Pageable paging);
 	
 	/**
 	 * Find by manager id.
@@ -94,59 +87,26 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	
 	//List<Event> findByPreferences(String preferences);
 	
-	/**
-	 * Find by data ora between two dates, order by data ora asc.
-	 *
-	 * @param dataOraGT the data ora greater than (lower limit)
-	 * @param dataOraLT the data ora less than (greater limit)
-	 * @return the list
-	 */
-	List<Event> findByDataOraBetweenOrderByDataOraAsc(Date dataOraGT, Date dataOraLT);
+
+//	List<Event> findByDataOraBetweenOrderByDataOraAsc(Date dataOraGT, Date dataOraLT);
 	
-	/**
-	 * Find by types.
-	 *
-	 * @param type the type
-	 * @return the list
-	 */
-	@Query("{types : {$in : ?0}}")
-	List<Event> findByTypes(String[] type);
+//	@Query("{types : {$in : ?0}}")
+//	List<Event> findByTypes(String[] type);
 	
+//	@Query("{freeSeat: {$gt: 0} }")
+//	List<Event> findByfreeSeatGreaterThanZero(Sort sort);
 	
+//	List<Event> findByManagerId(String managerId);
 	
-	/**
-	 * Find by free seat greater than zero.
-	 *
-	 * @param sort the sort
-	 * @return the list
-	 */
-	@Query("{freeSeat: {$gt: 0} }")
-	List<Event> findByfreeSeatGreaterThanZero(Sort sort);
-	
-	/**
-	 * Find by manager id.
-	 *
-	 * @param managerId the manager id
-	 * @return the list
-	 */
-	List<Event> findByManagerId(String managerId);
-	
-	/**
-	 * Find by location like.
-	 *
-	 * @param type the type of event
-	 * @param loc the location (region) to filter
-	 * @return the list
-	 */
-	@Query("{ '?0' : { '$regex' : ?1 , $options: 'i'}}")
-	List<Event> findByLocationLike(String type,String loc);
+//	@Query("{ '?0' : { '$regex' : ?1 , $options: 'i'}}")
+//	List<Event> findByLocationLike(String type,String loc);
 	
 
 	/**
 	 * Find by location regione like and free seat greater than zero.
 	 *
-	 * @param regione the regione to filter
-	 * @param sorted the sorted settings
+	 * @param regione the regione
+	 * @param sorted the sorted
 	 * @return the list
 	 */
 	@Query("{ 'location.regione' : { '$regex' : ?0 , $options: 'i'}, 'freeSeat': {$gt: 0},  'dataOra': {$gt: new Date()} }")
@@ -155,7 +115,7 @@ public interface EventRepository extends MongoRepository<Event, String> {
 	/**
 	 * Find manager of a event.
 	 *
-	 * @param id the manager id
+	 * @param manId the manager id
 	 * @return the aggregation results
 	 */
 	@Aggregation(pipeline = {"{\n"
@@ -170,7 +130,7 @@ public interface EventRepository extends MongoRepository<Event, String> {
 			+ "            'as': 'manager'\n"
 			+ "        }\n"
 			+ "    }"})
-	AggregationResults<EventManResponse> findManagerById(String id);
+	AggregationResults<EventManResponse> findManagerById(String manId);
 
 	
 	/**
@@ -197,16 +157,5 @@ public interface EventRepository extends MongoRepository<Event, String> {
 			+ "        }\n"
 			+ "    }"})
 	AggregationResults<ReportManResponse> findReports(String id);
-
-	
-	/**
-	 * Find by free seat greater than numPersone.
-	 *
-	 * @param numPers the num pers
-	 * @param ascending the ascending
-	 * @return the list
-	 */
-	@Query("{freeSeat: {$gte: ?0}, dataOra:{$gt: new Date()} }")
-	List<Event> findByfreeSeatGreaterThanNumPersone(Integer numPers, Sort ascending);
 
 }

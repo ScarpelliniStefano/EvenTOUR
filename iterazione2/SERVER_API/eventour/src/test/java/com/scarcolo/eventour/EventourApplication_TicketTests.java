@@ -141,24 +141,5 @@ class EventourApplication_TicketTests {
 				String.class);
 		assertEquals(request.getStatusCode(),HttpStatus.OK);
 	}
-	
-	///ticketInsps/manager/{id}
-	@Test
-	public void getTicketByManager() throws Exception {
-		String request=this.restTemplate.getForObject("http://localhost:" + port + "/api/ticketInsps/manager/61a0a0eeb5f9b12d06e9525e",
-				String.class);
-		JSONArray array=new JSONArray(request);
-		System.out.println(array);
-		assertEquals(array.getJSONObject(0).getString("mail"), "Celinia.Casagrande36@libero.it");
-		
-	}
-	
-	@Test
-	public void getTicketByManagerError() throws Exception {
-		ResponseEntity<String> request=this.restTemplate.getForEntity("http://localhost:" + port + "/api/ticketInsps/manager/61a0a0eeb5f9b12d06e95235",
-				String.class);
-		assertEquals(request.getStatusCode(), HttpStatus.NO_CONTENT);
-		
-	}
 
 }

@@ -14,6 +14,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
  *
  * @author stefa
  */
+/**
+ * @author stefa
+ *
+ */
 @Document(collection="bookings")
 public class Booking {
 	
@@ -30,7 +34,7 @@ public class Booking {
 	/** The prenoted seat. */
 	private Integer prenotedSeat;	
 	
-	/**  Come? */
+	/** The come. */
 	private Boolean come;	
 	
 	/**
@@ -41,10 +45,7 @@ public class Booking {
 	public Booking(AddBookingRequest request) {
         this.setUserId(new ObjectId(request.userId));
         this.setEventId(new ObjectId(request.eventId));
-        if(request.prenotedSeat<0) {
-        	throw new IllegalArgumentException();
-        }
-        this.prenotedSeat=request.prenotedSeat;
+        this.prenotedSeat=(request.prenotedSeat>0) ? request.prenotedSeat : 0;
         this.setCome(false);
     }
 	

@@ -59,9 +59,10 @@ public class Manager{
 	 * Instantiates a new manager.
 	 *
 	 * @param request the request
-	 * @throws Exception the exception
+	 * @throws AddressException errore mail
+	 * @throws IllegalArgumentException errore partita iva
 	 */
-	public Manager(AddManagerRequest request) throws Exception{
+	public Manager(AddManagerRequest request) throws AddressException,IllegalArgumentException{
 		boolean res=Functionalities.isValidEmailAddress(request.mail);
 		if(res) {
 			this.mail=request.mail;
@@ -94,48 +95,6 @@ public class Manager{
 		super();
 	}
 	
-	/**
-	 * Instantiates a new manager.
-	 *
-	 * @param id the id
-	 * @param name the name
-	 * @param surname the surname
-	 * @param mail the mail
-	 * @param codicePIVA the codice PIVA
-	 * @param dateOfBirth the date of birth
-	 * @param psw the psw
-	 * @param ragioneSociale the ragione sociale
-	 * @param residence the residence
-	 * @throws Exception the exception
-	 */
-	public Manager(String id, String name, String surname, String mail, String codicePIVA, Date dateOfBirth,
-			String psw, String ragioneSociale, Location residence) throws Exception {
-		this.id=id;
-		boolean res=Functionalities.isValidEmailAddress(mail);
-		if(res) {
-			this.mail=mail;
-		}else {
-			throw new AddressException();
-		}
-		
-		this.password=psw;
-		this.name=name;
-		this.surname=surname;
-		if(dateOfBirth.before(new Date())) {
-			this.dateOfBirth=dateOfBirth;
-		}else {
-			throw new DateTimeException("Errore data futura");
-		}
-		
-		this.residence=residence;
-		String risorsa=PartitaIVAFunctions.validate(codicePIVA);
-		if(risorsa=="ok")
-			this.codicePIVA=codicePIVA;
-		else
-			throw new IllegalArgumentException();
-		this.ragioneSociale=ragioneSociale;
-	}
-
 	/**
 	 * Gets the id.
 	 *
@@ -256,9 +215,9 @@ public class Manager{
 	 * Sets the date of birth check.
 	 *
 	 * @param dateOfBirth the new date of birth check
-	 * @throws Exception the exception
+	 * @throws DateTimeException the exception
 	 */
-	private void setDateOfBirthCheck(Date dateOfBirth) throws Exception {
+	private void setDateOfBirthCheck(Date dateOfBirth) throws DateTimeException {
 		if(dateOfBirth.before(new Date())) {
 			this.dateOfBirth = dateOfBirth;
 		}else {
@@ -308,14 +267,14 @@ public class Manager{
 	 * Sets the codice PIVA.
 	 *
 	 * @param codicePIVA the codicePIVA to set
-	 * @throws Exception the exception
+	 * @throws IllegalArgumentException the exception of incorrect partita iva
 	 */
-	public void setCodicePIVA(String codicePIVA) throws Exception {
+	public void setCodicePIVA(String codicePIVA) throws IllegalArgumentException {
 		String res=PartitaIVAFunctions.validate(codicePIVA);
 		if(res=="ok")
 			this.codicePIVA = codicePIVA;
 		else
-			throw new IllegalArgumentException(res);
+			throw new IllegalArgumentException();
 	}
 	
 	/**

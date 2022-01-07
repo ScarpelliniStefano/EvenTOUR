@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TicketManResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.manager</a> &gt; <span class="el_source">TicketManResponse.java</span></div><h1>TicketManResponse.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.model.manager;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TicketManResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.manager</a> &gt; <span class="el_source">TicketManResponse.java</span></div><h1>TicketManResponse.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.model.manager;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,9 +24,9 @@ public class TicketManResponse {
 	@JsonProperty(&quot;mail&quot;)
 	private String mail;
 	
-	/** The ticket inspectors. */
-	@JsonProperty(&quot;tickets&quot;)
-	private EventTick tickets;
+	/** The events. */
+	@JsonProperty(&quot;events&quot;)
+	private EventTick events;
 	
 	/**
 	 * Instantiates a new ticket man response.
@@ -35,15 +35,15 @@ public class TicketManResponse {
 	 * @param name the name
 	 * @param surname the surname
 	 * @param mail the mail
-	 * @param tickets the tickets associated
+	 * @param events the events
 	 */
-	public TicketManResponse(String id, String name, String surname, String mail, EventTick tickets) {
+	public TicketManResponse(String id, String name, String surname, String mail, EventTick events) {
 <span class="nc" id="L41">		super();</span>
 <span class="nc" id="L42">		this.id = id;</span>
 <span class="nc" id="L43">		this.name = name;</span>
 <span class="nc" id="L44">		this.surname = surname;</span>
 <span class="nc" id="L45">		this.mail = mail;</span>
-<span class="nc" id="L46">		this.tickets = tickets;</span>
+<span class="nc" id="L46">		this.events = events;</span>
 <span class="nc" id="L47">	}</span>
 	
 	/**
@@ -119,24 +119,24 @@ public class TicketManResponse {
 <span class="nc" id="L119">	}</span>
 	
 	/**
-	 * Gets the event tickets.
+	 * Gets the events.
 	 *
-	 * @return the ticket inspectors
+	 * @return the events
 	 */
-	public EventTick getTickets() {
-<span class="nc" id="L127">		return tickets;</span>
+	public EventTick getEvents() {
+<span class="nc" id="L127">		return events;</span>
 	}
 	
 	/**
 	 * Sets the events.
 	 *
-	 * @param tickets the ticket inspectors associated
+	 * @param events the new events
 	 */
-	public void setTickets(EventTick tickets) {
-<span class="nc" id="L136">		this.tickets = tickets;</span>
+	public void setEvents(EventTick events) {
+<span class="nc" id="L136">		this.events = events;</span>
 <span class="nc" id="L137">	}</span>
 	
 
 	
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

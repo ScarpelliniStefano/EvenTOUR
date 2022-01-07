@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>BookingService.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.service.booking</a> &gt; <span class="el_source">BookingService.java</span></div><h1>BookingService.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.service.booking;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>BookingService.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.service.booking</a> &gt; <span class="el_source">BookingService.java</span></div><h1>BookingService.java</h1><pre class="source lang-java linenums">package com.scarcolo.eventour.service.booking;
 
 
 import org.bson.types.ObjectId;
@@ -12,22 +12,17 @@ import com.scarcolo.eventour.functions.Mail;
 import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.booking.Booking;
 import com.scarcolo.eventour.model.booking.PaymentRequest;
-import com.scarcolo.eventour.model.booking.UserEventBookedResponse;
 import com.scarcolo.eventour.model.event.Event;
 import com.scarcolo.eventour.model.event.EventBookedResponse;
-import com.scarcolo.eventour.model.event.EventPlus;
 import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.model.user.UserBookedResponse;
 import com.scarcolo.eventour.repository.booking.BookingRepository;
-import com.scarcolo.eventour.repository.event.EventPlusRepository;
 import com.scarcolo.eventour.repository.event.EventRepository;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
 import com.scarcolo.eventour.repository.user.UserRepository;
-import com.scarcolo.eventour.service.manager.RequestService;
 import com.stripe.model.Order;
 
-import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -40,7 +35,7 @@ import java.util.Optional;
  * The Class BookingService.
  */
 @Service
-<span class="fc" id="L43">public class BookingService {</span>
+<span class="fc" id="L38">public class BookingService {</span>
 
     /** The booking repository. */
     @Autowired
@@ -50,21 +45,13 @@ import java.util.Optional;
     @Autowired
     private EventRepository eventRepository;
     
-    /** The eventplus repository. */
-    @Autowired
-    private EventPlusRepository eventPlusRepository;
-    
-    /** The user repository. */
+	/** The user repository. */
     @Autowired
     private UserRepository userRepository;
     
     /** The manager repository. */
     @Autowired
     private ManagerRepository managerRepository;
-    
-    /** The manager repository. */
-    @Autowired
-    private RequestService requestService;
 
    
     /**
@@ -72,37 +59,25 @@ import java.util.Optional;
      *
      * @param request the request of new booking
      * @return the response entity
-     * @throws IOException exception from inputstream file template
      */
-    public ResponseEntity&lt;Object&gt; add(AddBookingRequest request) throws IOException {
-<span class="fc" id="L78">        Booking booking = new Booking(request);</span>
-<span class="fc" id="L79">        Optional&lt;Event&gt; optionalEvent = eventRepository.findById(booking.getEventId());</span>
-<span class="fc" id="L80">        Optional&lt;User&gt; optionalUser = userRepository.findById(booking.getUserId());</span>
-<span class="pc bpc" id="L81" title="1 of 4 branches missed.">        if (!optionalUser.isEmpty() &amp;&amp; !optionalEvent.isEmpty()) {</span>
-<span class="fc" id="L82">            Event eventM=optionalEvent.get();</span>
-<span class="pc bpc" id="L83" title="1 of 2 branches missed.">            if(eventM.getFreeSeat()-booking.getPrenotedSeat()&gt;=0) {</span>
-<span class="fc" id="L84">            	eventM.setFreeSeat(eventM.getFreeSeat()-booking.getPrenotedSeat());</span>
-<span class="fc" id="L85">            	eventRepository.save(eventM);</span>
-<span class="fc" id="L86">            	boolean result=false;</span>
-<span class="fc" id="L87">            	Booking book=bookingRepository.save(booking);</span>
-            	try {
-<span class="fc" id="L89">            		result = Mail.sendBookingEventMsg(optionalUser.get().getEmail(),eventM,book);</span>
-<span class="pc" id="L90">            	} catch (IOException e) {</span>
-<span class="nc" id="L91">            		throw e;</span>
-            	}
-<span class="pc bpc" id="L93" title="1 of 2 branches missed.">            	if(!result) {</span>
-            		//System.out.println(&quot;error in sending mail&quot;);
-            	}else {
-<span class="fc" id="L96">            		return new ResponseEntity&lt;&gt;(book, HttpStatus.OK);</span>
-            	}
-            }else{
-<span class="nc" id="L99">            	return new ResponseEntity&lt;&gt;(&quot;ERROR. no enough seats available.&quot;, HttpStatus.NO_CONTENT);</span>
+    public ResponseEntity&lt;Object&gt; add(AddBookingRequest request) {
+<span class="fc" id="L64">        Booking booking = bookingRepository.save(new Booking(request));</span>
+<span class="fc" id="L65">        Optional&lt;Event&gt; optionalEvent = eventRepository.findById(booking.getEventId());</span>
+<span class="fc" id="L66">        Optional&lt;User&gt; optionalUser = userRepository.findById(booking.getUserId());</span>
+<span class="pc bpc" id="L67" title="1 of 4 branches missed.">        if (!optionalUser.isEmpty() &amp;&amp; !optionalEvent.isEmpty()) {</span>
+<span class="fc" id="L68">            Event eventM=optionalEvent.get();</span>
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">            if(eventM.getFreeSeat()-booking.getPrenotedSeat()&gt;=0) {</span>
+<span class="fc" id="L70">            	eventM.setFreeSeat(eventM.getFreeSeat()-booking.getPrenotedSeat());</span>
+<span class="fc" id="L71">            	eventRepository.save(eventM);</span>
+<span class="fc" id="L72">            } else {</span>
+<span class="nc" id="L73">            	bookingRepository.delete(booking);</span>
+<span class="nc" id="L74">            	return new ResponseEntity&lt;&gt;(&quot;ERROR. no enough seats available.&quot;, HttpStatus.OK);</span>
             }
-         } else {
-<span class="fc" id="L102">     		 return new ResponseEntity&lt;&gt;(HttpStatus.NOT_ACCEPTABLE);</span>
-         }
-            	
-<span class="nc" id="L105">        return new ResponseEntity&lt;&gt;(booking, HttpStatus.OK);</span>
+        }else {
+<span class="fc" id="L77">    		bookingRepository.delete(booking);</span>
+<span class="fc" id="L78">    		return new ResponseEntity&lt;&gt;(HttpStatus.NOT_ACCEPTABLE);</span>
+    	}
+<span class="fc" id="L80">        return new ResponseEntity&lt;&gt;(booking, HttpStatus.OK);</span>
         
     }
 
@@ -111,54 +86,29 @@ import java.util.Optional;
      *
      * @param id the id
      */
-    private void modifyComed(String id) {
-<span class="fc" id="L115">    	Optional&lt;Booking&gt; optionalBooking = bookingRepository.findById(id);</span>
-<span class="pc bpc" id="L116" title="1 of 2 branches missed.">    	if (!optionalBooking.isEmpty()) {</span>
-<span class="fc" id="L117">            Booking book=optionalBooking.get();</span>
-<span class="fc" id="L118">            book.setCome(true);</span>
-<span class="fc" id="L119">            bookingRepository.save(book);</span>
+    private void modify(String id) {
+<span class="fc" id="L90">    	Optional&lt;Booking&gt; optionalBooking = bookingRepository.findById(id);</span>
+<span class="pc bpc" id="L91" title="1 of 2 branches missed.">    	if (!optionalBooking.isEmpty()) {</span>
+<span class="fc" id="L92">            Booking book=optionalBooking.get();</span>
+<span class="fc" id="L93">            book.setCome(true);</span>
+<span class="fc" id="L94">            bookingRepository.save(book);</span>
     	}
-<span class="fc" id="L121">    }</span>
-    
-    
-    
-    /**
-     * Modify the review of a booking.
-     *
-     * @param id the id of booking
-     * @param review the review
-     */
-    private void modifyReview(String id, int review) {
-<span class="fc" id="L132">    	Optional&lt;Booking&gt; optionalBooking = bookingRepository.findById(id);</span>
-<span class="pc bpc" id="L133" title="1 of 2 branches missed.">    	if (!optionalBooking.isEmpty()) {</span>
-<span class="fc" id="L134">            Booking book=optionalBooking.get();</span>
-<span class="fc" id="L135">            EventPlus ev=eventPlusRepository.findById(book.getEventId()).get();</span>
-<span class="pc bpc" id="L136" title="1 of 2 branches missed.">            if(book.getReview()&gt;0) {</span>
-<span class="fc" id="L137">            	ev.setReviewSum(ev.getReviewSum()-book.getReview());</span>
-<span class="fc" id="L138">            	ev.setReviewTot(ev.getReviewTot()-1);</span>
-            }
-<span class="fc" id="L140">            book.setReview(review);</span>
-<span class="fc" id="L141">            ev.setReviewSum(ev.getReviewSum()+book.getReview());</span>
-<span class="fc" id="L142">            ev.setReviewTot(ev.getReviewTot()+1);</span>
-<span class="fc" id="L143">            eventPlusRepository.save(ev);</span>
-<span class="fc" id="L144">            bookingRepository.save(book);</span>
-    	}
-<span class="fc" id="L146">    }</span>
+<span class="fc" id="L96">    }</span>
 
    
     /**
      * Gets one booking by id.
      *
      * @param id the id of booking
-     * @return the booking by id
+     * @return the event by id
      */
     public ResponseEntity&lt;Booking&gt; getById(String id) {
-<span class="fc" id="L156">    		Optional&lt;Booking&gt; bookingData = bookingRepository.findById(id);</span>
+<span class="fc" id="L106">    		Optional&lt;Booking&gt; bookingData = bookingRepository.findById(id);</span>
 
-<span class="fc bfc" id="L158" title="All 2 branches covered.">    		if (bookingData.isPresent()) {</span>
-<span class="fc" id="L159">    			return new ResponseEntity&lt;&gt;(bookingData.get(), HttpStatus.OK);</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">    		if (bookingData.isPresent()) {</span>
+<span class="fc" id="L109">    			return new ResponseEntity&lt;&gt;(bookingData.get(), HttpStatus.OK);</span>
     		} else {
-<span class="fc" id="L161">    			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
+<span class="fc" id="L111">    			return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
     		}
     	
     }
@@ -167,23 +117,23 @@ import java.util.Optional;
     /**
      * Delete one booking.
      *
-     * @param id the id of booking to remove
+     * @param id the id
      * @return true, if successful
      */
     public boolean delete(String id) {
-<span class="fc" id="L174">        Optional&lt;Booking&gt; optionalBooking = bookingRepository.findById(id);</span>
-<span class="fc bfc" id="L175" title="All 2 branches covered.">        if (optionalBooking.isEmpty()) {</span>
-<span class="fc" id="L176">            return false;</span>
+<span class="fc" id="L124">        Optional&lt;Booking&gt; optionalBooking = bookingRepository.findById(id);</span>
+<span class="fc bfc" id="L125" title="All 2 branches covered.">        if (optionalBooking.isEmpty()) {</span>
+<span class="fc" id="L126">            return false;</span>
         }
         
-<span class="fc" id="L179">        Optional&lt;Event&gt; optionalEvent = eventRepository.findById(optionalBooking.get().getEventId());</span>
-<span class="pc bpc" id="L180" title="1 of 2 branches missed.">        if (!optionalEvent.isEmpty()) {</span>
-<span class="fc" id="L181">            Event eventM=optionalEvent.get();</span>
-<span class="fc" id="L182">            eventM.setFreeSeat(eventM.getFreeSeat()+optionalBooking.get().getPrenotedSeat());</span>
-<span class="fc" id="L183">            eventRepository.save(eventM);</span>
+<span class="fc" id="L129">        Optional&lt;Event&gt; optionalEvent = eventRepository.findById(optionalBooking.get().getEventId());</span>
+<span class="pc bpc" id="L130" title="1 of 2 branches missed.">        if (!optionalEvent.isEmpty()) {</span>
+<span class="fc" id="L131">            Event eventM=optionalEvent.get();</span>
+<span class="fc" id="L132">            eventM.setFreeSeat(eventM.getFreeSeat()+optionalBooking.get().getPrenotedSeat());</span>
+<span class="fc" id="L133">            eventRepository.save(eventM);</span>
     	}
-<span class="fc" id="L185">        bookingRepository.deleteById(optionalBooking.get().getId());</span>
-<span class="fc" id="L186">        return true;</span>
+<span class="fc" id="L135">        bookingRepository.deleteById(optionalBooking.get().getId());</span>
+<span class="fc" id="L136">        return true;</span>
     }
 
 	/**
@@ -193,14 +143,14 @@ import java.util.Optional;
 	 */
 	public ResponseEntity&lt;List&lt;Booking&gt;&gt; getAll() {
 		try {
-<span class="fc" id="L196">			List&lt;Booking&gt; bookings = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L197">			bookingRepository.findAll().forEach(bookings::add);</span>
-<span class="pc bpc" id="L198" title="1 of 2 branches missed.">			if(bookings.isEmpty()) {</span>
-<span class="nc" id="L199">				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
+<span class="fc" id="L146">			List&lt;Booking&gt; bookings = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L147">			bookingRepository.findAll().forEach(bookings::add);</span>
+<span class="pc bpc" id="L148" title="1 of 2 branches missed.">			if(bookings.isEmpty()) {</span>
+<span class="nc" id="L149">				return new ResponseEntity&lt;&gt;(HttpStatus.NO_CONTENT);</span>
 			}
-<span class="fc" id="L201">			return new ResponseEntity&lt;&gt;(bookings, HttpStatus.OK);</span>
-<span class="nc" id="L202">		}catch(Exception e) {</span>
-<span class="nc" id="L203">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+<span class="fc" id="L151">			return new ResponseEntity&lt;&gt;(bookings, HttpStatus.OK);</span>
+<span class="nc" id="L152">		}catch(Exception e) {</span>
+<span class="nc" id="L153">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
 		}
 	}
 
@@ -211,24 +161,15 @@ import java.util.Optional;
 	 * @param page the page
 	 * @param size the size
 	 * @param id the id user
-	 * @param pastFuture the past future character for show only future event's booking  or past event's booking
 	 * @return bookings by id user
 	 */
-	public ResponseEntity&lt;List&lt;EventBookedResponse&gt;&gt; getByIdUser(int page, int size, String id, char pastFuture) {
+	public ResponseEntity&lt;List&lt;EventBookedResponse&gt;&gt; getByIdUser(int page, int size, String id) {
 		try {
-<span class="fc" id="L219">			Optional&lt;User&gt; userOpt=userRepository.findById(id);</span>
-<span class="fc bfc" id="L220" title="All 2 branches covered.">			if(userOpt.isEmpty()) return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
-<span class="fc" id="L221">			AggregationResults&lt;EventBookedResponse&gt; eventsA=null;</span>
-<span class="pc bpc" id="L222" title="1 of 4 branches missed.">			if(pastFuture=='f' || pastFuture=='F')</span>
-<span class="fc" id="L223">				eventsA=bookingRepository.findByUserIdFuture(new ObjectId(id),page*size,size);</span>
-<span class="pc bpc" id="L224" title="1 of 4 branches missed.">			else if(pastFuture=='p' || pastFuture=='P')</span>
-<span class="fc" id="L225">				eventsA=bookingRepository.findByUserIdPast(new ObjectId(id),page*size,size);</span>
-			else
-<span class="fc" id="L227">				eventsA=bookingRepository.findByUserId(new ObjectId(id),page*size,size);</span>
-<span class="fc" id="L228">			List&lt;EventBookedResponse&gt; eventR=eventsA.getMappedResults();</span>
-<span class="fc" id="L229">			return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);</span>
-<span class="nc" id="L230">		}catch(Exception e) {</span>
-<span class="nc" id="L231">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+<span class="fc" id="L168">			AggregationResults&lt;EventBookedResponse&gt; eventsA=bookingRepository.findByUserId(new ObjectId(id),page*size,size);</span>
+<span class="fc" id="L169">			List&lt;EventBookedResponse&gt; eventR=eventsA.getMappedResults();</span>
+<span class="fc" id="L170">			return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);</span>
+<span class="nc" id="L171">		}catch(Exception e) {</span>
+<span class="nc" id="L172">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
 		}
 	}
 	
@@ -237,18 +178,18 @@ import java.util.Optional;
 	/**
 	 * Gets booking by user and event.
 	 *
-	 * @param id the id of user
-	 * @param idEv the id event
+	 * @param id the id
+	 * @param idEv the id ev
 	 * @return the booking by user and event
 	 */
 	public ResponseEntity&lt;List&lt;EventBookedResponse&gt;&gt; getByUserAndEvent(String id, String idEv) {
 		try {
-<span class="fc" id="L246">			AggregationResults&lt;EventBookedResponse&gt; eventsA=bookingRepository.findByUserAndEvent(id, idEv);</span>
-<span class="fc" id="L247">			List&lt;EventBookedResponse&gt; eventR=eventsA.getMappedResults();</span>
-<span class="fc bfc" id="L248" title="All 2 branches covered.">			if(eventR.isEmpty()) return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
-<span class="fc" id="L249">			return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);</span>
-<span class="nc" id="L250">		}catch(Exception e) {</span>
-<span class="nc" id="L251">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+<span class="fc" id="L187">			AggregationResults&lt;EventBookedResponse&gt; eventsA=bookingRepository.findByUserAndEvent(id,idEv);</span>
+<span class="fc" id="L188">			List&lt;EventBookedResponse&gt; eventR=eventsA.getMappedResults();</span>
+<span class="fc bfc" id="L189" title="All 2 branches covered.">			if(eventR.isEmpty()) return new ResponseEntity&lt;&gt;(HttpStatus.METHOD_NOT_ALLOWED);</span>
+<span class="fc" id="L190">			return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);</span>
+<span class="nc" id="L191">		}catch(Exception e) {</span>
+<span class="nc" id="L192">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
 		}
 	}
 	
@@ -257,121 +198,88 @@ import java.util.Optional;
 	 *
 	 * @param idBooking the id booking
 	 * @param idEvent the id event
-	 * @return if booking is correct
+	 * @return the check
 	 */
 	public ResponseEntity&lt;String&gt; getCheck(String idBooking,String idEvent) {
-<span class="fc" id="L263">    	Optional&lt;Booking&gt; bookingData = bookingRepository.findById(idBooking);</span>
-<span class="fc bfc" id="L264" title="All 2 branches covered.">    	if (bookingData.isPresent()) {</span>
-<span class="fc bfc" id="L265" title="All 2 branches covered.">  	  		if(bookingData.get().getEventId().equalsIgnoreCase(idEvent)) {</span>
-<span class="fc" id="L266">  	  			modifyComed(idBooking);</span>
-<span class="fc" id="L267">  	  			return new ResponseEntity&lt;&gt;(&quot;ACCESS GRANTED&quot;, HttpStatus.OK);</span>
+<span class="fc" id="L204">    	Optional&lt;Booking&gt; bookingData = bookingRepository.findById(idBooking);</span>
+    	
+    	
+<span class="fc bfc" id="L207" title="All 2 branches covered.">  	  	if (bookingData.isPresent()) {</span>
+<span class="fc bfc" id="L208" title="All 2 branches covered.">  	  		if(bookingData.get().getEventId().equalsIgnoreCase(idEvent)) {</span>
+<span class="fc" id="L209">  	  			modify(idBooking);</span>
+<span class="fc" id="L210">  	  			return new ResponseEntity&lt;&gt;(&quot;ACCESS GRANTED&quot;, HttpStatus.OK);</span>
   	  		}else
-<span class="fc" id="L269">  	  			return new ResponseEntity&lt;&gt;(&quot;ACCESS REFUSED&quot;, HttpStatus.OK);</span>
+<span class="fc" id="L212">  	  			return new ResponseEntity&lt;&gt;(&quot;ACCESS REFUSED&quot;, HttpStatus.OK);</span>
   	  	} else {
-<span class="fc" id="L271">  	  		return new ResponseEntity&lt;&gt;(&quot;INVALID BOOKING CODE&quot;,HttpStatus.OK);</span>
+<span class="fc" id="L214">  	  		return new ResponseEntity&lt;&gt;(&quot;INVALID BOOKING CODE&quot;,HttpStatus.OK);</span>
   	  	}
     }
 
 	/**
-	 * Gets the event's booking by id event.
+	 * Gets the by id event.
 	 *
-	 * @param id the id of event
-	 * @return the booking by id event
+	 * @param id the id
+	 * @return the by id event
 	 */
 	public ResponseEntity&lt;List&lt;UserBookedResponse&gt;&gt; getByIdEvent(String id) {
 		try {
-<span class="fc" id="L283">			AggregationResults&lt;UserBookedResponse&gt; userA=bookingRepository.findByEventId(new ObjectId(id));</span>
-<span class="fc" id="L284">			List&lt;UserBookedResponse&gt; eventR=userA.getMappedResults();</span>
-<span class="fc" id="L285">			return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);</span>
-<span class="nc" id="L286">		}catch(Exception e) {</span>
-<span class="nc" id="L287">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
-		}
-	}
-
-	
-
-	/**
-	 * Get a booking by id, with details.
-	 *
-	 * @param id the id of booking
-	 * @return the booking by id, with details
-	 */
-	public ResponseEntity&lt;UserEventBookedResponse&gt; getByIdDetails(String id) {
-		try {
-<span class="fc" id="L301">			AggregationResults&lt;UserEventBookedResponse&gt; userEventA=bookingRepository.findByIdDetails(new ObjectId(id));</span>
-<span class="fc" id="L302">			List&lt;UserEventBookedResponse&gt; eventR=userEventA.getMappedResults();</span>
-<span class="fc bfc" id="L303" title="All 2 branches covered.">			if(!eventR.isEmpty())</span>
-<span class="fc" id="L304">				return new ResponseEntity&lt;&gt;(eventR.get(0), HttpStatus.OK);</span>
-			else
-<span class="fc" id="L306">				return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
-<span class="nc" id="L307">		}catch(Exception e) {</span>
-			//System.out.println(e);
-<span class="nc" id="L309">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
+<span class="fc" id="L226">			AggregationResults&lt;UserBookedResponse&gt; userA=bookingRepository.findByEventId(new ObjectId(id));</span>
+<span class="fc" id="L227">			List&lt;UserBookedResponse&gt; eventR=userA.getMappedResults();</span>
+<span class="fc" id="L228">			return new ResponseEntity&lt;&gt;(eventR, HttpStatus.OK);</span>
+<span class="nc" id="L229">		}catch(Exception e) {</span>
+<span class="nc" id="L230">			return new ResponseEntity&lt;&gt;(HttpStatus.INTERNAL_SERVER_ERROR);</span>
 		}
 	}
 	
-	
-    
+
     //CARDNR: tutte quelle che iniziano con 400000380000 son accettate, previo superamento check vari
     //CVV: almeno un 2 deve esserci
 	//data come &quot;MM/AA&quot;
     /**
-     * Payment method.
+     * Checker payment method.
      *
      * @param type the type of user
-     * @param request the request of payment (date must be in MM/AA format)
-     * @return the response entity with outcome of payment
+     * @param request the request with payment data
+     * @return the response entity with string confirmation of error
      */
-    
 	public ResponseEntity&lt;String&gt; checkerPayment(String type, PaymentRequest request) {
-<span class="fc" id="L327">		LocalDate dt=LocalDate.of(Integer.parseInt(&quot;20&quot;+request.dateScad.split(&quot;/&quot;)[1]), Integer.parseInt(request.dateScad.split(&quot;/&quot;)[0]),01);</span>
-<span class="fc" id="L328">		request.cardNr=request.cardNr.replaceAll(&quot; &quot;, &quot;&quot;).replaceAll(&quot;-&quot;, &quot;&quot;);</span>
-<span class="fc bfc" id="L329" title="All 2 branches covered.">		if(dt.isBefore(LocalDate.now())) {</span>
-<span class="fc" id="L330">        	return new ResponseEntity&lt;&gt;(&quot;INVALID DATE&quot;,HttpStatus.OK);</span>
-<span class="pc bpc" id="L331" title="1 of 2 branches missed.">        }else if(request.amount.compareTo(0d)&lt;=0) {</span>
-<span class="nc" id="L332">        	return new ResponseEntity&lt;&gt;(&quot;AMOUNT INVALID&quot;,HttpStatus.OK);</span>
-<span class="pc bpc" id="L333" title="2 of 4 branches missed.">        }else if(request.authNr.length()!=3 || request.cardNr.length()!=16) {</span>
-<span class="nc" id="L334">        	return new ResponseEntity&lt;&gt;(&quot;CARD NUMBER OR CVV INVALID&quot;,HttpStatus.OK);</span>
+<span class="fc" id="L246">		LocalDate dt=LocalDate.of(Integer.parseInt(&quot;20&quot;+request.dateScad.split(&quot;/&quot;)[1]), Integer.parseInt(request.dateScad.split(&quot;/&quot;)[0]),01);</span>
+<span class="fc" id="L247">		request.cardNr=request.cardNr.replaceAll(&quot; &quot;, &quot;&quot;);</span>
+<span class="fc" id="L248">		request.cardNr=request.cardNr.replaceAll(&quot;-&quot;, &quot;&quot;);</span>
+<span class="fc bfc" id="L249" title="All 2 branches covered.">		if(dt.isBefore(LocalDate.now())) {</span>
+<span class="fc" id="L250">        	return new ResponseEntity&lt;&gt;(&quot;INVALID DATE&quot;,HttpStatus.OK);</span>
+<span class="pc bpc" id="L251" title="1 of 2 branches missed.">        }else if(request.amount.compareTo(0d)&lt;=0) {</span>
+<span class="nc" id="L252">        	return new ResponseEntity&lt;&gt;(&quot;AMOUNT INVALID&quot;,HttpStatus.OK);</span>
+<span class="pc bpc" id="L253" title="2 of 4 branches missed.">        }else if(request.authNr.length()!=3 || request.cardNr.length()!=16) {</span>
+<span class="nc" id="L254">        	return new ResponseEntity&lt;&gt;(&quot;CARD NUMBER OR CVV INVALID&quot;,HttpStatus.OK);</span>
         }else {
-<span class="fc" id="L336">        	Manager man=null;</span>
-<span class="fc bfc" id="L337" title="All 2 branches covered.">        	if(type.toUpperCase().contentEquals(&quot;USER&quot;)) {</span>
-<span class="fc" id="L338">        		Optional&lt;User&gt; optionalUser = userRepository.findById(request.idUser);</span>
-<span class="pc bpc" id="L339" title="1 of 2 branches missed.">        		if (optionalUser.isEmpty()) {</span>
-<span class="nc" id="L340">        			return null;</span>
+<span class="pc bpc" id="L256" title="1 of 2 branches missed.">        	if(type.toUpperCase().contentEquals(&quot;USER&quot;)) {</span>
+<span class="fc" id="L257">        		Optional&lt;User&gt; optionalUser = userRepository.findById(request.idUser);</span>
+<span class="pc bpc" id="L258" title="1 of 2 branches missed.">        		if (optionalUser.isEmpty()) {</span>
+<span class="nc" id="L259">        			return null;</span>
         		}
-        		//User user=optionalUser.get(); //in real payment will serve
-<span class="pc bpc" id="L343" title="1 of 2 branches missed.">        	}else if(type.toUpperCase().contentEquals(&quot;MANAGER&quot;)){</span>
-<span class="pc bpc" id="L344" title="1 of 2 branches missed.">        		if(!request.idUser.matches(&quot;0000&quot;)) {</span>
-<span class="fc" id="L345">        			Optional&lt;Manager&gt; optionalMan = managerRepository.findById(request.idUser);</span>
-<span class="pc bpc" id="L346" title="1 of 2 branches missed.">        			if (optionalMan.isEmpty()) {</span>
-<span class="nc" id="L347">        				return null;</span>
-        			}
-<span class="fc" id="L349">        			man=optionalMan.get();</span>
+        		//User user=optionalUser.get();
+<span class="nc bnc" id="L262" title="All 2 branches missed.">        	}else if(type.toUpperCase().contentEquals(&quot;MANAGER&quot;)){</span>
+<span class="nc" id="L263">        		Optional&lt;Manager&gt; optionalMan = managerRepository.findById(request.idUser);</span>
+<span class="nc bnc" id="L264" title="All 2 branches missed.">        		if (optionalMan.isEmpty()) {</span>
+<span class="nc" id="L265">        			return null;</span>
         		}
-        		
+        		//Manager man=optionalMan.get();
         	}
-<span class="fc" id="L353">            PaymentService ps = new PaymentServiceImpl();</span>
-            //METHOD FOR INSERT A NEW CUSTOMER
-        	/*Customer cust=ps.createCustomer(&quot;payment for booking&quot;, user.getName(),user.getSurname(), user.getEmail());
-        	  System.out.println(cust);*/
-<span class="fc" id="L357">        	Order order=new Order();</span>
-        	//METHOD FOR CONFIGURING A NEW ORDER
-        	/*order.setCurrency(&quot;EUR&quot;);
-        	  order.setCustomerObject(cust);
-        	  order.setAmount(request.amount.longValue());*/
-<span class="fc" id="L362">        	String cs = &quot;&quot;;</span>
+            
+            
+<span class="fc" id="L271">            PaymentService ps = new PaymentServiceImpl();</span>
+<span class="fc" id="L272">        	Order order=new Order();</span>
+        	String cs;
 			try {
-<span class="fc" id="L364">				cs = ps.chargeCreditCard(order,request.cardNr,String.valueOf(dt.getMonthValue()),String.valueOf(dt.getYear()),request.authNr);</span>
-<span class="fc bfc" id="L365" title="All 2 branches covered.">				if(cs==&quot;cb5e100e5a9a3e7f6d1fd97512215282&quot;) {</span>
-<span class="fc" id="L366">					return new ResponseEntity&lt;&gt;(&quot;ERROR with payment. Transaction: &quot;+cs,HttpStatus.OK);</span>
+<span class="fc" id="L275">				cs = ps.chargeCreditCard(order,request.cardNr,String.valueOf(dt.getMonthValue()),String.valueOf(dt.getYear()),request.authNr);</span>
+<span class="fc bfc" id="L276" title="All 2 branches covered.">				if(cs==&quot;cb5e100e5a9a3e7f6d1fd97512215282&quot;) {</span>
+<span class="fc" id="L277">					return new ResponseEntity&lt;&gt;(&quot;ERROR with payment. Transaction: &quot;+cs,HttpStatus.OK);</span>
 				}
-<span class="nc" id="L368">			} catch (NoSuchAlgorithmException e) {</span>
-<span class="nc" id="L369">				return new ResponseEntity&lt;&gt;(&quot;ERROR&quot;,HttpStatus.NO_CONTENT);</span>
+<span class="nc" id="L279">			} catch (NoSuchAlgorithmException e) {</span>
+<span class="nc" id="L280">				return new ResponseEntity&lt;&gt;(&quot;ERROR&quot;,HttpStatus.OK);</span>
 			}
-<span class="fc bfc" id="L371" title="All 2 branches covered.">			if(man!=null) {</span>
-<span class="fc" id="L372">				requestService.updateRenewal(man.getId());</span>
-			}
-<span class="fc" id="L374">        	return new ResponseEntity&lt;&gt;(&quot;OK. Transaction: &quot;+cs,HttpStatus.OK);</span>
+<span class="fc" id="L282">        	return new ResponseEntity&lt;&gt;(&quot;OK. Transaction: &quot;+cs,HttpStatus.OK);</span>
         }
 	}
 
@@ -379,58 +287,29 @@ import java.util.Optional;
 	//access to mail:
 	//username: eventourcs@gmail.com
 	//psw: #eventour96
-	
 	//for checking mail sended:
+	
 	//access to mailtrap with google account (credential written up here)
 	/**
-	 * Delete all booking from event, with notice to all user booked for event.
+	 * Delete all booking from event.
 	 *
-	 * @param event the event to delete
+	 * @param event the event
 	 * @return true, if successful
-	 * @throws IOException exception from inputstream file template
 	 */
-	public boolean deleteAllBookingFromEvent(Event event) throws IOException {
-<span class="fc" id="L393">		ResponseEntity&lt;List&lt;UserBookedResponse&gt;&gt; bookings=this.getByIdEvent(event.getId());</span>
-<span class="pc bpc" id="L394" title="1 of 2 branches missed.">		if(bookings.getStatusCode().is2xxSuccessful()) {</span>
-<span class="fc bfc" id="L395" title="All 2 branches covered.">			for(UserBookedResponse book : bookings.getBody()) {</span>
-<span class="fc" id="L396">				boolean result=false;</span>
-				try {
-<span class="fc" id="L398">					result = Mail.sendDeleteEventMsg(book.getUser()[0].getEmail(),event);</span>
-<span class="pc" id="L399">				} catch (IOException e) {</span>
-<span class="nc" id="L400">					throw e;</span>
+	public boolean deleteAllBookingFromEvent(Event event) {
+<span class="fc" id="L300">		ResponseEntity&lt;List&lt;UserBookedResponse&gt;&gt; bookings=this.getByIdEvent(event.getId());</span>
+<span class="pc bpc" id="L301" title="1 of 2 branches missed.">		if(bookings.getStatusCode().is2xxSuccessful()) {</span>
+<span class="fc bfc" id="L302" title="All 2 branches covered.">				for(UserBookedResponse book : bookings.getBody()) {</span>
+<span class="fc" id="L303">					boolean result=Mail.sendDeleteEventMsg(book.getUser()[0].getEmail(),event);</span>
+					if(!result) {
+						//System.out.println(&quot;error in sending mail&quot;);
+					}
+<span class="fc" id="L307">					this.delete(book.getId());</span>
 				}
-				if(!result) {
-					//System.out.println(&quot;error in sending mail&quot;);
-				}
-<span class="fc" id="L405">				this.delete(book.getId());</span>
-			}
-<span class="fc" id="L407">			return true;</span>
+<span class="fc" id="L309">			return true;</span>
 		}
-<span class="nc" id="L409">		return false;</span>
+<span class="nc" id="L311">		return false;</span>
 		
 	}
-
-	/**
-	 * Sets the review of a booking.
-	 *
-	 * @param idBooking the id of booking
-	 * @param review the review
-	 * @return the response entity with outcome
-	 */
-	public ResponseEntity&lt;String&gt; setReview(String idBooking, Integer review) {
-<span class="fc" id="L421">		Optional&lt;Booking&gt; bookingData = bookingRepository.findById(idBooking);</span>
-<span class="pc bpc" id="L422" title="1 of 2 branches missed.">  	  	if (bookingData.isPresent()) {</span>
-<span class="fc bfc" id="L423" title="All 2 branches covered.">  	  		if(!bookingData.get().getCome()) {</span>
-<span class="fc" id="L424">  	  			return new ResponseEntity&lt;&gt;(&quot;INVALID CODE BOOKING&quot;, HttpStatus.OK);</span>
-  	  		}
-<span class="pc bpc" id="L426" title="1 of 4 branches missed.">  	  		if(review&gt;0 &amp;&amp; review&lt;6) {</span>
-<span class="fc" id="L427">  	  			modifyReview(idBooking,review);</span>
-<span class="fc" id="L428">  	  			return new ResponseEntity&lt;&gt;(&quot;MODIFIED&quot;, HttpStatus.OK);</span>
-  	  		}else
-<span class="fc" id="L430">  	  			return new ResponseEntity&lt;&gt;(&quot;INVALID REVIEW&quot;, HttpStatus.OK);</span>
-  	  	} else {
-<span class="nc" id="L432">  	  		return new ResponseEntity&lt;&gt;(HttpStatus.NOT_FOUND);</span>
-  	  	}
-	}
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

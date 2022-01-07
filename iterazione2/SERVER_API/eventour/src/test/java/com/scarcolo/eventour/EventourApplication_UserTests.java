@@ -3,7 +3,6 @@ package com.scarcolo.eventour;
 
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,6 @@ import com.scarcolo.eventour.functions.Functionalities;
 import com.scarcolo.eventour.model.AccountRequest;
 import com.scarcolo.eventour.model.AccountResponse;
 import com.scarcolo.eventour.model.Location;
-import com.scarcolo.eventour.model.manager.ManagerResponse;
 import com.scarcolo.eventour.model.ticketinsp.AddTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.EditTicketInspRequest;
 import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
@@ -29,7 +27,6 @@ import com.scarcolo.eventour.model.user.EditUserRequest;
 import com.scarcolo.eventour.model.user.UserResponse;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 import java.time.LocalDate;
 import java.util.LinkedHashMap;
@@ -46,8 +43,8 @@ class EventourApplication_UserTests {
 	public void getEvenTour() throws Exception {
 		String request=this.restTemplate.getForObject("http://localhost:" + port + "/api//users/61a0a933bce0e98fbb2da18a/eventour/5",
 				String.class);
-		JSONObject obj=new JSONObject(request);
-		assertEquals(obj.getJSONObject("user").getString("id"),"61a0a933bce0e98fbb2da18a");
+		JSONArray arr=new JSONArray(request);
+		assertEquals(arr.length(),5);
 		
 	}
 	
@@ -84,8 +81,8 @@ class EventourApplication_UserTests {
 			request.residence.setRegione("Lombardia");
 			request.residence.setProvincia("Bergamo");
 			request.residence.setCity("Albino");
-			request.residence.setLat(44d);
-			request.residence.setLng(9d);
+			request.residence.setLat(44f);
+			request.residence.setLng(9f);
 			request.residence.setSigla("BG");
 		request.sex="M";
 		String[] tipi= {"1.2.2","2.2"};
@@ -113,8 +110,8 @@ class EventourApplication_UserTests {
 			request.residence.setRegione("Lombardia");
 			request.residence.setProvincia("Bergamo");
 			request.residence.setCity("Albino");
-			request.residence.setLat(44d);
-			request.residence.setLng(9d);
+			request.residence.setLat(44f);
+			request.residence.setLng(9f);
 			request.residence.setSigla("BG");
 		request.sex="M";
 		String[] tipi= {"1.2.2","2.2"};
@@ -156,8 +153,8 @@ class EventourApplication_UserTests {
 			request.residence.setRegione("Lombardia");
 			request.residence.setProvincia("Bergamo");
 			request.residence.setCity("Albino");
-			request.residence.setLat(44d);
-			request.residence.setLng(9d);
+			request.residence.setLat(44f);
+			request.residence.setLng(9f);
 			request.residence.setSigla("BG");
 		request.sex="M";
 		String[] tipi= {"1.2.2","2.2"};
@@ -183,8 +180,8 @@ class EventourApplication_UserTests {
 			request.residence.setRegione("Lombardia");
 			request.residence.setProvincia("Bergamo");
 			request.residence.setCity("Albino");
-			request.residence.setLat(44d);
-			request.residence.setLng(9d);
+			request.residence.setLat(44f);
+			request.residence.setLng(9f);
 			request.residence.setSigla("BG");
 		request.sex="M";
 		String[] tipi= {"1.2.2","2.2"};
@@ -257,21 +254,6 @@ class EventourApplication_UserTests {
 	}
 	
 	@Test
-	public void getAccountOfAdmin() throws Exception {
-		AccountRequest request=new AccountRequest();
-		request.username="admin@gmail.com";
-		request.password=Functionalities.getMd5("administrator");
-		AccountResponse response=this.restTemplate.postForObject("http://localhost:" + port + "/api/account", request, 
-				AccountResponse.class);
-		assertEquals(response.getTypeUser(),"Admin");
-		LinkedHashMap<String,String> user = new LinkedHashMap<>();
-		user=LinkedHashMap.class.cast(response.getUser());
-		//JSONObject jsonResp=new JSONObject(response.getUser().toString());
-		//UserResponse user=(UserResponse)response.getUser();
-		assertEquals(user.get("id"), "618a43a5885c9f6aab4af98b");
-	}
-	
-	@Test
 	public void getAccountOfUserErr() throws Exception {
 		AccountRequest request=new AccountRequest();
 		request.username="Colombano74@hotmail.com";
@@ -287,7 +269,7 @@ class EventourApplication_UserTests {
 		request.password="yelukare2";
 		response=this.restTemplate.postForObject("http://localhost:" + port + "/api/account", request, 
 				AccountResponse.class);
-		assertEquals(response.getTypeUser(),"NONE");
+		assertEquals(response.getTypeUser(),"User");
 		stringErr=String.class.cast(response.getUser());
 		assertEquals(stringErr, "ERROR. invalid password");
 	}
@@ -308,7 +290,7 @@ class EventourApplication_UserTests {
 		request.password="fanomuge2";
 		response=this.restTemplate.postForObject("http://localhost:" + port + "/api/account", request, 
 				AccountResponse.class);
-		assertEquals(response.getTypeUser(),"NONE");
+		assertEquals(response.getTypeUser(),"Manager");
 		stringErr=String.class.cast(response.getUser());
 		assertEquals(stringErr, "ERROR. invalid password");
 	}
@@ -329,21 +311,9 @@ class EventourApplication_UserTests {
 		request.password="vosipowo2";
 		response=this.restTemplate.postForObject("http://localhost:" + port + "/api/account", request, 
 				AccountResponse.class);
-		assertEquals(response.getTypeUser(),"NONE");
+		assertEquals(response.getTypeUser(),"TicketInsp");
 		stringErr=String.class.cast(response.getUser());
 		assertEquals(stringErr, "ERROR. invalid password");
-	}
-	
-	@Test
-	public void getAccountOfAdminErr() throws Exception {
-		AccountRequest request=new AccountRequest();
-		request.username="adminEventour@admin.com";
-		request.password=Functionalities.getMd5("admin");
-		AccountResponse response=this.restTemplate.postForObject("http://localhost:" + port + "/api/account", request, 
-				AccountResponse.class);
-		assertEquals(response.getTypeUser(),"NONE");
-		String stringErr=String.class.cast(response.getUser());
-		assertEquals(stringErr, "ERROR. unregistered user");
 	}
 	
 	@Test
@@ -356,46 +326,5 @@ class EventourApplication_UserTests {
 		assertEquals(response.getStatusCode(),HttpStatus.NO_CONTENT);
 	}
 	
-	
-	///account/changePsw
-	@Test
-	public void changePswAccountUser() throws Exception {
-		UserResponse request=this.restTemplate.getForObject("http://localhost:" + port + "/api/users/61a0a933bce0e98fbb2da18a",
-				UserResponse.class);
-		AccountRequest requestAcc=new AccountRequest();
-		requestAcc.username=request.getMail();
-		requestAcc.password="cambioPsw";
-		AccountResponse response=this.restTemplate.postForObject("http://localhost:" + port + "/api/account/changePsw", requestAcc, 
-				AccountResponse.class);
-		LinkedHashMap<String,String> user = new LinkedHashMap<>();
-		user=LinkedHashMap.class.cast(response.getUser());
-		assertEquals(user.get("id"), "61a0a933bce0e98fbb2da18a");
-		assertNotEquals(user.get("password"),Functionalities.getMd5("biqivepo"));
-		assertEquals(user.get("password"),Functionalities.getMd5(requestAcc.password));
-		
-		requestAcc.password="biqivepo";
-		response=this.restTemplate.postForObject("http://localhost:" + port + "/api/account/changePsw", requestAcc, 
-				AccountResponse.class);
-	}
-	
-	@Test
-	public void changePswAccountManager() throws Exception {
-		ManagerResponse request=this.restTemplate.getForObject("http://localhost:" + port + "/api/managers/61a0a0eeb5f9b12d06e95240",
-				ManagerResponse.class);
-		AccountRequest requestAcc=new AccountRequest();
-		requestAcc.username=request.getMail();
-		requestAcc.password="cambioPsw";
-		AccountResponse response=this.restTemplate.postForObject("http://localhost:" + port + "/api/account/changePsw", requestAcc, 
-				AccountResponse.class);
-		LinkedHashMap<String,String> user = new LinkedHashMap<>();
-		user=LinkedHashMap.class.cast(response.getUser());
-		assertEquals(user.get("id"), "61a0a0eeb5f9b12d06e95240");
-		assertNotEquals(user.get("password"),Functionalities.getMd5("fanomuge"));
-		assertEquals(user.get("password"),Functionalities.getMd5(requestAcc.password));
-		
-		requestAcc.password="fanomuge";
-		response=this.restTemplate.postForObject("http://localhost:" + port + "/api/account/changePsw", requestAcc, 
-				AccountResponse.class);
-	}
 
 }

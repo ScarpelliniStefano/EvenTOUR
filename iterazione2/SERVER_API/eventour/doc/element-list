@@ -1,6 +1,5 @@
 com.scarcolo.eventour
 com.scarcolo.eventour.configuration
-com.scarcolo.eventour.controller.admin
 com.scarcolo.eventour.controller.booking
 com.scarcolo.eventour.controller.event
 com.scarcolo.eventour.controller.manager
@@ -8,20 +7,16 @@ com.scarcolo.eventour.controller.ticketisp
 com.scarcolo.eventour.controller.user
 com.scarcolo.eventour.functions
 com.scarcolo.eventour.model
-com.scarcolo.eventour.model.admin
 com.scarcolo.eventour.model.booking
 com.scarcolo.eventour.model.event
 com.scarcolo.eventour.model.manager
-com.scarcolo.eventour.model.request
 com.scarcolo.eventour.model.ticketinsp
 com.scarcolo.eventour.model.user
-com.scarcolo.eventour.repository.admin
 com.scarcolo.eventour.repository.booking
 com.scarcolo.eventour.repository.event
 com.scarcolo.eventour.repository.manager
 com.scarcolo.eventour.repository.ticketisp
 com.scarcolo.eventour.repository.user
-com.scarcolo.eventour.service.admin
 com.scarcolo.eventour.service.booking
 com.scarcolo.eventour.service.event
 com.scarcolo.eventour.service.manager

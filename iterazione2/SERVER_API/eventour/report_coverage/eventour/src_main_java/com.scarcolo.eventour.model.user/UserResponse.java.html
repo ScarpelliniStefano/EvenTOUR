@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>UserResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">com.scarcolo.eventour (30 dic 2021 11:11:30)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.user</a> &gt; <span class="el_source">UserResponse.java</span></div><h1>UserResponse.java</h1><pre class="source lang-java linenums">/**
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="it"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>UserResponse.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">java (30 dic 2021 11:03:38)</a> &gt; <a href="../../index.html" class="el_group">eventour</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">com.scarcolo.eventour.model.user</a> &gt; <span class="el_source">UserResponse.java</span></div><h1>UserResponse.java</h1><pre class="source lang-java linenums">/**
  * 
  */
 package com.scarcolo.eventour.model.user;
@@ -40,10 +40,6 @@ public class UserResponse{
 	@JsonProperty(&quot;dateOfBirth&quot;)
 	private LocalDate dateOfBirth;
 	
-	/** The newsletter. */
-	@JsonProperty(&quot;newsletter&quot;)
-	private Boolean newsletter;
-	
 	/** The residence. */
 	@JsonProperty(&quot;residence&quot;)
 	private Location residence;
@@ -69,37 +65,34 @@ public class UserResponse{
 	 *
 	 * @param user the user
 	 */
-<span class="fc" id="L72">	public UserResponse(User user){</span>
-<span class="fc" id="L73">		this.id=user.getId();</span>
-<span class="fc" id="L74">		this.username=user.getUsername();</span>
-<span class="fc" id="L75">		this.mail=user.getEmail();</span>
-		try {
-<span class="fc" id="L77">			this.password=Functionalities.getMd5(user.getPassword()) ;</span>
-<span class="pc" id="L78">		} catch (NoSuchAlgorithmException e) {</span>
-<span class="nc" id="L79">			this.password=user.getPassword();</span>
-		}
-<span class="fc" id="L81">		this.name=user.getName();</span>
-<span class="fc" id="L82">		this.surname=user.getSurname();</span>
-<span class="fc" id="L83">		this.sex=user.getSex();</span>
-<span class="fc" id="L84">		this.dateOfBirth=user.getDateOfBirth();</span>
-<span class="fc" id="L85">		this.residence=user.getResidence();</span>
-<span class="fc" id="L86">		this.types=user.getTypes();</span>
-<span class="fc" id="L87">		this.newsletter=user.getNewsletter();</span>
-<span class="fc" id="L88">	}</span>
-	
-	/**
-	 * Instantiates a new user.
-	 */
-<span class="fc" id="L93">	public UserResponse() {</span>
-<span class="fc" id="L94">	}</span>
+<span class="fc" id="L68">	public UserResponse(User user){</span>
+<span class="fc" id="L69">		this.id=user.getId();</span>
+<span class="fc" id="L70">		this.username=user.getUsername();</span>
+<span class="fc" id="L71">		this.mail=user.getEmail();</span>
+<span class="fc" id="L72">		this.password=user.getPassword();</span>
+<span class="fc" id="L73">		this.name=user.getName();</span>
+<span class="fc" id="L74">		this.surname=user.getSurname();</span>
+<span class="fc" id="L75">		this.sex=user.getSex();</span>
+<span class="fc" id="L76">		this.dateOfBirth=user.getDateOfBirth();</span>
+<span class="fc" id="L77">		this.residence=user.getResidence();</span>
+<span class="fc" id="L78">		this.types=user.getTypes();</span>
+<span class="fc" id="L79">	}</span>
 
+	/**
+	 * Instantiates a new user response.
+	 */
+	public UserResponse() {
+<span class="fc" id="L85">		super();</span>
+<span class="fc" id="L86">	}</span>
+	
+	
 	/**
 	 * Gets the id.
 	 *
 	 * @return the id
 	 */
 	public String getId() {
-<span class="fc" id="L102">		return id;</span>
+<span class="fc" id="L95">		return id;</span>
 	}
 
 	/**
@@ -108,8 +101,8 @@ public class UserResponse{
 	 * @param id the new id
 	 */
 	public void setId(String id) {
-<span class="fc" id="L111">		this.id = id;</span>
-<span class="fc" id="L112">	}</span>
+<span class="fc" id="L104">		this.id = id;</span>
+<span class="fc" id="L105">	}</span>
 
 	/**
 	 * Gets the username.
@@ -117,7 +110,7 @@ public class UserResponse{
 	 * @return the username
 	 */
 	public String getUsername() {
-<span class="fc" id="L120">		return username;</span>
+<span class="fc" id="L113">		return username;</span>
 	}
 
 	/**
@@ -126,8 +119,8 @@ public class UserResponse{
 	 * @param username the new username
 	 */
 	public void setUsername(String username) {
-<span class="fc" id="L129">		this.username = username;</span>
-<span class="fc" id="L130">	}</span>
+<span class="fc" id="L122">		this.username = username;</span>
+<span class="fc" id="L123">	}</span>
 
 	/**
 	 * Gets the name.
@@ -135,7 +128,7 @@ public class UserResponse{
 	 * @return the name
 	 */
 	public String getName() {
-<span class="fc" id="L138">		return name;</span>
+<span class="fc" id="L131">		return name;</span>
 	}
 
 	/**
@@ -144,8 +137,8 @@ public class UserResponse{
 	 * @param name the new name
 	 */
 	public void setName(String name) {
-<span class="fc" id="L147">		this.name = name;</span>
-<span class="fc" id="L148">	}</span>
+<span class="fc" id="L140">		this.name = name;</span>
+<span class="fc" id="L141">	}</span>
 
 	/**
 	 * Gets the surname.
@@ -153,7 +146,7 @@ public class UserResponse{
 	 * @return the surname
 	 */
 	public String getSurname() {
-<span class="fc" id="L156">		return surname;</span>
+<span class="fc" id="L149">		return surname;</span>
 	}
 
 	/**
@@ -162,8 +155,8 @@ public class UserResponse{
 	 * @param surname the new surname
 	 */
 	public void setSurname(String surname) {
-<span class="fc" id="L165">		this.surname = surname;</span>
-<span class="fc" id="L166">	}</span>
+<span class="fc" id="L158">		this.surname = surname;</span>
+<span class="fc" id="L159">	}</span>
 
 	/**
 	 * Gets the sex.
@@ -171,7 +164,7 @@ public class UserResponse{
 	 * @return the sex
 	 */
 	public String getSex() {
-<span class="fc" id="L174">		return sex;</span>
+<span class="fc" id="L167">		return sex;</span>
 	}
 
 	/**
@@ -180,8 +173,8 @@ public class UserResponse{
 	 * @param sex the new sex
 	 */
 	public void setSex(String sex) {
-<span class="fc" id="L183">		this.sex = sex;</span>
-<span class="fc" id="L184">	}</span>
+<span class="fc" id="L176">		this.sex = sex;</span>
+<span class="fc" id="L177">	}</span>
 
 	/**
 	 * Gets the date of birth.
@@ -189,7 +182,7 @@ public class UserResponse{
 	 * @return the date of birth
 	 */
 	public LocalDate getDateOfBirth() {
-<span class="fc" id="L192">		return dateOfBirth;</span>
+<span class="fc" id="L185">		return dateOfBirth;</span>
 	}
 
 	/**
@@ -198,8 +191,8 @@ public class UserResponse{
 	 * @param dateOfBirth the new date of birth
 	 */
 	public void setDateOfBirth(LocalDate dateOfBirth) {
-<span class="fc" id="L201">		this.dateOfBirth = dateOfBirth;</span>
-<span class="fc" id="L202">	}</span>
+<span class="fc" id="L194">		this.dateOfBirth = dateOfBirth;</span>
+<span class="fc" id="L195">	}</span>
 
 	/**
 	 * Gets the residence.
@@ -207,7 +200,7 @@ public class UserResponse{
 	 * @return the residence
 	 */
 	public Location getResidence() {
-<span class="fc" id="L210">		return residence;</span>
+<span class="fc" id="L203">		return residence;</span>
 	}
 
 	/**
@@ -216,8 +209,8 @@ public class UserResponse{
 	 * @param residence the new residence
 	 */
 	public void setResidence(Location residence) {
-<span class="fc" id="L219">		this.residence = residence;</span>
-<span class="fc" id="L220">	}</span>
+<span class="fc" id="L212">		this.residence = residence;</span>
+<span class="fc" id="L213">	}</span>
 
 	/**
 	 * Gets the types.
@@ -225,7 +218,7 @@ public class UserResponse{
 	 * @return the types
 	 */
 	public String[] getTypes() {
-<span class="fc" id="L228">		return types;</span>
+<span class="fc" id="L221">		return types;</span>
 	}
 
 	/**
@@ -234,8 +227,8 @@ public class UserResponse{
 	 * @param types the new types
 	 */
 	public void setTypes(String[] types) {
-<span class="fc" id="L237">		this.types = types;</span>
-<span class="fc" id="L238">	}</span>
+<span class="fc" id="L230">		this.types = types;</span>
+<span class="fc" id="L231">	}</span>
 
 	/**
 	 * Gets the mail.
@@ -243,7 +236,7 @@ public class UserResponse{
 	 * @return the mail
 	 */
 	public String getMail() {
-<span class="fc" id="L246">		return mail;</span>
+<span class="fc" id="L239">		return mail;</span>
 	}
 
 	/**
@@ -252,8 +245,8 @@ public class UserResponse{
 	 * @param mail the new mail
 	 */
 	public void setMail(String mail) {
-<span class="fc" id="L255">		this.mail = mail;</span>
-<span class="fc" id="L256">	}</span>
+<span class="fc" id="L248">		this.mail = mail;</span>
+<span class="fc" id="L249">	}</span>
 
 	/**
 	 * Gets the password.
@@ -261,43 +254,21 @@ public class UserResponse{
 	 * @return the password
 	 */
 	public String getPassword() {
-<span class="fc" id="L264">		return password;</span>
+<span class="fc" id="L257">		return password;</span>
 	}
 
 	/**
 	 * Sets the password.
 	 *
 	 * @param password the new password
-	 * @throws NoSuchAlgorithmException if algorithm md5 is not found
+	 * @throws NoSuchAlgorithmException exception for md5 not present
 	 */
 	public void setPassword(String password) throws NoSuchAlgorithmException {
-		try {
-<span class="fc" id="L275">			this.password = Functionalities.getMd5(password);</span>
-<span class="pc" id="L276">		} catch (NoSuchAlgorithmException e) {</span>
-<span class="nc" id="L277">			throw e;</span>
-		}
-<span class="fc" id="L279">	}</span>
-
-	/**
-	 * Gets the newsletter.
-	 *
-	 * @return the newsletter
-	 */
-	public Boolean getNewsletter() {
-<span class="fc" id="L287">		return newsletter;</span>
-	}
-
-	/**
-	 * Sets the newsletter.
-	 *
-	 * @param newsletter the new newsletter
-	 */
-	public void setNewsletter(Boolean newsletter) {
-<span class="fc" id="L296">		this.newsletter = newsletter;</span>
-<span class="fc" id="L297">	}</span>
+<span class="fc" id="L267">		this.password = Functionalities.getMd5(password);</span>
+<span class="fc" id="L268">	}</span>
 
 	
 	
 	
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>com.scarcolo.eventour (30 dic 2021 11:11:30)</div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span>java (30 dic 2021 11:03:38)</div></body></html>

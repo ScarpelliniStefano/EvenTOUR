@@ -7,7 +7,6 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
-
 import javax.mail.internet.AddressException;
 
 import org.springframework.data.annotation.Id;
@@ -66,20 +65,11 @@ public class User{
 	 */
 	public User(AddUserRequest request) throws Exception {
 		this.username=request.username;
-		boolean res=Functionalities.isValidEmailAddress(request.mail);
-		if(res) {
-			this.mail=request.mail;
-		}else {
-			throw new AddressException();
-		}
+        this.mail=(Functionalities.isValidEmailAddress(request.mail)) ? request.mail : null;
         this.password=request.password;
         this.name=request.name;
         this.surname=request.surname;
-        if(request.dateOfBirth.isBefore(LocalDate.now())) {
-			this.dateOfBirth=Functionalities.convertToDate(request.dateOfBirth);
-		}else {
-			throw new DateTimeException("Errore data futura");
-		}
+        this.dateOfBirth=Functionalities.convertToDate(request.dateOfBirth);
         this.sex=(request.sex.toUpperCase().contentEquals("M") || request.sex.toUpperCase().contentEquals("F"))? request.sex.toUpperCase() : "N";
         this.residence=request.residence;
         this.types=request.types;
@@ -151,7 +141,7 @@ public class User{
 	 *
 	 * @return the name
 	 */
-	public String getName() {
+	protected String getName() {
 		return name;
 	}
 	
@@ -160,7 +150,7 @@ public class User{
 	 *
 	 * @param name the name to set
 	 */
-	public void setName(String name) {
+	protected void setName(String name) {
 		this.name = name;
 	}
 	
@@ -169,7 +159,7 @@ public class User{
 	 *
 	 * @return the surname
 	 */
-	public String getSurname() {
+	protected String getSurname() {
 		return surname;
 	}
 	
@@ -178,7 +168,7 @@ public class User{
 	 *
 	 * @param surname the surname to set
 	 */
-	public void setSurname(String surname) {
+	protected void setSurname(String surname) {
 		this.surname = surname;
 	}
 
@@ -196,7 +186,7 @@ public class User{
 	 * Sets the date of birth check.
 	 *
 	 * @param dateOfBirth the new date of birth check
-	 * @throws DateTimeException the exception for date incorrect
+	 * @throws Exception the exception
 	 */
 	private void setDateOfBirthCheck(Date dateOfBirth) throws DateTimeException {
 		if(dateOfBirth.before(new Date())) {
@@ -232,7 +222,7 @@ public class User{
 	 * @param sex the new sex
 	 */
 	public void setSex(String sex) {
-		this.sex = (sex.toUpperCase().contentEquals("M")) ? "M" : "F";
+		this.sex = (sex.contentEquals("M")) ? "M" : "F";
 	}
 
 	/**
@@ -243,26 +233,6 @@ public class User{
 	public String[] getTypes() {
 		return types;
 	}
-	
-	/*public String[] getTypesName() {
-		ArrayList<String> provString=new ArrayList<String>();
-		TypesE tipoTrovato;
-		for(String type : types) {
-			tipoTrovato=BootstrapSingleton.lookup.get(type);
-			provString.add(tipoTrovato.name());
-		}
-		return (String[]) provString.toArray();
-	}
-	
-	public String[] getTypesDesc() {
-		ArrayList<String> provString=new ArrayList<String>();
-		TypesE tipoTrovato;
-		for(String type : types) {
-			tipoTrovato=BootstrapSingleton.lookup.get(type);
-			provString.add(tipoTrovato.description());
-		}
-		return (String[]) provString.toArray();
-	}*/
 
 	/**
 	 * Sets the types.
@@ -316,7 +286,7 @@ public class User{
 	/**
 	 * Sets the email.
 	 *
-	 * @param mail the new email
+	 * @param mail the mail to set
 	 * @throws AddressException the address exception
 	 */
 	public void setEmail(String mail) throws AddressException {

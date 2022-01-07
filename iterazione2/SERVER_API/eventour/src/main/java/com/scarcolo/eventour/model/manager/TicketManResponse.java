@@ -24,9 +24,9 @@ public class TicketManResponse {
 	@JsonProperty("mail")
 	private String mail;
 	
-	/** The ticket inspectors. */
-	@JsonProperty("tickets")
-	private EventTick tickets;
+	/** The events. */
+	@JsonProperty("events")
+	private EventTick events;
 	
 	/**
 	 * Instantiates a new ticket man response.
@@ -35,15 +35,15 @@ public class TicketManResponse {
 	 * @param name the name
 	 * @param surname the surname
 	 * @param mail the mail
-	 * @param tickets the tickets associated
+	 * @param events the events
 	 */
-	public TicketManResponse(String id, String name, String surname, String mail, EventTick tickets) {
+	public TicketManResponse(String id, String name, String surname, String mail, EventTick events) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.mail = mail;
-		this.tickets = tickets;
+		this.events = events;
 	}
 	
 	/**
@@ -119,21 +119,21 @@ public class TicketManResponse {
 	}
 	
 	/**
-	 * Gets the event tickets.
+	 * Gets the events.
 	 *
-	 * @return the ticket inspectors
+	 * @return the events
 	 */
-	public EventTick getTickets() {
-		return tickets;
+	public EventTick getEvents() {
+		return events;
 	}
 	
 	/**
 	 * Sets the events.
 	 *
-	 * @param tickets the ticket inspectors associated
+	 * @param events the new events
 	 */
-	public void setTickets(EventTick tickets) {
-		this.tickets = tickets;
+	public void setEvents(EventTick events) {
+		this.events = events;
 	}
 	
 

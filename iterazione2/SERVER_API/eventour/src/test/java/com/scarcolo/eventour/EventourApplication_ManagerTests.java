@@ -17,16 +17,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.scarcolo.eventour.model.Location;
-import com.scarcolo.eventour.model.booking.PaymentRequest;
-import com.scarcolo.eventour.model.event.EventManResponse;
+import com.scarcolo.eventour.model.booking.AddBookingRequest;
 import com.scarcolo.eventour.model.manager.AddManagerRequest;
 import com.scarcolo.eventour.model.manager.EditManagerRequest;
+import com.scarcolo.eventour.model.manager.EventReportResponse;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 class EventourApplication_ManagerTests {
@@ -50,8 +52,8 @@ class EventourApplication_ManagerTests {
 				request.residence.setRegione("Lombardia");
 				request.residence.setProvincia("Bergamo");
 				request.residence.setCity("Albino");
-				request.residence.setLat(44d);
-				request.residence.setLng(9d);
+				request.residence.setLat(44f);
+				request.residence.setLng(9f);
 				request.residence.setSigla("BG");
 		request.codicePIVA="77914680192";
 		request.ragioneSociale="prova s.r.l.";
@@ -78,8 +80,8 @@ class EventourApplication_ManagerTests {
 				request.residence.setRegione("Lombardia");
 				request.residence.setProvincia("Bergamo");
 				request.residence.setCity("Albino");
-				request.residence.setLat(44d);
-				request.residence.setLng(9d);
+				request.residence.setLat(44f);
+				request.residence.setLng(9f);
 				request.residence.setSigla("BG");
 		request.codicePIVA="77914680192";
 		request.ragioneSociale="prova s.r.l.";
@@ -112,8 +114,8 @@ class EventourApplication_ManagerTests {
 				request.residence.setRegione("Lombardia");
 				request.residence.setProvincia("Bergamo");
 				request.residence.setCity("Albino");
-				request.residence.setLat(44d);
-				request.residence.setLng(9d);
+				request.residence.setLat(44f);
+				request.residence.setLng(9f);
 				request.residence.setSigla("BG");
 		request.codicePIVA="77914680192";
 		request.ragioneSociale="prova s.r.l.";
@@ -137,8 +139,8 @@ class EventourApplication_ManagerTests {
 				request.residence.setRegione("Lombardia");
 				request.residence.setProvincia("Bergamo");
 				request.residence.setCity("Albino");
-				request.residence.setLat(44d);
-				request.residence.setLng(9d);
+				request.residence.setLat(44f);
+				request.residence.setLng(9f);
 				request.residence.setSigla("BG");
 		request.codicePIVA="77914680192";
 		request.ragioneSociale="prova s.r.l.";
@@ -175,6 +177,8 @@ class EventourApplication_ManagerTests {
 		
 	}
 	
+	//@GetMapping("/managers/{id}/reports")
+	
 	@Test
 	public void getManagerReportById() throws Exception {
 		String request=this.restTemplate.getForObject("http://localhost:" + port + "/api/managers/61a0a0eeb5f9b12d06e9523a/reports",
@@ -184,58 +188,6 @@ class EventourApplication_ManagerTests {
 			String stringId = obj.getJSONObject(i).getJSONObject("eventDetails").getString("managerId");
 			assertEquals(stringId,"61a0a0eeb5f9b12d06e9523a");
 		}
-	}
-	
-	@Test
-	public void PayManager() throws Exception {
-		AddManagerRequest request=new AddManagerRequest();
-		request.name="utenteNomeProva";
-		request.surname="utenteCognomeProva";
-		request.mail="prova@gmail.com";
-		request.password="provaUser";
-		request.dateOfBirth=LocalDate.now().minusYears(30);
-		request.residence=new Location();
-				request.residence.setLocality("prova via");
-				request.residence.setCap("24042");
-				request.residence.setRegione("Lombardia");
-				request.residence.setProvincia("Bergamo");
-				request.residence.setCity("Albino");
-				request.residence.setLat(44d);
-				request.residence.setLng(9d);
-				request.residence.setSigla("BG");
-		request.codicePIVA="77914680192";
-		request.ragioneSociale="prova s.r.l.";
-		ManagerResponse managerCreated = restTemplate.postForObject("http://localhost:" + port + "/api/managers", request, ManagerResponse.class);
-		PaymentRequest requestPay=new PaymentRequest();
-		requestPay.idUser=managerCreated.getId();
-		requestPay.cardName="ABCDEF HILM";
-		requestPay.amount=20.00d;
-		requestPay.authNr="232";
-		requestPay.dateScad="08/24";
-		requestPay.cardNr="4000003800000008";
-		String bookingPay = restTemplate.postForObject("http://localhost:" + port + "/api/managers/payment", requestPay, String.class);
-		assertTrue(bookingPay.startsWith("OK. Transaction:"));
-		String reqDel="http://localhost:" + port + "/api/managers/"+managerCreated.getId();
-		restTemplate.delete(reqDel);
-	}
-	
-	@Test
-	public void PayManagerError() throws Exception {
-		PaymentRequest request=new PaymentRequest();
-		request.idUser="61a0a0eeb5f9b12d06e95240";
-		request.cardName="ABCDEF HILM";
-		request.amount=20.00d;
-		request.authNr="232";
-		request.dateScad="08/24";
-		request.cardNr="4000003700000008";
-		String bookingPay = restTemplate.postForObject("http://localhost:" + port + "/api/managers/payment", request, String.class);
-		assertTrue(bookingPay.contains("ERROR with payment. Transaction: cb5e100e5a9a3e7f6d1fd97512215282"));
-		
-		request.dateScad="08/21";
-		bookingPay = restTemplate.postForObject("http://localhost:" + port + "/api/managers/payment", request, String.class);
-		assertTrue(bookingPay.contains("INVALID DATE"));
-		
-		
 	}
 	
 	@Test
@@ -251,26 +203,6 @@ class EventourApplication_ManagerTests {
 		ResponseEntity<String> request=this.restTemplate.getForEntity("http://localhost:" + port + "/api/managers/",
 				String.class);
 		assertEquals(request.getStatusCode(),HttpStatus.OK);
-	}
-	
-	///managers/event/{id}
-	@Test
-	public void getManagerByIdEvent() throws Exception {
-		EventManResponse request=this.restTemplate.getForObject("http://localhost:" + port + "/api/managers/event/61a0a85ebce0e98fbb2d862b",
-				EventManResponse.class);
-		
-		assertEquals(request.getId(),"61a0a85ebce0e98fbb2d862b");
-		assertEquals(request.getManagerId(),"61a0a0eeb5f9b12d06e9523b");
-		assertEquals(request.getManager()[0].getCodicePIVA(),"115080601");
-	}
-	
-	@Test
-	public void getManagerByIdEventError() throws Exception {
-		ResponseEntity<String> request=this.restTemplate.getForEntity("http://localhost:" + port + "/api/managers/event/61a0a85ebce0e98fbb2d860a",
-				String.class);
-		int statusCode=request.getStatusCodeValue();
-		assertEquals(statusCode,404);
-		
 	}
 	
 

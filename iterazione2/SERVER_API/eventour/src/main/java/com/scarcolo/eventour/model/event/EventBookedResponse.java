@@ -32,10 +32,6 @@ public class EventBookedResponse {
 	@JsonProperty("event")
 	private Event[] event;
 	
-	/**  Rating. */
-	@JsonProperty("review")
-	private Integer review;
-	
 	/**
 	 * Instantiates a new event booked response.
 	 *
@@ -45,9 +41,8 @@ public class EventBookedResponse {
 	 * @param prenotedSeat the prenoted seat
 	 * @param come the come
 	 * @param event the event
-	 * @param review the review
 	 */
-	public EventBookedResponse(String id, String userId, String eventId, Integer prenotedSeat,Boolean come, Event[] event, Integer review) {
+	public EventBookedResponse(String id, String userId, String eventId, Integer prenotedSeat,Boolean come, Event[] event) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -55,7 +50,6 @@ public class EventBookedResponse {
 		this.prenotedSeat = prenotedSeat;
 		this.come = come;
 		this.event=event;
-		this.review = review;
 	}
 	
 	/**
@@ -164,24 +158,6 @@ public class EventBookedResponse {
 	 */
 	public void setEvent(Event[] event) {
 		this.event=event;
-	}
-
-	/**
-	 * Gets the review.
-	 *
-	 * @return the review
-	 */
-	protected Integer getReview() {
-		return review;
-	}
-
-	/**
-	 * Sets the review.
-	 *
-	 * @param review the review to set
-	 */
-	protected void setReview(Integer review) {
-		this.review = review;
 	}
 	
 }

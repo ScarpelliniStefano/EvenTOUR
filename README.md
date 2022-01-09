@@ -6,7 +6,7 @@ All’interno della piattaforma esistono differenti ruoli che interagiscono con 
 
 Per vedere in opera il progetto EvenTour devono essere scaricati tutti i file contenuti nel repository di GitHub.
 
-Una volta scaricato in locale il progetto, per ogni iterazione saranno disponibili una cartella contenente il progetto Eclipse del server che fornisce le API e una cartella zippata (consigliamo 7Zip O winRAR come programma di decompressione della cartella compressa [https://www.7-zip.org/download.html]) contenente il progetto Vue.
+Una volta scaricato in locale il progetto, esso andrà estratto (consigliamo 7Zip [https://www.7-zip.org/download.html] o winRAR [https://www.winrar.it/prelievo.php] come programma di decompressione del file compresso) per ogni iterazione saranno disponibili una cartella contenente il progetto Eclipse del server che fornisce le API e una cartella zippata (consigliamo 7Zip O winRAR come programma di decompressione della cartella compressa) contenente il progetto Vue.
 
 Nella cartella DOCUMENTAZIONE sará disponibile la documentazione comprendente il manuale utente.
 

@@ -1,0 +1,892 @@
+{
+	"info": {
+		"_postman_id": "5f9dc06f-9a72-44e5-a12c-a2a8a534574b",
+		"name": "evenTour_v2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "event",
+			"item": [
+				{
+					"name": "get-PAGE",
+					"item": [
+						{
+							"name": "Get event (READ)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{prefix}}/events?page=2",
+									"host": [
+										"{{prefix}}"
+									],
+									"path": [
+										"events"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get event data (READ)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{prefix}}/events/data=2022-01-20,2022-03-18",
+									"host": [
+										"{{prefix}}"
+									],
+									"path": [
+										"events",
+										"data=2022-01-20,2022-03-18"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get event preference (READ)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{prefix}}/events/pref/{{id_user}}",
+									"host": [
+										"{{prefix}}"
+									],
+									"path": [
+										"events",
+										"pref",
+										"{{id_user}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get event loc (READ)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{prefix}}/events/loc=comune/bergamo",
+									"host": [
+										"{{prefix}}"
+									],
+									"path": [
+										"events",
+										"loc=comune",
+										"bergamo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get event type (READ)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{prefix}}/events/type=1.4.1,1.2.1",
+									"host": [
+										"{{prefix}}"
+									],
+									"path": [
+										"events",
+										"type=1.4.1,1.2.1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get event (READ) manId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{prefix}}/events/manager/{{id_manager}}",
+									"host": [
+										"{{prefix}}"
+									],
+									"path": [
+										"events",
+										"manager",
+										"{{id_manager}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Add event  (CREATE)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\" : \"prova2\",\r\n    \"description\" : \"provaDesc\",\r\n    \"location\" : {\r\n        \"locality\": \"Delle Monache Strada, 43\",\r\n        \"city\": \"Cavriago\",\r\n        \"cap\": \"42025\",\r\n        \"provincia\": \"Reggio nell'emilia\",\r\n        \"sigla\": \"RE\",\r\n        \"regione\": \"Emilia romagna\",\r\n        \"lat\": 44.695640563964844,\r\n        \"lng\": 10.52737045288086\r\n    },\r\n    \"types\" : [\"1.1.1\"],\r\n    \"dataOra\" : \"2022-01-01T12:00\",\r\n    \"managerId\" : \"618a4550885c9f6aab4c44cc\",\r\n    \"urlImage\" : \"http://placeimg.com/640/480\",\r\n    \"totSeat\" : 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/events",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"events"
+							]
+						},
+						"description": "ADD USER (CREATE)"
+					},
+					"response": []
+				},
+				{
+					"name": "update event (UPDATE)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\" : {{id_event}},\r\n    \"types\" : [\"1.1.1\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/events",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"events"
+							]
+						},
+						"description": "ADD USER (CREATE)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete event ( DELETE )",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/events?id={{id_event}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"events"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{id_event}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get event (READ) id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/events/{{id_event}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"events",
+								"{{id_event}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ticketInsp",
+			"item": [
+				{
+					"name": "Get ticket by id (READ)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/ticketInsps/{{id_ticket}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"ticketInsps",
+								"{{id_ticket}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all tickets (READ)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/ticketInsps",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"ticketInsps"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get tickets (READ) eveId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/ticketInsps/event/{{id_event}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"ticketInsps",
+								"event",
+								"{{id_event}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete ticket",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/ticketInsps/{{id_ticket}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"ticketInsps",
+								"{{id_ticket}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update ticket",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"{{id_ticket}}\",\r\n    \"fullName\": \"mario bianchi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/ticketInsps",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"ticketInsps"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add ticket",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullName\": \"mario rossi\",\r\n    \"eventId\" : \"{{id_event}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/ticketInsps",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"ticketInsps"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bookings",
+			"item": [
+				{
+					"name": "user+event of a booking",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/bookings/{{id_booking}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings",
+								"{{id_booking}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "events of a user id booked",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/bookings/u/{{id_user}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings",
+								"u",
+								"{{id_user}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "booking of a event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/bookings/event/{{id_event}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings",
+								"event",
+								"{{id_event}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "booking payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUser\":\"{{id_user}}\",\r\n    \"cardNr\":4000003800000008,\r\n    \"cardName\":\"mario rossi\",\r\n    \"authNr\":232,\r\n    \"date\":\"07/23\",\r\n    \"amount\":10.00\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/bookings/user/payment",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings",
+								"user",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check booking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookingNr\":\"{{id_booking}}\",\r\n    \"eventId\":\"{{id_event}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/bookings/check",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings",
+								"check"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get bookings (READ)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/bookings",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book event",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"6198d4c48a29dbfc5b1cb2d5\",\r\n    \"eventId\":\"6198d42f8a29dbfc5b1caeea\",\r\n    \"prenotedSeat\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/bookings",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "booking of user in a event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/bookings/user/{{id_user}}/event/{{id_event}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings",
+								"user",
+								"{{id_user}}",
+								"event",
+								"{{id_event}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete booking",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/bookings/{{id_booking}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings",
+								"{{id_booking}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"userName\",\r\n    \"surname\":\"userSurname\",\r\n    \"sex\":\"M\",\r\n    \"dateOfBirth\":\"2002-01-01T00:00\",\r\n    \"residence\":{\r\n        \"locality\": \"Delle Monache Strada, 43\",\r\n        \"city\": \"Cavriago\",\r\n        \"cap\": \"42025\",\r\n        \"provincia\": \"Reggio nell'emilia\",\r\n        \"sigla\": \"RE\",\r\n        \"regione\": \"Emilia romagna\",\r\n        \"lat\": 44.695640563964844,\r\n        \"lng\": 10.52737045288086\r\n    },\r\n    \"types\":[\"1.2.1\"],\r\n    \"mail\":\"provaMail@gmail.com\",\r\n    \"password\":\"passwordProva\",\r\n    \"username\":\"usernameUser\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/users",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"{{id_user}}\",\r\n    \"residence\":{\r\n        \"locality\": \"Delle Monache Strada, 42\",\r\n        \"city\": \"Cavriago\",\r\n        \"cap\": \"42025\",\r\n        \"provincia\": \"Reggio nell'emilia\",\r\n        \"sigla\": \"RE\",\r\n        \"regione\": \"Emilia romagna\",\r\n        \"lat\": 44.695640563964844,\r\n        \"lng\": 10.52737045288086\r\n    },\r\n    \"types\":[\"1.2.1\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/users",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/users/{{id_user}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"users",
+								"{{id_user}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/users/{{id_user}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"users",
+								"{{id_user}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/users",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get eventour",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/users/{{id_user}}/eventour/5",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"users",
+								"{{id_user}}",
+								"eventour",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "manager",
+			"item": [
+				{
+					"name": "new manager",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"managerName\",\r\n    \"surname\":\"managerSurname\",\r\n    \"sex\":\"M\",\r\n    \"dateOfBirth\":\"2002-01-01T00:00\",\r\n    \"residence\":{\r\n        \"locality\": \"Delle Monache Strada, 43\",\r\n        \"city\": \"Cavriago\",\r\n        \"cap\": \"42025\",\r\n        \"provincia\": \"Reggio nell'emilia\",\r\n        \"sigla\": \"RE\",\r\n        \"regione\": \"Emilia romagna\",\r\n        \"lat\": 44.695640563964844,\r\n        \"lng\": 10.52737045288086\r\n    },\r\n    \"codicePIVA\":\"60763980814\",\r\n    \"ragioneSociale\":\"prova manager s.p.a.\",\r\n    \"mail\":\"managerMail@gmail.com\",\r\n    \"password\":\"passwordProva\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/managers",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"managers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update manager",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"{{id_manager}}\",\r\n    \"residence\":{\r\n        \"locality\": \"Delle Monache Strada, 42\",\r\n        \"city\": \"Cavriago\",\r\n        \"cap\": \"42025\",\r\n        \"provincia\": \"Reggio nell'emilia\",\r\n        \"sigla\": \"RE\",\r\n        \"regione\": \"Emilia romagna\",\r\n        \"lat\": 44.695640563964844,\r\n        \"lng\": 10.52737045288086\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/managers",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"managers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get manager by id report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/managers/{{id_manager}}/reports",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"managers",
+								"{{id_manager}}",
+								"reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get manager by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/managers/{{id_manager}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"managers",
+								"{{id_manager}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete manager",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/managers/{{id_manager}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"managers",
+								"{{id_manager}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all managers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/managers",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"managers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"Elita8@email.it\",\r\n    \"password\" : \"nusabaju\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{prefix}}/account",
+					"host": [
+						"{{prefix}}"
+					],
+					"path": [
+						"account"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id_event",
+			"value": "61a0a85ebce0e98fbb2d860f"
+		},
+		{
+			"key": "id_manager",
+			"value": "6198d2de8a29dbfc5b1caeca"
+		},
+		{
+			"key": "prefix",
+			"value": "http://localhost:8090/api",
+			"type": "string"
+		},
+		{
+			"key": "id_user",
+			"value": "61a0a933bce0e98fbb2da91b",
+			"type": "string"
+		},
+		{
+			"key": "id_ticket",
+			"value": "61a0b05abce0e98fbb2dad3c",
+			"type": "string"
+		},
+		{
+			"key": "id_booking",
+			"value": "61a8c62b648e0931525c310a",
+			"type": "string"
+		}
+	]
+}

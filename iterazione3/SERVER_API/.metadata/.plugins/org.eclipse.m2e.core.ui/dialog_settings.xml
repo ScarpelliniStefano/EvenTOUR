@@ -2,6 +2,7 @@
 <section name="Workbench">
 	<section name="MavenProjectImportWizardPage">
 		<list key="rootDirectory">
+			<item value="C:\Users\stefa\Desktop\EvenTOUR-main\iterazione3\SERVER_API"/>
 			<item value="D:\evenTour\eventour"/>
 			<item value="D:\evenTour\eventour_springboot\eventour"/>
 		</list>

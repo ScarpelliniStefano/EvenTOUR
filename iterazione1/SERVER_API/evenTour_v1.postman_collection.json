@@ -1,0 +1,461 @@
+{
+	"info": {
+		"_postman_id": "f3f630cb-b9e5-4936-8877-fd4d749c4baa",
+		"name": "evenTour_v1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "event",
+			"item": [
+				{
+					"name": "get-NO PAGE (old implementation)",
+					"item": [
+						{
+							"name": "Get event (READ)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{prefix}}/events?ordered=asc&param=loc",
+									"host": [
+										"{{prefix}}"
+									],
+									"path": [
+										"events"
+									],
+									"query": [
+										{
+											"key": "ordered",
+											"value": "asc"
+										},
+										{
+											"key": "param",
+											"value": "loc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get event (READ) manId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{prefix}}/events/manager/{{id_manager}}",
+									"host": [
+										"{{prefix}}"
+									],
+									"path": [
+										"events",
+										"manager",
+										"{{id_manager}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "get-PAGE",
+					"item": [
+						{
+							"name": "Get event (READ)",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{prefix}}/events?page=2&size=15&ordered=asc&param=dataOra",
+									"host": [
+										"{{prefix}}"
+									],
+									"path": [
+										"events"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "2"
+										},
+										{
+											"key": "size",
+											"value": "15"
+										},
+										{
+											"key": "ordered",
+											"value": "asc"
+										},
+										{
+											"key": "param",
+											"value": "dataOra"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get event (READ) manId",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{prefix}}/events/manager/{{id_manager}}",
+									"host": [
+										"{{prefix}}"
+									],
+									"path": [
+										"events",
+										"manager",
+										"{{id_manager}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Add event  (CREATE)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\" : \"prova2\",\r\n    \"description\" : \"provaDesc\",\r\n    \"location\" : {\r\n        \"locality\": \"Delle Monache Strada, 43\",\r\n        \"city\": \"Cavriago\",\r\n        \"cap\": \"42025\",\r\n        \"provincia\": \"Reggio nell'emilia\",\r\n        \"sigla\": \"RE\",\r\n        \"regione\": \"Emilia romagna\",\r\n        \"lat\": 44.695640563964844,\r\n        \"lng\": 10.52737045288086\r\n    },\r\n    \"types\" : [\"1.1.1\"],\r\n    \"dataOra\" : \"2022-01-01T12:00\",\r\n    \"managerId\" : \"618a4550885c9f6aab4c44cc\",\r\n    \"urlImage\" : \"http://placeimg.com/640/480\",\r\n    \"totSeat\" : 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/events",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"events"
+							]
+						},
+						"description": "ADD USER (CREATE)"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete event ( DELETE )",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/events?id={{id_event}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"events"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "{{id_event}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get event (READ) id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/events/{{id_event}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"events",
+								"{{id_event}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ticketInsp",
+			"item": [
+				{
+					"name": "Get tickets (READ)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/ticketInsps/{{id_ticket}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"ticketInsps",
+								"{{id_ticket}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get tickets (READ) eveId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/ticketInsps/event/{{id_event}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"ticketInsps",
+								"event",
+								"{{id_event}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bookings",
+			"item": [
+				{
+					"name": "user+event of a booking",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/bookings/{{id_booking}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings",
+								"{{id_booking}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "events of a user id booked",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/bookings/user/{{id_user}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings",
+								"user",
+								"{{id_user}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "correctBooking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookingNr\":\"{{id_booking}}\",\r\n    \"eventId\":\"{{id_event}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/bookings/check",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings",
+								"check"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get bookings (READ)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/bookings",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Book event",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"6198d4c48a29dbfc5b1cb2d5\",\r\n    \"eventId\":\"6198d42f8a29dbfc5b1caeea\",\r\n    \"prenotedSeat\":1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/bookings",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "booking of user in a event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/bookings/user/{{id_user}}/event/{{id_event}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings",
+								"user",
+								"{{id_user}}",
+								"event",
+								"{{id_event}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete booking",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{prefix}}/bookings/{{id_booking}}",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"bookings",
+								"{{id_booking}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user\": \"Elita8@email.it\",\r\n    \"password\" : \"nusabaju\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{prefix}}/account",
+					"host": [
+						"{{prefix}}"
+					],
+					"path": [
+						"account"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id_event",
+			"value": "61a0a85ebce0e98fbb2d860f"
+		},
+		{
+			"key": "id_manager",
+			"value": "6198d2de8a29dbfc5b1caeca"
+		},
+		{
+			"key": "prefix",
+			"value": "http://localhost:8090/api",
+			"type": "string"
+		},
+		{
+			"key": "id_user",
+			"value": "61a0a933bce0e98fbb2da91b",
+			"type": "string"
+		},
+		{
+			"key": "id_ticket",
+			"value": "61a0b05abce0e98fbb2dad3c",
+			"type": "string"
+		},
+		{
+			"key": "id_booking",
+			"value": "61a8c62b648e0931525c310a",
+			"type": "string"
+		}
+	]
+}

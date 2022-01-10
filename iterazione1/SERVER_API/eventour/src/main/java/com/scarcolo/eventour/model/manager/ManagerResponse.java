@@ -60,7 +60,7 @@ public class ManagerResponse{
 	 * Instantiates a new manager response.
 	 *
 	 * @param manager the manager
-	 * @throws Exception 
+	 * @throws Exception date of birth exception
 	 */
 	public ManagerResponse(Manager manager) throws Exception{
 		this.id=manager.getId();

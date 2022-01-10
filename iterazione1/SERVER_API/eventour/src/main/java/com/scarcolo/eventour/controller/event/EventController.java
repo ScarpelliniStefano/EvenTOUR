@@ -44,8 +44,16 @@ public class EventController {
 	      return eventService.add(request);
 	    }
 
+ 	
+ 	//SOLO PER TEST DELLA API
+ 	 /**
+  	 * Delete event by id.
+  	 *
+  	 * @param id the id
+  	 * @return true, if successful
+  	 */
  	@DeleteMapping("/events/{id}")
-    public boolean deleteEventById(@PathVariable("id") String id){
+    protected boolean deleteEventById(@PathVariable("id") String id){
         return eventService.delete(id);
     }
 	   

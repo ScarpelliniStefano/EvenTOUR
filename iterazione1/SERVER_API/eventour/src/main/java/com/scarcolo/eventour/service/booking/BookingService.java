@@ -132,6 +132,7 @@ public class BookingService {
 	 * Gets all booking by id user and id event.
 	 *
 	 * @param id the id user
+	 * @param idE the id event
 	 * @return bookings by id user
 	 */
 	public ResponseEntity<List<EventBookedResponse>> getByIdUserEvent(String id,String idE) {
@@ -168,7 +169,7 @@ public class BookingService {
 	/**
 	 * Gets if exist a booking with this id.
 	 *
-	 * @param idBooking the id booking
+	 * @param id the id booking
 	 * @return the check
 	 */
 	public ResponseEntity<Booking> getById(String id) {

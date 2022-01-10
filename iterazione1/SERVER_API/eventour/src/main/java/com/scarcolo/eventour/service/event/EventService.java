@@ -39,7 +39,6 @@ public class EventService {
      *
      * @param request the request
      * @return the response entity
-     * @throws Exception the exception
      */
     public ResponseEntity<EventResponse> add(AddEventRequest request){
         Event event;
@@ -164,6 +163,12 @@ public class EventService {
 	}
 
 
+	/**
+     * Delete a event, its ticket inspector and all bookings to the event.
+     *
+     * @param id the id of event
+     * @return true, if successful
+     */
 	public boolean delete(String id) {
 		Optional<Event> optionalEvent = eventRepository.findById(id);
         if (optionalEvent.isEmpty()) {

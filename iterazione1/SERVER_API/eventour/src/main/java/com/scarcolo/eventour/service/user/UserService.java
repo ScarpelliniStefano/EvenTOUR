@@ -11,6 +11,7 @@ import com.scarcolo.eventour.model.manager.Manager;
 import com.scarcolo.eventour.model.manager.ManagerResponse;
 import com.scarcolo.eventour.model.ticketinsp.TicketInsp;
 import com.scarcolo.eventour.model.ticketinsp.TicketInspResponse;
+import com.scarcolo.eventour.model.user.AddUserRequest;
 import com.scarcolo.eventour.model.user.User;
 import com.scarcolo.eventour.model.user.UserResponse;
 import com.scarcolo.eventour.repository.manager.ManagerRepository;
@@ -94,6 +95,22 @@ public class UserService {
 		}
 		
 	}
+	
+	/**
+     * Add a user.
+     *
+     * @param request the request of new user
+     * @return the response entity with data of created user
+     */
+    public ResponseEntity<UserResponse> add(AddUserRequest request){
+    	User user;
+		try {
+			user = new User(request);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+		}
+        return new ResponseEntity<>(new UserResponse(user), HttpStatus.OK);
+    }
 
 	
 	

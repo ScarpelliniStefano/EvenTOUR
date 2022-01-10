@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f3f630cb-b9e5-4936-8877-fd4d749c4baa",
+		"_postman_id": "1de753c8-d78e-41d5-9654-3e4fe28f94c3",
 		"name": "evenTour_v1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -374,6 +374,68 @@
 							"path": [
 								"bookings",
 								"{{id_booking}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "new user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"userName\",\r\n    \"surname\":\"userSurname\",\r\n    \"sex\":\"M\",\r\n    \"dateOfBirth\":\"2002-01-01T00:00\",\r\n    \"residence\":{\r\n        \"locality\": \"Delle Monache Strada, 43\",\r\n        \"city\": \"Cavriago\",\r\n        \"cap\": \"42025\",\r\n        \"provincia\": \"Reggio nell'emilia\",\r\n        \"sigla\": \"RE\",\r\n        \"regione\": \"Emilia romagna\",\r\n        \"lat\": 44.695640563964844,\r\n        \"lng\": 10.52737045288086\r\n    },\r\n    \"types\":[\"1.2.1\"],\r\n    \"mail\":\"provaMail@gmail.com\",\r\n    \"password\":\"passwordProva\",\r\n    \"username\":\"usernameUser\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/users",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "manager",
+			"item": [
+				{
+					"name": "new manager",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"managerName\",\r\n    \"surname\":\"managerSurname\",\r\n    \"sex\":\"M\",\r\n    \"dateOfBirth\":\"2002-01-01T00:00\",\r\n    \"residence\":{\r\n        \"locality\": \"Delle Monache Strada, 43\",\r\n        \"city\": \"Cavriago\",\r\n        \"cap\": \"42025\",\r\n        \"provincia\": \"Reggio nell'emilia\",\r\n        \"sigla\": \"RE\",\r\n        \"regione\": \"Emilia romagna\",\r\n        \"lat\": 44.695640563964844,\r\n        \"lng\": 10.52737045288086\r\n    },\r\n    \"codicePIVA\":\"60763980814\",\r\n    \"ragioneSociale\":\"prova manager s.p.a.\",\r\n    \"mail\":\"managerMail@gmail.com\",\r\n    \"password\":\"passwordProva\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{prefix}}/managers",
+							"host": [
+								"{{prefix}}"
+							],
+							"path": [
+								"managers"
 							]
 						}
 					},

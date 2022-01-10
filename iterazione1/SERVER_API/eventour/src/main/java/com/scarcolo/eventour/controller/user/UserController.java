@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.scarcolo.eventour.model.AccountRequest;
 import com.scarcolo.eventour.model.AccountResponse;
+import com.scarcolo.eventour.model.user.AddUserRequest;
+import com.scarcolo.eventour.model.user.UserResponse;
 import com.scarcolo.eventour.service.user.UserService;
 
 // TODO: Auto-generated Javadoc
@@ -36,5 +38,17 @@ public class UserController {
 	    public ResponseEntity<AccountResponse> getAccount(@RequestBody AccountRequest request){
 	        return userService.getAccount(request.username,request.password);
 	    }
+    	
+    	/**
+		 * Adds the user.
+		 *
+		 * @param request the request
+		 * @return the response entity
+		 * @throws Exception the exception
+		 */
+		@PostMapping("/users")
+		public ResponseEntity<UserResponse> addUser(@RequestBody AddUserRequest request) throws Exception{
+		      return userService.add(request);
+		}
 
 }

@@ -15102,3 +15102,4 @@ org.eclipse.core.runtime.CoreException: Launch configuration EventourApplication
 2022-01-10 09:34:28,771 [Worker-1: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2022-01-10 09:34:28,771 [Worker-1: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
 2022-01-10 09:34:28,771 [Worker-1: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory D:\evenTour\eventour\iterazione2\SERVER_API\eventour\src\test\resources
+2022-01-18 14:35:44,091 [Worker-5: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.

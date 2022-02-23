@@ -1,2 +1,2 @@
-java -jar ./eventour.jar
+java --release 11 -jar ./SERVER_API/eventour.jar
 cmd / k
